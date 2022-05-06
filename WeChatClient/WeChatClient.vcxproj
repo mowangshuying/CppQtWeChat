@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EFD21C0C-725B-44B2-A892-039151F20F08}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>WeChatClient</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
+    <QtInstall>msvc2017</QtInstall>
+    <QtModules>core;network;gui;widgets;websockets</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="QtSettings">
+    <QtInstall>msvc2017</QtInstall>
+    <QtModules>
+    </QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="json\cJSON.c" />
+    <ClCompile Include="json\CJsonObject.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="QChatFileInnerWnd.cpp" />
+    <ClCompile Include="QChatFileOuterWnd.cpp" />
+    <ClCompile Include="QCommGroupItemWnd.cpp" />
+    <ClCompile Include="QDataManager.cpp" />
+    <ClCompile Include="QEditLabel.cpp" />
+    <ClCompile Include="QEmoijWnd.cpp" />
+    <ClCompile Include="QGroupFriendsItemWnd.cpp" />
+    <ClCompile Include="QGroupFriendsWnd.cpp" />
+    <ClCompile Include="QGroupInfoWnd.cpp" />
+    <ClCompile Include="QPictureToolWnd.cpp" />
+    <ClCompile Include="QApplyFriendWnd1.cpp" />
+    <ClCompile Include="QApplyFriendWnd2.cpp" />
+    <ClCompile Include="QChatMsgWnd.cpp" />
+    <ClCompile Include="QCommContactInfo.cpp" />
+    <ClCompile Include="QCommContactItemWnd.cpp" />
+    <ClCompile Include="QCommListWnd.cpp" />
+    <ClCompile Include="QCommMsgItemWnd.cpp" />
+    <ClCompile Include="QCreateGroupListwnd1Item.cpp" />
+    <ClCompile Include="QCreateGroupListwnd2Item.cpp" />
+    <ClCompile Include="QCreateGroupWnd.cpp" />
+    <ClCompile Include="QCustomListWidgetItem.cpp" />
+    <ClCompile Include="QDealNewFriendsApplyItemWnd.cpp" />
+    <ClCompile Include="QDealNewFriendsApplyWnd.cpp" />
+    <ClCompile Include="QFindFriendItemWnd.cpp" />
+    <ClCompile Include="QFindFriendOrGroupWnd.cpp" />
+    <ClCompile Include="QLoginAndRegWnd.cpp" />
+    <ClCompile Include="QMainWnd.cpp" />
+    <ClCompile Include="QNextWnd.cpp" />
+    <ClCompile Include="QScreenShotWnd.cpp" />
+    <ClCompile Include="QSelectWnd1.cpp" />
+    <ClCompile Include="QSessionToolBar.cpp" />
+    <ClCompile Include="QSessionTopWnd.cpp" />
+    <ClCompile Include="QSessionWnd.cpp" />
+    <ClCompile Include="QSimpleLabel.cpp" />
+    <ClCompile Include="QSimpleSplit.cpp" />
+    <ClCompile Include="QSwitchButton.cpp" />
+    <ClCompile Include="QToolWnd.cpp" />
+    <ClCompile Include="QUserInfoWnd.cpp" />
+    <ClCompile Include="QWSClientMgr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QWSClientMgr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QLoginAndRegWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QCreateGroupWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QCreateGroupListwnd2Item.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QCreateGroupListwnd1Item.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QSelectWnd1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QApplyFriendWnd2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QApplyFriendWnd1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QNextWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QFindFriendItemWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QFindFriendOrGroupWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QCommListWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QCommContactInfo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QMainWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QToolWnd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="json\cJSON.h" />
+    <ClInclude Include="json\CJsonObject.hpp" />
+    <QtMoc Include="QEditLabel.h" />
+    <QtMoc Include="QGroupFriendsWnd.h" />
+    <QtMoc Include="QSwitchButton.h" />
+    <QtMoc Include="QGroupFriendsItemWnd.h" />
+    <QtMoc Include="QGroupInfoWnd.h" />
+    <QtMoc Include="QChatFileInnerWnd.h" />
+    <QtMoc Include="QChatFileOuterWnd.h" />
+    <QtMoc Include="QCommGroupItemWnd.h" />
+    <ClInclude Include="QDataManager.h" />
+    <QtMoc Include="QScreenShotWnd.h" />
+    <QtMoc Include="QEmoijWnd.h" />
+    <QtMoc Include="QSessionToolBar.h" />
+    <QtMoc Include="QSimpleLabel.h" />
+    <QtMoc Include="QDealNewFriendsApplyItemWnd.h" />
+    <QtMoc Include="QUserInfoWnd.h" />
+    <QtMoc Include="QDealNewFriendsApplyWnd.h" />
+    <QtMoc Include="QChatMsgWnd.h" />
+    <QtMoc Include="QPictureToolWnd.h" />
+    <QtMoc Include="QCommContactItemWnd.h" />
+    <QtMoc Include="QCommMsgItemWnd.h" />
+    <ClInclude Include="QCustomListWidgetItem.h" />
+    <QtMoc Include="QSessionTopWnd.h" />
+    <QtMoc Include="QSimpleSplit.h" />
+    <QtMoc Include="QSessionWnd.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
