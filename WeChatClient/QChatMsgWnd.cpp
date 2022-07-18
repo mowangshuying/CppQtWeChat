@@ -15,10 +15,10 @@ QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/,int64_t sendid,int64_t recvid)
 	font.setFamily("MicrosoftYaHei");
 	font.setPointSize(10);
 	setFont(font);
-	m_leftPixmap = QPixmap("./res/img/owner.png");
-	m_rightPixmap = QPixmap("./res/img/other.png");
+	m_leftPixmap = QPixmap("./img/owner.png");
+	m_rightPixmap = QPixmap("./img/other.png");
 	m_loadingMovie = new QMovie(this);
-	m_loadingMovie->setFileName("./res/gif/loading.gif");
+	m_loadingMovie->setFileName("./img/loading.gif");
 	
 	
 	m_loadingLable = new QLabel(this);
