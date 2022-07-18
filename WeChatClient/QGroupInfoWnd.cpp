@@ -7,7 +7,7 @@
 QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
 	//
-	setFixedSize(250+1, 535);
+	setFixedSize(250, 535);
 
 	// 滚动区域
 	m_scrollArea = new QScrollArea(this);
@@ -22,6 +22,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	//开始组装
 	m_groupfriendsWnd = new QGroupFriendsWnd();
 	m_groupfriendsWnd->setFixedHeight(249);
+	m_groupfriendsWnd->setStyleSheet("border:0px;");
 	m_vLayout->addWidget(m_groupfriendsWnd);
 
 
@@ -31,25 +32,27 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	}
 
 	m_simpleGroupInfoWnd = new QWidget();
+	m_simpleGroupInfoWnd->setStyleSheet("border:0px");
 	m_vLayout1 = new QVBoxLayout();
 	m_simpleGroupInfoWnd->setLayout(m_vLayout1);
 	m_vLayout->addWidget(m_simpleGroupInfoWnd);
 	
 	m_groupName1 = new QLabel();
 	m_groupName1->setText("群聊名称");
-	m_groupName1->setStyleSheet("font-size:14px");
+	//m_groupName1->setStyleSheet("font-size:14px;border:0px");
 	m_vLayout1->addWidget(m_groupName1);
 
 	// 提供分割线
-	m_vLayout1->addSpacing(5);
+	//m_vLayout1->addSpacing(5);
 
 	m_groupName2 = new QEditLabel();
-	m_groupName2->setFixedHeight(25);
-	m_groupName2->setStyleSheet("border:0px");
+	//m_groupName2->setFixedHeight(25);
+	m_groupName2->setStyleSheet("border:1px solid #828790;");
+	m_groupName2->setFixedSize(200,25);
 	m_vLayout1->addWidget(m_groupName2);
 
 	// 提供分割线
-	m_vLayout1->addSpacing(5);
+	//m_vLayout1->addSpacing(5);
 
 	m_groupNotice1 = new QLabel();
 	m_groupNotice1->setText("群公告");
@@ -58,12 +61,12 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	m_vLayout1->addWidget(m_groupNotice1);
 
 	// 提供分割线
-	m_vLayout1->addSpacing(5);
+	//m_vLayout1->addSpacing(5);
 
 	m_groupNotice2 = new QEditLabel();
 	//m_groupNotice2->setText("未设置");
-	m_groupNotice2->setFixedHeight(25);
-	m_groupNotice2->setStyleSheet("border:0px");
+	m_groupNotice2->setFixedSize(200,25);
+	m_groupNotice2->setStyleSheet("border:1px solid #828790;");
 	m_vLayout1->addWidget(m_groupNotice2);
 
 	// 提供分割线
@@ -79,8 +82,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 	m_groupRemarks2 = new QEditLabel();
 	//m_groupRemarks2->setText("群聊的备仅自己可见");
-	m_groupRemarks2->setFixedHeight(25);
-	m_groupRemarks2->setStyleSheet("border:0px");
+	m_groupRemarks2->setFixedSize(200, 25);
+	m_groupRemarks2->setStyleSheet("border:1px solid #828790;");
 	m_vLayout1->addWidget(m_groupRemarks2);
 
 	// 提供分割线
@@ -96,8 +99,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 	m_groupRoleName2 = new QEditLabel();
 	m_groupRoleName2->setText("白衣沽酒");
-	m_groupRoleName2->setFixedHeight(25);
-	m_groupRoleName2->setStyleSheet("border:0px");
+	m_groupRoleName2->setFixedSize(200, 25);;
+	m_groupRoleName2->setStyleSheet("border:1px solid #828790");
 	m_vLayout1->addWidget(m_groupRoleName2);
 
 	{
@@ -106,6 +109,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	}
 
 	m_simpleGroupSettingWnd = new QWidget();
+	m_simpleGroupSettingWnd->setStyleSheet("border:0px;");
 	m_vLayout->addWidget(m_simpleGroupSettingWnd);
 	m_vLayout2 = new QVBoxLayout();
 	//m_vLayout2->setSpacing(5);
@@ -123,6 +127,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 	m_showGroupFriendsRoleNameBtn = new QSwitchButton();
 	m_hLayout21->addWidget(m_showGroupFriendsRoleNameBtn);
+	m_hLayout21->addSpacing(40);
 
 	//
 	m_hLayout22 = new QHBoxLayout();
@@ -135,6 +140,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 	m_MsgFreeBtn = new QSwitchButton();
 	m_hLayout22->addWidget(m_MsgFreeBtn);
+	m_hLayout22->addSpacing(40);
 
 	m_hLayout23 = new QHBoxLayout();
 	m_vLayout2->addLayout(m_hLayout23);
@@ -146,7 +152,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 	m_topWndBtn = new QSwitchButton();
 	m_hLayout23->addWidget(m_topWndBtn);
-
+	m_hLayout23->addSpacing(40);
 
 	m_hLayout24 = new QHBoxLayout();
 	m_vLayout2->addLayout(m_hLayout24);
@@ -159,6 +165,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 	m_save2AddrBookBtn = new QSwitchButton();
 	m_hLayout24->addWidget(m_save2AddrBookBtn);
+	m_hLayout24->addSpacing(40);
 
 	{
 		QSimpleSplit* sp = new QSimpleSplit();
@@ -166,6 +173,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	}
 
 	m_delexitWnd = new QWidget();
+	m_delexitWnd->setStyleSheet("border:0px;");
 	m_vLayout->addWidget(m_delexitWnd);
 	m_vLayout3 = new QVBoxLayout();
 	m_delexitWnd->setLayout(m_vLayout3);
@@ -173,6 +181,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	m_delexitBtn = new QPushButton();
 	m_delexitBtn->setText("删除并退出");
 	m_delexitBtn->setStyleSheet("border:0px;background-color:#f00;font-size:14px;height:30px;");
+	m_delexitBtn->setFixedSize(220, 30);
 	m_vLayout3->addWidget(m_delexitBtn);
 
 
@@ -182,9 +191,11 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	//设置无边框
 	setAttribute(Qt::WA_StyledBackground);
 	setWindowFlags(Qt::FramelessWindowHint);
-	//setWindowFlag(Qt::WindowType::);
-
+	
+	setStyleSheet("background-color:#fff;");
+	m_centerWnd->setStyleSheet("border:1px;");	//setContentsMargins(0, 0, 10, 0);
 	m_scrollArea->setWidget(m_centerWnd);
+	m_scrollArea->setStyleSheet("border-top:1px solid #828790;border-bottom:0px;border-right:0px;border-left:1px solid #828790;");
 }
 
 bool QGroupInfoWnd::event(QEvent* event) {

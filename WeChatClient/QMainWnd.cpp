@@ -12,6 +12,9 @@
 #include "QDataManager.h"
 #include "QChatFileOuterWnd.h"
 #include "QCommGroupItemWnd.h"
+#include <QPainter>
+#include <cstdlib>
+#include <qmath.h>
 
 QMainWnd* QMainWnd::m_mainWnd = nullptr;
 
@@ -87,7 +90,8 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/)
 	setLayout(m_hLayout);
 	setWindowFlags(Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_StyledBackground);
-	setStyleSheet("background-color:#white");
+	setStyleSheet("background-color:#white;");
+	//setContentsMargins(2, 2, 2, 2);
 
 	//
 	connect(m_toolWnd, SIGNAL(signal_toolWndPageChanged(int)), this, SLOT(slot_toolWndPageChanged(int)));
@@ -756,3 +760,25 @@ void QMainWnd::slot_replyFinished(QNetworkReply* reply)
 	    m_toolWnd->m_headUrlLabel->setPixmap(m_toolWnd->m_headImg);
 	}
 }
+
+//void QMainWnd::paintEvent(QPaintEvent* event)
+//{
+//	QPainterPath path;
+//	path.setFillRule(Qt::WindingFill);
+//	QRectF rect(10, 10, this->width() - 20, this->height() - 20);
+//	path.addRoundRect(rect, 8, 8);
+//
+//	QPainter painter(this);
+//	painter.setRenderHint(QPainter::Antialiasing, true);
+//	painter.fillPath(path, QBrush(Qt::white));
+//
+//	QColor color(0, 0, 0, 50);
+//	for (int i = 0; i < 10; i++) {
+//		QPainterPath path;
+//		path.setFillRule(Qt::WindingFill);
+//		path.addRect(10 - i, 10 - i, this->width() - (10 - i) * 2, this->height() - (10 - i) * 2);
+//		color.setAlpha(150 - qSqrt(i) * 50);
+//		painter.setPen(color);
+//		painter.drawPath(path);
+//	}
+//}

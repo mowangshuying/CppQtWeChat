@@ -178,6 +178,7 @@ void QFindFriendOrGroupWnd::slot_onSearchBtnClicked()
 					   }
 
 					   addFriendItem("./img/head2.png", username.c_str(),userid);
+
 				   }
 
 			});

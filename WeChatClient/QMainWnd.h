@@ -70,6 +70,8 @@ public slots:
 	void slot_toolWndPageChanged(int page);
 	void slot_replyFinished(QNetworkReply* reply);
 	//void slot_moreBtnClicked();
+//protected:
+//	virtual void paintEvent(QPaintEvent* event);
 public:
 	QHBoxLayout* m_hLayout;
 	QToolWnd* m_toolWnd;
