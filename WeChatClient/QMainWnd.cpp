@@ -94,16 +94,32 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/)
 	//setContentsMargins(2, 2, 2, 2);
 
 	//
-	connect(m_toolWnd, SIGNAL(signal_toolWndPageChanged(int)), this, SLOT(slot_toolWndPageChanged(int)));
-	connect(m_commMsgListWnd, SIGNAL(commListChanged(int)), this, SLOT(slot_sesIdToIndex(int)));
-	connect(m_commContactsListWnd, SIGNAL(signal_contactInfoChange(QMap<QString, QString>)),m_commContactInfo, SLOT(slot_contactInfoChange(QMap< QString, QString>)));
-	connect(m_commContactInfo, SIGNAL(signal_sendMsgBtnClick(QMap<QString, QString>)),this, SLOT(slot_sendMsgBtnClick(QMap<QString, QString>)));
+	connect(m_toolWnd, SIGNAL(signal_toolWndPageChanged(int)), 
+		this, SLOT(slot_toolWndPageChanged(int)));
 
-	QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendmsg",std::bind(&QMainWnd::cs_msg_sendmsg,this, std::placeholders::_1) );
-	QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
-	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_sessionlist", std::bind(&QMainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
-	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_grouplist", std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
-	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
+	connect(m_commMsgListWnd, SIGNAL(commListChanged(int)), 
+		this, SLOT(slot_sesIdToIndex(int)));
+	
+	connect(m_commContactsListWnd, SIGNAL(signal_contactInfoChange(QMap<QString, QString>)),
+		m_commContactInfo, SLOT(slot_contactInfoChange(QMap< QString, QString>)));
+
+	connect(m_commContactInfo, SIGNAL(signal_sendMsgBtnClick(QMap<QString, QString>)),
+		this, SLOT(slot_sendMsgBtnClick(QMap<QString, QString>)));
+
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendmsg",
+		std::bind(&QMainWnd::cs_msg_sendmsg,this, std::placeholders::_1) );
+
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendgroupmsg",
+		std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
+
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_sessionlist",
+		std::bind(&QMainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
+
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_grouplist",
+		std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
+
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_friendlist",
+		std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
 
 	m_networkMgr = new QNetworkAccessManager();
 	connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)),this, SLOT(slot_replyFinished(QNetworkReply*)));
