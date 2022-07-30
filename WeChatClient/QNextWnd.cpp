@@ -115,7 +115,7 @@ void QNextWnd::slot_pushBtnClick()
 		auto pApplyWnd1 = dynamic_cast<QApplyFriendWnd1*>(m_wnd1);
 		json.Add("applymsg",pApplyWnd1->m_inMsgEdit->toPlainText().toStdString().c_str());
 
-		QWSClientMgr::getSingletonInstance()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) 
+		QWSClientMgr::getInstance()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) 
 			{
 				int state = 0;
 				if (!msg.Get("state", state)) 

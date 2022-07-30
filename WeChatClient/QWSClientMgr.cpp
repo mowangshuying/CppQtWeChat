@@ -23,7 +23,7 @@ QWSClientMgr::QWSClientMgr()
 	//m_webSock->open(QUrl("ws://127.0.0.1:5000"));
 }
 
-QWSClientMgr* QWSClientMgr::getSingletonInstance()
+QWSClientMgr* QWSClientMgr::getInstance()
 {
 	if (m_WsClientMgr == nullptr) {
 		m_WsClientMgr = new QWSClientMgr();

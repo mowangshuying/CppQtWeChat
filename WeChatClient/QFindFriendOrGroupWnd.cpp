@@ -145,7 +145,7 @@ void QFindFriendOrGroupWnd::slot_onSearchBtnClicked()
 			delete pitem;
 		}
 
-		QWSClientMgr::getSingletonInstance()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
+		QWSClientMgr::getInstance()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
 
 				   int state;
 				   if (!msg.Get("state", state))

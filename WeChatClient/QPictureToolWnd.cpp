@@ -161,7 +161,7 @@ void QPictureToolWnd::slot_determineBtnClicked()
 			json2.Add("headimg", headimgstr);
 			json2.Add("userid", QMainWnd::getSinletonInstance()->m_userid);
 			//告诉远端服务器该玩家的头像数据
-			QWSClientMgr::getSingletonInstance()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject &msg) {
+			QWSClientMgr::getInstance()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject &msg) {
 					qDebug() << msg.ToString().c_str() << endl;
 					QMainWnd::getSinletonInstance()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getSinletonInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg);
 					QDataManager::getInstance()->m_UserId2HeadImgMap[QMainWnd::getSinletonInstance()->m_userid] = QMainWnd::getSinletonInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg;

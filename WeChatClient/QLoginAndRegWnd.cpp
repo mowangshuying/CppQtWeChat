@@ -184,7 +184,7 @@ void QLoginAndRegWnd::slot_regOrLoginBtn()
 		json.Add("nickname", nickname);
 		json.Add("sex", sex);
 
-		QWSClientMgr::getSingletonInstance()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
+		QWSClientMgr::getInstance()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
 				int state = 0;
 				if (!msg.Get("state",state)) {
 					return;
@@ -238,7 +238,7 @@ void QLoginAndRegWnd::slot_regOrLoginBtn()
 		json.Add("username", username);
 		json.Add("password", password);
 
-		QWSClientMgr::getSingletonInstance()->request("cs_msg_login", json, [this](neb::CJsonObject& msg){
+		QWSClientMgr::getInstance()->request("cs_msg_login", json, [this](neb::CJsonObject& msg){
 			//
 			int state = 0;
 			if (!msg.Get("state", state)) 

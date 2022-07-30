@@ -315,7 +315,7 @@ void QCreateGroupWnd::slot_comfirmBtnClick()
 		json["groupfriends"].Add(groupfriendIdVct[i]);
 	}
 	//向远端服务器发送请求
-	QWSClientMgr::getSingletonInstance()->request("cs_msg_create_group", json, [this,groupname](neb::CJsonObject& msg)
+	QWSClientMgr::getInstance()->request("cs_msg_create_group", json, [this,groupname](neb::CJsonObject& msg)
 		{
 			qDebug() <<"msg:"<< msg.ToString().c_str();
 			//现在服务端仅仅返回 createid，groupname,groupid,groupfriends

@@ -120,7 +120,7 @@ void QSessionWnd::slot_sendTextBtnClick()
 	//如果不是发送群消息
 	if (m_isGroupSes == false)
 	{
-		QWSClientMgr::getSingletonInstance()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg)
+		QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg)
 			{
 				//向远端发送消息
 				QString time = QString::number(QDateTime::currentDateTime().toTime_t());
@@ -141,7 +141,7 @@ void QSessionWnd::slot_sendTextBtnClick()
 	//发送的是群消息
 	if (m_isGroupSes == true)
 	{
-		QWSClientMgr::getSingletonInstance()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg)
+		QWSClientMgr::getInstance()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg)
 			{
 				qDebug() << "cs_msg_sendgroupmsg:msg=" << msg.ToString().c_str();
 				//向远端发送消息
@@ -181,7 +181,7 @@ void QSessionWnd::slot_moreBtnClick()
 		//向远端服务器发送请求
 	neb::CJsonObject json;
 	json.Add("groupId", m_recvId);
-	QWSClientMgr::getSingletonInstance()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg)
+	QWSClientMgr::getInstance()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg)
 		{
 			qDebug() << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
 			// 向群好友列表中嵌入数据
@@ -359,7 +359,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 						filejson.Add("filesize", sizeStr.toStdString());
 						json.Add("msgtext", filejson.ToString());
 
-						QWSClientMgr::getSingletonInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg)
+						QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg)
 							{
 								qDebug() << "after upload file recv msg from server!";
 							});

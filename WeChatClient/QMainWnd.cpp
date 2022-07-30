@@ -99,11 +99,11 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/)
 	connect(m_commContactsListWnd, SIGNAL(signal_contactInfoChange(QMap<QString, QString>)),m_commContactInfo, SLOT(slot_contactInfoChange(QMap< QString, QString>)));
 	connect(m_commContactInfo, SIGNAL(signal_sendMsgBtnClick(QMap<QString, QString>)),this, SLOT(slot_sendMsgBtnClick(QMap<QString, QString>)));
 
-	QWSClientMgr::getSingletonInstance()->regMsgCall("cs_msg_sendmsg",std::bind(&QMainWnd::cs_msg_sendmsg,this, std::placeholders::_1) );
-	QWSClientMgr::getSingletonInstance()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
-	QWSClientMgr::getSingletonInstance()->regMsgCall("cs_msg_update_sessionlist", std::bind(&QMainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
-	QWSClientMgr::getSingletonInstance()->regMsgCall("cs_msg_update_grouplist", std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
-	QWSClientMgr::getSingletonInstance()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendmsg",std::bind(&QMainWnd::cs_msg_sendmsg,this, std::placeholders::_1) );
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_sessionlist", std::bind(&QMainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_grouplist", std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
+	QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
 
 	m_networkMgr = new QNetworkAccessManager();
 	connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)),this, SLOT(slot_replyFinished(QNetworkReply*)));
@@ -373,7 +373,7 @@ void QMainWnd::requestFriendList()
 	//
 	neb::CJsonObject json;
 	json.Add("ownerid", QMainWnd::getSinletonInstance()->m_userid);
-	QWSClientMgr::getSingletonInstance()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg)
+	QWSClientMgr::getInstance()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg)
 		{
 			//QMessageBox::information(nullptr, "info", msg.ToString().c_str());
 			if (!msg["data"].IsArray())
@@ -429,7 +429,7 @@ void QMainWnd::requestSessionList()
 	//向远端请求会话列表
 	neb::CJsonObject json;
 	json.Add("ownerid", QMainWnd::getSinletonInstance()->getSinletonInstance()->m_userid);
-	QWSClientMgr::getSingletonInstance()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg)
+	QWSClientMgr::getInstance()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg)
 		{
 			//QMessageBox::information(nullptr, "info", msg.ToString().c_str());
 			qDebug() << "msg:" << msg.ToString().c_str();
@@ -569,7 +569,7 @@ void QMainWnd::requestGroupList()
 {
 	neb::CJsonObject json;
 	json.Add("ownerid", QMainWnd::getSinletonInstance()->getSinletonInstance()->m_userid);
-	QWSClientMgr::getSingletonInstance()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg)
+	QWSClientMgr::getInstance()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg)
 		{
 			qDebug() << "requestGroupList:" <<msg.ToString().c_str();
 			//先判断传入是否是msg["data"]是否是array

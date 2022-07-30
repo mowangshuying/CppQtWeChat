@@ -26,7 +26,7 @@ private:
 	QWSClientMgr();
 public:
 
-	static QWSClientMgr* getSingletonInstance();
+	static QWSClientMgr* getInstance();
 
 	void sendMsg(const QString& message);
 
