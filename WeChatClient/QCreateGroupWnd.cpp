@@ -326,7 +326,7 @@ void QCreateGroupWnd::slot_comfirmBtnClick()
 				return;
 			}
 			//接收到创建群组成功的时候，向列表中嵌入一条数据
-			QMainWnd::getSinletonInstance()->m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.toStdString().c_str(), groupid);
+			QMainWnd::getInstance()->m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.toStdString().c_str(), groupid);
 		});
 }
 

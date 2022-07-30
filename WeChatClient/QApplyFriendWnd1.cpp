@@ -38,7 +38,7 @@ QApplyFriendWnd1::QApplyFriendWnd1(QWidget* p /*= nullptr*/)
 
 	m_userInfoWnd->setFixedWidth(130);
 	m_userInfoWnd->setWindowFlags(Qt::FramelessWindowHint);
-	m_userInfoWnd->setStyleSheet("background-color:#aaa;border:none");
+	m_userInfoWnd->setStyleSheet("background-color:#aaa;border:0px;");
 	m_hLayout->addWidget(m_userInfoWnd);
 
 	m_vLayout = new QVBoxLayout();

@@ -20,7 +20,7 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/)
 
 	m_vLayout1 = new QVBoxLayout();
 
-	m_hLayout0 = new QHBoxLayout(this);
+	m_hLayout0 = new QHBoxLayout();
 	m_hLayout0->setContentsMargins(0, 0, 0, 0);
 	m_hLayout0->setSpacing(0);
 	m_minBtn = new QPushButton(this);
@@ -153,8 +153,7 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/)
 
 void QCommContactInfo::slot_contactInfoChange(QMap<QString, QString> map)
 {
-	//
-	qDebug() <<"map = " << map;
+	qDebug() <<"contactInfoChange map = " << map << "\n";
 	//根据map中name字段修改昵称字段
 	m_nickNameLabel->setText(map["name"]);
 	//加载QDataManager中玩家头像数据

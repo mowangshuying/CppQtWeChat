@@ -30,7 +30,7 @@ private:
 	QMainWnd(QWidget* p = nullptr);
 
 public:
-	static QMainWnd* getSinletonInstance() {
+	static QMainWnd* getInstance() {
 		if (m_mainWnd == nullptr)
 		{
 			m_mainWnd = new QMainWnd();

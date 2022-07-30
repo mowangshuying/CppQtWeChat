@@ -46,7 +46,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/)
 	m_MsgWndList->setAcceptDrops(false);
 	m_MsgWndList->setMinimumWidth(this->width());
 	m_sendTextEdit = new QTextEdit(this);
-	m_sendTextEdit->setStyleSheet("border:0px");
+	m_sendTextEdit->setStyleSheet("border:0px;");
 	m_sendTextEdit->setAcceptDrops(false);
 
 	m_sesToolBar = new QSessionToolBar();
@@ -84,7 +84,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/)
 
 
 	m_MsgWndList->setSelectionMode(QAbstractItemView::NoSelection);
-	m_MsgWndList->setStyleSheet("border:2px red solid");
+	m_MsgWndList->setStyleSheet("border:2px red solid;");
 	m_MsgWndList->setFocusPolicy(Qt::NoFocus);
 	m_MsgWndList->setAttribute(Qt::WA_StyledBackground);
 	m_MsgWndList->setAcceptDrops(true);
@@ -93,7 +93,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/)
 	m_sendTextBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
 	setAttribute(Qt::WA_StyledBackground);
-	setStyleSheet("background-color:white;border:0px");
+	setStyleSheet("background-color:white;border:0px;");
 
 	connect(m_sesToolBar->m_emoijWnd, SIGNAL(signal_emoijClicked(QString)), this, SLOT(slot_emoijClicked(QString)));
 	connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slot_moreBtnClick()));
@@ -111,7 +111,7 @@ void QSessionWnd::slot_sendTextBtnClick()
 	m_sendTextEdit->setText("");
 
 	neb::CJsonObject json;
-	json.Add("sendid", QMainWnd::getSinletonInstance()->m_userid);
+	json.Add("sendid", QMainWnd::getInstance()->m_userid);
 	json.Add("recvid", m_recvId);
 	json.Add("sesid", m_sesId);
 	json.Add("msgtext", msgText.toStdString().c_str());
@@ -124,7 +124,7 @@ void QSessionWnd::slot_sendTextBtnClick()
 			{
 				//向远端发送消息
 				QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-				QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getSinletonInstance()->m_userid, m_recvId);
+				QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getInstance()->m_userid, m_recvId);
 				QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
 				msgWnd->setFixedWidth(this->width());
 				QSize msgSize = msgWnd->fontRect(msgText);
@@ -146,7 +146,7 @@ void QSessionWnd::slot_sendTextBtnClick()
 				qDebug() << "cs_msg_sendgroupmsg:msg=" << msg.ToString().c_str();
 				//向远端发送消息
 				QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-				QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getSinletonInstance()->m_userid, m_recvId);
+				QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getInstance()->m_userid, m_recvId);
 				QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
 				msgWnd->setFixedWidth(this->width());
 				QSize msgSize = msgWnd->fontRect(msgText);
@@ -302,7 +302,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 		}
 
 		//{//这是用于测试的，以后要删除掉
-			QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, QMainWnd::getSinletonInstance()->m_userid, m_recvId);
+			QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, QMainWnd::getInstance()->m_userid, m_recvId);
 			fileWnd->m_innerWnd->m_fileName->setText(filename);
 			fileWnd->m_innerWnd->m_fileSize->setText(sizeStr);
 			//fileWnd->m_innerWnd->m_fileDir = strFileName;
@@ -325,8 +325,8 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 
 		QDateTime current_date_time = QDateTime::currentDateTime();
 		QString current_date = current_date_time.toString("yyyy_MM_dd_hh_mm_ss_zzz_"); 
-		QString uploadfilestr = QString("form-data;name=\"headimg\";filename=\"%1_%2_%3\"").arg(QMainWnd::getSinletonInstance()->m_userid).arg(current_date).arg(filename);
-		QString uploadfilestr2 = QString("%1_%2_%3").arg(QMainWnd::getSinletonInstance()->m_userid).arg(current_date).arg(filename);
+		QString uploadfilestr = QString("form-data;name=\"headimg\";filename=\"%1_%2_%3\"").arg(QMainWnd::getInstance()->m_userid).arg(current_date).arg(filename);
+		QString uploadfilestr2 = QString("%1_%2_%3").arg(QMainWnd::getInstance()->m_userid).arg(current_date).arg(filename);
 		part.setHeader(QNetworkRequest::ContentDispositionHeader, uploadfilestr);
 	
 
@@ -348,7 +348,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 						fileWnd->m_innerWnd->m_sendState->setText("已发送");
 
 						neb::CJsonObject json;
-						json.Add("sendid", QMainWnd::getSinletonInstance()->m_userid);
+						json.Add("sendid", QMainWnd::getInstance()->m_userid);
 						json.Add("recvid", m_recvId);
 						json.Add("sesid", m_sesId);
 						json.Add("msgtype", 1);

@@ -75,7 +75,7 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/)
 	
 	m_listWidget = new QListWidget(this);
 	m_listWidget->setFixedHeight(330);
-	m_listWidget->setStyleSheet("border:0px");
+	m_listWidget->setStyleSheet("border:0px;");
 	m_vLayout->addWidget(m_listWidget);
 
 	m_vLayout->addStretch();

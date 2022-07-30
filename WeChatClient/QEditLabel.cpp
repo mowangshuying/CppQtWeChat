@@ -20,14 +20,13 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e) {
 	if (QEvent::Enter == e->type()) {
 		m_StackLayout->setCurrentWidget(m_lineEdit);
 		m_lineEdit->setText(m_label->text());
-		//qDebug() << "1111 e->type() = " << e->type() << "obj = " << obj << endl;
+		//qDebug() << "QEvent::Enter..." << endl;
 	}
 
 	if (QEvent::Leave == e->type()) {
 		m_StackLayout->setCurrentWidget(m_label);
 		m_label->setText(m_lineEdit->text());
-		//m_label->setStyleSheet("border:0px;");
-		//qDebug() << "2222 e->type() = " << e->type() << "obj = " << obj << endl;
+		//qDebug() << "QEvent::Leave..." << endl;
 	}
 
 	return QWidget::eventFilter(obj, e);
@@ -37,13 +36,9 @@ void QEditLabel::initCtrls() {
 	m_StackLayout = new QStackedLayout(this);
 	setLayout(m_StackLayout);
 
-	m_label = new QLabel("test");
-	//m_label->setStyleSheet("background-color:white");
-
+	m_label = new QLabel();
 	m_lineEdit = new QLineEdit();
-	m_label->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-
-	//m_stackWidget->setGeometry(0, 0, 50, 50);
+	//m_label->setFocusPolicy(Qt::FocusPolicy::ClickFocus); // 暂时先注释，并未发现异常
 
 	m_label->installEventFilter(this);
 	m_lineEdit->installEventFilter(this);

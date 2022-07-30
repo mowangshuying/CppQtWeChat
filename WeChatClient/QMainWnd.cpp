@@ -90,7 +90,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/)
 	setLayout(m_hLayout);
 	setWindowFlags(Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_StyledBackground);
-	setStyleSheet("background-color:#white;");
+	//setStyleSheet("background-color:#ffffff;");
 	//setContentsMargins(2, 2, 2, 2);
 
 	//
@@ -372,7 +372,7 @@ void QMainWnd::requestFriendList()
 {
 	//
 	neb::CJsonObject json;
-	json.Add("ownerid", QMainWnd::getSinletonInstance()->m_userid);
+	json.Add("ownerid", QMainWnd::getInstance()->m_userid);
 	QWSClientMgr::getInstance()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg)
 		{
 			//QMessageBox::information(nullptr, "info", msg.ToString().c_str());
@@ -428,7 +428,7 @@ void QMainWnd::requestSessionList()
 {
 	//向远端请求会话列表
 	neb::CJsonObject json;
-	json.Add("ownerid", QMainWnd::getSinletonInstance()->getSinletonInstance()->m_userid);
+	json.Add("ownerid", QMainWnd::getInstance()->getInstance()->m_userid);
 	QWSClientMgr::getInstance()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg)
 		{
 			//QMessageBox::information(nullptr, "info", msg.ToString().c_str());
@@ -568,7 +568,7 @@ void QMainWnd::requestSessionList()
 void QMainWnd::requestGroupList()
 {
 	neb::CJsonObject json;
-	json.Add("ownerid", QMainWnd::getSinletonInstance()->getSinletonInstance()->m_userid);
+	json.Add("ownerid", QMainWnd::getInstance()->getInstance()->m_userid);
 	QWSClientMgr::getInstance()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg)
 		{
 			qDebug() << "requestGroupList:" <<msg.ToString().c_str();

@@ -57,7 +57,7 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/)
 	
 	{
 		QSimpleSplit* sp = new QSimpleSplit();
-		sp->setStyleSheet("background-color:gray;border:none");
+		sp->setStyleSheet("background-color:gray;border:0px;");
 		m_vTopLayout->addWidget(sp);
 	}
 
@@ -268,7 +268,7 @@ void QLoginAndRegWnd::slot_regOrLoginBtn()
 			}
 
 			qDebug() << msg.ToString().c_str();
-			m_mainWnd = QMainWnd::getSinletonInstance();
+			m_mainWnd = QMainWnd::getInstance();
 			if (m_mainWnd != nullptr) {
 				m_mainWnd->m_userid = userid;
 				m_mainWnd->m_username = username.c_str();

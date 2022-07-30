@@ -8,7 +8,7 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/)
 	m_vLayout->setContentsMargins(0, 0, 0, 0);
 	m_vLayout->setSpacing(0);
 
-	m_hLayout1 = new QHBoxLayout(this);
+	m_hLayout1 = new QHBoxLayout();
 
 	m_hLayout1->setContentsMargins(0, 0, 0, 0);
 	m_hLayout1->setSpacing(0);
@@ -38,7 +38,7 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/)
 	m_hLayout1->setSpacing(5);
 	m_vLayout->addLayout(m_hLayout1);
 
-	m_hLayout2 = new QHBoxLayout(this);
+	m_hLayout2 = new QHBoxLayout();
 	m_hLayout2->setContentsMargins(0, 0, 0, 0);
 	m_hLayout2->setSpacing(0);
 
@@ -74,6 +74,6 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/)
 
 	setFixedHeight(65);
 	setAttribute(Qt::WA_StyledBackground);
-	setStyleSheet("background-color:white;border:0px");
+	setStyleSheet("background-color:white;border:0px;");
 }
 

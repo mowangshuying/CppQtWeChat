@@ -17,8 +17,8 @@ QSelectWnd1::QSelectWnd1(QWidget* p)
 	m_addContactsOrGroupBtn = new QPushButton("添加好友或群",this);
 	m_createGroupBtn = new QPushButton("创建群聊",this);
 
-	m_addContactsOrGroupBtn->setStyleSheet("border:none");
-	m_createGroupBtn->setStyleSheet("border:none");
+	m_addContactsOrGroupBtn->setStyleSheet("border:0px;");
+	m_createGroupBtn->setStyleSheet("border:0px;");
 
 	m_vLayout->addWidget(m_addContactsOrGroupBtn);
 	{

@@ -127,7 +127,7 @@ void QPictureToolWnd::slot_determineBtnClicked()
 	request.setUrl(QUrl("http://49.232.169.205:80/UploadDemo/UploadServlet"));
 	QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
 	QHttpPart part;
-	part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"u%1.png\"").arg(QMainWnd::getSinletonInstance()->m_userid));
+	part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"u%1.png\"").arg(QMainWnd::getInstance()->m_userid));
 	part.setHeader(QNetworkRequest::ContentTypeHeader,"image/png");
 	QFile* file = new QFile(m_filePath);
 	file->open(QFile::ReadOnly);
@@ -159,12 +159,12 @@ void QPictureToolWnd::slot_determineBtnClicked()
 
 			neb::CJsonObject json2;
 			json2.Add("headimg", headimgstr);
-			json2.Add("userid", QMainWnd::getSinletonInstance()->m_userid);
+			json2.Add("userid", QMainWnd::getInstance()->m_userid);
 			//告诉远端服务器该玩家的头像数据
 			QWSClientMgr::getInstance()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject &msg) {
 					qDebug() << msg.ToString().c_str() << endl;
-					QMainWnd::getSinletonInstance()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getSinletonInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg);
-					QDataManager::getInstance()->m_UserId2HeadImgMap[QMainWnd::getSinletonInstance()->m_userid] = QMainWnd::getSinletonInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
+					QMainWnd::getInstance()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg);
+					QDataManager::getInstance()->m_UserId2HeadImgMap[QMainWnd::getInstance()->m_userid] = QMainWnd::getInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
 				});
 		});
 }

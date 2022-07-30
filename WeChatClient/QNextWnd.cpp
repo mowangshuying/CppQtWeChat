@@ -108,7 +108,7 @@ void QNextWnd::slot_pushBtnClick()
 
 		//向远端服务器发送添加好友申请
 		neb::CJsonObject json;
-		json.Add("ownerid", QMainWnd::getSinletonInstance()->m_userid);
+		json.Add("ownerid", QMainWnd::getInstance()->m_userid);
 		json.Add("friendid",m_friendid);
 
 		//获取验证的消息

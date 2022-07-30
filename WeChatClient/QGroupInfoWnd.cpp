@@ -32,14 +32,14 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	}
 
 	m_simpleGroupInfoWnd = new QWidget();
-	m_simpleGroupInfoWnd->setStyleSheet("border:0px");
+	m_simpleGroupInfoWnd->setStyleSheet("border:0px;");
 	m_vLayout1 = new QVBoxLayout();
 	m_simpleGroupInfoWnd->setLayout(m_vLayout1);
 	m_vLayout->addWidget(m_simpleGroupInfoWnd);
 	
 	m_groupName1 = new QLabel();
 	m_groupName1->setText("群聊名称");
-	//m_groupName1->setStyleSheet("font-size:14px;border:0px");
+	//m_groupName1->setStyleSheet("font-size:14px;border:0px;");
 	m_vLayout1->addWidget(m_groupName1);
 
 	// 提供分割线

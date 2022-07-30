@@ -37,7 +37,7 @@ QApplyFriendWnd2::QApplyFriendWnd2(QWidget* p /*= nullptr*/)
 
 	m_userInfoWnd->setFixedWidth(130);
 	m_userInfoWnd->setWindowFlags(Qt::FramelessWindowHint);
-	m_userInfoWnd->setStyleSheet("background-color:#aaa;border:none");
+	m_userInfoWnd->setStyleSheet("background-color:#aaa;border:0px;");
 
 	m_vLayout = new QVBoxLayout();
 	m_inMsgLabel = new QLabel();

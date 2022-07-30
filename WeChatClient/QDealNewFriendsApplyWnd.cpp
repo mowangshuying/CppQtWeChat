@@ -60,8 +60,8 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/)
 	m_listWnd2->setAttribute(Qt::WA_StyledBackground);
 	setAttribute(Qt::WA_StyledBackground);
 
-	m_listWnd1->setStyleSheet("border:0px");
-	m_listWnd2->setStyleSheet("border:0px");
+	m_listWnd1->setStyleSheet("border:0px;");
+	m_listWnd2->setStyleSheet("border:0px;");
 }
 
 void QDealNewFriendsApplyWnd::addListItem(const char* headurl,const char* name,const char* msg,int state,int id, bool isApplyer, int userid)
@@ -78,7 +78,7 @@ void QDealNewFriendsApplyWnd::setFriendApplyList()
 {
 	//
 	neb::CJsonObject json;
-	json.Add("ownerid", QMainWnd::getSinletonInstance()->m_userid);
+	json.Add("ownerid", QMainWnd::getInstance()->m_userid);
 	QWSClientMgr::getInstance()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg)
 		{
 			qDebug() << msg.ToString().c_str();
@@ -103,7 +103,7 @@ void QDealNewFriendsApplyWnd::setFriendApplyList()
 					continue;
 				}
 
-				if (ownerid == QMainWnd::getSinletonInstance()->m_userid)
+				if (ownerid == QMainWnd::getInstance()->m_userid)
 				{
 					std::string username;
 					if (!tempJsonObj.Get("friendusername", username))

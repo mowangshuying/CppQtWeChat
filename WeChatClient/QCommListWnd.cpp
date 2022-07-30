@@ -19,7 +19,7 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType/*Q
 	setLayout(m_vLayout);
 	setFixedWidth(250);
 	
-	m_hLayout = new QHBoxLayout(this);
+	m_hLayout = new QHBoxLayout();
 	m_hLayout->setContentsMargins(0, 0, 0, 0);
 	m_hLayout->setSpacing(0);
 	m_searchEdit = new QLineEdit(this);
@@ -55,12 +55,12 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType/*Q
 
 	setFixedWidth(250);
 	setObjectName("QCommListWnd");
-	setStyleSheet("#QCommListWnd{background:white;border:0px}");
+	setStyleSheet("#QCommListWnd{background:white;border:0px;}");
 	setAttribute(Qt::WA_StyledBackground);
 	setWindowFlags(Qt::FramelessWindowHint);
 
 
-	m_listWidget->setStyleSheet("border:0px");
+	m_listWidget->setStyleSheet("border:0px;");
 	connect(m_listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(onCurrentItemClicked(QListWidgetItem*)));
 	connect(m_startGroupBtn, SIGNAL(clicked()), this, SLOT(onStartGroupBtnClicked()));
 
@@ -71,6 +71,8 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType/*Q
 
 void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
 {
+	// 自定义列表 
+	// 包含如下列表信息：联系人列表、消息列表、群聊列表
 	QCustomListWidgetItem* pCustItem = dynamic_cast<QCustomListWidgetItem*>(item);
 	qDebug() << "QCommListWnd::onCurrentItemClicked sesid:" << pCustItem->sesId();
 	
@@ -78,20 +80,24 @@ void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
 	if (m_WndType == QCommContactItemWnd_Type) 
 	{
 		QCommContactItemWnd* wnd = dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pCustItem));
-		//修改栈内信息
-		QMap<QString, QString> infoMap;
-		infoMap["name"] = wnd->m_name->text();	
 		if (wnd->m_bNewFriend)
 		{
-			QMainWnd::getSinletonInstance()->m_dealNewFriendsApplyWnd->setFriendApplyList();
+			QMainWnd::getInstance()->m_dealNewFriendsApplyWnd->setFriendApplyList();
 			//切换窗口到新的朋友窗口
-			QMainWnd::getSinletonInstance()->m_sLayout2->setCurrentIndex(1);
+			//m_sLayout2中位置为1的窗口为新的朋友的窗口
+			QMainWnd::getInstance()->m_sLayout2->setCurrentIndex(1);
 		}
 		else
 		{
-			//切换到展示联系人信息的页面
-			QMainWnd::getSinletonInstance()->m_sLayout2->setCurrentIndex(0);
+			// 设置信息
+			// 该联系人的名字和该联系人的id信息
+			QMap<QString, QString> infoMap;
+			infoMap["name"] = wnd->m_name->text();
 			infoMap["friendid"] = QString::number(wnd->m_friendId,10);
+			
+			//切换到展示联系人信息的页面
+			QMainWnd::getInstance()->m_sLayout2->setCurrentIndex(0);
+
 			//联系人的信息改变
 			emit signal_contactInfoChange(infoMap);
 		}
@@ -113,9 +119,9 @@ void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
 		//获取到群的id
 		int groupid = wnd->m_groupId;
 		//右边工具栏需要跳转到msg那一栏
-		QMainWnd::getSinletonInstance()->m_toolWnd->m_msgBtn->click();
+		QMainWnd::getInstance()->m_toolWnd->m_msgBtn->click();
 		//先找到消息列表中所在的位置
-		auto msgListWidget = QMainWnd::getSinletonInstance()->m_commMsgListWnd->m_listWidget;
+		auto msgListWidget = QMainWnd::getInstance()->m_commMsgListWnd->m_listWidget;
 
 		//int sesid = -1;
 		for (int i = 0; i < msgListWidget->count(); i++)
@@ -126,7 +132,7 @@ void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
 			{
 				//sesid = pWnd->m_sesId;
 				msgListWidget->setCurrentItem(pitem);
-				QMainWnd::getSinletonInstance()->slot_sesIdToIndex(pWnd->m_sesId);
+				QMainWnd::getInstance()->slot_sesIdToIndex(pWnd->m_sesId);
 				break;
 			}
 		}
