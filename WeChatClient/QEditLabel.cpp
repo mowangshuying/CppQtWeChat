@@ -19,13 +19,15 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e) {
 
 	if (QEvent::Enter == e->type()) {
 		m_StackLayout->setCurrentWidget(m_lineEdit);
-		qDebug() << "1111 e->type() = " << e->type() << "obj = " << obj << endl;
+		m_lineEdit->setText(m_label->text());
+		//qDebug() << "1111 e->type() = " << e->type() << "obj = " << obj << endl;
 	}
 
 	if (QEvent::Leave == e->type()) {
 		m_StackLayout->setCurrentWidget(m_label);
 		m_label->setText(m_lineEdit->text());
-		qDebug() << "2222 e->type() = " << e->type() << "obj = " << obj << endl;
+		//m_label->setStyleSheet("border:0px;");
+		//qDebug() << "2222 e->type() = " << e->type() << "obj = " << obj << endl;
 	}
 
 	return QWidget::eventFilter(obj, e);
@@ -45,6 +47,8 @@ void QEditLabel::initCtrls() {
 
 	m_label->installEventFilter(this);
 	m_lineEdit->installEventFilter(this);
+
+	m_label->setStyleSheet("border:0px;");
 
 	m_StackLayout->addWidget(m_label);
 	m_StackLayout->addWidget(m_lineEdit);

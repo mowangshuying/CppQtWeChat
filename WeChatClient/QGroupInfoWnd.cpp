@@ -49,8 +49,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	//m_groupName2->setFixedHeight(25);
 	//m_groupName2->setStyleSheet("border:1px solid #828790;");
 	m_groupName2->setStyleSheet("border:0px;border-bottom:1px solid #828790;");
-
 	m_groupName2->setFixedSize(200,25);
+	m_groupName2->setText("请在此处添加群聊名称...");
 	m_vLayout1->addWidget(m_groupName2);
 
 	// 提供分割线
@@ -66,7 +66,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	//m_vLayout1->addSpacing(5);
 
 	m_groupNotice2 = new QEditLabel();
-	//m_groupNotice2->setText("未设置");
+	m_groupNotice2->setText("请在此处设置群公告...");
 	m_groupNotice2->setFixedSize(200,25);
 	m_groupNotice2->setStyleSheet("border:0px;border-bottom:1px solid #828790;");
 	m_vLayout1->addWidget(m_groupNotice2);
@@ -83,7 +83,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	m_vLayout1->addSpacing(5);
 
 	m_groupRemarks2 = new QEditLabel();
-	//m_groupRemarks2->setText("群聊的备仅自己可见");
+	m_groupRemarks2->setText("请在此处设置群备注...");
 	m_groupRemarks2->setFixedSize(200, 25);
 	m_groupRemarks2->setStyleSheet("border:0px;border-bottom:1px solid #828790;");
 	m_vLayout1->addWidget(m_groupRemarks2);
@@ -100,7 +100,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 	m_vLayout1->addSpacing(5);
 
 	m_groupRoleName2 = new QEditLabel();
-	m_groupRoleName2->setText("白衣沽酒");
+	m_groupRoleName2->setText("请在此处设置备注...");
 	m_groupRoleName2->setFixedSize(200, 25);;
 	m_groupRoleName2->setStyleSheet("border:0px;border-bottom:1px solid #828790;");
 	m_vLayout1->addWidget(m_groupRoleName2);
