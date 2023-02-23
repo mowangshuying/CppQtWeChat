@@ -1,5 +1,6 @@
 #include "QWSClientMgr.h"
 #include <QDebug>
+#include <QThread>
 
 
 
@@ -21,6 +22,7 @@ QWSClientMgr::QWSClientMgr()
 	//连接远端服务器
 	m_webSock->open(QUrl("ws://49.232.169.205:5000"));
 	//m_webSock->open(QUrl("ws://127.0.0.1:5000"));
+	qDebug()<<__FUNCTION__<<":" << QThread::currentThread()->currentThreadId() << endl;
 }
 
 QWSClientMgr* QWSClientMgr::getInstance()
@@ -39,6 +41,7 @@ void QWSClientMgr::sendMsg(const QString& message)
 void QWSClientMgr::regMsgCall(QString cmd, NetEventCall netEventCall)
 {
 	m_Msg2CallbackMap[cmd] = netEventCall;
+	qDebug() << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
 }
 
 void QWSClientMgr::transfer(neb::CJsonObject& msg)
@@ -99,6 +102,7 @@ void QWSClientMgr::onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson)
 void QWSClientMgr::slot_connected()
 {
 	qDebug() << "slot_connected()...";
+	qDebug() << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
 
 	//向远端服务器发送一个注册消息
 	{
@@ -119,7 +123,7 @@ void QWSClientMgr::slot_disconnected()
 
 void QWSClientMgr::slot_recvMsg(const QString& message)
 {
-	
+	qDebug() << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
 	neb::CJsonObject json;
 	if (!json.Parse(message.toStdString())) {
 		qDebug() << "json parse failed in slot_recvMsg";

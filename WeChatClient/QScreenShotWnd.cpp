@@ -13,6 +13,7 @@ QScreenShotWnd::QScreenShotWnd(QWidget* p /*= nullptr*/)
 	m_beginPos = QPoint(-1, -1);
 	m_endPos = QPoint(-1, -1);
 	m_leftBtnPress = false;
+	//m_bFirst = true;
 	setMouseTracking(true);//开启鼠标实时追踪，实时的显示鼠标的位置
 	m_screenShotRect = QRect(0, 0, QApplication::desktop()->width(), QApplication::desktop()->height());
 
@@ -47,7 +48,7 @@ void QScreenShotWnd::slot_exitSccreenShot()
 
 void QScreenShotWnd::showEvent(QShowEvent* showEvent)
 {
-	setWindowOpacity(0.7);
+	setWindowOpacity(0.2);
 }
 
 void QScreenShotWnd::mousePressEvent(QMouseEvent* event)
@@ -56,6 +57,9 @@ void QScreenShotWnd::mousePressEvent(QMouseEvent* event)
 	{
 		m_leftBtnPress = true;
 		setBeginPos(event->pos());
+
+		//按下鼠标时候设置窗口的背景颜色
+		//setStyleSheet("background-color:black;");
 	}
 }
 
@@ -74,6 +78,7 @@ void QScreenShotWnd::mouseReleaseEvent(QMouseEvent* event)
 	{
 		m_leftBtnPress = false;
 		setEndPos(event->pos());
+		
 		if (m_beginPos.x() > m_endPos.x())
 		{
 			m_beginPos.setX(m_beginPos.x() + m_endPos.x());
@@ -86,7 +91,10 @@ void QScreenShotWnd::mouseReleaseEvent(QMouseEvent* event)
 			m_endPos.setY(m_beginPos.y() - m_endPos.y());
 			m_beginPos.setY(m_beginPos.y() - m_endPos.y());
 		}
-		m_screenShotRect.setRect(m_beginPos.x(), m_beginPos.y(), m_endPos.x() - m_beginPos.x(), m_endPos.y() - m_beginPos.y());
+
+		// 设置屏幕截图的范围
+		m_screenShotRect.setRect(m_beginPos.x(), m_beginPos.y(), 
+			m_endPos.x() - m_beginPos.x(), m_endPos.y() - m_beginPos.y());
 	}
 }
 
@@ -94,8 +102,8 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
 {
 	QPainter painter(this); //将当前窗体对象设置为画布
 	QPen pen;
-	pen.setColor(Qt::red);//设置笔色
-	pen.setWidth(4);     //画笔线条宽度
+	pen.setColor(Qt::blue);//设置笔色
+	pen.setWidth(2);     //画笔线条宽度
 	painter.setPen(pen);//设置画笔
 
 	int lx = m_beginPos.x() < m_endPos.x() ? m_beginPos.x() : m_endPos.x();//矩形截图区域左上角x坐标
@@ -103,21 +111,29 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
 	int w = m_beginPos.x() < m_endPos.x() ? m_endPos.x() - m_beginPos.x() : m_beginPos.x() - m_endPos.x();//矩形截图区域宽度
 	int h = m_beginPos.y() < m_endPos.y() ? m_endPos.y() - m_beginPos.y() : m_beginPos.y() - m_endPos.y();//矩形截图区域高度
 
+	//矩形截图区域
 	QRect rect = QRect(lx, ly, w, h);//矩形截图区域
-	if (lx != -1 && w > 0 && h > 0)//防止第一次就重绘 并且宽高大于0时才进行截图操作
+	//防止第一次就重绘 并且宽高大于0时才进行截图操作
+	if (lx != -1 && w > 0 && h > 0)
 	{
 
-		painter.drawPixmap(rect, m_fullScreenPixmap, rect);//重绘截图矩形部分，即恢复原图，达到去除幕布效果
-		painter.drawRect(lx, ly, w, h);//画截图矩形
-		//截图区域大小位置提示
-		if (ly > 10)//避免看不到提示,在截图矩形上边不接近屏幕上边时，提示在截图矩形的上边的上面
+		//重绘截图矩形部分，即恢复原图，达到去除幕布效果
+		painter.drawPixmap(rect, m_fullScreenPixmap, rect);
+		//画截图矩形
+		painter.drawRect(lx, ly, w, h);
+									   
+	    //截图区域大小位置提示
+		if (ly > 10)
 		{
+			//避免看不到提示,在截图矩形上边不接近屏幕上边时，提示在截图矩形的上边的上面
 			painter.drawText(lx + 2, ly - 8, tr("截图范围(%1,%2) - (%3,%4)  截图大小：(%5 x %6)").arg(lx).arg(ly).arg(lx + w).arg(ly + h).arg(w).arg(h));
 		}
-		else//在截图矩形上边接近屏幕上边时，提示在截图矩形的上边的下面
+		else
 		{
+			//在截图矩形上边接近屏幕上边时，提示在截图矩形的上边的下面
 			painter.drawText(lx + 2, ly + 12, tr("截图范围(%1,%2) - (%3,%4)  截图大小：(%5 x %6)").arg(lx).arg(ly).arg(lx + w).arg(ly + h).arg(w).arg(h));
 		}
+
 	}
 
 	//实时显示鼠标的位置

@@ -1,6 +1,10 @@
 #include "QEditLabel.h"
 #include <QDebug>
 #include <QApplication>
+#include <QVector>
+#include <vector>
+#include <QMap>
+#include <map>
 
 QEditLabel::QEditLabel(QWidget* parent)
 	: QWidget(parent) {
@@ -48,4 +52,9 @@ void QEditLabel::initCtrls() {
 	m_StackLayout->addWidget(m_label);
 	m_StackLayout->addWidget(m_lineEdit);
 	m_StackLayout->setCurrentWidget(m_label);
+
+	sizeof(QVector<int>);
+	sizeof(std::vector<int>);
+	sizeof(QMap<int, int>);
+	sizeof(std::map<int,int>);
 }

@@ -74,7 +74,7 @@ void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
 	// 自定义列表 
 	// 包含如下列表信息：联系人列表、消息列表、群聊列表
 	QCustomListWidgetItem* pCustItem = dynamic_cast<QCustomListWidgetItem*>(item);
-	qDebug() << "QCommListWnd::onCurrentItemClicked sesid:" << pCustItem->sesId();
+	qDebug() << __FUNCTION__  << "sesid:" << pCustItem->sesId() << "\n";
 	
 	//当前点击的是联系人列表中的某一项目
 	if (m_WndType == QCommContactItemWnd_Type) 

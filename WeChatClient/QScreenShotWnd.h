@@ -36,6 +36,9 @@ public:
 public:
 	QPixmap m_fullScreenPixmap;
 private:
+	// 是否是第一次截屏
+	//bool m_bFirst;
+
 	//鼠标开始位置
 	QPoint m_beginPos;
 	//鼠标结束位置
@@ -47,5 +50,8 @@ private:
 
 	//右键菜单
 	QMenu* m_RightBtnMenu;
+
+	// 构建截屏工具条
+
 };
 
