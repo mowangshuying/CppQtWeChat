@@ -44,7 +44,7 @@ QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p, const char* headUrl, const ch
 
 void QFindFriendItemWnd::slot_addFriendBtnClick()
 {
-	m_nextWnd = new QNextWnd(nullptr,m_friendid,m_username);
+	m_nextWnd = new QApplyFriendNextWnd(nullptr,m_friendid,m_username);
 	m_nextWnd->show();
 }
 

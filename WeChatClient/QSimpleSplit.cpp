@@ -9,7 +9,7 @@ QSimpleSplit::QSimpleSplit(QWidget* p /*= nullptr*/, QSimpleSplit_direction d/* 
 	setFocusPolicy(Qt::NoFocus);
 	setWindowFlags(Qt::FramelessWindowHint);
 	if (d == QSimpleSplit_direction_v) {
-		//设置高度为2
+		//
 		setFixedHeight(1);
 	}
 	else {

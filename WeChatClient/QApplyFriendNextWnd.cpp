@@ -1,7 +1,7 @@
-#include "QNextWnd.h"
+#include "QApplyFriendNextWnd.h"
 #include "QSimpleSplit.h"
-#include "QApplyFriendWnd1.h"
-#include "QApplyFriendWnd2.h"
+#include "QApplyFriendInputInfoWnd.h"
+#include "QApplyFriendWaitInfoWnd.h"
 
 #include <QMouseEvent>
 #include <QMessageBox>
@@ -10,7 +10,7 @@
 #include "QMainWnd.h"
 
 
-QNextWnd::QNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString username /*= ""*/)
+QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString username /*= ""*/)
 	: QWidget(p),m_friendid(friendid),m_username(username)
 {
 	m_state = Ps_Next;
@@ -49,10 +49,10 @@ QNextWnd::QNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString 
 	m_sLayout = new QStackedLayout(this);
 	m_sLayout->setContentsMargins(0, 0, 0, 0);
 
-	m_wnd1 = new QApplyFriendWnd1();
+	m_wnd1 = new QApplyFriendInputInfoWnd();
 	m_sLayout->addWidget(m_wnd1);
 
-	m_wnd2 = new QApplyFriendWnd2();
+	m_wnd2 = new QApplyFriendWaitInfoWnd();
 	m_sLayout->addWidget(m_wnd2);
 
 
@@ -77,7 +77,7 @@ QNextWnd::QNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString 
 	
 }
 
-void QNextWnd::mouseMoveEvent(QMouseEvent* event)
+void QApplyFriendNextWnd::mouseMoveEvent(QMouseEvent* event)
 {
 	if (m_bPress)
 	{
@@ -85,19 +85,19 @@ void QNextWnd::mouseMoveEvent(QMouseEvent* event)
 	}
 }
 
-void QNextWnd::mousePressEvent(QMouseEvent* event)
+void QApplyFriendNextWnd::mousePressEvent(QMouseEvent* event)
 {
 	m_bPress = true;
 	m_poPress = event->pos();
 }
 
-void QNextWnd::mouseReleaseEvent(QMouseEvent* event)
+void QApplyFriendNextWnd::mouseReleaseEvent(QMouseEvent* event)
 {
 	Q_UNUSED(event);
 	m_bPress = false;
 }
 
-void QNextWnd::slot_pushBtnClick()
+void QApplyFriendNextWnd::slot_pushBtnClick()
 {
 	if (m_state == Ps_Next) {
 		//设置m_sLayout为第2个窗口
@@ -112,8 +112,8 @@ void QNextWnd::slot_pushBtnClick()
 		json.Add("friendid",m_friendid);
 
 		//获取验证的消息
-		auto pApplyWnd1 = dynamic_cast<QApplyFriendWnd1*>(m_wnd1);
-		json.Add("applymsg",pApplyWnd1->m_inMsgEdit->toPlainText().toStdString().c_str());
+		auto pApplyWnd1 = dynamic_cast<QApplyFriendInputInfoWnd*>(m_wnd1);
+		json.Add("applymsg",pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
 
 		QWSClientMgr::getInstance()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) 
 			{
@@ -122,7 +122,6 @@ void QNextWnd::slot_pushBtnClick()
 				{
 					return;
 				}
-
 				//添加好友申请
 				//QMessageBox::information(nullptr, "cs_msg_apply_add_friend", msg.ToString().c_str());
 			});
@@ -136,12 +135,12 @@ void QNextWnd::slot_pushBtnClick()
 	}
 }
 
-void QNextWnd::closeWnd()
+void QApplyFriendNextWnd::closeWnd()
 {
 	close();
 }
 
-void QNextWnd::minWnd()
+void QApplyFriendNextWnd::minWnd()
 {
 	showMinimized();
 }

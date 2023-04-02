@@ -38,7 +38,7 @@
     <ClCompile Include="QCreateGroupWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QApplyFriendWnd2.cpp">
+    <ClCompile Include="QApplyFriendWaitInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QCreateGroupListwnd2Item.cpp">
@@ -50,7 +50,7 @@
     <ClCompile Include="QSelectWnd1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QApplyFriendWnd1.cpp">
+    <ClCompile Include="QApplyFriendInputInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QFindFriendOrGroupWnd.cpp">
@@ -163,10 +163,10 @@
     <QtMoc Include="QSelectWnd1.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QApplyFriendWnd2.h">
+    <QtMoc Include="QApplyFriendWaitInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QApplyFriendWnd1.h">
+    <QtMoc Include="QApplyFriendInputInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QNextWnd.h">

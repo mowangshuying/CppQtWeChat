@@ -10,11 +10,11 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-class QNextWnd : public QWidget
+class QApplyFriendNextWnd : public QWidget
 {
 	Q_OBJECT
 public:
-	QNextWnd(QWidget* p = nullptr,int64_t friendid = -1,QString username = "");
+	QApplyFriendNextWnd(QWidget* p = nullptr,int64_t friendid = -1,QString username = "");
 	
 	enum PushBtn_State {
 		Ps_Next = 0,

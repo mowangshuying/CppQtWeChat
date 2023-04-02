@@ -61,14 +61,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <AdditionalOptions>/d1 reportAllClassLayout %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
+    <ClCompile />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <AdditionalOptions>/d1 reportAllClassLayout %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
+    <ClCompile />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
     <ClCompile>
@@ -110,8 +106,8 @@
     <ClCompile Include="QGroupFriendsWnd.cpp" />
     <ClCompile Include="QGroupInfoWnd.cpp" />
     <ClCompile Include="QPictureToolWnd.cpp" />
-    <ClCompile Include="QApplyFriendWnd1.cpp" />
-    <ClCompile Include="QApplyFriendWnd2.cpp" />
+    <ClCompile Include="QApplyFriendInputInfoWnd.cpp" />
+    <ClCompile Include="QApplyFriendWaitInfoWnd.cpp" />
     <ClCompile Include="QChatMsgWnd.cpp" />
     <ClCompile Include="QCommContactInfo.cpp" />
     <ClCompile Include="QCommContactItemWnd.cpp" />
@@ -159,10 +155,10 @@
     <QtMoc Include="QSelectWnd1.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QApplyFriendWnd2.h" />
+    <QtMoc Include="QApplyFriendWaitInfoWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QApplyFriendWnd1.h" />
+    <QtMoc Include="QApplyFriendInputInfoWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QNextWnd.h" />

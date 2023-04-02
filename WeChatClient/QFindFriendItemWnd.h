@@ -31,5 +31,5 @@ public:
 	//添加好友用户名
 	QString m_username;
 
-	QNextWnd* m_nextWnd;
+	QApplyFriendNextWnd* m_nextWnd;
 };

@@ -16,7 +16,9 @@
 #include "QMessageBox.h"
 #include "QChatFileInnerWnd.h"
 #include "QChatFileOuterWnd.h"
-
+#include <QJsonParseError>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/)
 	: QWidget(p)
@@ -319,13 +321,13 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 
 		QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
 		QNetworkRequest request;
-		request.setUrl(QUrl("http://49.232.169.205:80/UploadDemo/UploadServlet"));
+		request.setUrl(QUrl("http://139.9.93.17:8081/upload"));
 		QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
 		QHttpPart part;
 
 		QDateTime current_date_time = QDateTime::currentDateTime();
 		QString current_date = current_date_time.toString("yyyy_MM_dd_hh_mm_ss_zzz_"); 
-		QString uploadfilestr = QString("form-data;name=\"headimg\";filename=\"%1_%2_%3\"").arg(QMainWnd::getInstance()->m_userid).arg(current_date).arg(filename);
+		QString uploadfilestr = QString("form-data;name=\"file\";filename=\"%1_%2_%3\"").arg(QMainWnd::getInstance()->m_userid).arg(current_date).arg(filename);
 		QString uploadfilestr2 = QString("%1_%2_%3").arg(QMainWnd::getInstance()->m_userid).arg(current_date).arg(filename);
 		part.setHeader(QNetworkRequest::ContentDispositionHeader, uploadfilestr);
 	
@@ -343,28 +345,77 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 					fileWnd->m_innerWnd->m_progressBar->setMinimum(0);
 					fileWnd->m_innerWnd->m_progressBar->setMaximum(y);
 					fileWnd->m_innerWnd->m_progressBar->setValue(x);
-					if (x == y)
-					{
-						fileWnd->m_innerWnd->m_sendState->setText("已发送");
-
-						neb::CJsonObject json;
-						json.Add("sendid", QMainWnd::getInstance()->m_userid);
-						json.Add("recvid", m_recvId);
-						json.Add("sesid", m_sesId);
-						json.Add("msgtype", 1);
-
-						neb::CJsonObject filejson;
-						filejson.Add("filename_server", uploadfilestr2.toStdString());
-						filejson.Add("filename_client", filename.toStdString());
-						filejson.Add("filesize", sizeStr.toStdString());
-						json.Add("msgtext", filejson.ToString());
-
-						QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg)
-							{
-								qDebug() << "after upload file recv msg from server!";
-							});
-					}
 				}
+			});
+
+		/*
+		* void Widget::postBack(QNetworkReply* reply)
+{
+	//qDebug()<<reply->readAll().data(); //输出所有响应内容
+
+	// 获取响应信息
+	QByteArray bytes = reply->readAll();
+
+	QJsonParseError jsonError;
+	QJsonDocument doucment = QJsonDocument::fromJson(bytes, &jsonError);
+	if (jsonError.error != QJsonParseError::NoError) {
+		qDebug() << QStringLiteral("解析Json失败");
+		return;
+	}
+
+	// 解析Json
+	if (doucment.isObject())
+	{
+		QJsonObject obj = doucment.object();
+		QJsonValue value;
+		if (obj.contains("data"))
+		{
+			value = obj.take("data");
+			if (value.isString())
+			{
+				QString data = value.toString();
+				qDebug() << data;
+			}
+		}
+	 }
+
+}
+		*/
+
+		connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, uploadfilestr2, sizeStr, filename](QNetworkReply* reply) {
+				// 获取响应信息
+				QByteArray bytes = reply->readAll();
+				std::string str = bytes.toStdString();
+				int i = 0;
+				//QJsonParseError jsonError;
+				//QJsonDocument doucment = QJsonDocument::fromJson(bytes, &jsonError);
+				//if (jsonError.error != QJsonParseError::NoError) {
+				//	qDebug() << QStringLiteral("解析Json失败");
+				//	return;
+				//}
+
+				
+				//if (x == y)
+				//{
+					fileWnd->m_innerWnd->m_sendState->setText("已发送");
+					neb::CJsonObject json;
+					json.Add("sendid", QMainWnd::getInstance()->m_userid);
+					json.Add("recvid", m_recvId);
+					json.Add("sesid", m_sesId);
+					json.Add("msgtype", 1);
+
+					neb::CJsonObject filejson;
+					filejson.Add("filename_server", str);
+					filejson.Add("filename_client", filename.toStdString());
+					filejson.Add("filesize", sizeStr.toStdString());
+					json.Add("msgtext", filejson.ToString());
+
+					QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg)
+						{
+							qDebug() << "after upload file recv msg from server!";
+						});
+				//}
+
 			});
 	}
 
