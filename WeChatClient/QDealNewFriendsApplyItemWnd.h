@@ -12,8 +12,6 @@ class QDealNewFriendsApplyItemWnd : public QWidget
 {
     Q_OBJECT
 public:
-    // QDealNewFriendsApplyItemWnd(QWidget* p = nullptr);
-
     QDealNewFriendsApplyItemWnd(QWidget* p = nullptr,
                                 const char* headurl = "",
                                 const char* name = "",

@@ -59,6 +59,10 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/) : QWi
 
     m_listWnd1->setStyleSheet("border:0px;");
     m_listWnd2->setStyleSheet("border:0px;");
+
+    if (objectName().isEmpty())
+        setObjectName("QDealNewFriendsApplyWnd");
+    setStyleSheet("QWidget#QDealNewFriendsApplyWnd{border-top-right-radius:4px;border-bottom-right-radius:4px; background-color:white;border:none;}");
 }
 
 void QDealNewFriendsApplyWnd::addListItem(const char* headurl, const char* name, const char* msg, int state, int id, bool isApplyer, int userid)

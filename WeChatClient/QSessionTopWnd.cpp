@@ -33,8 +33,8 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout1->addWidget(m_maxBtn);
     m_hLayout1->addWidget(m_closeBtn);
 
-    m_hLayout1->setContentsMargins(0, 0, 0, 0);
-    m_hLayout1->setSpacing(5);
+    m_hLayout1->setContentsMargins(0, 5, 0, 0);
+    m_hLayout1->addSpacing(15);
     m_vLayout->addLayout(m_hLayout1);
 
     m_hLayout2 = new QHBoxLayout();
@@ -70,5 +70,8 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     setFixedHeight(65);
     setAttribute(Qt::WA_StyledBackground);
-    setStyleSheet("background-color:white;border:0px;");
+    // setStyleSheet("background-color:white;border:0px;");
+    if (objectName().isEmpty())
+        setObjectName("QSessionTopWnd");
+    setStyleSheet("QWidget#QSessionTopWnd{border-top-right-radius:4px;background-color:white;border:none;}");
 }

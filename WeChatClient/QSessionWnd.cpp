@@ -22,7 +22,8 @@
 
 QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setFixedSize(640, 600);
+    // setFixedSize(640, 600);
+    setMinimumSize(640, 600);
     setWindowTitle("会话窗口");
     setAcceptDrops(true);
 
@@ -337,54 +338,11 @@ void QSessionWnd::dropEvent(QDropEvent* event)
             }
         });
 
-        /*
-        * void Widget::postBack(QNetworkReply* reply)
-{
-//qDebug()<<reply->readAll().data(); //输出所有响应内容
-
-// 获取响应信息
-QByteArray bytes = reply->readAll();
-
-QJsonParseError jsonError;
-QJsonDocument doucment = QJsonDocument::fromJson(bytes, &jsonError);
-if (jsonError.error != QJsonParseError::NoError) {
-        qDebug() << QStringLiteral("解析Json失败");
-        return;
-}
-
-// 解析Json
-if (doucment.isObject())
-{
-        QJsonObject obj = doucment.object();
-        QJsonValue value;
-        if (obj.contains("data"))
-        {
-                value = obj.take("data");
-                if (value.isString())
-                {
-                        QString data = value.toString();
-                        qDebug() << data;
-                }
-        }
- }
-
-}
-        */
-
         connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, uploadfilestr2, sizeStr, filename](QNetworkReply* reply) {
             // 获取响应信息
             QByteArray bytes = reply->readAll();
             std::string str = bytes.toStdString();
             int i = 0;
-            // QJsonParseError jsonError;
-            // QJsonDocument doucment = QJsonDocument::fromJson(bytes, &jsonError);
-            // if (jsonError.error != QJsonParseError::NoError) {
-            //	qDebug() << QStringLiteral("解析Json失败");
-            //	return;
-            //}
-
-            // if (x == y)
-            //{
             fileWnd->m_innerWnd->m_sendState->setText("已发送");
             neb::CJsonObject json;
             json.Add("sendid", QMainWnd::getInstance()->m_userid);
@@ -401,7 +359,16 @@ if (doucment.isObject())
             QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) {
                 qDebug() << "after upload file recv msg from server!";
             });
-            //}
         });
+    }
+}
+
+void QSessionWnd::resizeEvent(QResizeEvent* event)
+{
+    if (m_groupInfoWnd != nullptr)
+    {
+        int nTempHeight = height() - m_sesTopWnd->height();
+        m_groupInfoWnd->setMinimumHeight(nTempHeight);
+        m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
     }
 }

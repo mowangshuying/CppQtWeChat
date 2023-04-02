@@ -27,13 +27,11 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_commContactsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::QCommContactItemWnd_Type);
     m_commGroupsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::QCommGroupItemWnd_Type);
 
-    // m_groupInfoWnd = new QGroupInfoWnd();
-    // m_groupInfoWnd->show();
-
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
 
     m_sLayout1 = new QStackedLayout();
+
     //消息列表
     m_sLayout1->addWidget(m_commMsgListWnd);
     //联系人列表
@@ -47,22 +45,17 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_sLayout2 = new QStackedLayout();
     m_sLayout2->setContentsMargins(0, 0, 0, 0);
 
-    {
-        m_commContactInfo = new QCommContactInfo(this);
-        m_sLayout2->addWidget(m_commContactInfo);
-        connect(m_commContactInfo->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
-        connect(m_commContactInfo->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
-        connect(m_commContactInfo->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
-    }
+    m_commContactInfo = new QCommContactInfo(this);
+    m_sLayout2->addWidget(m_commContactInfo);
+    connect(m_commContactInfo->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
+    connect(m_commContactInfo->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
+    connect(m_commContactInfo->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
 
-    {
-        m_dealNewFriendsApplyWnd = new QDealNewFriendsApplyWnd(this);
-        connect(m_dealNewFriendsApplyWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
-        connect(m_dealNewFriendsApplyWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
-        connect(m_dealNewFriendsApplyWnd->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
-        m_sLayout2->addWidget(m_dealNewFriendsApplyWnd);
-    }
-
+    m_dealNewFriendsApplyWnd = new QDealNewFriendsApplyWnd(this);
+    connect(m_dealNewFriendsApplyWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
+    connect(m_dealNewFriendsApplyWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
+    connect(m_dealNewFriendsApplyWnd->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
+    m_sLayout2->addWidget(m_dealNewFriendsApplyWnd);
     m_commContactsListWnd->addContactsItem("./img/head2.png", "新的朋友", true);
 
     m_hLayout->addWidget(m_toolWnd);
@@ -73,7 +66,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         m_hLayout->addWidget(sp);
     }
 
-    m_hLayout->addLayout(m_sLayout1, 1);
+    m_hLayout->addLayout(m_sLayout1, 0);
 
     {
         /*添加分割线的示例代码*/
@@ -81,15 +74,13 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         m_hLayout->addWidget(sp);
     }
     m_hLayout->setSpacing(0);
-    m_hLayout->addLayout(m_sLayout2, 2);
+    m_hLayout->addLayout(m_sLayout2, 1);
     // m_hLayout->addWidget(m_groupInfoWnd);
     m_hLayout->addStretch();
 
     setLayout(m_hLayout);
     setWindowFlags(Qt::FramelessWindowHint);
-    setAttribute(Qt::WA_StyledBackground);
-    // setStyleSheet("background-color:#ffffff;");
-    // setContentsMargins(2, 2, 2, 2);
+    setAttribute(Qt::WA_TranslucentBackground);
 
     //
     connect(m_toolWnd, SIGNAL(signal_toolWndPageChanged(int)), this, SLOT(slot_toolWndPageChanged(int)));
@@ -115,6 +106,13 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_networkMgr = new QNetworkAccessManager();
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
+
+    if (objectName().isEmpty())
+        setObjectName("QMainWnd");
+    setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
+
+    setMinimumSize(800, 600);
+    // setContentsMargins(12, 12, 12, 12);
 }
 
 void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
@@ -638,8 +636,14 @@ void QMainWnd::minWnd()
 
 void QMainWnd::maxWnd()
 {
-    //暂时去掉窗口最大化
-    // showMaximized();
+    if (windowState() == Qt::MaximumSize)
+    {
+        showNormal();
+    }
+    else
+    {
+        showMaximized();
+    }
 }
 
 void QMainWnd::mouseMoveEvent(QMouseEvent* event)

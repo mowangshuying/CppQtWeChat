@@ -16,7 +16,7 @@ QGroupFriendsWnd::QGroupFriendsWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_listWnd->setAttribute(Qt::WA_StyledBackground);
     m_listWnd->setWindowFlags(Qt::FramelessWindowHint);
 
-    setAttribute(Qt::WA_StyledBackground);
+    //setAttribute(Qt::WA_StyledBackground);
     setWindowFlags(Qt::FramelessWindowHint);
     m_listWnd->setStyleSheet("border:0px;");
 }

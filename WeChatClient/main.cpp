@@ -7,6 +7,7 @@
 #include "QWSClientMgr.h"
 #include "QDealNewFriendsApplyWnd.h"
 #include <QDir>
+
 int main(int argc, char** argv)
 {
     QTextCodec* codec = QTextCodec::codecForName("UTF-8");
@@ -16,6 +17,7 @@ int main(int argc, char** argv)
     app.setWindowIcon(QIcon("./img/wechat.ico"));
     //创建网络通信的管理
     QWSClientMgr::getInstance();
+
     //加载本地的样式表
     QFile qss("./stylesheet/wechat.qss");
     if (qss.open(QFile::ReadOnly))

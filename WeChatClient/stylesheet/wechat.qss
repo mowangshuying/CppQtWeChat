@@ -1,5 +1,5 @@
 
-QScrollBar:vertical
+QScrollBar:vertical 
 {
 	width:8px;
 	background:rgba(0,0,0,0%);

@@ -6,7 +6,12 @@ QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     setFixedWidth(55);
     setWindowFlags(Qt::FramelessWindowHint);
-    setStyleSheet("background-color:#2E2E2E;");
+    // setStyleSheet("background-color:#2E2E2E;");
+
+    if (objectName().isEmpty())
+        setObjectName("QToolWnd");
+    setStyleSheet("QWidget#QToolWnd{border-top-left-radius:4px;border-bottom-left-radius:4px; background-color:#2E2E2E;border:none;}");
+
     //脱离父窗口的样式控制
     setAttribute(Qt::WA_StyledBackground);
 

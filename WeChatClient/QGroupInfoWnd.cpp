@@ -7,12 +7,14 @@
 QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     //
-    setFixedSize(250, 535);
+    // setFixedSize(250, 535);
+    setFixedWidth(250);
+    setMinimumHeight(535);
 
     // ¹ö¶¯ÇøÓò
     m_scrollArea = new QScrollArea(this);
     m_centerWnd = new QWidget(this);
-    m_scrollArea->setGeometry(0, 0, 250, 535);
+    m_scrollArea->setGeometry(0, 0, width(), height());
 
     m_vLayout = new QVBoxLayout();
     m_centerWnd->setLayout(m_vLayout);
