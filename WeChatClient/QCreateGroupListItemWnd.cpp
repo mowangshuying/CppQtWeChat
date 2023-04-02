@@ -1,6 +1,6 @@
 #include <QDebug>
 #include "QDataManager.h"
-#include "QCreateGroupListwnd2Item.h"
+#include "QCreateGroupListItemWnd.h"
 
 
 QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p /*= nullptr*/)

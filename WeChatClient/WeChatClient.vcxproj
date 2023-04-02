@@ -114,7 +114,7 @@
     <ClCompile Include="QCommListWnd.cpp" />
     <ClCompile Include="QCommMsgItemWnd.cpp" />
     <ClCompile Include="QCreateGroupListItemWithSelBtnWnd.cpp" />
-    <ClCompile Include="QCreateGroupListwnd2Item.cpp" />
+    <ClCompile Include="QCreateGroupListItemWnd.cpp" />
     <ClCompile Include="QCreateGroupWnd.cpp" />
     <ClCompile Include="QCustomListWidgetItem.cpp" />
     <ClCompile Include="QDealNewFriendsApplyItemWnd.cpp" />
@@ -146,7 +146,7 @@
     <QtMoc Include="QCreateGroupWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCreateGroupListwnd2Item.h" />
+    <QtMoc Include="QCreateGroupListItemWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QCreateGroupListItemWithSelBtnWnd.h" />
