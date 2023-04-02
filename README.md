@@ -22,49 +22,49 @@ Vs+qt 使用c++开发仿照微信的聊天
 
 #### bug2:创建群聊后，再次点击创建群聊按钮时候，页面上还有部分数据没有清空
 
-![image-20220105235424102](./img/image-20220105235424102.png)
+![image-20220105235424102](./docs/images/image-20220105235424102.png)
 
 #### bug3:创建群聊的用户，在右方点击群组时候，群组列表中含有刚刚创建的群，但是其他群组成员中群组列表中并没有显示刚刚创建的群，更为奇怪的是创建群组的用户，消息列表中没有相应的会话，但是其他用户含有相应的会话
 
 未出现群组信息
 
-![image-20220106000145442](./img/image-20220106000145442.png)
+![image-20220106000145442](./docs/images/image-20220106000145442.png)
 
 消息列表中未出现相应的会话
 
-![image-20220106000351862](./img/image-20220106000351862.png)
+![image-20220106000351862](./docs/images/image-20220106000351862.png)
 
 #### bug4:群组头像没有显示正常(这个暂时不着急，开发设置群头像在修改)
 
 #### bug5:点击查找好友时候，将自己的信息也设置到其中了，还有没有显示正确玩家头像
 
-![image-20220106001015470](./img/image-20220106001015470.png)
+![image-20220106001015470](./docs/images/image-20220106001015470.png)
 
 #### bug6：现在并无断线重连机制，应该增加断线重连机制
 
 #### bug7：向某个玩家发送好友请求后，好友验证页面并自动刷新，然后最后显示的信息有点不太完整：如该显示玩家头像但是却没有显示玩家头像
 
-![image-20220106001732763](./img/image-20220106001732763.png)
+![image-20220106001732763](./docs/images/image-20220106001732763.png)
 
 #### bug8:点击同意按钮后，消息列表和群列表并没有及时更新
 
-![image-20220106001929875](./img/image-20220106001929875.png)
+![image-20220106001929875](./docs/images/image-20220106001929875.png)
 
-![image-20220106002018904](./img/image-20220106002018904.png)
+![image-20220106002018904](./docs/images/image-20220106002018904.png)
 
 ### 2022/1/19 修改项目的各种名称及文件夹
 
-#### 1、修改项目名：
+#### 1、修改项目名
 
-![image-20220119075236063](./img/image-20220119075236063.png)
+![image-20220119075236063](./docs/images/image-20220119075236063.png)
 
 #### 2、修改文件名及目录名
 
-![image-20220119075457716](./img/image-20220119075457716.png)
+![image-20220119075457716](./docs/images/image-20220119075457716.png)
 
 #### 3、内部相关项目文件
 
-![image-20220119075644684](./img/image-20220119075644684.png)
+![image-20220119075644684](./docs/images/image-20220119075644684.png)
 
 #### 4、关于现在想到的一些问题
 
@@ -74,15 +74,15 @@ Vs+qt 使用c++开发仿照微信的聊天
 
 #### 显示Label，隐藏LineEidt
 
-![image-20220123171100114](./img/image-20220123171100114.png)
+![image-20220123171100114](./docs/images/image-20220123171100114.png)
 
 #### 显示LineEdit，隐藏QLabel
 
-![image-20220123171339005](./img/image-20220123171339005.png)
+![image-20220123171339005](./docs/images/image-20220123171339005.png)
 
 ### 2022/2/6:群头像和用户头像初步设计
 
-#### 之前头像和用户对应关系为：
+#### 之前头像和用户对应关系为
 
 ```
 用户id ->  用户id.png
@@ -90,17 +90,17 @@ Vs+qt 使用c++开发仿照微信的聊天
 例如：userid = 100001 (用户id一般为6位数字)那么对应远端的用户头像为 100001.png
 ```
 
-##### 优点：
+##### 优点
 
 利用http请求上传头像和修改头像的时候，只要知道用户id，就能找到此用户id对应的头像
 
-##### 缺点：
+##### 缺点
 
 考虑到群id和用户的id是会重复的。所以必须加强群的头像和玩家头像的区分，以便之后访问到正确的用户头像和群的头像
 
-#### 改进方案：
+#### 改进方案
 
-##### 用户头像的对应方式如下：
+##### 用户头像的对应方式如下
 
 ```
 用户id  -> u+用户id.png
@@ -108,7 +108,7 @@ Vs+qt 使用c++开发仿照微信的聊天
 例如：userid = 100001 (用户id一般为6位数字)那么对应远端的用户头像为:u100001.png
 ```
 
-##### 群头像的对应方式如下：
+##### 群头像的对应方式如下
 
 ```
 群id -> g+群id.png
@@ -128,13 +128,13 @@ void QPictureToolWnd::slot_determineBtnClicked()
 
 中，是用户点击确定按钮时候，向远端服务器发送请求，在此处会设置玩家上传的头像的名：
 
-![image-20220206232328636](./img/image-20220206232328636.png)
+![image-20220206232328636](./docs/images/image-20220206232328636.png)
 
 ##### 更换玩家请求用户的头像名
 
 在QCommContactItemWnd的构造函数中会向远端请求头像，具体代码如下，需要修改部分将会用红框标出
 
-![image-20220206233144664](./img/image-20220206233144664.png)
+![image-20220206233144664](./docs/images/image-20220206233144664.png)
 
 #### 现在想到的不足之处
 
@@ -146,19 +146,19 @@ void QPictureToolWnd::slot_determineBtnClicked()
 
 #### 关于修改的一点记录
 
-![image-20220207225731078](./img/image-20220207225731078.png)
+![image-20220207225731078](./docs/images/image-20220207225731078.png)
 
-![image-20220207225803867](./img/image-20220207225803867.png)
+![image-20220207225803867](./docs/images/image-20220207225803867.png)
 
-![image-20220207225827424](./img/image-20220207225827424.png)
+![image-20220207225827424](./docs/images/image-20220207225827424.png)
 
-![image-20220207225853265](./img/image-20220207225853265.png)
+![image-20220207225853265](./docs/images/image-20220207225853265.png)
 
-![image-20220207225906500](./img/image-20220207225906500.png)
+![image-20220207225906500](./docs/images/image-20220207225906500.png)
 
-![image-20220207225941045](./img/image-20220207225941045.png)
+![image-20220207225941045](./docs/images/image-20220207225941045.png)
 
-#### 关于请求头像方案的整改，在现实中的例子如：
+#### 关于请求头像方案的整改，在现实中的例子如
 
 排队买包子，只有当前一个人买了或者不买，才会轮到下一个人，这样就会有序。此方案应该涉及到任务队列，线程等知识，这部分内容明天整改
 
@@ -166,17 +166,17 @@ void QPictureToolWnd::slot_determineBtnClicked()
 
 将res中相应文件移到img文件夹中（请明天整改）
 
-![image-20220207231034344](./img/image-20220207231034344.png)
+![image-20220207231034344](./docs/images/image-20220207231034344.png)
 
-![image-20220207231159494](./img/image-20220207231159494.png)
+![image-20220207231159494](./docs/images/image-20220207231159494.png)
 
 #### 今日成果展示
 
-![image-20220207230624278](./img/image-20220207230624278.png)
+![image-20220207230624278](./docs/images/image-20220207230624278.png)
 
-![image-20220207230717863](./img/image-20220207230717863.png)
+![image-20220207230717863](./docs/images/image-20220207230717863.png)
 
-##### 注：今日群头像和好友头像修改基本完成。准备休息。
+##### 注：今日群头像和好友头像修改基本完成。准备休息
 
 ### 2022/4/4 群聊获取群里所有好友信息
 
@@ -184,46 +184,46 @@ void QPictureToolWnd::slot_determineBtnClicked()
 
 在文件QWSClientMgr.cpp中如下位置：
 
-![image-20220404113154149](./img/image-20220404113154149.png)
+![image-20220404113154149](./docs/images/image-20220404113154149.png)
 
-### 不是群聊会话，应该要隐藏moreBtn,相应对比图如下：
+### 不是群聊会话，应该要隐藏moreBtn,相应对比图如下
 
-![image-20220404114218516](./img/image-20220404114218516.png)
+![image-20220404114218516](./docs/images/image-20220404114218516.png)
 
-![image-20220404114442147](./img/image-20220404114442147.png)
+![image-20220404114442147](./docs/images/image-20220404114442147.png)
 
 ### 2022/4/6 实现向远端请求群内好友列表
 
-![image-20220406081347618](./img/image-20220406081347618.png)
+![image-20220406081347618](./docs/images/image-20220406081347618.png)
 
 ### 2022/4/14 完善显示群内好友列表
 
-![image-20220414224309021](./img/image-20220414224309021.png)
+![image-20220414224309021](./docs/images/image-20220414224309021.png)
 
 关键部分代码：
 
-![image-20220414224447808](./img/image-20220414224447808.png)
+![image-20220414224447808](./docs/images/image-20220414224447808.png)
 
 ### 2022/4/16 修改群信息窗口中的字体大小
 
-![image-20220416090429678](./img/image-20220416090429678.png)
+![image-20220416090429678](./docs/images/image-20220416090429678.png)
 
 ### 2022/4/17 给用户添加滚动条
 
-![image-20220417165056586](./img/image-20220417165056586.png)
+![image-20220417165056586](./docs/images/image-20220417165056586.png)
 
 具体相关代码为：
 
 ```c++
 QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-	//
-	setFixedSize(250, 535);
+ //
+ setFixedSize(250, 535);
 
-	QScrollArea* m_scrollArea = new QScrollArea(this);
-	QWidget* m_tempWnd = new QWidget(this);
-	//m_scrollArea->setWidget(m_tempWnd);
-	m_scrollArea->setGeometry(0, 0, 250, 535);
+ QScrollArea* m_scrollArea = new QScrollArea(this);
+ QWidget* m_tempWnd = new QWidget(this);
+ //m_scrollArea->setWidget(m_tempWnd);
+ m_scrollArea->setGeometry(0, 0, 250, 535);
     ……
     ……
     m_scrollArea->setWidget(m_tempWnd);
@@ -234,7 +234,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 #### 好友框线修改
 
-![image-20220418085606040](./img/image-20220418085606040.png)
+![image-20220418085606040](./docs/images/image-20220418085606040.png)
 
 #### 后续整改方案
 
@@ -251,19 +251,19 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 在mx_user_group表中含有字段groupname的字段，要修改groupname只需要修改数据库中该字段值就可以
 
-![image-20220430114558087](./img/image-20220430114558087.png)
+![image-20220430114558087](./docs/images/image-20220430114558087.png)
 
 #### 支持修改群聊公告
 
 在mx_user_group表中含有字段groupsetting字段，要修改群聊公告，将groupsetting看成群聊设置的一个json串，{“GroupChatAnnouncement”:“公告内容”}
 
-![image-20220430115403394](./img/image-20220430115403394.png)
+![image-20220430115403394](./docs/images/image-20220430115403394.png)
 
 #### 支持修改我在群聊中昵称
 
 在mx_user_friend的表中含有remarks字段，用于表示我在群聊中的名称。
 
-![image-20220430115309411](./img/image-20220430115309411.png)
+![image-20220430115309411](./docs/images/image-20220430115309411.png)
 
 ### 2022/7/30 优化群信息窗口
 
@@ -273,7 +273,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 #### 效果展示
 
-![image-20220730230819181](./img/image-20220730230819181.png)
+![image-20220730230819181](./docs/images/image-20220730230819181.png)
 
 #### 后续计划
 
