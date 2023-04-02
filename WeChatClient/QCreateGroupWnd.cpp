@@ -53,7 +53,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/)
 	m_vLayout1->addWidget(m_listWnd1);
 	m_hLayout2->addLayout(m_vLayout1);
 
-	QSimpleSplit* sp = new QSimpleSplit(nullptr, QSimpleSplit::QSimpleSplit_direction_h);
+	QSimpleSplit* sp = new QSimpleSplit(nullptr, QSimpleSplit::Direction_H);
 	m_hLayout2->addWidget(sp);
 
 	m_vLayout2 = new QVBoxLayout();

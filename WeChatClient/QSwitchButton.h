@@ -7,8 +7,8 @@ https://blog.csdn.net/weixin_39572794/article/details/110516773
 * 特此标注：特此感谢此博文作者的贡献
 */
 
-//设置编码格式为utf-8
-#pragma execution_character_set("utf-8")
+
+#include "QPch.h"
 
 #include <QWidget>
 #include <QMouseEvent>

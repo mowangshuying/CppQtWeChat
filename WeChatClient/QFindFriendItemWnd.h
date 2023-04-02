@@ -1,15 +1,15 @@
 #pragma once
 
 
-//设置编码格式为utf-8
-#pragma execution_character_set("utf-8")
+
+#include "QPch.h"
 
 #include<QWidget>
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QPushButton>
 
-#include "QNextWnd.h"
+#include "QApplyFriendNextWnd.h"
 
 class QFindFriendItemWnd :public  QWidget {
 	Q_OBJECT

@@ -123,7 +123,7 @@
     <ClCompile Include="QFindFriendOrGroupWnd.cpp" />
     <ClCompile Include="QLoginAndRegWnd.cpp" />
     <ClCompile Include="QMainWnd.cpp" />
-    <ClCompile Include="QNextWnd.cpp" />
+    <ClCompile Include="QApplyFriendNextWnd.cpp" />
     <ClCompile Include="QScreenShotWnd.cpp" />
     <ClCompile Include="QSelectWnd1.cpp" />
     <ClCompile Include="QSessionToolBar.cpp" />
@@ -161,7 +161,7 @@
     <QtMoc Include="QApplyFriendInputInfoWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QNextWnd.h" />
+    <QtMoc Include="QApplyFriendNextWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QFindFriendItemWnd.h" />
@@ -184,6 +184,7 @@
   <ItemGroup>
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="json\CJsonObject.hpp" />
+    <ClInclude Include="QPch.h" />
     <QtMoc Include="QEditLabel.h" />
     <QtMoc Include="QGroupFriendsWnd.h" />
     <QtMoc Include="QSwitchButton.h" />

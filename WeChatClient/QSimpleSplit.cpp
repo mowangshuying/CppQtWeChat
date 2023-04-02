@@ -1,20 +1,21 @@
 #include "QSimpleSplit.h"
 
-QSimpleSplit::QSimpleSplit(QWidget* p /*= nullptr*/, QSimpleSplit_direction d/* = QSimpleSplit_direction_v*/)
+QSimpleSplit::QSimpleSplit(QWidget* p /*= nullptr*/, QSimpleSplitDirection direct/* Direction_H */)
 {
 	setAttribute(Qt::WA_StyledBackground);
-	//setAttribute(Qt::FramelessWindowHint);
-	//设置一些样式
-	//无焦点
+	//设置一些样式, 无焦点, 无边框
 	setFocusPolicy(Qt::NoFocus);
 	setWindowFlags(Qt::FramelessWindowHint);
-	if (d == QSimpleSplit_direction_v) {
-		//
+	
+	if (direct == Direction_H) 
+	{
 		setFixedHeight(1);
 	}
-	else {
+	else 
+	{
 		setFixedWidth(1);
 	}
+
 	//设置分割线的颜色
 	// 灰色的分割线
 	//setStyleSheet("background-color:#E7E7E;border:none");

@@ -44,7 +44,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
 	m_hLayout->addWidget(m_userInfoWnd);
 
 	// 添加一个分割条
-	m_split = new QSimpleSplit(nullptr, QSimpleSplit::QSimpleSplit_direction_h);
+	m_split = new QSimpleSplit(nullptr, QSimpleSplit::Direction_V);
 	m_hLayout->addWidget(m_split);
 
 	m_vLayout = new QVBoxLayout();

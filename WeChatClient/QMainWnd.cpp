@@ -70,7 +70,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/)
 
 	{
 		/*添加分割线的示例代码*/
-		QSimpleSplit* sp = new QSimpleSplit(this,QSimpleSplit::QSimpleSplit_direction_h);
+		QSimpleSplit* sp = new QSimpleSplit(this,QSimpleSplit::Direction_H);
 		m_hLayout->addWidget(sp);
 	}
 
@@ -79,7 +79,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/)
 
 	{
 		/*添加分割线的示例代码*/
-		QSimpleSplit* sp = new QSimpleSplit(this, QSimpleSplit::QSimpleSplit_direction_h);
+		QSimpleSplit* sp = new QSimpleSplit(this, QSimpleSplit::Direction_V);
 		m_hLayout->addWidget(sp);
 	}
 	m_hLayout->setSpacing(0);
