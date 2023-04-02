@@ -5,8 +5,8 @@
 
 #include "QSimpleSplit.h"
 #include "QCreateGroupWnd.h"
-#include "QCreateGroupListwnd1Item.h"
-#include "QCreateGroupListwnd2Item.h"
+#include "QCreateGroupListItemWithSelBtnWnd.h"
+#include "QCreateGroupListItemWnd.h"
 #include "QDataManager.h"
 #include "QWSClientMgr.h"
 #include "QMainWnd.h"
@@ -120,7 +120,7 @@ void QCreateGroupWnd::mouseReleaseEvent(QMouseEvent* event)
 
 void QCreateGroupWnd::addListWnd1Item(const char* headUrl, int64_t friendid,const char* nickname, const char* rolename)
 {
-	QCreateGroupListwnd1Item* pListwnd1Item = new QCreateGroupListwnd1Item(m_listWnd1, headUrl, friendid,nickname,rolename);
+	QCreateGroupListItemWithSelBtnWnd* pListwnd1Item = new QCreateGroupListItemWithSelBtnWnd(m_listWnd1, headUrl, friendid,nickname,rolename);
 	QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd1);
     pListItem->setSizeHint(QSize(275,35));
 	m_listWnd1->setItemWidget(pListItem, pListwnd1Item);
@@ -131,7 +131,7 @@ void QCreateGroupWnd::addListWnd1Item(const char* headUrl, int64_t friendid,cons
 
 void QCreateGroupWnd::addListWnd2Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename)
 {
-	QCreateGroupListwnd2Item* pListwnd2Item = new QCreateGroupListwnd2Item(m_listWnd2, headUrl,friendid, nickname, rolename);
+	QCreateGroupListItemWnd* pListwnd2Item = new QCreateGroupListItemWnd(m_listWnd2, headUrl,friendid, nickname, rolename);
 	QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd2);
 	pListItem->setSizeHint(QSize(275, 35));
 	m_listWnd2->setItemWidget(pListItem, pListwnd2Item);
@@ -147,7 +147,7 @@ bool QCreateGroupWnd::hasThisWndByRolename(QString rolename,QListWidget* listWnd
 	for (int i = 0; i < listWnd->count(); i++) {
 		QListWidgetItem *item = listWnd->item(i);
 		if (listWnd == m_listWnd1) {
-			QCreateGroupListwnd1Item* wnd = dynamic_cast<QCreateGroupListwnd1Item*>(listWnd->itemWidget(item));
+			QCreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(listWnd->itemWidget(item));
 			if (wnd->m_roleName->text() == rolename) {
 				bHas = true;
 				break;
@@ -155,7 +155,7 @@ bool QCreateGroupWnd::hasThisWndByRolename(QString rolename,QListWidget* listWnd
 		}
 
 		if (listWnd == m_listWnd2) {
-			QCreateGroupListwnd2Item* wnd = dynamic_cast<QCreateGroupListwnd2Item*>(listWnd->itemWidget(item));
+			QCreateGroupListItemWnd* wnd = dynamic_cast<QCreateGroupListItemWnd*>(listWnd->itemWidget(item));
 			if (wnd->m_roleName->text() == rolename) {
 				bHas = true;
 				break;
@@ -170,7 +170,7 @@ void QCreateGroupWnd::delThisWndByRolename(QString rolename, QListWidget* listWn
 	for (int i = 0; i < listWnd->count(); i++) {
 		QListWidgetItem* item = listWnd->item(i);
 		if (listWnd == m_listWnd1) {
-			QCreateGroupListwnd1Item* wnd = dynamic_cast<QCreateGroupListwnd1Item*>(listWnd->itemWidget(item));
+			QCreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(listWnd->itemWidget(item));
 			if (wnd->m_roleName->text() == rolename) {
 				listWnd->takeItem(i);
 				break;
@@ -178,7 +178,7 @@ void QCreateGroupWnd::delThisWndByRolename(QString rolename, QListWidget* listWn
 		}
 
 		if (listWnd == m_listWnd2) {
-			QCreateGroupListwnd2Item* wnd = dynamic_cast<QCreateGroupListwnd2Item*>(listWnd->itemWidget(item));
+			QCreateGroupListItemWnd* wnd = dynamic_cast<QCreateGroupListItemWnd*>(listWnd->itemWidget(item));
 			if (wnd->m_roleName->text() == rolename) {
 				//listWnd->removeItemWidget(item);
 				listWnd->takeItem(i);
@@ -213,7 +213,7 @@ void QCreateGroupWnd::updateData()
 				continue;
 			}
 
-			QCreateGroupListwnd1Item* wnd = dynamic_cast<QCreateGroupListwnd1Item*> (m_listWnd1->itemWidget(item));
+			QCreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<QCreateGroupListItemWithSelBtnWnd*> (m_listWnd1->itemWidget(item));
 			if (wnd == nullptr)
 			{
 				continue;
@@ -297,7 +297,7 @@ void QCreateGroupWnd::slot_comfirmBtnClick()
 			continue;
 		}
 
-		QCreateGroupListwnd2Item* wnd = dynamic_cast<QCreateGroupListwnd2Item*>(m_listWnd2->itemWidget(item));
+		QCreateGroupListItemWnd* wnd = dynamic_cast<QCreateGroupListItemWnd*>(m_listWnd2->itemWidget(item));
 		if (wnd == NULL)
 		{
 			continue;

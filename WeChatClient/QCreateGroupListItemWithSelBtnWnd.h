@@ -9,11 +9,12 @@
 #include <QVBoxLayout>
 #include <QMap>
 
-class QCreateGroupListwnd1Item : public QWidget {
+class QCreateGroupListItemWithSelBtnWnd : public QWidget 
+{
 	Q_OBJECT
 public:
-	QCreateGroupListwnd1Item(QWidget* p = nullptr);
-	QCreateGroupListwnd1Item(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
+	QCreateGroupListItemWithSelBtnWnd(QWidget* p = nullptr);
+	QCreateGroupListItemWithSelBtnWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
 signals:
 	void signal_selRBtnClick(QMap<QString,QString> map);
 public slots:
@@ -25,6 +26,5 @@ public:
 	QLabel* m_roleName;
 	QString m_headImgStr;
 	int64_t m_friendid;
-	
 	QRadioButton* m_selRBtn;
 };

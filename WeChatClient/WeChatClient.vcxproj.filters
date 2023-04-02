@@ -44,7 +44,7 @@
     <ClCompile Include="QCreateGroupListwnd2Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCreateGroupListwnd1Item.cpp">
+    <ClCompile Include="QCreateGroupListItemWithSelBtnWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QSelectWnd1.cpp">
@@ -157,7 +157,7 @@
     <QtMoc Include="QCreateGroupListwnd2Item.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCreateGroupListwnd1Item.h">
+    <QtMoc Include="QCreateGroupListItemWithSelBtnWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QSelectWnd1.h">

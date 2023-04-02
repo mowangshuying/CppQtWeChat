@@ -1,9 +1,8 @@
 #include <QDebug>
 #include "QDataManager.h"
-#include "QCreateGroupListwnd2Item.h"
+#include "QCreateGroupListItemWithSelBtnWnd.h"
 
-
-QCreateGroupListwnd2Item::QCreateGroupListwnd2Item(QWidget* p /*= nullptr*/)
+QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p /*= nullptr*/)
 	:QWidget(p)
 {
 	m_hLayout = new QHBoxLayout();
@@ -12,6 +11,7 @@ QCreateGroupListwnd2Item::QCreateGroupListwnd2Item(QWidget* p /*= nullptr*/)
 	m_headImage = new QLabel();
 	m_nickName = new QLabel();
 	m_roleName = new QLabel();
+	m_selRBtn = new QRadioButton();
 
 	m_nickName->setText(" nickname ");
 	m_roleName->setText(" (0123456) ");
@@ -19,9 +19,10 @@ QCreateGroupListwnd2Item::QCreateGroupListwnd2Item(QWidget* p /*= nullptr*/)
 	m_hLayout->addWidget(m_headImage);
 	m_hLayout->addWidget(m_nickName);
 	m_hLayout->addWidget(m_roleName);
+	m_hLayout->addWidget(m_selRBtn);
 }
 
-QCreateGroupListwnd2Item::QCreateGroupListwnd2Item(QWidget* p,const char* headimg, int64_t friendid, const char* nickname, const char* rolename)
+QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p,const char* headimg, int64_t friendid, const char* nickname, const char* rolename)
 	: QWidget(p),m_friendid(friendid)
 {
 
@@ -35,7 +36,7 @@ QCreateGroupListwnd2Item::QCreateGroupListwnd2Item(QWidget* p,const char* headim
 	m_headImage = new QLabel();
 	m_nickName = new QLabel();
 	m_roleName = new QLabel();
-	//m_selRBtn = new QRadioButton();
+	m_selRBtn = new QRadioButton();
 
 	m_nickName->setText(nickname);
 	m_roleName->setText(rolename);
@@ -46,7 +47,7 @@ QCreateGroupListwnd2Item::QCreateGroupListwnd2Item(QWidget* p,const char* headim
 	m_headImage->setPixmap(QPixmap(headimg));
 	m_headImage->setFixedSize(25,25);
 
-	QPixmap p1 =  QDataManager::getInstance()->m_UserId2HeadImgMap[m_friendid];
+	QPixmap p1 = QDataManager::getInstance()->m_UserId2HeadImgMap[m_friendid];
 	p1 = p1.scaled(25, 25);
 	m_headImage->setPixmap(p1);
 
@@ -55,4 +56,27 @@ QCreateGroupListwnd2Item::QCreateGroupListwnd2Item(QWidget* p,const char* headim
 	m_hLayout->addWidget(m_nickName);
 	m_hLayout->addWidget(m_roleName);
 	m_hLayout->addStretch();
+	m_hLayout->addWidget(m_selRBtn);
+
+	connect(m_selRBtn, SIGNAL(clicked(bool)), this, SLOT(slot_clickedSelBtn(bool)));
 }
+
+void QCreateGroupListItemWithSelBtnWnd::slot_clickedSelBtn(bool isSel/* = false*/)
+{
+	qDebug() << "isSel"<<isSel;
+
+	QMap<QString, QString> sMap;
+
+	sMap["headimg"] = m_headImgStr;
+	sMap["nickname"] = m_nickName->text();
+	sMap["rolename"] = m_roleName->text();
+	sMap["friendid"] = QString::number(m_friendid);
+	if (isSel) {
+		sMap["isSel"] = "true";
+	}
+	else {
+		sMap["isSel"] = "false";
+	}
+	emit signal_selRBtnClick(sMap);
+}
+

@@ -9,11 +9,12 @@
 #include <QVBoxLayout>
 #include <QMap>
 
-class QCreateGroupListwnd2Item : public QWidget {
+class QCreateGroupListItemWnd : public QWidget 
+{
 	Q_OBJECT
 public:
-	QCreateGroupListwnd2Item(QWidget* p = nullptr);
-	QCreateGroupListwnd2Item(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
+	QCreateGroupListItemWnd(QWidget* p = nullptr);
+	QCreateGroupListItemWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
 //signals:
 //	void signal_selRBtnClick(QMap<QString,QString> map);
 //public slots:

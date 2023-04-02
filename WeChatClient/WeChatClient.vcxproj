@@ -113,7 +113,7 @@
     <ClCompile Include="QCommContactItemWnd.cpp" />
     <ClCompile Include="QCommListWnd.cpp" />
     <ClCompile Include="QCommMsgItemWnd.cpp" />
-    <ClCompile Include="QCreateGroupListwnd1Item.cpp" />
+    <ClCompile Include="QCreateGroupListItemWithSelBtnWnd.cpp" />
     <ClCompile Include="QCreateGroupListwnd2Item.cpp" />
     <ClCompile Include="QCreateGroupWnd.cpp" />
     <ClCompile Include="QCustomListWidgetItem.cpp" />
@@ -149,7 +149,7 @@
     <QtMoc Include="QCreateGroupListwnd2Item.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCreateGroupListwnd1Item.h" />
+    <QtMoc Include="QCreateGroupListItemWithSelBtnWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QSelectWnd1.h" />
