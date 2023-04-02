@@ -7,21 +7,22 @@
 
 class QEmoijWnd : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	QEmoijWnd(QWidget* p = nullptr);
+    QEmoijWnd(QWidget* p = nullptr);
+
 protected:
-	bool event(QEvent* event);
+    bool event(QEvent* event);
 
-	void paintEvent(QPaintEvent* paintEvent);
+    void paintEvent(QPaintEvent* paintEvent);
 signals:
-	void signal_emoijClicked(QString m_emoijString);
+    void signal_emoijClicked(QString m_emoijString);
 public slots:
-	//判断哪个单元格子被点击
-	void slot_cellClicked(int x,int y);
-public:
-	QStringList m_emoijStrList;
-	QTableWidget* m_centerWnd;
-	QVBoxLayout* m_vLayout;
-};
+    //判断哪个单元格子被点击
+    void slot_cellClicked(int x, int y);
 
+public:
+    QStringList m_emoijStrList;
+    QTableWidget* m_centerWnd;
+    QVBoxLayout* m_vLayout;
+};

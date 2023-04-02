@@ -6,20 +6,22 @@
 #include <QObject>
 #include <QStackedLayout>
 
-class QEditLabel : public QWidget {
-	
-	Q_OBJECT
+class QEditLabel : public QWidget
+{
+    Q_OBJECT
 public:
-	QEditLabel(QWidget* parent = nullptr);
+    QEditLabel(QWidget* parent = nullptr);
 
-	void setText(const char* text);
+    void setText(const char* text);
 
 protected:
-	bool eventFilter(QObject* obj, QEvent* e);
+    bool eventFilter(QObject* obj, QEvent* e);
+
 private:
-	QStackedLayout* m_StackLayout;
-	QLabel* m_label;
-	QLineEdit* m_lineEdit;
+    QStackedLayout* m_StackLayout;
+    QLabel* m_label;
+    QLineEdit* m_lineEdit;
+
 private:
-	void initCtrls();
+    void initCtrls();
 };

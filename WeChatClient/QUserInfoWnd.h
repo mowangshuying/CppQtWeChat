@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "QPch.h"
 
 #include <QEvent>
@@ -12,24 +11,24 @@
 
 class QUserInfoWnd : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	QUserInfoWnd(QWidget* p = nullptr);
+    QUserInfoWnd(QWidget* p = nullptr);
 
 protected:
-	bool event(QEvent* event);
+    bool event(QEvent* event);
+
 public:
-	//
-	QVBoxLayout* m_vLayout;
+    //
+    QVBoxLayout* m_vLayout;
 
-	QHBoxLayout* m_hLayout1;
-	QVBoxLayout* m_vLayout1;
-	QLabel* m_usernameLabel;
-	QLabel* m_userIdLabel;
+    QHBoxLayout* m_hLayout1;
+    QVBoxLayout* m_vLayout1;
+    QLabel* m_usernameLabel;
+    QLabel* m_userIdLabel;
 
-	QVBoxLayout* m_vLayout2;
-	QLabel* m_headLabel;
-	QPushButton* m_changeHeadImgBtn;
-	QLabel* m_otherLabel;
+    QVBoxLayout* m_vLayout2;
+    QLabel* m_headLabel;
+    QPushButton* m_changeHeadImgBtn;
+    QLabel* m_otherLabel;
 };
-

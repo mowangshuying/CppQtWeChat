@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "QPch.h"
 
 #include <QWidget>
@@ -11,23 +10,26 @@
 #include "QFindFriendOrGroupWnd.h"
 #include "QCreateGroupWnd.h"
 
-class QSelectWnd1 : public QWidget {
-	Q_OBJECT
+class QSelectWnd1 : public QWidget
+{
+    Q_OBJECT
 protected:
-	bool event(QEvent* event);
+    bool event(QEvent* event);
+
 public:
-	QSelectWnd1(QWidget* p);
+    QSelectWnd1(QWidget* p);
 
 public slots:
-	void slot_addContactsOrGroupBtnClick();
-	void slot_createGroup();
+    void slot_addContactsOrGroupBtnClick();
+    void slot_createGroup();
+
 public:
-	//将玩家的数据设置到QListWidget中
-	//void updateData();
+    //将玩家的数据设置到QListWidget中
+    // void updateData();
 public:
-	QVBoxLayout* m_vLayout;
-	QPushButton* m_addContactsOrGroupBtn;
-	QPushButton* m_createGroupBtn;
-	QFindFriendOrGroupWnd* m_findFriendOrGroupWnd;
-	QCreateGroupWnd* m_crateGroupWnd;
+    QVBoxLayout* m_vLayout;
+    QPushButton* m_addContactsOrGroupBtn;
+    QPushButton* m_createGroupBtn;
+    QFindFriendOrGroupWnd* m_findFriendOrGroupWnd;
+    QCreateGroupWnd* m_crateGroupWnd;
 };

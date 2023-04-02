@@ -6,18 +6,18 @@
 #include "QEmoijWnd.h"
 class QSessionToolBar : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	QSessionToolBar(QWidget* p = nullptr);
+    QSessionToolBar(QWidget* p = nullptr);
 public slots:
-	void slot_emojiBtnClick();
-	void slot_screenshotBtnClick();
-public:
-	QHBoxLayout* m_hLayout;
-	QPushButton* m_emojiBtn;
-	QPushButton* m_sendFileBtn;
-	QPushButton* m_screenshotBtn;
-	
-	QEmoijWnd* m_emoijWnd;
-};
+    void slot_emojiBtnClick();
+    void slot_screenshotBtnClick();
 
+public:
+    QHBoxLayout* m_hLayout;
+    QPushButton* m_emojiBtn;
+    QPushButton* m_sendFileBtn;
+    QPushButton* m_screenshotBtn;
+
+    QEmoijWnd* m_emoijWnd;
+};

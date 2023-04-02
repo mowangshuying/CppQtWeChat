@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "QPch.h"
 
 #include <QWidget>
@@ -10,13 +9,14 @@
 
 #include "QGroupFriendsItemWnd.h"
 
-class QGroupFriendsWnd : public QWidget 
+class QGroupFriendsWnd : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	QGroupFriendsWnd(QWidget* p = nullptr);
-	void addItem(QGroupFriendsItemWnd* w);
+    QGroupFriendsWnd(QWidget* p = nullptr);
+    void addItem(QGroupFriendsItemWnd* w);
+
 public:
-	QVBoxLayout* m_vLayout;
-	QListWidget* m_listWnd;
+    QVBoxLayout* m_vLayout;
+    QListWidget* m_listWnd;
 };

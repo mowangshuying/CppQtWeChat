@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "QPch.h"
 
 #include <QWidget>
@@ -12,39 +11,41 @@
 
 class QChatFileInnerWnd : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-
-	QChatFileInnerWnd(QWidget* p = nullptr);
+    QChatFileInnerWnd(QWidget* p = nullptr);
 public slots:
-	void slot_openFileBtnClick();
-	void slot_copyFileBtnClick();
-	void slot_openFileDirBtnClick();
-	void slot_downloadFileBtnClick();
+    void slot_openFileBtnClick();
+    void slot_copyFileBtnClick();
+    void slot_openFileDirBtnClick();
+    void slot_downloadFileBtnClick();
+
 public:
-	void sendFileShow();
-	void recvFileShow();
+    void sendFileShow();
+    void recvFileShow();
+
 public:
-	QVBoxLayout* m_vLayout;
+    QVBoxLayout* m_vLayout;
 
-	QHBoxLayout* m_hLayout1;
-	QVBoxLayout* m_vLayout1;
-	
-	QProgressBar* m_progressBar;;
+    QHBoxLayout* m_hLayout1;
+    QVBoxLayout* m_vLayout1;
 
-	QHBoxLayout* m_hLayout2;
+    QProgressBar* m_progressBar;
+    ;
 
-	QLabel* m_fileIcon;
-	QLabel* m_fileName;
-	QLabel* m_fileSize;
+    QHBoxLayout* m_hLayout2;
 
-	QLabel* m_sendState;//发送状态  
-	QPushButton* m_openFile;//打开文件
-	QPushButton* m_copyFile;//拷贝
-	QPushButton* m_openFileDir;//打开所在目录
-	QPushButton* m_downLoad;
+    QLabel* m_fileIcon;
+    QLabel* m_fileName;
+    QLabel* m_fileSize;
 
-	QString m_fileFullpath = "";
-	QString m_fileFullDir = "";
-	QString m_serveFilePath = "";//远程的文件地址
+    QLabel* m_sendState;         //发送状态
+    QPushButton* m_openFile;     //打开文件
+    QPushButton* m_copyFile;     //拷贝
+    QPushButton* m_openFileDir;  //打开所在目录
+    QPushButton* m_downLoad;
+
+    QString m_fileFullpath = "";
+    QString m_fileFullDir = "";
+    QString m_serveFilePath = "";  //远程的文件地址
 };

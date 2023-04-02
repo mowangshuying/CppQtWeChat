@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "QPch.h"
 
 #include <QWidget>
@@ -10,16 +9,16 @@
 #include <QHBoxLayout>
 #include <QTextEdit>
 
-class QApplyFriendWaitInfoWnd : public QWidget 
+class QApplyFriendWaitInfoWnd : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	QApplyFriendWaitInfoWnd(QWidget* p = nullptr);
+    QApplyFriendWaitInfoWnd(QWidget* p = nullptr);
 
 public:
-	//窗口主要布局
-	QVBoxLayout* m_vLayout;
+    //窗口主要布局
+    QVBoxLayout* m_vLayout;
 
-	// 文本显示
-	QLabel* m_infoLabel;
+    // 文本显示
+    QLabel* m_infoLabel;
 };
