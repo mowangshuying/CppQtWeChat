@@ -27,6 +27,19 @@ private:
     //会话窗口
     QMainWnd(QWidget* p = nullptr);
 
+    enum BorderArea
+    {
+        BorderAreaNone = 0,
+        BorderAreaTop,
+        BorderAreaBottom,
+        BorderAreaLeft,
+        BorderAreaRight,
+        BorderAreaTopLeft,
+        BorderAreaTopRight,
+        BorderAreaBottomLeft,
+        BorderAreaBottomRight,
+    };
+
 public:
     static QMainWnd* getInstance()
     {
@@ -54,6 +67,10 @@ public:
     //请求群组消息
     void requestGroupList();
 
+    //
+    void UpdateBorderArea(QPoint pos);
+    void UpdateCursor();
+    void UpdateWindowByBorderArea();
 public slots:
     void closeWnd();
     void minWnd();
@@ -94,7 +111,7 @@ public:
 
     int m_currentSesId = 0;
 
-    bool m_bPress = false;
+    bool m_bLeftBtnPress = false;
     QPoint m_poPress;
 
     static QMainWnd* m_mainWnd;
@@ -104,4 +121,6 @@ public:
     //用户id
     int64_t m_userid;
     QNetworkAccessManager* m_networkMgr;
+
+    BorderArea m_borderArea;
 };
