@@ -22,36 +22,37 @@
 
 QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    // setFixedSize(640, 600);
     setMinimumSize(640, 600);
     setWindowTitle("会话窗口");
     setAcceptDrops(true);
 
-    // m_hLayout = new QHBoxLayout(this);
-    // m_hLayout->setContentsMargins(0, 0, 0, 0);
-    // m_hLayout->setSpacing(0);
-
     m_vLayout = new QVBoxLayout();
-    // m_hLayout->addLayout(m_vLayout);
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
+
 
     // 每个会话都保存着一个groupInfoWnd
     m_groupInfoWnd = new QGroupInfoWnd();
     m_groupInfoWnd->hide();
 
+    // 会话窗口的top
     m_sesTopWnd = new QSessionTopWnd(this);
-
+    
+    // 消息窗口
     m_MsgWndList = new QListWidget(this);
     m_MsgWndList->setAcceptDrops(false);
     m_MsgWndList->setMinimumWidth(this->width());
+    
+    // 发送消息窗口
     m_sendTextEdit = new QTextEdit(this);
     m_sendTextEdit->setStyleSheet("border:0px;");
     m_sendTextEdit->setAcceptDrops(false);
 
+    // 会话窗口的工具栏部分
     m_sesToolBar = new QSessionToolBar();
 
+    // 发送按钮
     m_sendTextBtn = new QPushButton(this);
     m_sendTextBtn->setFixedSize(70, 30);
     m_sendTextBtn->setText("发送(S)");

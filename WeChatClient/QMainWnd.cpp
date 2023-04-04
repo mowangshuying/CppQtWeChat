@@ -779,47 +779,78 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
     }
 
     qDebug() << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
-    qDebug() << "[mouseMoveEvent and m_poPress]: x:" << m_poPress.x() << "y:" << m_poPress.y();
+    qDebug() << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
     qDebug() << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
-    qDebug() << "[mouseMoveEvent distance]:x:" << (event->pos() - m_poPress).x();
+    qDebug() << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
 
     if (m_borderArea == BorderArea::BorderAreaNone)
     {
-        move(event->pos() - m_poPress + pos());
+        move(event->pos() - m_leftBtnPressPoint + pos());
     }
     else
     {
         if (m_borderArea == BorderArea::BorderAreaRight)
         {
-            setFixedWidth(width() + (event->pos() - m_poPress).x());
-            m_poPress = event->pos();
+            qDebug() << "mini size: w:" << minimumSize().width() << "h:" << minimumSize().height();
+            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
+            int wndW = width() + distancePoint.x();
+            if (wndW < 950)
+            {
+                return;
+            }
+            setFixedWidth(wndW);
+            m_leftBtnPressPoint = event->pos();
             return;
         }
         else if (m_borderArea == BorderArea::BorderAreaLeft)
         {
-            QRect tmpRect = rect();
+            QRect wndRect = rect();
+            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
             qDebug() << "[BorderArea::BorderAreaLeft]:"
-                     << "rect.x() = " << tmpRect.x() << "distance.x() = " << (event->pos() - m_poPress).x() << "width = " << width() << "height = " << height();
-            QPoint tmpPo = mapToGlobal(m_poPress);
-            setGeometry(pos().x() + tmpRect.x() + (event->pos() - m_poPress).x(), pos().y(), width() - (event->pos() - m_poPress).x(), height());
-            m_poPress = event->pos();
-            //QPoint tmpPo2 = mapToGlobal(event->pos());
-            //if (tmpPo != tmpPo2)
-            //{
-            //    m_poPress = event->pos();
-            //}
+                     << "rect.x() = " << wndRect.x() << "distance.x() = " << (event->pos() - m_leftBtnPressPoint).x() << "width = " << width()
+                     << "height = " << height();
+
+            int gWndX = pos().x() + wndRect.x() + distancePoint.x();
+            int gWndY = pos().y();
+            int wndW = width() - distancePoint.x();
+            int wndH = height();
+
+            // 小于最小宽度不允许继续缩放
+            if (wndW < 950)
+            {
+                return;
+            }
+
+            setGeometry(gWndX, gWndY, wndW, wndH);
+            m_leftBtnPressPoint = event->pos();
             return;
         }
         else if (m_borderArea == BorderArea::BorderAreaTop)
         {
-            QRect tmpRect = rect();
-            setGeometry(pos().x(), pos().y() + tmpRect.y() + (event->pos() - m_poPress).y(), width(), height() - (event->pos() - m_poPress).y());
-            m_poPress = event->pos();
+            QRect wndRect = rect();
+            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
+
+            int gWndX = pos().x();
+            int gWndY = pos().y() + wndRect.y() + distancePoint.y();
+            int wndW = width();
+            int wndH = height() - distancePoint.y();
+            if (wndH < 600)
+            {
+                return;
+            }
+            setGeometry(gWndX, gWndY, wndW, wndH);
+            m_leftBtnPressPoint = event->pos();
         }
         else if (m_borderArea == BorderArea::BorderAreaBottom)
         {
-            setFixedHeight(height() + (event->pos() - m_poPress).y());
-            m_poPress = event->pos();
+            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
+            int wndH = height() + distancePoint.y();
+            if (wndH < 600)
+            {
+                return;
+            }
+            setFixedHeight(wndH);
+            m_leftBtnPressPoint = event->pos();
             return;
         }
     }
@@ -834,10 +865,10 @@ void QMainWnd::mousePressEvent(QMouseEvent* event)
 
     // 鼠标左键按下
     m_bLeftBtnPress = true;
-    m_poPress = event->pos();
+    m_leftBtnPressPoint = event->pos();
     UpdateBorderArea(event->pos());
     UpdateCursor();
-    qDebug() << "left button: x:" << m_poPress.x() << "y:" << m_poPress.y();
+    qDebug() << "left button: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
 }
 
 void QMainWnd::mouseReleaseEvent(QMouseEvent* event)

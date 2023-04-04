@@ -112,7 +112,7 @@ public:
     int m_currentSesId = 0;
 
     bool m_bLeftBtnPress = false;
-    QPoint m_poPress;
+    QPoint m_leftBtnPressPoint;
 
     static QMainWnd* m_mainWnd;
 
