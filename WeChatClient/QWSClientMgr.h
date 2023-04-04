@@ -65,5 +65,7 @@ public:
     RequestMsg2CallbackMap m_RequestMsg2CallbackMap;
     int64 m_MsgId = 0;
     QTimer* m_timer;
+    // 是否连接上远端的服务器
+    bool m_bConn;
     int m_time = 0;
 };

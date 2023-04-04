@@ -6,6 +6,7 @@ QWSClientMgr* QWSClientMgr::m_WsClientMgr = nullptr;
 
 QWSClientMgr::QWSClientMgr()
 {
+    m_bConn = false;
     m_webSock = new QWebSocket();
 
     //创建一个定时器
@@ -113,11 +114,15 @@ void QWSClientMgr::slot_connected()
         json.Add("cckey", "ccmm00@123456");
         request("cs_reg_client", json, [this](neb::CJsonObject& msg) { qDebug() << "reg client suc"; });
     }
+
+    m_bConn = true;
 }
 
 void QWSClientMgr::slot_disconnected()
 {
     qDebug() << "slot_disconnected...";
+    // m_webSock->close();
+    m_bConn = false;
 }
 
 void QWSClientMgr::slot_recvMsg(const QString& message)
@@ -171,5 +176,11 @@ void QWSClientMgr::slot_timer()
         // 5秒向网关服务器发送心跳
         neb::CJsonObject json;
         request("cs_msg_heart", json);
+    }
+
+    if (!m_bConn)
+    {
+        m_webSock->open(QUrl("ws://49.232.169.205:5000"));
+        qDebug() << "Retry to connect server";
     }
 }
