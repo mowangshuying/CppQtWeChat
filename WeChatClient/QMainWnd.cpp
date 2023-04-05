@@ -409,22 +409,7 @@ void QMainWnd::requestFriendList()
                 continue;
             }
 
-            bool has = false;
-            int count = m_commContactsListWnd->m_listWidget->count();
-            for (int i = 0; i < count; i++)
-            {
-                QListWidgetItem* pitem = m_commContactsListWnd->m_listWidget->item(i);
-                QCommContactItemWnd* pWnd = dynamic_cast<QCommContactItemWnd*>(m_commContactsListWnd->m_listWidget->itemWidget(pitem));
-                if (pWnd->m_friendId == friendid)
-                {
-                    has = true;
-                }
-            }
-
-            if (!has)
-            {
-                m_commContactsListWnd->addContactsItem("./img/head2.png", friendusername.c_str(), false, friendid);
-            }
+            m_commContactsListWnd->addContactsItem("./img/head2.png", friendusername.c_str(), false, friendid);
         }
     });
 }
@@ -495,76 +480,51 @@ void QMainWnd::requestSessionList()
                 isGroup = true;
             }
 
+            m_commMsgListWnd->addMsgItem(recvusername.c_str(), recentlymsg.c_str(), sesid, recvid, isGroup);
+
+            if (!hasSessionWndBySessionId(sesid))
             {
-                bool has1 = false;
-                int count = m_commMsgListWnd->m_listWidget->count();
-                for (int i = 0; i < count; i++)
+                QSessionWnd* sesWnd = new QSessionWnd();
+                sesWnd->m_sesTopWnd->m_titleLabel->setText(recvusername.c_str());
+                sesWnd->m_sesId = sesid;
+                sesWnd->m_recvId = recvid;
+                sesWnd->m_isGroupSes = isgroupses;
+
+                // 不是群组会话，应该隐藏more按钮
+                if (!isgroupses)
                 {
-                    QListWidgetItem* pitem = m_commMsgListWnd->m_listWidget->item(i);
-                    QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_commMsgListWnd->m_listWidget->itemWidget(pitem));
-                    if (pWnd->m_sesId == sesid)
-                    {
-                        has1 = true;
-                        break;
-                    }
+                    sesWnd->m_sesTopWnd->m_moreBtn->hide();
                 }
 
-                if (!has1)
-                {
-                    //
-                    if (isGroup)
-                    {
-                        m_commMsgListWnd->addMsgItem("./img/groupHead.png", recvusername.c_str(), recentlymsg.c_str(), sesid, recvid, isGroup);
-                    }
-                    else
-                    {
-                        m_commMsgListWnd->addMsgItem("./img/head1.png", recvusername.c_str(), recentlymsg.c_str(), sesid, recvid, isGroup);
-                    }
-                }
-            }
-
-            {
-                bool has2 = false;
-
-                int count = m_sLayout2->count();
-                for (int i = 0; i < count; i++)
-                {
-                    if (i <= 1)
-                    {
-                        continue;
-                    }
-
-                    QLayoutItem* item = m_sLayout2->layout()->itemAt(i);
-                    QSessionWnd* sesWnd = dynamic_cast<QSessionWnd*>(item->widget());
-                    if (sesWnd->m_sesId == sesid)
-                    {
-                        has2 = true;
-                        break;
-                    }
-                }
-
-                if (!has2)
-                {
-                    QSessionWnd* sesWnd = new QSessionWnd();
-                    sesWnd->m_sesTopWnd->m_titleLabel->setText(recvusername.c_str());
-                    sesWnd->m_sesId = sesid;
-                    sesWnd->m_recvId = recvid;
-                    sesWnd->m_isGroupSes = isgroupses;
-
-                    // 不是群组会话，应该隐藏more按钮
-                    if (!isgroupses)
-                    {
-                        sesWnd->m_sesTopWnd->m_moreBtn->hide();
-                    }
-
-                    connect(sesWnd->m_sesTopWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
-                    connect(sesWnd->m_sesTopWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
-                    connect(sesWnd->m_sesTopWnd->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
-                    m_sLayout2->addWidget(sesWnd);
-                }
+                connect(sesWnd->m_sesTopWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
+                connect(sesWnd->m_sesTopWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
+                connect(sesWnd->m_sesTopWnd->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
+                m_sLayout2->addWidget(sesWnd);
             }
         }
     });
+}
+
+bool QMainWnd::hasSessionWndBySessionId(int sesid)
+{
+    bool bHas = false;
+    int count = m_sLayout2->count();
+    for (int i = 0; i < count; i++)
+    {
+        if (i <= 1)
+        {
+            continue;
+        }
+
+        QLayoutItem* item = m_sLayout2->layout()->itemAt(i);
+        QSessionWnd* sesWnd = dynamic_cast<QSessionWnd*>(item->widget());
+        if (sesWnd->m_sesId == sesid)
+        {
+            bHas = true;
+            break;
+        }
+    }
+    return bHas;
 }
 
 void QMainWnd::requestGroupList()
@@ -603,24 +563,7 @@ void QMainWnd::requestGroupList()
                 continue;
             }
 
-            //判断群聊列表中是否含有此群聊
-            int count = m_commGroupsListWnd->m_listWidget->count();
-            bool has = false;
-            for (int i = 0; i < count; i++)
-            {
-                QListWidgetItem* pitem = m_commGroupsListWnd->m_listWidget->item(i);
-                QCommGroupItemWnd* pWnd = dynamic_cast<QCommGroupItemWnd*>(m_commGroupsListWnd->m_listWidget->itemWidget(pitem));
-                if (pWnd->m_groupId == groupid)
-                {
-                    has = true;
-                    break;
-                }
-            }
-
-            if (!has)
-            {
-                m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.c_str(), groupid);
-            }
+            m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.c_str(), groupid);
         }
     });
 }
@@ -778,10 +721,11 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
         return;
     }
 
-    qDebug() << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
-    qDebug() << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
-    qDebug() << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
-    qDebug() << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
+    // 鼠标移动的调试信息
+    // qDebug() << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
+    // qDebug() << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
+    // qDebug() << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
+    // qDebug() << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
 
     if (m_borderArea == BorderArea::BorderAreaNone)
     {
@@ -789,70 +733,75 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
     }
     else
     {
-        if (m_borderArea == BorderArea::BorderAreaRight)
+        adjustWndSizeByMouseMove(event);
+    }
+}
+
+void QMainWnd::adjustWndSizeByMouseMove(QMouseEvent* event)
+{
+    if (m_borderArea == BorderArea::BorderAreaRight)
+    {
+        qDebug() << "mini size: w:" << minimumSize().width() << "h:" << minimumSize().height();
+        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
+        int wndW = width() + distancePoint.x();
+        if (wndW < 950)
         {
-            qDebug() << "mini size: w:" << minimumSize().width() << "h:" << minimumSize().height();
-            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
-            int wndW = width() + distancePoint.x();
-            if (wndW < 950)
-            {
-                return;
-            }
-            setFixedWidth(wndW);
-            m_leftBtnPressPoint = event->pos();
             return;
         }
-        else if (m_borderArea == BorderArea::BorderAreaLeft)
+        setFixedWidth(wndW);
+        m_leftBtnPressPoint = event->pos();
+        return;
+    }
+    else if (m_borderArea == BorderArea::BorderAreaLeft)
+    {
+        QRect wndRect = rect();
+        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
+
+        int gWndX = pos().x() + wndRect.x() + distancePoint.x();
+        int gWndY = pos().y();
+        int wndW = width() - distancePoint.x();
+        int wndH = height();
+
+        qDebug() << "[BorderArea::BorderAreaLeft]:"
+                 << "rect.x() = " << wndRect.x() << "distance.x() = " << distancePoint.x() << "width = " << width() << "height = " << height();
+
+        // 小于最小宽度不允许继续缩放
+        if (wndW < 950)
         {
-            QRect wndRect = rect();
-            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
-            qDebug() << "[BorderArea::BorderAreaLeft]:"
-                     << "rect.x() = " << wndRect.x() << "distance.x() = " << (event->pos() - m_leftBtnPressPoint).x() << "width = " << width()
-                     << "height = " << height();
-
-            int gWndX = pos().x() + wndRect.x() + distancePoint.x();
-            int gWndY = pos().y();
-            int wndW = width() - distancePoint.x();
-            int wndH = height();
-
-            // 小于最小宽度不允许继续缩放
-            if (wndW < 950)
-            {
-                return;
-            }
-
-            setGeometry(gWndX, gWndY, wndW, wndH);
-            m_leftBtnPressPoint = event->pos();
             return;
         }
-        else if (m_borderArea == BorderArea::BorderAreaTop)
-        {
-            QRect wndRect = rect();
-            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
 
-            int gWndX = pos().x();
-            int gWndY = pos().y() + wndRect.y() + distancePoint.y();
-            int wndW = width();
-            int wndH = height() - distancePoint.y();
-            if (wndH < 600)
-            {
-                return;
-            }
-            setGeometry(gWndX, gWndY, wndW, wndH);
-            m_leftBtnPressPoint = event->pos();
-        }
-        else if (m_borderArea == BorderArea::BorderAreaBottom)
+        setGeometry(gWndX, gWndY, wndW, wndH);
+        m_leftBtnPressPoint = event->pos();
+        return;
+    }
+    else if (m_borderArea == BorderArea::BorderAreaTop)
+    {
+        QRect wndRect = rect();
+        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
+
+        int gWndX = pos().x();
+        int gWndY = pos().y() + wndRect.y() + distancePoint.y();
+        int wndW = width();
+        int wndH = height() - distancePoint.y();
+        if (wndH < 600)
         {
-            QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
-            int wndH = height() + distancePoint.y();
-            if (wndH < 600)
-            {
-                return;
-            }
-            setFixedHeight(wndH);
-            m_leftBtnPressPoint = event->pos();
             return;
         }
+        setGeometry(gWndX, gWndY, wndW, wndH);
+        m_leftBtnPressPoint = event->pos();
+    }
+    else if (m_borderArea == BorderArea::BorderAreaBottom)
+    {
+        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
+        int wndH = height() + distancePoint.y();
+        if (wndH < 600)
+        {
+            return;
+        }
+        setFixedHeight(wndH);
+        m_leftBtnPressPoint = event->pos();
+        return;
     }
 }
 

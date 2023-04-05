@@ -17,7 +17,7 @@ class QCommMsgItemWnd : public QWidget
     Q_OBJECT
 public:
     QCommMsgItemWnd(QWidget* p);
-    QCommMsgItemWnd(QWidget* p, const char* headUrl, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg);
+    QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg);
 public slots:
     void slot_replyFinished(QNetworkReply* reply);
 
@@ -30,5 +30,6 @@ public:
     int64_t m_userid;
     int64_t m_sesId;
     bool m_isGroupMsg;
+    QString m_url;
     QNetworkAccessManager* m_networkMgr;
 };

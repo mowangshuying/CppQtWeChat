@@ -6,7 +6,7 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p) : QWidget(p)
 {
 }
 
-QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* headUrl, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg)
+QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg)
 {
     m_sesId = sesid;
     m_userid = userid;
@@ -30,7 +30,13 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* headUrl, const char* na
 
     m_headurl = new QLabel();
     m_headurl->setFixedSize(40, 40);
-    m_headurl->setPixmap(QPixmap(headUrl));
+
+    m_url = "./img/groupHead.png";
+    if (isGroppMsg)
+    {
+        m_url = "./img/head1.png"; 
+    }
+    m_headurl->setPixmap(QPixmap(m_url));
 
     m_hLayout->addSpacing(10);
     m_hLayout->addWidget(m_headurl);
@@ -43,21 +49,18 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* headUrl, const char* na
     setLayout(m_hLayout);
     setFixedHeight(65);
 
-    //
-    if (!isGroppMsg)
-    {
-        QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(userid);
-        m_networkMgr = new QNetworkAccessManager();
-        connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
-        m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
-    }
-    else
+    // ./img/groupHead.png
+    // ./img/head1.png
+
+
+    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(userid);
+    if (isGroppMsg)
     {
         QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(userid);
-        m_networkMgr = new QNetworkAccessManager();
-        connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
-        m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
     }
+    m_networkMgr = new QNetworkAccessManager();
+    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
+    m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
 
 void QCommMsgItemWnd::slot_replyFinished(QNetworkReply* reply)

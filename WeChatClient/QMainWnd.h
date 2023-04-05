@@ -64,6 +64,9 @@ public:
     void requestHeadImg();
     void requestFriendList();
     void requestSessionList();
+
+    bool hasSessionWndBySessionId(int sesid);
+
     //请求群组消息
     void requestGroupList();
 
@@ -77,6 +80,9 @@ public slots:
     void maxWnd();
 
     void mouseMoveEvent(QMouseEvent* event);
+
+    void adjustWndSizeByMouseMove(QMouseEvent* event);
+
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 

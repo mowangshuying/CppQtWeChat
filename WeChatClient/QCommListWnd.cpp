@@ -154,9 +154,15 @@ void QCommListWnd::onStartGroupBtnClicked()
     m_selectWnd1->show();
 }
 
-QListWidgetItem* QCommListWnd::addMsgItem(const char* headUrl, const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg)
+QListWidgetItem* QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg)
 {
-    QCommMsgItemWnd* pMsgItem = new QCommMsgItemWnd(m_listWidget, headUrl, name, msg, sesid, userid, isGroupMsg);
+    if (hasMsgItemBySesId(sesid))
+    {
+        qDebug() << "has same ses sesid = " << sesid;
+        return NULL;
+    }
+
+    QCommMsgItemWnd* pMsgItem = new QCommMsgItemWnd(m_listWidget, name, msg, sesid, userid, isGroupMsg);
     QListWidgetItem* pListItem = new QCustomListWidgetItem(m_listWidget);
     pMsgItem->setFixedWidth(this->width() - 5);
     pListItem->setSizeHint(QSize(this->width() - 5, 65));
@@ -166,6 +172,11 @@ QListWidgetItem* QCommListWnd::addMsgItem(const char* headUrl, const char* name,
 
 void QCommListWnd::addContactsItem(const char* headUrl, const char* name, bool isNewFriend /*= false*/, int friendid /* = -1*/)
 {
+    if (hasContactsItemByFriendId(friendid))
+    {
+        qDebug() << "has same friend friendId = " << friendid;
+        return;
+    }
     QCommContactItemWnd* pMsgItem = new QCommContactItemWnd(m_listWidget, headUrl, name, isNewFriend, friendid);
     QListWidgetItem* pListItem = new QCustomListWidgetItem(m_listWidget);
     pMsgItem->setFixedWidth(this->width() - 5);
@@ -175,9 +186,66 @@ void QCommListWnd::addContactsItem(const char* headUrl, const char* name, bool i
 
 void QCommListWnd::addGroupItem(const char* headUrl, const char* name, int groupid)
 {
+    if (hasGroupItemByGroupId(groupid))
+    {
+        qDebug() << "has same group groupid = " << groupid;
+        return;
+    }
+
     QCommGroupItemWnd* pGroupItem = new QCommGroupItemWnd(m_listWidget, headUrl, name, groupid);
     QListWidgetItem* pListItem = new QCustomListWidgetItem(m_listWidget);
     pGroupItem->setFixedWidth(this->width() - 5);
     pListItem->setSizeHint(QSize(this->width() - 5, 65));
     m_listWidget->setItemWidget(pListItem, pGroupItem);
+}
+
+bool QCommListWnd::hasMsgItemBySesId(int64_t sesid)
+{
+    bool bHas = false;
+    int count = m_listWidget->count();
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_listWidget->item(i);
+        QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
+        if (pWnd->m_sesId == sesid)
+        {
+            bHas = true;
+            break;
+        }
+    }
+    return bHas;
+}
+
+bool QCommListWnd::hasGroupItemByGroupId(int64_t groupid)
+{
+    //判断群聊列表中是否含有此群聊
+    int count = m_listWidget->count();
+    bool bHas = false;
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_listWidget->item(i);
+        QCommGroupItemWnd* pWnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pitem));
+        if (pWnd->m_groupId == groupid)
+        {
+            bHas = true;
+            break;
+        }
+    }
+    return bHas;
+}
+
+bool QCommListWnd::hasContactsItemByFriendId(int64_t friendId)
+{
+    bool bHas = false;
+    int count = m_listWidget->count();
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_listWidget->item(i);
+        QCommContactItemWnd* pWnd = dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pitem));
+        if (pWnd->m_friendId == friendId)
+        {
+            bHas = true;
+        }
+    }
+    return bHas;
 }
