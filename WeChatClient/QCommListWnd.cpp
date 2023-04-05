@@ -2,7 +2,7 @@
 #include <QScrollBar>
 #include "QMainWnd.h"
 
-#include "QSelectWnd1.h"
+#include "QSelectAddGroupOrAddFriendWnd.h"
 #include "QSimpleSplit.h"
 #include "QCommListWnd.h"
 #include "QCommMsgItemWnd.h"
@@ -49,8 +49,8 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     m_listWidget->setWindowFlags(Qt::FramelessWindowHint);
     m_vLayout->addWidget(m_listWidget);
 
-    m_selectWnd1 = new QSelectWnd1(nullptr);
-    m_selectWnd1->hide();
+    m_selectWnd = new QSelectAddGroupOrAddFriendWnd(nullptr);
+    m_selectWnd->hide();
 
     setFixedWidth(250);
     setObjectName("QCommListWnd");
@@ -59,11 +59,11 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     setWindowFlags(Qt::FramelessWindowHint);
 
     m_listWidget->setStyleSheet("border:0px;");
-    connect(m_listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(onCurrentItemClicked(QListWidgetItem*)));
-    connect(m_startGroupBtn, SIGNAL(clicked()), this, SLOT(onStartGroupBtnClicked()));
+    connect(m_listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotOnCurrentItemClicked(QListWidgetItem*)));
+    connect(m_startGroupBtn, SIGNAL(clicked()), this, SLOT(slotOnStartGroupBtnClicked()));
 }
 
-void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
+void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
 {
     // 自定义列表
     // 包含如下列表信息：联系人列表、消息列表、群聊列表
@@ -71,7 +71,7 @@ void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
     qDebug() << __FUNCTION__ << "sesid:" << pCustItem->sesId() << "\n";
 
     //当前点击的是联系人列表中的某一项目
-    if (m_WndType == QCommContactItemWnd_Type)
+    if (m_WndType == ContactItemWndType)
     {
         QCommContactItemWnd* wnd = dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pCustItem));
         if (wnd->m_bNewFriend)
@@ -93,20 +93,22 @@ void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
             QMainWnd::getInstance()->m_sLayout2->setCurrentIndex(0);
 
             //联系人的信息改变
-            emit signal_contactInfoChange(infoMap);
+            emit signalContactInfoChange(infoMap);
         }
+        return;
     }
 
     //当前点击的是消息列表中的某一项
-    if (m_WndType == QCommMsgItemWnd_Tpye)
+    if (m_WndType == MsgItemWndTpye)
     {
         QCommMsgItemWnd* wnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pCustItem));
         qint64 sesid = wnd->m_sesId;
-        commListChanged(sesid);
+        signalCommListChanged(sesid);
+        return;
     }
 
     //当前点击的我是群列表中的某一项
-    if (m_WndType == QCommGroupItemWnd_Type)
+    if (m_WndType == GroupItemWndType)
     {
         //判断当前点击是那一项
         QCommGroupItemWnd* wnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pCustItem));
@@ -117,28 +119,22 @@ void QCommListWnd::onCurrentItemClicked(QListWidgetItem* item)
         //先找到消息列表中所在的位置
         auto msgListWidget = QMainWnd::getInstance()->m_commMsgListWnd->m_listWidget;
 
-        // int sesid = -1;
         for (int i = 0; i < msgListWidget->count(); i++)
         {
             QListWidgetItem* pitem = msgListWidget->item(i);
             QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(msgListWidget->itemWidget(pitem));
             if (pWnd->m_isGroupMsg && pWnd->m_userid == groupid)
             {
-                // sesid = pWnd->m_sesId;
                 msgListWidget->setCurrentItem(pitem);
                 QMainWnd::getInstance()->slot_sesIdToIndex(pWnd->m_sesId);
                 break;
             }
         }
-
-        // if (sesid != -1)
-        //{
-        //	QMainWnd::getSinletonInstance()->slot_sesIdToIndex(sesid);
-        //}
+        return;
     }
 }
 
-void QCommListWnd::onStartGroupBtnClicked()
+void QCommListWnd::slotOnStartGroupBtnClicked()
 {
     // qDebug() << "onStartGroupBtnClicked()";
     QRect rect = m_startGroupBtn->geometry();
@@ -147,11 +143,11 @@ void QCommListWnd::onStartGroupBtnClicked()
     QPoint gPoint = m_startGroupBtn->mapToGlobal(QPoint(0, 0));
 
     /*选择的窗口只能允许出现一个*/
-    QRect swRect = m_selectWnd1->geometry();
-    swRect.setX(gPoint.x() - m_selectWnd1->width() + m_startGroupBtn->width());
+    QRect swRect = m_selectWnd->geometry();
+    swRect.setX(gPoint.x() - m_selectWnd->width() + m_startGroupBtn->width());
     swRect.setY(gPoint.y() + m_startGroupBtn->height() + 5);
-    m_selectWnd1->setGeometry(swRect);
-    m_selectWnd1->show();
+    m_selectWnd->setGeometry(swRect);
+    m_selectWnd->show();
 }
 
 QListWidgetItem* QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg)

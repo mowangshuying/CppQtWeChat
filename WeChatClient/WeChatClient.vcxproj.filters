@@ -47,7 +47,7 @@
     <ClCompile Include="QCreateGroupListItemWithSelBtnWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelectWnd1.cpp">
+    <ClCompile Include="QSelectAddGroupOrAddFriendWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QApplyFriendInputInfoWnd.cpp">
@@ -160,7 +160,7 @@
     <QtMoc Include="QCreateGroupListItemWithSelBtnWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSelectWnd1.h">
+    <QtMoc Include="QSelectAddGroupOrAddFriendWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QApplyFriendWaitInfoWnd.h">

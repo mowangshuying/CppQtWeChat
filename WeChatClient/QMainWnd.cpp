@@ -23,9 +23,9 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout = new QHBoxLayout(this);
     m_toolWnd = new QToolWnd(this);
 
-    m_commMsgListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::QCommMsgItemWnd_Tpye);
-    m_commContactsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::QCommContactItemWnd_Type);
-    m_commGroupsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::QCommGroupItemWnd_Type);
+    m_commMsgListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::MsgItemWndTpye);
+    m_commContactsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::ContactItemWndType);
+    m_commGroupsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::GroupItemWndType);
 
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
@@ -85,10 +85,10 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     //
     connect(m_toolWnd, SIGNAL(signal_toolWndPageChanged(int)), this, SLOT(slot_toolWndPageChanged(int)));
 
-    connect(m_commMsgListWnd, SIGNAL(commListChanged(int)), this, SLOT(slot_sesIdToIndex(int)));
+    connect(m_commMsgListWnd, SIGNAL(signalCommListChanged(int)), this, SLOT(slot_sesIdToIndex(int)));
 
     connect(m_commContactsListWnd,
-            SIGNAL(signal_contactInfoChange(QMap<QString, QString>)),
+            SIGNAL(signalContactInfoChange(QMap<QString, QString>)),
             m_commContactInfo,
             SLOT(slot_contactInfoChange(QMap<QString, QString>)));
 

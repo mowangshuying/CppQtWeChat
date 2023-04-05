@@ -11,7 +11,7 @@
 #include <QMap>
 #include <QString>
 
-#include "QSelectWnd1.h"
+#include "QSelectAddGroupOrAddFriendWnd.h"
 
 class QCommListWnd : public QWidget
 {
@@ -21,20 +21,20 @@ class QCommListWnd : public QWidget
 public:
     enum QCommListWndEnum
     {
-        QCommMsgItemWnd_Tpye = 0,
-        QCommContactItemWnd_Type = 1,
-        QCommGroupItemWnd_Type = 2,
+        MsgItemWndTpye = 0,
+        ContactItemWndType = 1,
+        GroupItemWndType = 2,
     };
 
-    QCommListWnd(QWidget* p = nullptr, QCommListWndEnum wndType = QCommMsgItemWnd_Tpye);
+    QCommListWnd(QWidget* p = nullptr, QCommListWndEnum wndType = MsgItemWndTpye);
 
 signals:
-    void commListChanged(int num);
-    void signal_contactInfoChange(QMap<QString, QString> infoMap);
+    void signalCommListChanged(int num);
+    void signalContactInfoChange(QMap<QString, QString> infoMap);
 public slots:
-    void onCurrentItemClicked(QListWidgetItem* item);
+    void slotOnCurrentItemClicked(QListWidgetItem* item);
     //如果点击那个按钮的话
-    void onStartGroupBtnClicked();
+    void slotOnStartGroupBtnClicked();
 
 public:
     QListWidgetItem* addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg);
@@ -53,7 +53,7 @@ public:
     //开始的那个按钮
     QPushButton* m_startGroupBtn;
 
-    QSelectWnd1* m_selectWnd1;
+    QSelectAddGroupOrAddFriendWnd* m_selectWnd;
 
     QListWidget* m_listWidget;
     //窗口类型

@@ -1,10 +1,10 @@
-#include "QSelectWnd1.h"
+#include "QSelectAddGroupOrAddFriendWnd.h"
 #include "QFindFriendOrGroupWnd.h"
 #include "QSimpleSplit.h"
 #include <QDebug>
 #include <QApplication>
 
-QSelectWnd1::QSelectWnd1(QWidget* p) : QWidget(p)
+QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget(p)
 {
     setAttribute(Qt::WA_StyledBackground);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -39,7 +39,7 @@ QSelectWnd1::QSelectWnd1(QWidget* p) : QWidget(p)
     connect(m_createGroupBtn, SIGNAL(clicked()), this, SLOT(slot_createGroup()));
 }
 
-void QSelectWnd1::slot_addContactsOrGroupBtnClick()
+void QSelectAddGroupOrAddFriendWnd::slot_addContactsOrGroupBtnClick()
 {
     if (m_findFriendOrGroupWnd != nullptr)
     {
@@ -48,7 +48,7 @@ void QSelectWnd1::slot_addContactsOrGroupBtnClick()
     }
 }
 
-void QSelectWnd1::slot_createGroup()
+void QSelectAddGroupOrAddFriendWnd::slot_createGroup()
 {
     if (m_crateGroupWnd != nullptr)
     {
@@ -57,7 +57,7 @@ void QSelectWnd1::slot_createGroup()
     }
 }
 
-bool QSelectWnd1::event(QEvent* event)
+bool QSelectAddGroupOrAddFriendWnd::event(QEvent* event)
 {
     if (event->type() == QEvent::ActivationChange)
     {

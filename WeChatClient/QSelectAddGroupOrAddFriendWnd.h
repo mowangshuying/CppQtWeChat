@@ -10,14 +10,14 @@
 #include "QFindFriendOrGroupWnd.h"
 #include "QCreateGroupWnd.h"
 
-class QSelectWnd1 : public QWidget
+class QSelectAddGroupOrAddFriendWnd : public QWidget
 {
     Q_OBJECT
 protected:
     bool event(QEvent* event);
 
 public:
-    QSelectWnd1(QWidget* p);
+    QSelectAddGroupOrAddFriendWnd(QWidget* p);
 
 public slots:
     void slot_addContactsOrGroupBtnClick();

@@ -125,7 +125,7 @@
     <ClCompile Include="QMainWnd.cpp" />
     <ClCompile Include="QApplyFriendNextWnd.cpp" />
     <ClCompile Include="QScreenShotWnd.cpp" />
-    <ClCompile Include="QSelectWnd1.cpp" />
+    <ClCompile Include="QSelectAddGroupOrAddFriendWnd.cpp" />
     <ClCompile Include="QSessionToolBar.cpp" />
     <ClCompile Include="QSessionTopWnd.cpp" />
     <ClCompile Include="QSessionWnd.cpp" />
@@ -152,7 +152,7 @@
     <QtMoc Include="QCreateGroupListItemWithSelBtnWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QSelectWnd1.h" />
+    <QtMoc Include="QSelectAddGroupOrAddFriendWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QApplyFriendWaitInfoWnd.h" />
