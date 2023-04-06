@@ -13,6 +13,7 @@
 #include "QUserInfoWnd.h"
 #include "QPictureToolWnd.h"
 #include <QNetworkReply>
+#include "QSelectMoreWnd.h"
 
 /*
  * 最右边工具栏窗口
@@ -32,6 +33,7 @@ public slots:
     void slot_onClickHeadUrlLabel();
     void slot_onClickChangeHeadImgBtn();
     void slot_onClickGroupsBtn();
+    void slot_onClickMoreBtn();
 
 public:
     int m_selectIndex;
@@ -44,4 +46,6 @@ public:
     QUserInfoWnd* m_userInfoWnd;
     QPictureToolWnd* m_pictureToolWnd;
     QPixmap m_headImg;
+    QPushButton* m_moreBtn;
+    QSelectMoreWnd* m_selectMoreWnd;
 };

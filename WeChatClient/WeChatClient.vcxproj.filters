@@ -143,6 +143,9 @@
     <ClCompile Include="QEditLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QSelectMoreWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QWSClientMgr.h">
@@ -254,6 +257,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QEditLabel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QSelectMoreWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

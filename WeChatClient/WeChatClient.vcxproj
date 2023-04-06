@@ -126,6 +126,7 @@
     <ClCompile Include="QApplyFriendNextWnd.cpp" />
     <ClCompile Include="QScreenShotWnd.cpp" />
     <ClCompile Include="QSelectAddGroupOrAddFriendWnd.cpp" />
+    <ClCompile Include="QSelectMoreWnd.cpp" />
     <ClCompile Include="QSessionToolBar.cpp" />
     <ClCompile Include="QSessionTopWnd.cpp" />
     <ClCompile Include="QSessionWnd.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="json\CJsonObject.hpp" />
     <ClInclude Include="QPch.h" />
+    <QtMoc Include="QSelectMoreWnd.h" />
     <QtMoc Include="QEditLabel.h" />
     <QtMoc Include="QGroupFriendsWnd.h" />
     <QtMoc Include="QSwitchButton.h" />
