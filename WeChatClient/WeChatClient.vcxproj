@@ -60,6 +60,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile />
   </ItemDefinitionGroup>
@@ -105,6 +108,7 @@
     <ClCompile Include="QGroupFriendsItemWnd.cpp" />
     <ClCompile Include="QGroupFriendsWnd.cpp" />
     <ClCompile Include="QGroupInfoWnd.cpp" />
+    <ClCompile Include="QSelfLog.h" />
     <ClCompile Include="QPictureToolWnd.cpp" />
     <ClCompile Include="QApplyFriendInputInfoWnd.cpp" />
     <ClCompile Include="QApplyFriendWaitInfoWnd.cpp" />

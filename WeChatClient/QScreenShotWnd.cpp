@@ -6,14 +6,15 @@
 #include <QFileDialog>
 #include <QGuiApplication>
 #include <QClipboard>
+#include <QDebug>
 
 QScreenShotWnd::QScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     m_beginPos = QPoint(-1, -1);
     m_endPos = QPoint(-1, -1);
     m_leftBtnPress = false;
-    // m_bFirst = true;
-    setMouseTracking(true);  //开启鼠标实时追踪，实时的显示鼠标的位置
+    //开启鼠标实时追踪，实时的显示鼠标的位置
+    setMouseTracking(true);
     m_screenShotRect = QRect(0, 0, QApplication::desktop()->width(), QApplication::desktop()->height());
 
     m_RightBtnMenu = new QMenu(this);
@@ -46,7 +47,8 @@ void QScreenShotWnd::slot_exitSccreenShot()
 
 void QScreenShotWnd::showEvent(QShowEvent* showEvent)
 {
-    setWindowOpacity(0.2);
+    setWindowOpacity(0.3);
+    setStyleSheet("background-color:black;");
 }
 
 void QScreenShotWnd::mousePressEvent(QMouseEvent* event)
@@ -54,10 +56,11 @@ void QScreenShotWnd::mousePressEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton)
     {
         m_leftBtnPress = true;
+        // 鼠标按下设置beginPos位置
         setBeginPos(event->pos());
-
+        LogDebug << "begPoint x:" << m_beginPos.x() << "y:" << m_beginPos.y();
         //按下鼠标时候设置窗口的背景颜色
-        // setStyleSheet("background-color:black;");
+        setStyleSheet("background-color:black;");
     }
 }
 
@@ -99,9 +102,9 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);  //将当前窗体对象设置为画布
     QPen pen;
-    pen.setColor(Qt::blue);  //设置笔色
-    pen.setWidth(2);         //画笔线条宽度
-    painter.setPen(pen);     //设置画笔
+    pen.setColor(qRgb(0, 205, 102));  //设置笔色
+    pen.setWidth(2);                  //画笔线条宽度
+    painter.setPen(pen);              //设置画笔
 
     int lx = m_beginPos.x() < m_endPos.x() ? m_beginPos.x() : m_endPos.x();                                 //矩形截图区域左上角x坐标
     int ly = m_beginPos.y() < m_endPos.y() ? m_beginPos.y() : m_endPos.y();                                 //矩形截图区域右上角x坐标
@@ -118,17 +121,17 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
         //画截图矩形
         painter.drawRect(lx, ly, w, h);
 
-        //截图区域大小位置提示
-        if (ly > 10)
-        {
-            //避免看不到提示,在截图矩形上边不接近屏幕上边时，提示在截图矩形的上边的上面
-            painter.drawText(lx + 2, ly - 8, tr("截图范围(%1,%2) - (%3,%4)  截图大小：(%5 x %6)").arg(lx).arg(ly).arg(lx + w).arg(ly + h).arg(w).arg(h));
-        }
-        else
-        {
-            //在截图矩形上边接近屏幕上边时，提示在截图矩形的上边的下面
-            painter.drawText(lx + 2, ly + 12, tr("截图范围(%1,%2) - (%3,%4)  截图大小：(%5 x %6)").arg(lx).arg(ly).arg(lx + w).arg(ly + h).arg(w).arg(h));
-        }
+        ////截图区域大小位置提示
+        // if (ly > 10)
+        //{
+        //    //避免看不到提示,在截图矩形上边不接近屏幕上边时，提示在截图矩形的上边的上面
+        //    painter.drawText(lx + 2, ly - 8, tr("截图范围(%1,%2) - (%3,%4)  截图大小：(%5 x %6)").arg(lx).arg(ly).arg(lx + w).arg(ly + h).arg(w).arg(h));
+        //}
+        // else
+        //{
+        //    //在截图矩形上边接近屏幕上边时，提示在截图矩形的上边的下面
+        //    painter.drawText(lx + 2, ly + 12, tr("截图范围(%1,%2) - (%3,%4)  截图大小：(%5 x %6)").arg(lx).arg(ly).arg(lx + w).arg(ly + h).arg(w).arg(h));
+        //}
     }
 
     //实时显示鼠标的位置

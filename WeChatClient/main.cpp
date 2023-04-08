@@ -7,11 +7,14 @@
 #include "QWSClientMgr.h"
 #include "QDealNewFriendsApplyWnd.h"
 #include <QDir>
+#include "QSelfLog.h"
 
 int main(int argc, char** argv)
 {
     QTextCodec* codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
+
+    LogDebug << "start";
 
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon("./img/wechat.ico"));

@@ -3,6 +3,7 @@
 #include <QPixMap>
 #include <QDesktopWidget>
 #include "QScreenShotWnd.h"
+#include <QDebug>
 
 QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
 {
@@ -49,8 +50,31 @@ void QSessionToolBar::slot_emojiBtnClick()
     m_emoijWnd->show();
 }
 
+// 参考资料：https://www.cnblogs.com/syh6324/p/9502307.html
 void QSessionToolBar::slot_screenshotBtnClick()
 {
+    qDebug() << "desktop winId:" << QApplication::desktop()->winId();
+    qDebug() << "desktop sceen count:" << QApplication::desktop()->screenCount();
+    qDebug() << "desktop width:" << QApplication::desktop()->width() << " height:" << QApplication::desktop()->height();
+
+    // 获取当前鼠标位置
+    QPoint mousePoint = QCursor().pos();
+    qDebug() << __FUNCTION__ << "mouse point x:" << mousePoint.x() << " y:" << mousePoint.y();
+    int nSceenCount = QApplication::desktop()->screenCount();
+    int nSceenWidth = QApplication::desktop()->width();
+    int nEverySceenWidth = nSceenWidth / nSceenCount;
+    int nCurScreenIndex = -1;
+    for (int i = 0; i < nSceenCount; i++)
+    {
+        if (mousePoint.x() >= nEverySceenWidth * i && mousePoint.x() <= nEverySceenWidth * (i + 1))
+        {
+            nCurScreenIndex = i;
+            break;
+        }
+    }
+
+    qDebug() << __FUNCTION__ << " nCurScreenIndex:" << nCurScreenIndex;
+
     QScreenShotWnd* s = new QScreenShotWnd();
     s->m_fullScreenPixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
     s->showFullScreen();

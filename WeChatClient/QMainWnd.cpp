@@ -15,6 +15,7 @@
 #include <QPainter>
 #include <cstdlib>
 #include <qmath.h>
+#include <QGraphicsDropShadowEffect>
 
 QMainWnd* QMainWnd::m_mainWnd = nullptr;
 
@@ -84,24 +85,17 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     //
     connect(m_toolWnd, SIGNAL(signal_toolWndPageChanged(int)), this, SLOT(slot_toolWndPageChanged(int)));
-
     connect(m_commMsgListWnd, SIGNAL(signalCommListChanged(int)), this, SLOT(slot_sesIdToIndex(int)));
-
     connect(m_commContactsListWnd,
             SIGNAL(signalContactInfoChange(QMap<QString, QString>)),
             m_commContactInfo,
             SLOT(slot_contactInfoChange(QMap<QString, QString>)));
-
     connect(m_commContactInfo, SIGNAL(signal_sendMsgBtnClick(QMap<QString, QString>)), this, SLOT(slot_sendMsgBtnClick(QMap<QString, QString>)));
 
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendmsg", std::bind(&QMainWnd::cs_msg_sendmsg, this, std::placeholders::_1));
-
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
-
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_sessionlist", std::bind(&QMainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
-
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_grouplist", std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
-
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
 
     m_networkMgr = new QNetworkAccessManager();
@@ -110,9 +104,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     if (objectName().isEmpty())
         setObjectName("QMainWnd");
     setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
-
     setMinimumSize(800, 600);
-    // setContentsMargins(12, 12, 12, 12);
     setMouseTracking(true);
 }
 
@@ -927,25 +919,3 @@ void QMainWnd::slot_replyFinished(QNetworkReply* reply)
         m_toolWnd->m_headUrlLabel->setPixmap(m_toolWnd->m_headImg);
     }
 }
-
-// void QMainWnd::paintEvent(QPaintEvent* event)
-//{
-//	QPainterPath path;
-//	path.setFillRule(Qt::WindingFill);
-//	QRectF rect(10, 10, this->width() - 20, this->height() - 20);
-//	path.addRoundRect(rect, 8, 8);
-//
-//	QPainter painter(this);
-//	painter.setRenderHint(QPainter::Antialiasing, true);
-//	painter.fillPath(path, QBrush(Qt::white));
-//
-//	QColor color(0, 0, 0, 50);
-//	for (int i = 0; i < 10; i++) {
-//		QPainterPath path;
-//		path.setFillRule(Qt::WindingFill);
-//		path.addRect(10 - i, 10 - i, this->width() - (10 - i) * 2, this->height() - (10 - i) * 2);
-//		color.setAlpha(150 - qSqrt(i) * 50);
-//		painter.setPen(color);
-//		painter.drawPath(path);
-//	}
-//}

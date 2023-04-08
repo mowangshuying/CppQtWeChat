@@ -146,6 +146,9 @@
     <ClCompile Include="QSelectMoreWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QSelfLog.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QWSClientMgr.h">
