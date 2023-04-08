@@ -81,7 +81,7 @@ void QDealNewFriendsApplyWnd::setFriendApplyList()
     neb::CJsonObject json;
     json.Add("ownerid", QMainWnd::getInstance()->m_userid);
     QWSClientMgr::getInstance()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
-        qDebug() << msg.ToString().c_str();
+        LogDebug << msg.ToString().c_str();
         for (int i = 0; i < msg["data"].GetArraySize(); i++)
         {
             neb::CJsonObject tempJsonObj;

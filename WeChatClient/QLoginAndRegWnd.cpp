@@ -264,7 +264,7 @@ void QLoginAndRegWnd::slot_regOrLoginBtn()
                 return;
             }
 
-            qDebug() << msg.ToString().c_str();
+            LogDebug << msg.ToString().c_str();
             m_mainWnd = QMainWnd::getInstance();
             if (m_mainWnd != nullptr)
             {

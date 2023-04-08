@@ -68,7 +68,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
     // 自定义列表
     // 包含如下列表信息：联系人列表、消息列表、群聊列表
     QCustomListWidgetItem* pCustItem = dynamic_cast<QCustomListWidgetItem*>(item);
-    qDebug() << __FUNCTION__ << "sesid:" << pCustItem->sesId() << "\n";
+    LogDebug << "sesid:" << pCustItem->sesId();
 
     //当前点击的是联系人列表中的某一项目
     if (m_WndType == ContactItemWndType)
@@ -136,10 +136,10 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
 
 void QCommListWnd::slotOnStartGroupBtnClicked()
 {
-    // qDebug() << "onStartGroupBtnClicked()";
+    // LogDebug << "onStartGroupBtnClicked()";
     QRect rect = m_startGroupBtn->geometry();
-    qDebug() << "rect" << rect << endl;
-    qDebug() << " the pos of startGroupBtn: " << m_startGroupBtn->pos();
+    LogDebug << "rect" << rect << endl;
+    LogDebug << " the pos of startGroupBtn: " << m_startGroupBtn->pos();
     QPoint gPoint = m_startGroupBtn->mapToGlobal(QPoint(0, 0));
 
     /*选择的窗口只能允许出现一个*/
@@ -154,7 +154,7 @@ QListWidgetItem* QCommListWnd::addMsgItem(const char* name, const char* msg, qin
 {
     if (hasMsgItemBySesId(sesid))
     {
-        qDebug() << "has same ses sesid = " << sesid;
+        LogDebug << "has same ses sesid = " << sesid;
         return NULL;
     }
 
@@ -170,7 +170,7 @@ void QCommListWnd::addContactsItem(const char* headUrl, const char* name, bool i
 {
     if (hasContactsItemByFriendId(friendid))
     {
-        qDebug() << "has same friend friendId = " << friendid;
+        LogDebug << "has same friend friendId = " << friendid;
         return;
     }
     QCommContactItemWnd* pMsgItem = new QCommContactItemWnd(m_listWidget, headUrl, name, isNewFriend, friendid);
@@ -184,7 +184,7 @@ void QCommListWnd::addGroupItem(const char* headUrl, const char* name, int group
 {
     if (hasGroupItemByGroupId(groupid))
     {
-        qDebug() << "has same group groupid = " << groupid;
+        LogDebug << "has same group groupid = " << groupid;
         return;
     }
 

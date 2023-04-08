@@ -259,7 +259,7 @@ void QCreateGroupWnd::minWnd()
 
 void QCreateGroupWnd::slot_selRBtnClick(QMap<QString, QString> map)
 {
-    // qDebug() << "map" << map;
+    // LogDebug << "map" << map;
     if (map["isSel"] == "true")
     {
         if (hasThisWndByRolename(map["rolename"], m_listWnd2) == false)
@@ -288,10 +288,10 @@ void QCreateGroupWnd::slot_comfirmBtnClick()
     //获取当前玩家id，获取群的名称
     int ownerid = QDataManager::getInstance()->m_userid;
     QString groupname = m_groupNameEdit->text();
-    // qDebug() << "ownerid:" << ownerid << "groupname:" << groupname;
+    // LogDebug << "ownerid:" << ownerid << "groupname:" << groupname;
     if (groupname == "")
     {
-        // qDebug() << "groupname is empty()";
+        // LogDebug << "groupname is empty()";
         QMessageBox::information(nullptr, "info", "请输入正确的群组名称");
         return;
     }
@@ -310,7 +310,7 @@ void QCreateGroupWnd::slot_comfirmBtnClick()
         {
             continue;
         }
-        qDebug() << "groupfrindIdVct add " << wnd->m_friendid;
+        LogDebug << "groupfrindIdVct add " << wnd->m_friendid;
         groupfriendIdVct.push_back(wnd->m_friendid);
     }
     //填充数据
@@ -324,12 +324,12 @@ void QCreateGroupWnd::slot_comfirmBtnClick()
     }
     //向远端服务器发送请求
     QWSClientMgr::getInstance()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
-        qDebug() << "msg:" << msg.ToString().c_str();
+        LogDebug << "msg:" << msg.ToString().c_str();
         //现在服务端仅仅返回 createid，groupname,groupid,groupfriends
         int groupid = -1;
         if (!msg["data"].Get("groupid", groupid))
         {
-            qDebug() << "msg[\"data\"] can not find groupid!";
+            LogDebug << "msg[\"data\"] can not find groupid!";
             return;
         }
         //接收到创建群组成功的时候，向列表中嵌入一条数据

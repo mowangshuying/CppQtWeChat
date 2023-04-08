@@ -1,5 +1,6 @@
 #pragma once
 
+#include "QPch.h"
 #include <QWidget>
 #include <QEvent>
 #include <QVBoxLayout>

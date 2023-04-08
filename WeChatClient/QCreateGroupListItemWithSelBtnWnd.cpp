@@ -64,7 +64,7 @@ QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p,
 
 void QCreateGroupListItemWithSelBtnWnd::slot_clickedSelBtn(bool isSel /* = false*/)
 {
-    qDebug() << "isSel" << isSel;
+    LogDebug << "isSel" << isSel;
 
     QMap<QString, QString> sMap;
 

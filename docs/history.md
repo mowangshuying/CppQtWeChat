@@ -266,3 +266,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 * 顶部的搜索框需要为其补充功能
 * 完善好友查找窗口，看是否可以集成到主窗口中
 * 主要为补充查找到玩家的头像信息等
+
+### 2023/04/08 日志优化
+
+![image-20230408101649768](./images/image-20230408101649768.png)

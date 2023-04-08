@@ -31,19 +31,18 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
 
-
     // 每个会话都保存着一个groupInfoWnd
     m_groupInfoWnd = new QGroupInfoWnd();
     m_groupInfoWnd->hide();
 
     // 会话窗口的top
     m_sesTopWnd = new QSessionTopWnd(this);
-    
+
     // 消息窗口
     m_MsgWndList = new QListWidget(this);
     m_MsgWndList->setAcceptDrops(false);
     m_MsgWndList->setMinimumWidth(this->width());
-    
+
     // 发送消息窗口
     m_sendTextEdit = new QTextEdit(this);
     m_sendTextEdit->setStyleSheet("border:0px;");
@@ -141,7 +140,7 @@ void QSessionWnd::slot_sendTextBtnClick()
     if (m_isGroupSes == true)
     {
         QWSClientMgr::getInstance()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
-            qDebug() << "cs_msg_sendgroupmsg:msg=" << msg.ToString().c_str();
+            LogDebug << "cs_msg_sendgroupmsg:msg=" << msg.ToString().c_str();
             //向远端发送消息
             QString time = QString::number(QDateTime::currentDateTime().toTime_t());
             QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getInstance()->m_userid, m_recvId);
@@ -180,7 +179,7 @@ void QSessionWnd::slot_moreBtnClick()
     neb::CJsonObject json;
     json.Add("groupId", m_recvId);
     QWSClientMgr::getInstance()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
-        qDebug() << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
+        LogDebug << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
         // 向群好友列表中嵌入数据
         neb::CJsonObject datajson;
         if (!msg.Get("data", datajson))
@@ -258,17 +257,17 @@ void QSessionWnd::slot_moreBtnClick()
 
 void QSessionWnd::dragEnterEvent(QDragEnterEvent* event)
 {
-    qDebug() << "dragEnterEvent";
+    LogDebug << "dragEnterEvent";
     event->acceptProposedAction();
 }
 
 void QSessionWnd::dropEvent(QDropEvent* event)
 {
-    qDebug() << "dropEvent";
+    LogDebug << "dropEvent";
     //拖拽成功获取文件信息
     const QMimeData* qm = event->mimeData();
     QString strFileName = qm->urls()[0].toLocalFile();
-    qDebug() << "strFileName:" << strFileName;
+    LogDebug << "strFileName:" << strFileName;
     //判断是否是支持的文件
     QFileInfo fileinfo = QFileInfo(strFileName);
 
@@ -282,7 +281,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
         QString suffix = fileinfo.suffix();
         //获取文件大小
         float size = fileinfo.size() * 100 / 1024 * 0.01;
-        qDebug() << "filename:" << filename << "suffix:" << suffix << "size:" << size << "kb";
+        LogDebug << "filename:" << filename << "suffix:" << suffix << "size:" << size << "kb";
 
         QString sizeStr;
         if (size < 1024)
@@ -358,7 +357,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
             json.Add("msgtext", filejson.ToString());
 
             QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) {
-                qDebug() << "after upload file recv msg from server!";
+                LogDebug << "after upload file recv msg from server!";
             });
         });
     }

@@ -1,4 +1,3 @@
-#include <QDebug>
 #include <QPainter>
 #include <QDateTime>
 
@@ -53,11 +52,11 @@ QSize QChatMsgWnd::fontRect(QString str)
     m_iconRightRect = QRect(this->width() - iconSpaceW - iconWH, iconTMPH, iconWH, iconWH);
 
     QSize msgSize = getRealStringSize(str);
-    qDebug() << "fontRect size = " << msgSize;
+    LogDebug << "fontRect size = " << msgSize;
 
     int height = msgSize.height() > minH ? msgSize.height() : minH;
 
-    qDebug() << "QChatMsgWnd::fontRect height = " << height;
+    LogDebug << "QChatMsgWnd::fontRect height = " << height;
     m_triangleLeftRect = QRect(iconWH + iconSpaceW + iconRectW, m_lineHeight / 2, triangleW, 5);
 
     m_triangleRightRect = QRect(this->width() - iconRectW - iconWH - iconSpaceW - triangleW, m_lineHeight / 2, triangleW, 5);
@@ -96,7 +95,7 @@ QSize QChatMsgWnd::fontRect(QString str)
 
 QSize QChatMsgWnd::getRealStringSize(QString str)
 {
-    // qDebug() << "getRealStringSize start------------------------------";
+    // LogDebug() << "getRealStringSize start------------------------------";
     QFontMetricsF fm(this->font());
     // m_lineHeight = fm.lineSpacing();
     // int fontHeight = fm.height();

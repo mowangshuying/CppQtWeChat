@@ -21,7 +21,7 @@ QWSClientMgr::QWSClientMgr()
     //连接远端服务器
     m_webSock->open(QUrl("ws://49.232.169.205:5000"));
     // m_webSock->open(QUrl("ws://127.0.0.1:5000"));
-    qDebug() << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
+    LogDebug << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
 }
 
 QWSClientMgr* QWSClientMgr::getInstance()
@@ -41,7 +41,7 @@ void QWSClientMgr::sendMsg(const QString& message)
 void QWSClientMgr::regMsgCall(QString cmd, NetEventCall netEventCall)
 {
     m_Msg2CallbackMap[cmd] = netEventCall;
-    qDebug() << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
+    LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
 }
 
 void QWSClientMgr::transfer(neb::CJsonObject& msg)
@@ -87,7 +87,7 @@ void QWSClientMgr::onNetMsgDo(int64 msgId, neb::CJsonObject& msgJson)
         m_RequestMsg2CallbackMap.erase(itf);
         return;
     }
-    qDebug() << "can not find msgid = " << msgId << " in onNetMsgDo ";
+    LogDebug << "can not find msgid = " << msgId << " in onNetMsgDo ";
 }
 
 void QWSClientMgr::onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson)
@@ -99,20 +99,20 @@ void QWSClientMgr::onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson)
         itf->second(msgJson);
         return;
     }
-    qDebug() << "can not find cmd = " << qcmdStr << " in onNetMsgDo ";
+    LogDebug << "can not find cmd = " << qcmdStr << " in onNetMsgDo ";
 }
 
 void QWSClientMgr::slot_connected()
 {
-    qDebug() << "slot_connected()...";
-    qDebug() << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
+    LogDebug << "slot_connected()...";
+    LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
 
     //向远端服务器发送一个注册消息
     {
         neb::CJsonObject json;
         json.Add("type", "Client");
         json.Add("cckey", "ccmm00@123456");
-        request("cs_reg_client", json, [this](neb::CJsonObject& msg) { qDebug() << "reg client suc"; });
+        request("cs_reg_client", json, [this](neb::CJsonObject& msg) { LogDebug << "reg client suc"; });
     }
 
     m_bConn = true;
@@ -120,18 +120,18 @@ void QWSClientMgr::slot_connected()
 
 void QWSClientMgr::slot_disconnected()
 {
-    qDebug() << "slot_disconnected...";
+    LogDebug << "slot_disconnected...";
     // m_webSock->close();
     m_bConn = false;
 }
 
 void QWSClientMgr::slot_recvMsg(const QString& message)
 {
-    qDebug() << __FUNCTION__ << ":" << QThread::currentThread()->currentThreadId() << endl;
+    LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
     neb::CJsonObject json;
     if (!json.Parse(message.toStdString()))
     {
-        qDebug() << "json parse failed in slot_recvMsg";
+        LogDebug << "json parse failed in slot_recvMsg";
         return;
     }
 
@@ -139,7 +139,7 @@ void QWSClientMgr::slot_recvMsg(const QString& message)
     int msgType = 0;
     if (!json.Get("type", msgType))
     {
-        qDebug() << "can not find msgType in slot_recvMsg";
+        LogDebug << "can not find msgType in slot_recvMsg";
         return;
     }
 
@@ -148,7 +148,7 @@ void QWSClientMgr::slot_recvMsg(const QString& message)
         int msgId = 0;
         if (!json.Get("msgId", msgId))
         {
-            qDebug() << "can not find msgid in slot_recvMsg";
+            LogDebug << "can not find msgid in slot_recvMsg";
             return;
         }
         onNetMsgDo(msgId, json);
@@ -160,7 +160,7 @@ void QWSClientMgr::slot_recvMsg(const QString& message)
         std::string cmd;
         if (!json.Get("cmd", cmd))
         {
-            qDebug() << "can not find cmd in slot_recvMsg";
+            LogDebug << "can not find cmd in slot_recvMsg";
             return;
         }
         onNetMsgDo(cmd, json);
@@ -181,6 +181,6 @@ void QWSClientMgr::slot_timer()
     if (!m_bConn)
     {
         m_webSock->open(QUrl("ws://49.232.169.205:5000"));
-        qDebug() << "Retry to connect server";
+        LogDebug << "Retry to connect server";
     }
 }

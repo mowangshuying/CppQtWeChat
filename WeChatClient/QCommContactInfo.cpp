@@ -151,7 +151,7 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
 
 void QCommContactInfo::slot_contactInfoChange(QMap<QString, QString> map)
 {
-    qDebug() << "contactInfoChange map = " << map << "\n";
+    LogDebug << "contactInfoChange map = " << map << "\n";
     //根据map中name字段修改昵称字段
     m_nickNameLabel->setText(map["name"]);
     //加载QDataManager中玩家头像数据
@@ -204,5 +204,5 @@ void QCommContactInfo::hideBgPng()
 
 // void QCommContactInfo::slot_test()
 //{
-//	qDebug() << "slot_tst" << endl;
+//	LogDebug << "slot_tst" << endl;
 //}

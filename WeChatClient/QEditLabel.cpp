@@ -25,14 +25,14 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
     {
         m_StackLayout->setCurrentWidget(m_lineEdit);
         m_lineEdit->setText(m_label->text());
-        // qDebug() << "QEvent::Enter..." << endl;
+        // LogDebug << "QEvent::Enter..." << endl;
     }
 
     if (QEvent::Leave == e->type())
     {
         m_StackLayout->setCurrentWidget(m_label);
         m_label->setText(m_lineEdit->text());
-        // qDebug() << "QEvent::Leave..." << endl;
+        // LogDebug << "QEvent::Leave..." << endl;
     }
 
     return QWidget::eventFilter(obj, e);

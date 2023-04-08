@@ -413,7 +413,7 @@ void QMainWnd::requestSessionList()
     json.Add("ownerid", QMainWnd::getInstance()->getInstance()->m_userid);
     QWSClientMgr::getInstance()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg) {
         // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
-        qDebug() << "msg:" << msg.ToString().c_str();
+        LogDebug << "msg:" << msg.ToString().c_str();
         //向会话列表中添加一些数据
         if (!msg["data"].IsArray())
         {
@@ -524,7 +524,7 @@ void QMainWnd::requestGroupList()
     neb::CJsonObject json;
     json.Add("ownerid", QMainWnd::getInstance()->getInstance()->m_userid);
     QWSClientMgr::getInstance()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
-        qDebug() << "requestGroupList:" << msg.ToString().c_str();
+        LogDebug << "requestGroupList:" << msg.ToString().c_str();
         //先判断传入是否是msg["data"]是否是array
         if (!msg["data"].IsArray())
         {
@@ -714,10 +714,10 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
     }
 
     // 鼠标移动的调试信息
-    // qDebug() << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
-    // qDebug() << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
-    // qDebug() << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
-    // qDebug() << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
+    // LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
+    // LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
+    // LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
+    // LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
 
     if (m_borderArea == BorderArea::BorderAreaNone)
     {
@@ -733,7 +733,7 @@ void QMainWnd::adjustWndSizeByMouseMove(QMouseEvent* event)
 {
     if (m_borderArea == BorderArea::BorderAreaRight)
     {
-        qDebug() << "mini size: w:" << minimumSize().width() << "h:" << minimumSize().height();
+        LogDebug << "mini size: w:" << minimumSize().width() << "h:" << minimumSize().height();
         QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
         int wndW = width() + distancePoint.x();
         if (wndW < 950)
@@ -754,7 +754,7 @@ void QMainWnd::adjustWndSizeByMouseMove(QMouseEvent* event)
         int wndW = width() - distancePoint.x();
         int wndH = height();
 
-        qDebug() << "[BorderArea::BorderAreaLeft]:"
+        LogDebug << "[BorderArea::BorderAreaLeft]:"
                  << "rect.x() = " << wndRect.x() << "distance.x() = " << distancePoint.x() << "width = " << width() << "height = " << height();
 
         // 小于最小宽度不允许继续缩放
@@ -809,7 +809,7 @@ void QMainWnd::mousePressEvent(QMouseEvent* event)
     m_leftBtnPressPoint = event->pos();
     UpdateBorderArea(event->pos());
     UpdateCursor();
-    qDebug() << "left button: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
+    LogDebug << "left button: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
 }
 
 void QMainWnd::mouseReleaseEvent(QMouseEvent* event)
