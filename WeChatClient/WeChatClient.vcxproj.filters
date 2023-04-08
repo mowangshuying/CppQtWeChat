@@ -149,6 +149,9 @@
     <ClCompile Include="QSelfLog.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="QScreenShotToolBarWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QWSClientMgr.h">
@@ -263,6 +266,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QSelectMoreWnd.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QScreenShotToolBarWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

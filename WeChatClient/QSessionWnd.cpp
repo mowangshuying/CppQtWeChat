@@ -25,6 +25,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setMinimumSize(640, 600);
     setWindowTitle("»á»°´°¿Ú");
     setAcceptDrops(true);
+    setMouseTracking(true);
 
     m_vLayout = new QVBoxLayout();
     m_vLayout->setContentsMargins(0, 0, 0, 0);

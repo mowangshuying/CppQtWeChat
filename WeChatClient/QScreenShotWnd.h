@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QMenu>
+#include "QScreenShotToolBarWnd.h"
 
 class QScreenShotWnd : public QWidget
 {
@@ -14,11 +15,11 @@ public:
     QScreenShotWnd(QWidget* p = nullptr);
 public slots:
     //复制截图
-    void slot_copyScreenShot();
+    void slotCopyScreenShot();
     //保存截图
-    void slot_saveScreenShot();
+    void slotSaveScreenShot();
     //退出截图
-    void slot_exitSccreenShot();
+    void slotExitSccreenShot();
 
 protected:
     void showEvent(QShowEvent*);
@@ -30,22 +31,20 @@ protected:
     void contextMenuEvent(QContextMenuEvent*);  //--右键菜单事件
     void keyPressEvent(QKeyEvent* e);           //--按键事件
 public:
-    QPoint getBeginPos();
-    QPoint getEndPos();
-    void setBeginPos(QPoint p);
-    void setEndPos(QPoint p);
-
 public:
     QPixmap m_fullScreenPixmap;
 
 private:
-    // 是否是第一次截屏
-    // bool m_bFirst;
-
     //鼠标开始位置
-    QPoint m_beginPos;
+    QPoint m_begPos;
     //鼠标结束位置
     QPoint m_endPos;
+
+    // 鼠标开始全局位置
+    QPoint m_globalBegPos;
+    // 鼠标结束全局位置
+    QPoint m_globalEndPos;
+
     //矩形截图区域
     QRect m_screenShotRect;
     //左键是否按下
@@ -54,5 +53,10 @@ private:
     //右键菜单
     QMenu* m_RightBtnMenu;
 
-    // 构建截屏工具条
+    QScreen* m_screen;
+
+    QScreenShotToolBarWnd* m_toolBarWnd;
+
+    bool m_isPainting;
+    bool m_patingSuc;
 };

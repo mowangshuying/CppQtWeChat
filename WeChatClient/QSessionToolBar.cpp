@@ -4,6 +4,7 @@
 #include <QDesktopWidget>
 #include "QScreenShotWnd.h"
 #include <QDebug>
+#include <QScreen>
 
 QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
 {
@@ -76,6 +77,5 @@ void QSessionToolBar::slot_screenshotBtnClick()
     LogDebug << __FUNCTION__ << " nCurScreenIndex:" << nCurScreenIndex;
 
     QScreenShotWnd* s = new QScreenShotWnd();
-    s->m_fullScreenPixmap = QPixmap::grabWindow(QApplication::desktop()->winId());
     s->showFullScreen();
 }

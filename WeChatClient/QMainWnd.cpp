@@ -705,6 +705,8 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
 {
     if (!m_bLeftBtnPress)
     {
+        UpdateBorderArea(event->pos());
+        UpdateCursor();
         return;
     }
 

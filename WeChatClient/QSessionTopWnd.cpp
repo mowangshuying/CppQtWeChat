@@ -70,6 +70,7 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     setFixedHeight(65);
     setAttribute(Qt::WA_StyledBackground);
+    setMouseTracking(true);
     // setStyleSheet("background-color:white;border:0px;");
     if (objectName().isEmpty())
         setObjectName("QSessionTopWnd");
