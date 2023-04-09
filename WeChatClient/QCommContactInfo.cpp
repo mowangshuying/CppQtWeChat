@@ -142,11 +142,13 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
 
     setLayout(m_vLayout1);
     setAttribute(Qt::WA_StyledBackground);
+    
 
     // setStyleSheet("background-color:white;border-image:url(./img/emptybg.png)");
     connect(m_sendMsgBtn, SIGNAL(clicked()), this, SLOT(slot_sendMsgBtnClick()));
 
     showBgPng();
+    setMouseTracking(true);
 }
 
 void QCommContactInfo::slot_contactInfoChange(QMap<QString, QString> map)

@@ -757,10 +757,10 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
     }
 
     // 鼠标移动的调试信息
-    // LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
-    // LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
-    // LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
-    // LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
+     LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
+     LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
+     LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
+     LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
 
     if (m_borderArea == BorderArea::BorderAreaNone)
     {
@@ -808,6 +808,7 @@ void QMainWnd::adjustWndSizeByMouseMove(QMouseEvent* event)
 
         setGeometry(gWndX, gWndY, wndW, wndH);
         m_leftBtnPressPoint = event->pos();
+        m_leftBtnPressPoint.setX(m_leftBtnPressPoint.x() - distancePoint.x());
         return;
     }
     else if (m_borderArea == BorderArea::BorderAreaTop)
@@ -825,6 +826,7 @@ void QMainWnd::adjustWndSizeByMouseMove(QMouseEvent* event)
         }
         setGeometry(gWndX, gWndY, wndW, wndH);
         m_leftBtnPressPoint = event->pos();
+        m_leftBtnPressPoint.setY(m_leftBtnPressPoint.y() - distancePoint.y());
     }
     else if (m_borderArea == BorderArea::BorderAreaBottom)
     {

@@ -200,13 +200,6 @@ void QLoginAndRegWnd::slot_regOrLoginBtn()
                 infoStr = "×¢²á³É¹¦";
             }
 
-            // QByteArray byteArr;
-            // QBuffer buffer(&byteArr);
-            // buffer.open(QIODevice::WriteOnly);
-            // m_HeadImg.save(&buffer, "png");
-            // QByteArray byteArr2 = byteArr.toBase64();
-            // QString headimgdata(byteArr2);
-
             QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
             QNetworkRequest request;
             request.setUrl(QUrl("http://49.232.169.205:80/UploadDemo/UploadServlet"));
