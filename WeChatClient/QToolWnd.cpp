@@ -134,17 +134,6 @@ void QToolWnd::slot_onClickMoreBtn()
 {
     if (m_selectMoreWnd->isHidden())
     {
-        ///*QRect rect = m_headUrlLabel->geometry();
-        //QPoint gPoint = m_headUrlLabel->mapToGlobal(QPoint(0, 0));
-        //QRect swRect = m_userInfoWnd->geometry();
-        //swRect.setX(gPoint.x() + m_headUrlLabel->width() / 2);
-        //swRect.setY(gPoint.y() + m_headUrlLabel->height() / 2);
-        //m_userInfoWnd->m_headLabel->setPixmap(QDataManager::getInstance()->m_UserId2HeadImgMap[QDataManager::getInstance()->m_userid]);
-        //m_userInfoWnd->m_usernameLabel->setText(QDataManager::getInstance()->m_username);
-        //m_userInfoWnd->m_userIdLabel->setText("ÓÃ»§id:" + QString::number(QDataManager::getInstance()->m_userid));
-        //m_userInfoWnd->setGeometry(swRect);
-        //m_userInfoWnd->show();*/
-
         QPoint gPoint = m_moreBtn->mapToGlobal(QPoint(m_moreBtn->width(), m_moreBtn->height()));
         QRect swRect = m_selectMoreWnd->geometry();
         swRect.setX(gPoint.x());
