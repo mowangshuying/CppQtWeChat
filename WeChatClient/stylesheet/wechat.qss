@@ -1,7 +1,7 @@
 
 QScrollBar:vertical 
 {
-	width:8px;
+	width:4px;
 	background:rgba(0,0,0,0%);
 	margin:0px,0px,0px,0px;
 	padding-top:9px;
@@ -10,44 +10,48 @@ QScrollBar:vertical
 
 QScrollBar::handle:vertical
 {
-	width:8px;
+	width:4px;
 	background:rgba(0,0,0,25%);
-	border-radius:4px;
+	border-radius:2px;
 	min-height:20;
 }
 
 QScrollBar::handle:vertical:hover
 {
-	width:8px;
+	width:4px;
 	background:rgba(0,0,0,50%);
-	border-radius:4px;
+	border-radius:2px;
 	min-height:20;
 }
 
 QScrollBar::add-line:vertical
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/3.png);
 	subcontrol-position:bottom;
 }
 
 QScrollBar::sub-line:vertical
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/1.png);
 	subcontrol-position:top;
 }
 
 QScrollBar::add-line:vertical:hover
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/4.png);
 	subcontrol-position:bottom;
 }
 
 QScrollBar::sub-line:vertical:hover
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/2.png);
 	subcontrol-position:top;
 }
@@ -55,13 +59,13 @@ QScrollBar::sub-line:vertical:hover
 QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical
 {
 	background:rgba(0,0,0,10%);
-	border-radius:4px;
+	border-radius:2px;
 }
 
 
 QScrollBar:horizontal
 {
-	width:8px;
+	width:4px;
 	background:rgba(0,0,0,0%);
 	margin:0px,0px,0px,0px;
 	padding-top:9px;
@@ -69,44 +73,48 @@ QScrollBar:horizontal
 }
 QScrollBar::handle:horizontal
 {
-	width:8px;
+	width:4px;
 	background:rgba(0,0,0,25%);
-	border-radius:4px;
+	border-radius:2px;
 	min-height:20;
 }
 QScrollBar::handle:horizontal:hover
 {
-	width:8px;
+	width:4px;
 	background:rgba(0,0,0,50%);
-	border-radius:4px;
+	border-radius:2px;
 	min-height:20;
 }
 QScrollBar::add-line:horizontal
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/3.png);
 	subcontrol-position:bottom;
 }
 QScrollBar::sub-line:horizontal
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/1.png);
 	subcontrol-position:top;
 }
 QScrollBar::add-line:horizontal:hover
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/4.png);
 	subcontrol-position:bottom;
 }
 QScrollBar::sub-line:horizontal:hover
 {
-	height:9px;width:8px;
+	height:9px;
+	width:4px;
 	border-image:url(:/images/a/2.png);
 	subcontrol-position:top;
 }
 QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal
 {
 	background:rgba(0,0,0,10%);
-	border-radius:4px;
+	border-radius:2px;
 }
