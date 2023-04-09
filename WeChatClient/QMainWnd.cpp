@@ -596,7 +596,7 @@ void QMainWnd::requestGroupList()
 void QMainWnd::UpdateBorderArea(QPoint pos)
 {
     m_borderArea = BorderArea::BorderAreaNone;
-    int offset = 20;
+    int offset = 5;
 
     int x = pos.x();
     int y = pos.y();
