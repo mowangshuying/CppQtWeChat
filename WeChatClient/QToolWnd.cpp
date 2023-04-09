@@ -23,21 +23,25 @@ QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_msgBtn = new QPushButton(this);
     m_msgBtn->setFixedSize(30, 30);
     m_msgBtn->setIconSize(QSize(30, 30));
+    m_msgBtn->setToolTip("聊天");
     m_msgBtn->setIcon(QPixmap("./img/msgBtnNormal.png"));
 
     m_contactsBtn = new QPushButton(this);
     m_contactsBtn->setFixedSize(30, 30);
     m_contactsBtn->setIconSize(QSize(30, 30));
+    m_contactsBtn->setToolTip("联系人");
     m_contactsBtn->setIcon(QPixmap("./img/contactsBtnNomal.png"));
 
     m_groupsBtn = new QPushButton(this);
     m_groupsBtn->setFixedSize(30, 30);
     m_groupsBtn->setIconSize(QSize(30, 30));
+    m_groupsBtn->setToolTip("群组");
     m_groupsBtn->setIcon(QPixmap("./img/groupBtnNomal.png"));
 
     m_moreBtn = new QPushButton(this);
     m_moreBtn->setFixedSize(30, 30);
     m_moreBtn->setIconSize(QSize(30, 30));
+    m_moreBtn->setToolTip("更多");
     m_moreBtn->setIcon(QPixmap("./img/tmore.png"));
 
     m_vBoxLayout->setAlignment(Qt::AlignCenter);
