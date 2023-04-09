@@ -15,6 +15,8 @@
 #include "QGroupInfoWnd.h"
 #include "QDealNewFriendsApplyWnd.h"
 #include "./json/CJsonObject.hpp"
+#include <QSystemTrayIcon>
+#include <QMenu>
 
 /*
  * 主窗口窗口只能有一个，将主窗口设置为单例对象
@@ -26,6 +28,8 @@ class QMainWnd : public QWidget
 private:
     //会话窗口
     QMainWnd(QWidget* p = nullptr);
+
+    ~QMainWnd();
 
     enum BorderArea
     {
@@ -78,6 +82,7 @@ public slots:
     void closeWnd();
     void minWnd();
     void maxWnd();
+    void showNormalWnd();
 
     void mouseMoveEvent(QMouseEvent* event);
 
@@ -94,6 +99,8 @@ public slots:
     // void slot_moreBtnClicked();
     // protected:
     //	virtual void paintEvent(QPaintEvent* event);
+    void slot_onSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason);
+
 public:
     QHBoxLayout* m_hLayout;
     QToolWnd* m_toolWnd;
@@ -129,4 +136,10 @@ public:
     QNetworkAccessManager* m_networkMgr;
 
     BorderArea m_borderArea;
+
+    // 系统托盘功能
+    QSystemTrayIcon* m_systemTrayIcon;
+    QMenu* m_systemTrayIconMenu;
+    QAction* m_systemTrayIconExitAction;
+    QAction* m_systemTrayIconShowMainWndAction;
 };

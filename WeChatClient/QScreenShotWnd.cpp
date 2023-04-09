@@ -173,7 +173,7 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
     QPainter painter(this);  //将当前窗体对象设置为画布
     QPen pen;
     pen.setColor(qRgba(26, 255, 25, 1.0));  //设置笔色
-    pen.setWidth(4);                        //画笔线条宽度
+    pen.setWidth(2);                        //画笔线条宽度
     painter.setPen(pen);                    //设置画笔
 
     LogDebug << "screen rect: x = " << m_screenShotRect.x() << ", y = " << m_screenShotRect.y() << ", w = " << m_screenShotRect.width()

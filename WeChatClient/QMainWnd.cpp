@@ -101,11 +101,43 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_networkMgr = new QNetworkAccessManager();
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
 
+    // 系统托盘功能
+    m_systemTrayIcon = new QSystemTrayIcon(this);
+    m_systemTrayIcon->setIcon(QIcon("./img/wechat.ico"));
+    m_systemTrayIcon->setToolTip("QT版微信v2.0.0");
+    m_systemTrayIcon->show();
+
+    m_systemTrayIconMenu = new QMenu();
+    m_systemTrayIconShowMainWndAction = new QAction();
+    m_systemTrayIconShowMainWndAction->setText("打开主面板");
+    m_systemTrayIconMenu->addAction(m_systemTrayIconShowMainWndAction);
+
+    m_systemTrayIconExitAction = new QAction();
+    m_systemTrayIconExitAction->setText("退出");
+    m_systemTrayIconMenu->addAction(m_systemTrayIconExitAction);
+    m_systemTrayIcon->setContextMenu(m_systemTrayIconMenu);
+
+    connect(m_systemTrayIconExitAction, &QAction::triggered, this, &QMainWnd::closeWnd);
+    connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &QMainWnd::showNormalWnd);
+
+    // 托盘功能实现
+    // m_systemTrayIcon->activated
+    // activated(QSystemTrayIcon::ActivationReason reason)
+    // connect(m_systemTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason reason)), this,
+    // SLOT(slot_onSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason)));
+    connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &QMainWnd::slot_onSystemTrayIconClick);
+
     if (objectName().isEmpty())
         setObjectName("QMainWnd");
     setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
     setMinimumSize(800, 600);
     setMouseTracking(true);
+}
+
+QMainWnd::~QMainWnd()
+{
+    // m_systemTrayIcon->hide();
+    // delete m_systemTrayIcon;
 }
 
 void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
@@ -681,6 +713,7 @@ void QMainWnd::UpdateWindowByBorderArea()
 
 void QMainWnd::closeWnd()
 {
+    m_systemTrayIcon->hide();
     qApp->quit();
 }
 
@@ -698,6 +731,14 @@ void QMainWnd::maxWnd()
     else
     {
         showMaximized();
+    }
+}
+
+void QMainWnd::showNormalWnd()
+{
+    if (windowState() == Qt::WindowMinimized)
+    {
+        showNormal();
     }
 }
 
@@ -919,5 +960,46 @@ void QMainWnd::slot_replyFinished(QNetworkReply* reply)
         m_toolWnd->m_headImg = pixmap;
         QDataManager::getInstance()->m_UserId2HeadImgMap[m_userid] = m_toolWnd->m_headImg;
         m_toolWnd->m_headUrlLabel->setPixmap(m_toolWnd->m_headImg);
+    }
+}
+
+void QMainWnd::slot_onSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason)
+    {
+        case QSystemTrayIcon::Unknown:
+        {
+            LogDebug << "unknown message";
+        }
+        break;
+
+        case QSystemTrayIcon::Context:
+        {
+            // 右键菜单
+            LogDebug << "context";
+        }
+        break;
+        case QSystemTrayIcon::DoubleClick:
+        {
+            LogDebug << "double click";
+        }
+        break;
+        case QSystemTrayIcon::Trigger:
+        {
+            // 最小化重新显示窗口
+            if (windowState() == Qt::WindowMinimized)
+            {
+                showNormal();
+            }
+            LogDebug << "trigger";
+        }
+        break;
+        case QSystemTrayIcon::MiddleClick:
+        {
+            LogDebug << "midlle click";
+        }
+        break;
+        default:
+            break;
     }
 }
