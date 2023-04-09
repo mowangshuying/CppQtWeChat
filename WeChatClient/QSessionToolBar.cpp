@@ -26,14 +26,22 @@ QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
     m_screenshotBtn->setIcon(QPixmap("./img/screenshotBtn.png"));
     m_screenshotBtn->setIconSize(QSize(30, 30));
 
+    m_voiceTelphoneBtn = new QPushButton();
+    m_voiceTelphoneBtn->setIcon(QPixmap("./img/voiceTelphoneBtn.png"));
+    m_voiceTelphoneBtn->setIconSize(QSize(30, 30));
+    m_voiceTelphoneBtn->setFixedSize(QSize(30, 30));
+    m_voiceTelphoneBtn->setStyleSheet(" border:2px solid rgb(0,0,0);");
+
     m_emoijWnd = new QEmoijWnd();
     m_emoijWnd->hide();
 
     m_hLayout->addWidget(m_emojiBtn);
     m_hLayout->addWidget(m_sendFileBtn);
     m_hLayout->addWidget(m_screenshotBtn);
-
     m_hLayout->addStretch();
+    m_hLayout->addWidget(m_voiceTelphoneBtn);
+    m_hLayout->addSpacing(15);
+
     connect(m_emojiBtn, SIGNAL(clicked()), this, SLOT(slot_emojiBtnClick()));
     connect(m_screenshotBtn, SIGNAL(clicked()), this, SLOT(slot_screenshotBtnClick()));
 }

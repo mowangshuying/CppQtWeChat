@@ -163,6 +163,7 @@ void QSessionWnd::slot_emoijClicked(QString str)
 {
     QString tempStr = m_sendTextEdit->toPlainText() + str;
     m_sendTextEdit->setText(tempStr);
+    LogDebug << tempStr;
 }
 
 void QSessionWnd::slot_moreBtnClick()

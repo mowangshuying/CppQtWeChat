@@ -18,6 +18,7 @@ public:
     QPushButton* m_emojiBtn;
     QPushButton* m_sendFileBtn;
     QPushButton* m_screenshotBtn;
+    QPushButton* m_voiceTelphoneBtn;
 
     QEmoijWnd* m_emoijWnd;
 };
