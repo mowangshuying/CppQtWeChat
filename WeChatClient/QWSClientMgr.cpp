@@ -106,22 +106,19 @@ void QWSClientMgr::slot_connected()
 {
     LogDebug << "slot_connected()...";
     LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
-
     //向远端服务器发送一个注册消息
-    {
-        neb::CJsonObject json;
-        json.Add("type", "Client");
-        json.Add("cckey", "ccmm00@123456");
-        request("cs_reg_client", json, [this](neb::CJsonObject& msg) { LogDebug << "reg client suc"; });
-    }
-
-    m_bConn = true;
+    neb::CJsonObject json;
+    json.Add("type", "Client");
+    json.Add("cckey", "ccmm00@123456");
+    request("cs_reg_client", json, [this](neb::CJsonObject& msg) {
+        LogDebug << "reg client suc";
+        m_bConn = true;
+    });
 }
 
 void QWSClientMgr::slot_disconnected()
 {
     LogDebug << "slot_disconnected...";
-    // m_webSock->close();
     m_bConn = false;
 }
 
@@ -163,6 +160,7 @@ void QWSClientMgr::slot_recvMsg(const QString& message)
             LogDebug << "can not find cmd in slot_recvMsg";
             return;
         }
+
         onNetMsgDo(cmd, json);
         return;
     }

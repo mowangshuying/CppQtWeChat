@@ -22,14 +22,14 @@ public slots:
     void slotExitSccreenShot();
 
 protected:
-    void showEvent(QShowEvent*);
-    void mousePressEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
-    void mouseReleaseEvent(QMouseEvent* event);
-    void paintEvent(QPaintEvent* event);
+    void showEvent(QShowEvent*) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    void paintEvent(QPaintEvent* event) override;
 
-    void contextMenuEvent(QContextMenuEvent*);  //--右键菜单事件
-    void keyPressEvent(QKeyEvent* e);           //--按键事件
+    void contextMenuEvent(QContextMenuEvent*) override;  //--右键菜单事件
+    void keyPressEvent(QKeyEvent* e) override;           //--按键事件
 public:
 public:
     QPixmap m_fullScreenPixmap;

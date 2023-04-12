@@ -96,6 +96,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     connect(m_sesToolBar->m_emoijWnd, SIGNAL(signal_emoijClicked(QString)), this, SLOT(slot_emoijClicked(QString)));
     connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slot_moreBtnClick()));
+    connect(m_sesToolBar->m_voiceTelphoneBtn, &QPushButton::clicked, this, &QSessionWnd::slotVoiceTelPhoneBtnClick);
 }
 
 void QSessionWnd::slot_sendTextBtnClick()
@@ -257,6 +258,20 @@ void QSessionWnd::slot_moreBtnClick()
     m_groupInfoWnd->show();
 }
 
+void QSessionWnd::slotVoiceTelPhoneBtnClick()
+{
+    QMainWnd* mainWnd = QMainWnd::getInstance();
+    QVoiceTelphoneWnd* telphoneWnd = mainWnd->m_voiceTelphoneWnd;
+    telphoneWnd->setRecvIdAndSesId(m_recvId, m_sesId);
+    if (telphoneWnd->windowState() == Qt::WindowMinimized)
+    {
+        telphoneWnd->showNormal();
+    }
+    telphoneWnd->show();
+    telphoneWnd->activateWindow();
+    telphoneWnd->callPhone();
+}
+
 void QSessionWnd::dragEnterEvent(QDragEnterEvent* event)
 {
     LogDebug << "dragEnterEvent";
@@ -271,106 +286,107 @@ void QSessionWnd::dropEvent(QDropEvent* event)
     QString strFileName = qm->urls()[0].toLocalFile();
     LogDebug << "strFileName:" << strFileName;
     //判断是否是支持的文件
-    QFileInfo fileinfo = QFileInfo(strFileName);
+    QFileInfo fileInfo = QFileInfo(strFileName);
 
-    if (!fileinfo.isDir())
+    if (fileInfo.isDir())
     {
-        //获取文件名
-        QString filename = fileinfo.fileName();
-        QString filepath = fileinfo.filePath();
-
-        //获取文件后缀名
-        QString suffix = fileinfo.suffix();
-        //获取文件大小
-        float size = fileinfo.size() * 100 / 1024 * 0.01;
-        LogDebug << "filename:" << filename << "suffix:" << suffix << "size:" << size << "kb";
-
-        QString sizeStr;
-        if (size < 1024)
-        {
-            sizeStr = QString("%1 K").arg(size);
-        }
-        else
-        {
-            size = fileinfo.size() * 100 / (1024 * 1024) * 0.01;
-            sizeStr = QString("%1 M").arg(size);
-        }
-
-        //{//这是用于测试的，以后要删除掉
-        QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, QMainWnd::getInstance()->m_userid, m_recvId);
-        fileWnd->m_innerWnd->m_fileName->setText(filename);
-        fileWnd->m_innerWnd->m_fileSize->setText(sizeStr);
-        // fileWnd->m_innerWnd->m_fileDir = strFileName;
-        fileWnd->m_innerWnd->m_fileFullDir = fileinfo.absolutePath();
-        fileWnd->m_innerWnd->m_fileFullpath = fileinfo.absoluteFilePath();
-        fileWnd->m_innerWnd->sendFileShow();
-
-        fileWnd->setFixedWidth(m_MsgWndList->width());
-        QListWidgetItem* fileItem = new QListWidgetItem(m_MsgWndList);
-        QSize filesize(fileWnd->width(), 100 + 20);
-        fileItem->setSizeHint(filesize);
-        m_MsgWndList->setItemWidget(fileItem, fileWnd);
-        //}
-
-        QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
-        QNetworkRequest request;
-        request.setUrl(QUrl("http://139.9.93.17:8081/upload"));
-        QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
-        QHttpPart part;
-
-        QDateTime current_date_time = QDateTime::currentDateTime();
-        QString current_date = current_date_time.toString("yyyy_MM_dd_hh_mm_ss_zzz_");
-        QString uploadfilestr = QString("form-data;name=\"file\";filename=\"%1_%2_%3\"").arg(QMainWnd::getInstance()->m_userid).arg(current_date).arg(filename);
-        QString uploadfilestr2 = QString("%1_%2_%3").arg(QMainWnd::getInstance()->m_userid).arg(current_date).arg(filename);
-        part.setHeader(QNetworkRequest::ContentDispositionHeader, uploadfilestr);
-
-        QFile* file = new QFile(strFileName);
-        file->open(QFile::ReadOnly);
-        part.setBodyDevice(file);
-        file->setParent(multiPart);
-        multiPart->append(part);
-        QNetworkReply* reply = pManager->post(request, multiPart);
-
-        connect(reply, &QNetworkReply::uploadProgress, this, [this, fileWnd, uploadfilestr2, sizeStr, filename](qint64 x, qint64 y) {
-            if (y != 0)
-            {
-                fileWnd->m_innerWnd->m_progressBar->setMinimum(0);
-                fileWnd->m_innerWnd->m_progressBar->setMaximum(y);
-                fileWnd->m_innerWnd->m_progressBar->setValue(x);
-            }
-        });
-
-        connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, uploadfilestr2, sizeStr, filename](QNetworkReply* reply) {
-            // 获取响应信息
-            QByteArray bytes = reply->readAll();
-            std::string str = bytes.toStdString();
-            int i = 0;
-            fileWnd->m_innerWnd->m_sendState->setText("已发送");
-            neb::CJsonObject json;
-            json.Add("sendid", QMainWnd::getInstance()->m_userid);
-            json.Add("recvid", m_recvId);
-            json.Add("sesid", m_sesId);
-            json.Add("msgtype", 1);
-
-            neb::CJsonObject filejson;
-            filejson.Add("filename_server", str);
-            filejson.Add("filename_client", filename.toStdString());
-            filejson.Add("filesize", sizeStr.toStdString());
-            json.Add("msgtext", filejson.ToString());
-
-            QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) {
-                LogDebug << "after upload file recv msg from server!";
-            });
-        });
+        LogDebug << "is dir";
+        return;
     }
+
+    //获取文件名
+    QString filename = fileInfo.fileName();
+    QString filepath = fileInfo.filePath();
+
+    //获取文件后缀名
+    QString suffix = fileInfo.suffix();
+    //获取文件大小
+    float size = fileInfo.size() * 100 / 1024 * 0.01;
+    LogDebug << "filename:" << filename << "suffix:" << suffix << "size:" << size << "kb";
+
+    QString sizeStr;
+    if (size < 1024)
+    {
+        sizeStr = QString("%1 K").arg(size);
+    }
+    else
+    {
+        size = fileInfo.size() * 100 / (1024 * 1024) * 0.01;
+        sizeStr = QString("%1 M").arg(size);
+    }
+
+    QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, QMainWnd::getInstance()->m_userid, m_recvId);
+    fileWnd->m_innerWnd->m_fileName->setText(filename);
+    fileWnd->m_innerWnd->m_fileSize->setText(sizeStr);
+    fileWnd->m_innerWnd->m_fileFullDir = fileInfo.absolutePath();
+    fileWnd->m_innerWnd->m_fileFullpath = fileInfo.absoluteFilePath();
+    fileWnd->m_innerWnd->sendFileShow();
+    fileWnd->setFixedWidth(m_MsgWndList->width());
+
+    QListWidgetItem* fileItem = new QListWidgetItem(m_MsgWndList);
+    QSize filesize(fileWnd->width(), 120);
+    fileItem->setSizeHint(filesize);
+    m_MsgWndList->setItemWidget(fileItem, fileWnd);
+
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+    QString currentDate = currentDateTime.toString("yyyy_MM_dd_hh_mm_ss_zzz_");
+    QString httpHeader = QString("form-data;name=\"file\";filename=\"%1_%2_%3\"").arg(QMainWnd::getInstance()->m_userid).arg(currentDate).arg(filename);
+    QString fileNameStr = QString("%1_%2_%3").arg(QMainWnd::getInstance()->m_userid).arg(currentDate).arg(filename);
+
+    // 文件名
+    QFile* file = new QFile(strFileName);
+    file->open(QFile::ReadOnly);
+
+    QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://139.9.93.17:8081/upload"));
+    QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
+    QHttpPart part;
+    part.setHeader(QNetworkRequest::ContentDispositionHeader, httpHeader);
+    part.setBodyDevice(file);
+    file->setParent(multiPart);
+    multiPart->append(part);
+    QNetworkReply* reply = pManager->post(request, multiPart);
+
+    connect(reply, &QNetworkReply::uploadProgress, this, [this, fileWnd, fileNameStr, sizeStr, filename](qint64 x, qint64 y) {
+        if (y != 0)
+        {
+            fileWnd->m_innerWnd->m_progressBar->setMinimum(0);
+            fileWnd->m_innerWnd->m_progressBar->setMaximum(y);
+            fileWnd->m_innerWnd->m_progressBar->setValue(x);
+        }
+    });
+
+    connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, fileNameStr, sizeStr, filename](QNetworkReply* reply) {
+        // 获取响应信息
+        QByteArray bytes = reply->readAll();
+        std::string str = bytes.toStdString();
+        int i = 0;
+        fileWnd->m_innerWnd->m_sendState->setText("已发送");
+
+        neb::CJsonObject json;
+        json.Add("sendid", QMainWnd::getInstance()->m_userid);
+        json.Add("recvid", m_recvId);
+        json.Add("sesid", m_sesId);
+        json.Add("msgtype", 1);
+        neb::CJsonObject filejson;
+        filejson.Add("filename_server", str);
+        filejson.Add("filename_client", filename.toStdString());
+        filejson.Add("filesize", sizeStr.toStdString());
+        json.Add("msgtext", filejson.ToString());
+
+        QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogDebug << "after upload file recv msg from server!"; });
+    });
 }
 
 void QSessionWnd::resizeEvent(QResizeEvent* event)
 {
-    if (m_groupInfoWnd != nullptr)
+    if (m_groupInfoWnd == nullptr)
     {
-        int nTempHeight = height() - m_sesTopWnd->height();
-        m_groupInfoWnd->setMinimumHeight(nTempHeight);
-        m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
+        return;
     }
+
+    int nTempHeight = height() - m_sesTopWnd->height();
+    m_groupInfoWnd->setMinimumHeight(nTempHeight);
+    m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
 }

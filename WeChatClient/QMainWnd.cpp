@@ -121,10 +121,6 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &QMainWnd::showNormalWnd);
 
     // 托盘功能实现
-    // m_systemTrayIcon->activated
-    // activated(QSystemTrayIcon::ActivationReason reason)
-    // connect(m_systemTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason reason)), this,
-    // SLOT(slot_onSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason)));
     connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &QMainWnd::slot_onSystemTrayIconClick);
 
     if (objectName().isEmpty())
@@ -132,6 +128,9 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
     setMinimumSize(800, 600);
     setMouseTracking(true);
+
+    m_voiceTelphoneWnd = new QVoiceTelphoneWnd();
+    m_voiceTelphoneWnd->hide();
 }
 
 QMainWnd::~QMainWnd()
@@ -193,76 +192,89 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         }
     }
 
-    if (ses != nullptr)
+    if (ses == nullptr)
     {
-        if (msgtype == 0)
-        {
-            //向会话中嵌入一条数据；
-            QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-            QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, recvid);
-            QListWidgetItem* msgItem = new QListWidgetItem(ses->m_MsgWndList);
-            msgWnd->setFixedWidth(640);
-            QSize msgSize = msgWnd->fontRect(msgtext.c_str());
-
-            //
-
-            msgItem->setSizeHint(msgSize);
-            //会设置消息并调用相应的
-            msgWnd->setText(msgtext.c_str(), time, msgSize, QChatMsgWnd::ChatMsg_Other);
-            //关联项与窗口
-            ses->m_MsgWndList->setItemWidget(msgItem, msgWnd);
-        }
-
-        if (msgtype == 1)
-        {
-            neb::CJsonObject json;
-            if (!json.Parse(msgtext))
-            {
-                return;
-            }
-
-            std::string filename_server = "";
-            std::string filename_client = "";
-            std::string filesize = "";
-
-            if (!json.Get("filename_server", filename_server))
-            {
-                return;
-            }
-
-            if (!json.Get("filename_client", filename_client))
-            {
-                return;
-            }
-
-            if (!json.Get("filesize", filesize))
-            {
-                return;
-            }
-
-            ////接收端是一个文件
-            QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, sendid, recvid);
-            fileWnd->m_innerWnd->m_fileName->setText(filename_client.c_str());
-            fileWnd->m_innerWnd->m_fileSize->setText(filesize.c_str());
-            fileWnd->m_innerWnd->m_sendState->setText("等待下载...");
-            fileWnd->m_innerWnd->m_serveFilePath = filename_server.c_str();
-            fileWnd->m_innerWnd->recvFileShow();
-            //
-
-            fileWnd->setFixedWidth(ses->m_MsgWndList->width());
-            QListWidgetItem* fileItem = new QListWidgetItem(ses->m_MsgWndList);
-            QSize fileWndSize(fileWnd->width(), 100 + 20);
-            fileItem->setSizeHint(fileWndSize);
-            ses->m_MsgWndList->setItemWidget(fileItem, fileWnd);
-        }
-
-        ses->m_MsgWndList->scrollToBottom();
+        LogDebug << "can not find ses sesId:" << sesid;
+        return;
     }
+
+    // 发送消息
+    if (msgtype == 0)
+    {
+        //向会话中嵌入一条数据；
+        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+        QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, recvid);
+        QListWidgetItem* msgItem = new QListWidgetItem(ses->m_MsgWndList);
+        msgWnd->setFixedWidth(640);
+        QSize msgSize = msgWnd->fontRect(msgtext.c_str());
+        msgItem->setSizeHint(msgSize);
+        //会设置消息并调用相应的
+        msgWnd->setText(msgtext.c_str(), time, msgSize, QChatMsgWnd::ChatMsg_Other);
+        //关联项与窗口
+        ses->m_MsgWndList->setItemWidget(msgItem, msgWnd);
+        return;
+    }
+
+    // 发送文件
+    if (msgtype == 1)
+    {
+        neb::CJsonObject json;
+        if (!json.Parse(msgtext))
+        {
+            return;
+        }
+
+        std::string filename_server = "";
+        std::string filename_client = "";
+        std::string filesize = "";
+
+        if (!json.Get("filename_server", filename_server))
+        {
+            return;
+        }
+
+        if (!json.Get("filename_client", filename_client))
+        {
+            return;
+        }
+
+        if (!json.Get("filesize", filesize))
+        {
+            return;
+        }
+
+        ////接收端是一个文件
+        QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, sendid, recvid);
+        fileWnd->m_innerWnd->m_fileName->setText(filename_client.c_str());
+        fileWnd->m_innerWnd->m_fileSize->setText(filesize.c_str());
+        fileWnd->m_innerWnd->m_sendState->setText("等待下载...");
+        fileWnd->m_innerWnd->m_serveFilePath = filename_server.c_str();
+        fileWnd->m_innerWnd->recvFileShow();
+
+        fileWnd->setFixedWidth(ses->m_MsgWndList->width());
+        QListWidgetItem* fileItem = new QListWidgetItem(ses->m_MsgWndList);
+        QSize fileWndSize(fileWnd->width(), 100 + 20);
+        fileItem->setSizeHint(fileWndSize);
+        ses->m_MsgWndList->setItemWidget(fileItem, fileWnd);
+    }
+
+    // 发送语音通话的消息
+    if (msgtype == 2)
+    {
+        // 收到语音通话消息，存入m_phoneWnd
+        QString qMsgText = msgtext.c_str();
+        QByteArray byteArray = QByteArray::fromBase64(qMsgText.toUtf8());
+        if (ses->m_sesToolBar->m_phoneWnd != nullptr)
+        {
+            ses->m_sesToolBar->m_phoneWnd->m_ByteArrayVct.push_back(byteArray);
+        }
+    }
+
+    ses->m_MsgWndList->scrollToBottom();
 }
 
 void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
 {
-    // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
     //首先获取对应的会话id；
     int sesid = -1;
     if (!msg["data"].Get("sesid", sesid))
@@ -757,10 +769,10 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
     }
 
     // 鼠标移动的调试信息
-     LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
-     LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
-     LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
-     LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
+    LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
+    LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
+    LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
+    LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
 
     if (m_borderArea == BorderArea::BorderAreaNone)
     {

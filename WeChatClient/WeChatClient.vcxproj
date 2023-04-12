@@ -51,7 +51,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
     <QtInstall>msvc2017</QtInstall>
-    <QtModules>core;network;gui;widgets;websockets</QtModules>
+    <QtModules>core;network;gui;multimedia;widgets;websockets;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
@@ -66,7 +66,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="QtSettings">
     <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>network;gui;widgets;websockets;</QtModules>
+    <QtModules>network;gui;multimedia;widgets;websockets;multimediawidgets;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -208,6 +208,7 @@
     <ClCompile Include="QSwitchButton.cpp" />
     <ClCompile Include="QToolWnd.cpp" />
     <ClCompile Include="QUserInfoWnd.cpp" />
+    <ClCompile Include="QVoiceTelphoneWnd.cpp" />
     <ClCompile Include="QWSClientMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +260,7 @@
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="json\CJsonObject.hpp" />
     <ClInclude Include="QPch.h" />
+    <QtMoc Include="QVoiceTelphoneWnd.h" />
     <QtMoc Include="QScreenShotToolBarWnd.h" />
     <QtMoc Include="QSelectMoreWnd.h" />
     <QtMoc Include="QEditLabel.h" />

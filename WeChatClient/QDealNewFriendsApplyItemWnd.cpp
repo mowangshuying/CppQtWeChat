@@ -129,8 +129,6 @@ void QDealNewFriendsApplyItemWnd::slot_onRefuseBtnClick()
     json.Add("applyid", m_id);
     json.Add("applystate", 2);
     QWSClientMgr::getInstance()->request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
-        //
-        // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
         m_AgreeBtn->setText("ря╬э╬Ь");
         m_AgreeBtn->setEnabled(false);
         m_refuseBtn->hide();

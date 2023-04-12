@@ -4,6 +4,8 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include "QEmoijWnd.h"
+#include "QVoiceTelphoneWnd.h"
+
 class QSessionToolBar : public QWidget
 {
     Q_OBJECT
@@ -21,4 +23,5 @@ public:
     QPushButton* m_voiceTelphoneBtn;
 
     QEmoijWnd* m_emoijWnd;
+    QVoiceTelphoneWnd* m_phoneWnd;
 };

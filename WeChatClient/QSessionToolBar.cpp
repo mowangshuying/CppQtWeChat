@@ -5,6 +5,7 @@
 #include "QScreenShotWnd.h"
 #include <QDebug>
 #include <QScreen>
+#include "QVoiceTelphoneWnd.h"
 
 QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
 {

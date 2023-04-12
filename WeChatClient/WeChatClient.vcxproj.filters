@@ -152,6 +152,9 @@
     <ClCompile Include="QScreenShotToolBarWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QVoiceTelphoneWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QWSClientMgr.h">
@@ -269,6 +272,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QScreenShotToolBarWnd.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QVoiceTelphoneWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

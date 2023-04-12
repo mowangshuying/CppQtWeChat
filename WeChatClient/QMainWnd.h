@@ -17,6 +17,7 @@
 #include "./json/CJsonObject.hpp"
 #include <QSystemTrayIcon>
 #include <QMenu>
+#include "QVoiceTelphoneWnd.h"
 
 /*
  * 主窗口窗口只能有一个，将主窗口设置为单例对象
@@ -142,4 +143,6 @@ public:
     QMenu* m_systemTrayIconMenu;
     QAction* m_systemTrayIconExitAction;
     QAction* m_systemTrayIconShowMainWndAction;
+
+    QVoiceTelphoneWnd* m_voiceTelphoneWnd;
 };

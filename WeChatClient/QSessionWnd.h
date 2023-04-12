@@ -29,6 +29,7 @@ public slots:
     void slot_sendTextBtnClick();
     void slot_emoijClicked(QString str);
     void slot_moreBtnClick();
+    void slotVoiceTelPhoneBtnClick();
 
 protected:
     void dragEnterEvent(QDragEnterEvent* event);
