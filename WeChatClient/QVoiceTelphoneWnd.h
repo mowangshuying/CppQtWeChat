@@ -61,6 +61,7 @@ public:
     void cs_msg_call_phone(neb::CJsonObject& msg);
     void cs_msg_accept_phone(neb::CJsonObject& msg);
     void cs_msg_phonemsg(neb::CJsonObject& msg);
+    void cs_msg_close_phone(neb::CJsonObject& msg);
 public slots:
     void slotOnAcceptBtnClick();
     void slotOnRefuseBtnClick();

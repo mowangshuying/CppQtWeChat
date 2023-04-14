@@ -55,9 +55,9 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
     m_refuseBtn->setGeometry(width() / 2 - 21, 500, 42, 42);
 
     // 媒体相关
-    m_format.setSampleRate(8000);                       //设置采样率
+    m_format.setSampleRate(16000);                      //设置采样率
     m_format.setChannelCount(1);                        //设定声道数目，mono(平声道)的声道数目是1；stero(立体声)的声道数目是2
-    m_format.setSampleSize(8);                          //设置采样大小
+    m_format.setSampleSize(16);                         //设置采样大小
     m_format.setCodec("audio/pcm");                     //设置编码器，"audio/pcm"在所有的平台都支持
     m_format.setSampleType(QAudioFormat::SignedInt);    //设置采样类型
     m_format.setByteOrder(QAudioFormat::LittleEndian);  //设定高低位的，LittleEndian（低位优先）/LargeEndian(高位优先)
@@ -83,6 +83,8 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_accept_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_accept_phone, this, std::placeholders::_1));
     // cs_msg_phonemsg
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_phonemsg", std::bind(&QVoiceTelphoneWnd::cs_msg_phonemsg, this, std::placeholders::_1));
+    // cs_msg_close_phone
+    QWSClientMgr::getInstance()->regMsgCall("cs_msg_close_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_close_phone, this, std::placeholders::_1));
 }
 
 void QVoiceTelphoneWnd::timerEvent(QTimerEvent* event)
@@ -106,7 +108,7 @@ void QVoiceTelphoneWnd::playAudioFormByteArrayVct()
     // 播放m_ByteArrayVct的数据
     if (m_ByteArrayVct.isEmpty())
     {
-        LogDebug << "m_ByteArrayVct is empty!";
+        // LogDebug << "m_ByteArrayVct is empty!";
         return;
     }
 
@@ -130,10 +132,12 @@ void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
     std::string msgText = inputByteArray.toBase64().toStdString();
     json.Add("msgtext", msgText);
 
-    LogDebug << "intputByteArray:" << inputByteArray.length() << "msgtext:" << msgText.length() << "json:" << json.ToString().length();
+    // LogDebug << "intputByteArray:" << inputByteArray.length() << "msgtext:" << msgText.length() << "json:" << json.ToString().length();
+
+    // 不请求消息
     QWSClientMgr::getInstance()->request("cs_msg_phonemsg", json, [](neb::CJsonObject& msg) {
         //向远端发送消息
-        LogDebug << "send msg suc!";
+        // LogDebug << "send msg suc!";
     });
 }
 
@@ -157,7 +161,9 @@ void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
         LogDebug << "accept phone";
         m_bells->stop();  // 停止振铃
         m_state = VoiceTelphoneState::VTS_phoning;
-        m_timerId = startTimer(10);
+        m_timerId = startTimer(30);
+        m_acceptBtn->hide();
+        m_refuseBtn->show();
     });
 }
 
@@ -167,9 +173,8 @@ void QVoiceTelphoneWnd::requestSendClosePhoneToServer()
     json.Add("sendid", QMainWnd::getInstance()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
-    QWSClientMgr::getInstance()->request("cs_close_phone", json, [=](neb::CJsonObject& msg) {
-        m_bells->stop();  // 停止振铃
-        m_state = VoiceTelphoneState::VTS_close;
+    QWSClientMgr::getInstance()->request("cs_msg_close_phone", json, [=](neb::CJsonObject& msg) {
+        closePhone();  //
     });
 }
 
@@ -261,8 +266,10 @@ void QVoiceTelphoneWnd::cs_msg_accept_phone(neb::CJsonObject& msg)
 
     setRecvIdAndSesId(sendid, sesid);
     m_bells->stop();
-    m_timerId = startTimer(10);
     m_state = VoiceTelphoneState::VTS_phoning;
+    m_timerId = startTimer(30);
+    m_refuseBtn->show();
+    m_acceptBtn->hide();
 }
 
 void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
@@ -298,6 +305,12 @@ void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
     m_ByteArrayVct.push_back(byteArray);
 }
 
+void QVoiceTelphoneWnd::cs_msg_close_phone(neb::CJsonObject& msg)
+{
+    // slotOnRefuseBtnClick();
+    closePhone();
+}
+
 void QVoiceTelphoneWnd::slotOnAcceptBtnClick()
 {
     LogDebug << "called";
@@ -306,5 +319,6 @@ void QVoiceTelphoneWnd::slotOnAcceptBtnClick()
 
 void QVoiceTelphoneWnd::slotOnRefuseBtnClick()
 {
-    closePhone();
+    // closePhone();
+    requestSendClosePhoneToServer();
 }

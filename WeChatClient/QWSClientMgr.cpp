@@ -125,7 +125,7 @@ void QWSClientMgr::slot_disconnected()
 
 void QWSClientMgr::slot_recvMsg(const QString& message)
 {
-    LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
+    // LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
     neb::CJsonObject json;
     if (!json.Parse(message.toStdString()))
     {
@@ -180,6 +180,7 @@ void QWSClientMgr::slot_timer()
     if (!m_bConn)
     {
         m_webSock->open(QUrl("ws://49.232.169.205:5000"));
+        // m_webSock->open(QUrl("ws://127.0.0.1:5000"));
         LogDebug << "Retry to connect server";
     }
 }
