@@ -3,6 +3,7 @@
 #include "json/CJsonObject.hpp"
 #include "QMainWnd.h"
 #include <QThread>
+#include <functional>
 
 QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
 {
@@ -76,12 +77,17 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
     connect(m_refuseBtn, &QPushButton::clicked, this, &QVoiceTelphoneWnd::slotOnRefuseBtnClick);
     m_bells = new QSound("./music/callPhone.wav");
     m_bells->setLoops(10);
+
+    QWSClientMgr::getInstance()->regMsgCall("cs_msg_call_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_call_phone, this, std::placeholders::_1));
+    // cs_msg_accept_phone
+    QWSClientMgr::getInstance()->regMsgCall("cs_msg_accept_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_accept_phone, this, std::placeholders::_1));
+    // cs_msg_phonemsg
+    QWSClientMgr::getInstance()->regMsgCall("cs_msg_phonemsg", std::bind(&QVoiceTelphoneWnd::cs_msg_phonemsg, this, std::placeholders::_1));
 }
 
 void QVoiceTelphoneWnd::timerEvent(QTimerEvent* event)
 {
-    LogDebug << "called";
-
+    // LogDebug << "called";
     // 读取所有语音数据并发送到服务器
     QByteArray inputByteArray = m_inputDevice->readAll();
     requestSendVoiceDataToServer(inputByteArray);
@@ -92,6 +98,11 @@ void QVoiceTelphoneWnd::timerEvent(QTimerEvent* event)
 
 void QVoiceTelphoneWnd::playAudioFormByteArrayVct()
 {
+    if (VoiceTelphoneState::VTS_phoning != m_state)
+    {
+        return;
+    }
+
     // 播放m_ByteArrayVct的数据
     if (m_ByteArrayVct.isEmpty())
     {
@@ -106,23 +117,60 @@ void QVoiceTelphoneWnd::playAudioFormByteArrayVct()
 
 void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
 {
+    // 只有在打电话时候才发送采集到的消息给服务器
+    if (VoiceTelphoneState::VTS_phoning != m_state)
+    {
+        return;
+    }
+
     neb::CJsonObject json;
     json.Add("sendid", QMainWnd::getInstance()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
     std::string msgText = inputByteArray.toBase64().toStdString();
     json.Add("msgtext", msgText);
-    json.Add("msgtype", 2);
 
     LogDebug << "intputByteArray:" << inputByteArray.length() << "msgtext:" << msgText.length() << "json:" << json.ToString().length();
-    QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [](neb::CJsonObject& msg) {
+    QWSClientMgr::getInstance()->request("cs_msg_phonemsg", json, [](neb::CJsonObject& msg) {
         //向远端发送消息
         LogDebug << "send msg suc!";
     });
 }
 
-void QVoiceTelphoneWnd::cs_msg_sendvoicemsg(neb::CJsonObject& json)
+void QVoiceTelphoneWnd::requestSendCallPhoneToServer()
 {
+    // cs_call_phone
+    neb::CJsonObject json;
+    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("recvid", m_recvId);
+    json.Add("sesid", m_sesId);
+    QWSClientMgr::getInstance()->request("cs_msg_call_phone", json, [=](neb::CJsonObject& msg) { LogDebug << "recv cs_msg_call_phone"; });
+}
+
+void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
+{
+    neb::CJsonObject json;
+    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("recvid", m_recvId);
+    json.Add("sesid", m_sesId);
+    QWSClientMgr::getInstance()->request("cs_msg_accept_phone", json, [=](neb::CJsonObject& msg) {
+        LogDebug << "accept phone";
+        m_bells->stop();  // 停止振铃
+        m_state = VoiceTelphoneState::VTS_phoning;
+        m_timerId = startTimer(10);
+    });
+}
+
+void QVoiceTelphoneWnd::requestSendClosePhoneToServer()
+{
+    neb::CJsonObject json;
+    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("recvid", m_recvId);
+    json.Add("sesid", m_sesId);
+    QWSClientMgr::getInstance()->request("cs_close_phone", json, [=](neb::CJsonObject& msg) {
+        m_bells->stop();  // 停止振铃
+        m_state = VoiceTelphoneState::VTS_close;
+    });
 }
 
 void QVoiceTelphoneWnd::setRecvIdAndSesId(int64_t recvId, int64_t sesId)
@@ -137,6 +185,7 @@ void QVoiceTelphoneWnd::callPhone()
     m_state = VoiceTelphoneState::VTS_call;
     m_acceptBtn->hide();
     m_bells->play();
+    requestSendCallPhoneToServer();
     m_state = VoiceTelphoneState::VTS_waitAccept;
 }
 
@@ -157,13 +206,102 @@ void QVoiceTelphoneWnd::acceptPhone()
     // cs_accept_phone
     // 向远端发送请求，请求接听电话
     // 远端返回后，关闭振铃
+    requestSendAcceptPhoneToServer();
+}
+
+void QVoiceTelphoneWnd::cs_msg_call_phone(neb::CJsonObject& msg)
+{
+    LogDebug << msg.ToString().c_str();
+
+    int sesid = -1;
+    if (!msg["data"].Get("sesid", sesid))
+    {
+        return;
+    }
+
+    int64_t sendid = -1;
+    if (!msg["data"].Get("sendid", sendid))
+    {
+        return;
+    }
+
+    int64_t recvid = -1;
+    if (!msg["data"].Get("recvid", recvid))
+    {
+        return;
+    }
+
+    setRecvIdAndSesId(sendid, sesid);
+    show();
+    m_bells->play();
+    m_refuseBtn->hide();
+}
+
+void QVoiceTelphoneWnd::cs_msg_accept_phone(neb::CJsonObject& msg)
+{
+    LogDebug << "called";
+    // 关闭铃声
+    int sesid = -1;
+    if (!msg["data"].Get("sesid", sesid))
+    {
+        return;
+    }
+
+    int64_t sendid = -1;
+    if (!msg["data"].Get("sendid", sendid))
+    {
+        return;
+    }
+
+    int64_t recvid = -1;
+    if (!msg["data"].Get("recvid", recvid))
+    {
+        return;
+    }
+
+    setRecvIdAndSesId(sendid, sesid);
+    m_bells->stop();
+    m_timerId = startTimer(10);
+    m_state = VoiceTelphoneState::VTS_phoning;
+}
+
+void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
+{
+    // 接收到远端的消息后，将消息存入m_ByteArrayVct
+    int sesid = -1;
+    if (!msg["data"].Get("sesid", sesid))
+    {
+        return;
+    }
+
+    std::string msgtext = "";
+    if (!msg["data"].Get("msgtext", msgtext))
+    {
+        return;
+    }
+
+    int64_t sendid = -1;
+    if (!msg["data"].Get("sendid", sendid))
+    {
+        return;
+    }
+
+    int64_t recvid = -1;
+    if (!msg["data"].Get("sendid", recvid))
+    {
+        return;
+    }
+
+    // 收到语音通话消息，存入m_phoneWnd
+    QString qMsgText = msgtext.c_str();
+    QByteArray byteArray = QByteArray::fromBase64(qMsgText.toUtf8());
+    m_ByteArrayVct.push_back(byteArray);
 }
 
 void QVoiceTelphoneWnd::slotOnAcceptBtnClick()
 {
     LogDebug << "called";
-    m_timerId = startTimer(10);
-    // m_bells->play();
+    acceptPhone();
 }
 
 void QVoiceTelphoneWnd::slotOnRefuseBtnClick()

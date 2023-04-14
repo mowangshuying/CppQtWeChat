@@ -258,18 +258,6 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         ses->m_MsgWndList->setItemWidget(fileItem, fileWnd);
     }
 
-    // 发送语音通话的消息
-    if (msgtype == 2)
-    {
-        // 收到语音通话消息，存入m_phoneWnd
-        QString qMsgText = msgtext.c_str();
-        QByteArray byteArray = QByteArray::fromBase64(qMsgText.toUtf8());
-        if (ses->m_sesToolBar->m_phoneWnd != nullptr)
-        {
-            ses->m_sesToolBar->m_phoneWnd->m_ByteArrayVct.push_back(byteArray);
-        }
-    }
-
     ses->m_MsgWndList->scrollToBottom();
 }
 
@@ -769,10 +757,10 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
     }
 
     // 鼠标移动的调试信息
-    LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
-    LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
-    LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
-    LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
+    // LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
+    // LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
+    // LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
+    // LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
 
     if (m_borderArea == BorderArea::BorderAreaNone)
     {

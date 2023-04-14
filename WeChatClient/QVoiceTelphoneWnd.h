@@ -19,12 +19,12 @@ class QVoiceTelphoneWnd : public QWidget
 public:
     enum class VoiceTelphoneState
     {
-        VTS_none = 0, // 初始状态
-        VTS_call, // 打电话
+        VTS_none = 0,    // 初始状态
+        VTS_call,        // 打电话
         VTS_waitAccept,  // 等待接听
-        VTS_accept, // 接听电话
-        VTS_phoning, //通话中
-        VTS_close, // 挂断电话
+        VTS_accept,      // 接听电话
+        VTS_phoning,     //通话中
+        VTS_close,       // 挂断电话
     };
 
 public:
@@ -34,7 +34,15 @@ public:
 
     void playAudioFormByteArrayVct();
 
+    // 采集语音并发送到服务器，服务器再进行转发
     void requestSendVoiceDataToServer(QByteArray& inputByteArray);
+
+    //
+    void requestSendCallPhoneToServer();
+
+    void requestSendAcceptPhoneToServer();
+
+    void requestSendClosePhoneToServer();
 
     //接收到别人发送的消息
     void cs_msg_sendvoicemsg(neb::CJsonObject& json);
@@ -49,6 +57,10 @@ public:
     // 接听电话
     void acceptPhone();
     // cs_msg_phonemsg
+
+    void cs_msg_call_phone(neb::CJsonObject& msg);
+    void cs_msg_accept_phone(neb::CJsonObject& msg);
+    void cs_msg_phonemsg(neb::CJsonObject& msg);
 public slots:
     void slotOnAcceptBtnClick();
     void slotOnRefuseBtnClick();
@@ -73,7 +85,7 @@ public:
     QVector<QByteArray> m_ByteArrayVct;
 
     QSound* m_bells;
-    
+
     int64_t m_recvId = -1;
     int64_t m_sesId = -1;
 

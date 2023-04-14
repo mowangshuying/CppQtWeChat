@@ -93,6 +93,7 @@ void QWSClientMgr::onNetMsgDo(int64 msgId, neb::CJsonObject& msgJson)
 void QWSClientMgr::onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson)
 {
     QString qcmdStr = cmd.c_str();
+    LogDebug << "cmd:" << qcmdStr;
     auto itf = m_Msg2CallbackMap.find(qcmdStr);
     if (itf != m_Msg2CallbackMap.end())
     {
