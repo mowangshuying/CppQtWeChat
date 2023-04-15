@@ -177,7 +177,6 @@
     <ClCompile Include="QGroupFriendsWnd.cpp" />
     <ClCompile Include="QGroupInfoWnd.cpp" />
     <ClCompile Include="QScreenShotToolBarWnd.cpp" />
-    <ClCompile Include="QSelfLog.h" />
     <ClCompile Include="QPictureToolWnd.cpp" />
     <ClCompile Include="QApplyFriendInputInfoWnd.cpp" />
     <ClCompile Include="QApplyFriendWaitInfoWnd.cpp" />
@@ -200,6 +199,7 @@
     <ClCompile Include="QScreenShotWnd.cpp" />
     <ClCompile Include="QSelectAddGroupOrAddFriendWnd.cpp" />
     <ClCompile Include="QSelectMoreWnd.cpp" />
+    <ClCompile Include="QSelfLog.cpp" />
     <ClCompile Include="QSessionToolBar.cpp" />
     <ClCompile Include="QSessionTopWnd.cpp" />
     <ClCompile Include="QSessionWnd.cpp" />
@@ -260,6 +260,7 @@
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="json\CJsonObject.hpp" />
     <ClInclude Include="QPch.h" />
+    <ClInclude Include="QSelfLog.h" />
     <QtMoc Include="QVoiceTelphoneWnd.h" />
     <QtMoc Include="QScreenShotToolBarWnd.h" />
     <QtMoc Include="QSelectMoreWnd.h" />

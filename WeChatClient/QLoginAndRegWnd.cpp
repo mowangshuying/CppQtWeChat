@@ -221,6 +221,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
             multiPart->append(part);
             QNetworkReply* reply = pManager->post(request, multiPart);
 
+            //注册成功后，弹出窗口
             QMessageBox::information(nullptr, "info", infoStr.c_str());
         });
         return;

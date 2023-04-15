@@ -41,7 +41,7 @@ void QWSClientMgr::sendMsg(const QString& message)
 void QWSClientMgr::regMsgCall(QString cmd, NetEventCall netEventCall)
 {
     m_Msg2CallbackMap[cmd] = netEventCall;
-    LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
+    //LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
 }
 
 void QWSClientMgr::transfer(neb::CJsonObject& msg)
@@ -106,7 +106,7 @@ void QWSClientMgr::onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson)
 void QWSClientMgr::slot_connected()
 {
     LogDebug << "slot_connected()...";
-    LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
+    //LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
     //向远端服务器发送一个注册消息
     neb::CJsonObject json;
     json.Add("type", "Client");

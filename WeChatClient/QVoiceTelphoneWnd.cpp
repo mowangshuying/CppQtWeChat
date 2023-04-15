@@ -156,12 +156,15 @@ void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
 
 void QVoiceTelphoneWnd::requestSendCallPhoneToServer()
 {
-    // cs_call_phone
     neb::CJsonObject json;
     json.Add("sendid", QMainWnd::getInstance()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
-    QWSClientMgr::getInstance()->request("cs_msg_call_phone", json, [=](neb::CJsonObject& msg) { LogDebug << "recv cs_msg_call_phone"; });
+    // 将拨打电话的请求推送到服务器，如果推送成功，设置当前状态为等待接听电话
+    QWSClientMgr::getInstance()->request("cs_msg_call_phone", json, [=](neb::CJsonObject& msg) {
+        LogDebug << "recv cs_msg_call_phone";
+        m_state = VoiceTelphoneState::VTS_waitAccept;
+    });
 }
 
 void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
@@ -170,6 +173,7 @@ void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
     json.Add("sendid", QMainWnd::getInstance()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
+
     QWSClientMgr::getInstance()->request("cs_msg_accept_phone", json, [=](neb::CJsonObject& msg) {
         LogDebug << "accept phone";
         m_bells->stop();  // 停止振铃
@@ -204,7 +208,7 @@ void QVoiceTelphoneWnd::callPhone()
     m_acceptBtn->hide();
     m_bells->play();
     requestSendCallPhoneToServer();
-    m_state = VoiceTelphoneState::VTS_waitAccept;
+    // m_state = VoiceTelphoneState::VTS_waitAccept;
 }
 
 void QVoiceTelphoneWnd::closePhone()
@@ -217,6 +221,8 @@ void QVoiceTelphoneWnd::closePhone()
     m_bells->stop();
     hide();
     m_state = VoiceTelphoneState::VTS_close;
+    // 清空采集到的消息，不在向远端服务器推送
+    m_ByteArrayVct.clear();
 }
 
 void QVoiceTelphoneWnd::acceptPhone()
@@ -320,7 +326,7 @@ void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
 
 void QVoiceTelphoneWnd::cs_msg_close_phone(neb::CJsonObject& msg)
 {
-    // slotOnRefuseBtnClick();
+    // 挂断电话
     closePhone();
 }
 

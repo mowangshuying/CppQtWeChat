@@ -146,13 +146,13 @@
     <ClCompile Include="QSelectMoreWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelfLog.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="QScreenShotToolBarWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QVoiceTelphoneWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QSelfLog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -292,6 +292,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QPch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QSelfLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

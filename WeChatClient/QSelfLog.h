@@ -2,6 +2,11 @@
 
 #include <QDebug>
 #include <QTime>
+#include <QFile>
+#include <QTextStream>
+#include <QMessageLogContext>
+#include <qlogging.h>
+#include <QtMsgHandler>
 
 #pragma execution_character_set("utf-8")
 
@@ -23,21 +28,17 @@ public:
     {
     }
 
-    static QString getTimeStr()
-    {
-        QDateTime dateTime = QDateTime::currentDateTime();
-        QString timeStr = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
-        return timeStr;
-    }
+    static QString getTimeStr();
 
-    static QString getFileName(const char* file)
-    {
-        QString fileStr = file;
-        QString fileNameStr = fileStr.right(fileStr.size() - fileStr.lastIndexOf("\\") - 1);
-        return fileNameStr;
-    }
+    static QString getFileName(const char* file);
+
+    static void logSysInit();
+
+    static void myMessageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 
 public:
+    static QFile* gFileLog;
+    static QtMessageHandler gDefaultHandler;
 };
 
 #define LogDebug                                                           \

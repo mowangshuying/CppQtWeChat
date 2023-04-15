@@ -7,10 +7,11 @@
 #include "QWSClientMgr.h"
 #include "QDealNewFriendsApplyWnd.h"
 #include <QDir>
-#include "QSelfLog.h"
 
 int main(int argc, char** argv)
 {
+    QSelfLog::logSysInit();
+
     QTextCodec* codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
 
