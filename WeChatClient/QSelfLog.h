@@ -48,6 +48,13 @@ public:
              << "]"                                                        \
              << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() << "." << __FUNCTION__ << "." << __LINE__ << "]"
 
+#define LogInfo                                                            \
+    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]" \
+             << "["                                                        \
+             << "info"                                                     \
+             << "]"                                                        \
+             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() << "." << __FUNCTION__ << "." << __LINE__ << "]"
+
 #define LogWarn                                                            \
     qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]" \
              << "["                                                        \
