@@ -239,46 +239,32 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
             //
             int state = 0;
             if (!msg.Get("state", state))
-            {
-                // QMessageBox::information(nullptr, "login error", msg["data"].ToString().c_str());
                 return;
-            }
 
             int64 userid = 0;
             if (!msg["data"].Get("userId", userid))
-            {
-                // QMessageBox::information(nullptr,"login error", msg["data"].ToString().c_str());
                 return;
-            }
 
             std::string token;
             if (!msg["data"].Get("token", token))
-            {
-                // QMessageBox::information(nullptr, "login error", msg["data"].ToString().c_str());
                 return;
-            }
 
             std::string username;
             if (!msg["data"].Get("username", username))
-            {
                 return;
-            }
 
             LogDebug << msg.ToString().c_str();
+
             m_mainWnd = QMainWnd::getInstance();
-            if (m_mainWnd != nullptr)
-            {
-                m_mainWnd->m_userid = userid;
-                m_mainWnd->m_username = username.c_str();
-                m_mainWnd->requestHeadImg();
-                m_mainWnd->requestFriendList();
-                m_mainWnd->requestSessionList();
-                m_mainWnd->requestGroupList();
-                m_mainWnd->show();
-                QDataManager::getInstance()->m_userid = userid;
-                QDataManager::getInstance()->m_username = username.c_str();
-                this->hide();
-            }
+            if (m_mainWnd == nullptr)
+                return;
+
+            m_mainWnd->setUserIdAndName(userid, username.c_str());
+            m_mainWnd->request();
+            m_mainWnd->show();
+
+            QDataManager::getInstance()->setUserIdAndName(userid, username.c_str());
+            this->hide();
         });
     }
 }

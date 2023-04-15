@@ -79,6 +79,21 @@ public:
     void UpdateBorderArea(QPoint pos);
     void UpdateCursor();
     void UpdateWindowByBorderArea();
+
+    void setUserIdAndName(int64_t userId, QString username)
+    {
+        m_username = username;
+        m_userid = userId;
+    }
+
+    void request()
+    {
+        requestHeadImg();
+        requestFriendList();
+        requestSessionList();
+        requestGroupList();
+    }
+
 public slots:
     void closeWnd();
     void minWnd();

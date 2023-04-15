@@ -25,6 +25,11 @@ private:
 public:
     static QDataManager* getInstance();
     static void freeInstance();
+    void setUserIdAndName(int64_t userId, QString userName)
+    {
+        m_userid = userId;
+        m_username = userName;
+    }
 
 private:
     static QDataManager* m_dataManager;
