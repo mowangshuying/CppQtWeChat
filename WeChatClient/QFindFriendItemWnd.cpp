@@ -2,10 +2,13 @@
 
 QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p) : QWidget(p)
 {
+    setObjectName("QFindFriendItemWnd");
 }
 
 QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p, const char* headUrl, const char* name) : QWidget(p), m_username(name)
 {
+    setObjectName("QFindFriendItemWnd");
+
     m_hLayout = new QHBoxLayout(this);
 
     m_hLayout->setSpacing(0);

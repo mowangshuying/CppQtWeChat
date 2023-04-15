@@ -4,6 +4,7 @@
 
 QSwitchButton::QSwitchButton(QWidget *parent) : QWidget(parent)
 {
+    setObjectName("QSwitchButton");
     bSwitch = false;
     bgColorOff = QColor(192, 192, 192);
     bgColorOn = QColor(50, 205, 50);

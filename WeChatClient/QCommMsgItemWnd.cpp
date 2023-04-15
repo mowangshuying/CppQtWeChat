@@ -4,10 +4,13 @@
 
 QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p) : QWidget(p)
 {
+    setObjectName("QCommMsgItemWnd");
 }
 
 QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg)
 {
+    setObjectName("QCommMsgItemWnd");
+
     m_sesId = sesid;
     m_userid = userid;
     m_isGroupMsg = isGroppMsg;
@@ -34,7 +37,7 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
     m_url = "./img/groupHead.png";
     if (isGroppMsg)
     {
-        m_url = "./img/head1.png"; 
+        m_url = "./img/head1.png";
     }
     m_headurl->setPixmap(QPixmap(m_url));
 
@@ -51,7 +54,6 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
 
     // ./img/groupHead.png
     // ./img/head1.png
-
 
     QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(userid);
     if (isGroppMsg)

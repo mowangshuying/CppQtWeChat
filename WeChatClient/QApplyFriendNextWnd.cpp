@@ -12,6 +12,8 @@
 QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString username /*= ""*/)
     : QWidget(p), m_friendid(friendid), m_username(username)
 {
+    setObjectName("QApplyFriendNextWnd");
+
     m_state = Ps_Next;
 
     m_vLayout = new QVBoxLayout(this);

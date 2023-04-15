@@ -4,6 +4,7 @@
 
 QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QToolWnd");
     setFixedWidth(55);
     setWindowFlags(Qt::FramelessWindowHint);
     // setStyleSheet("background-color:#2E2E2E;");

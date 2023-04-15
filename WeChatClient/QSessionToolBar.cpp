@@ -9,6 +9,8 @@
 
 QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QSessionToolBar");
+
     setFixedHeight(40);
     // setStyleSheet("boder:2px gray");
 

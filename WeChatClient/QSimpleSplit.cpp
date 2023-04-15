@@ -2,6 +2,7 @@
 
 QSimpleSplit::QSimpleSplit(QWidget* p /*= nullptr*/, QSimpleSplitDirection direct /* Direction_H */)
 {
+    setObjectName("QSimpleSplit");
     setAttribute(Qt::WA_StyledBackground);
     //设置一些样式, 无焦点, 无边框
     setFocusPolicy(Qt::NoFocus);

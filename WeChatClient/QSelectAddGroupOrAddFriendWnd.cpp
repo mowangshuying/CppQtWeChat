@@ -6,6 +6,7 @@
 
 QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget(p)
 {
+    setObjectName("QSelectAddGroupOrAddFriendWnd");
     setAttribute(Qt::WA_StyledBackground);
     setWindowFlags(Qt::FramelessWindowHint);
     setFixedWidth(100);

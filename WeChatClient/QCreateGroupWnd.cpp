@@ -13,6 +13,8 @@
 
 QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QCreateGroupWnd");
+
     m_vLayout = new QVBoxLayout(this);
     setLayout(m_vLayout);
     setFixedSize(600, 400);

@@ -21,6 +21,7 @@ QMainWnd* QMainWnd::m_mainWnd = nullptr;
 
 QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QMainWnd");
     m_hLayout = new QHBoxLayout(this);
     m_toolWnd = new QToolWnd(this);
 

@@ -6,6 +6,7 @@
 
 QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QGroupInfoWnd");
     //
     // setFixedSize(250, 535);
     setFixedWidth(250);

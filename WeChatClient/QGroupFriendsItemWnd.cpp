@@ -7,6 +7,8 @@
 
 QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QGroupFriendsItemWnd");
+
     m_hLayout = new QHBoxLayout();
     setLayout(m_hLayout);
     m_hLayout->setContentsMargins(0, 0, 0, 0);

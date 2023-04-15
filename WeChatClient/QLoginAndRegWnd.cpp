@@ -14,6 +14,8 @@
 
 QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QLoginAndRegWnd");
+
     setFixedSize(430, 330);
     setContentsMargins(0, 0, 0, 0);
     m_vLayout = new QVBoxLayout();

@@ -15,6 +15,8 @@
 
 QScreenShotWnd::QScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QScreenShotWnd");
+
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 

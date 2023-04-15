@@ -12,6 +12,8 @@
 
 QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QChatFileInnerWnd");
+
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);
 

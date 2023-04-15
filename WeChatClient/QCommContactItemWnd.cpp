@@ -6,11 +6,13 @@
 
 QCommContactItemWnd::QCommContactItemWnd(QWidget* p) : QWidget(p)
 {
+    setObjectName("QCommContactItemWnd");
 }
 
 QCommContactItemWnd::QCommContactItemWnd(QWidget* p, const char* headUrl, const char* name, bool bNewFriend /* = false*/, int friendid /* = -1*/)
     : QWidget(p), m_bNewFriend(bNewFriend), m_friendId(friendid)
 {
+    setObjectName("QCommContactItemWnd");
     m_hLayout = new QHBoxLayout(this);
     m_hLayout->setSpacing(0);
     setLayout(m_hLayout);

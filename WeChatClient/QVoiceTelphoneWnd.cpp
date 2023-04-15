@@ -7,6 +7,7 @@
 
 QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
 {
+    setObjectName("QVoiceTelphoneWnd");
     setFixedSize(350, 600);
     setStyleSheet("background-color:rgb(25,25,25)");
 
@@ -73,11 +74,23 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
     m_outputDevice = m_output->start();
     m_inputDevice = m_input->start();
 
-    connect(m_acceptBtn, &QPushButton::clicked, this, &QVoiceTelphoneWnd::slotOnAcceptBtnClick);
-    connect(m_refuseBtn, &QPushButton::clicked, this, &QVoiceTelphoneWnd::slotOnRefuseBtnClick);
     m_bells = new QSound("./music/callPhone.wav");
     m_bells->setLoops(10);
 
+    // 注册信号和槽
+    regSignalSlot();
+    // 注册网络消息
+    regNetMsg();
+}
+
+void QVoiceTelphoneWnd::regSignalSlot()
+{
+    connect(m_acceptBtn, &QPushButton::clicked, this, &QVoiceTelphoneWnd::slotOnAcceptBtnClick);
+    connect(m_refuseBtn, &QPushButton::clicked, this, &QVoiceTelphoneWnd::slotOnRefuseBtnClick);
+}
+
+void QVoiceTelphoneWnd::regNetMsg()
+{
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_call_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_call_phone, this, std::placeholders::_1));
     // cs_msg_accept_phone
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_accept_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_accept_phone, this, std::placeholders::_1));
@@ -319,6 +332,7 @@ void QVoiceTelphoneWnd::slotOnAcceptBtnClick()
 
 void QVoiceTelphoneWnd::slotOnRefuseBtnClick()
 {
-    // closePhone();
+    // 告诉服务器，我点击了挂电话的按钮
+    // 服务器会将挂电话的信息推送到对方
     requestSendClosePhoneToServer();
 }

@@ -9,6 +9,7 @@
 
 QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QDealNewFriendsApplyWnd");
     m_vLayout = new QVBoxLayout(this);
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);

@@ -8,6 +8,7 @@
 
 QEditLabel::QEditLabel(QWidget* parent) : QWidget(parent)
 {
+    setObjectName("QEditLabel");
     initCtrls();
 }
 

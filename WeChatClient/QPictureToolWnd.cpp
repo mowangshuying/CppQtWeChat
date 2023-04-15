@@ -14,6 +14,8 @@
 
 QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QPictureToolWnd");
+
     setWindowFlags(Qt::FramelessWindowHint);
 
     m_vLayout = new QVBoxLayout();

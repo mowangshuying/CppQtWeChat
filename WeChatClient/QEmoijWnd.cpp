@@ -8,6 +8,7 @@
 
 QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QEmoijWnd");
     setFixedSize(335, 225);
     //…Ë÷√Œﬁ±ﬂøÚ Ù–‘
     setWindowFlags(Qt::FramelessWindowHint);

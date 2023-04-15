@@ -8,6 +8,7 @@
 
 QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QUserInfoWnd");
     setAttribute(Qt::WA_StyledBackground);
     setWindowFlags(Qt::FramelessWindowHint);
     // setAttribute(Qt::WA_TranslucentBackground);

@@ -30,6 +30,10 @@ public:
 public:
     QVoiceTelphoneWnd(QWidget* p = nullptr);
 
+    void regSignalSlot();
+
+    void regNetMsg();
+
     void timerEvent(QTimerEvent* event);
 
     void playAudioFormByteArrayVct();

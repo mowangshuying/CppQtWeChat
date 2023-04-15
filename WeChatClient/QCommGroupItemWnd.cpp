@@ -6,10 +6,13 @@
 
 QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p) : QWidget(p)
 {
+    setObjectName("QCommGroupItemWnd");
 }
 
 QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p, const char* headUrl, const char* name, int groupId) : QWidget(p), m_groupId(groupId)
 {
+    setObjectName("QCommGroupItemWnd");
+
     m_hLayout = new QHBoxLayout(this);
     m_hLayout->setSpacing(0);
     setLayout(m_hLayout);

@@ -22,6 +22,7 @@
 
 QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QSessionWnd");
     setMinimumSize(640, 600);
     setWindowTitle("»á»°´°¿Ú");
     setAcceptDrops(true);

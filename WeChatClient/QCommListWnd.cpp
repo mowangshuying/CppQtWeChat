@@ -12,6 +12,8 @@
 
 QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*QCommMsgItemWnd_Tpye*/) : QWidget(p), m_WndType(wndType)
 {
+    setObjectName("QCommListWnd");
+
     m_vLayout = new QVBoxLayout();
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);

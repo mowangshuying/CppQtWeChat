@@ -3,6 +3,8 @@
 
 QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QApplyFriendInputInfoWnd");
+
     setContentsMargins(0, 0, 0, 0);
     setFixedSize(460, 300);
 

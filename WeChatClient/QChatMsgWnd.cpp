@@ -8,6 +8,7 @@
 
 QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, int64_t recvid) : QWidget(p), m_recvid(recvid), m_sendid(sendid)
 {
+    setObjectName("QChatMsgWnd");
     //设置窗体的字体大小
     QFont font = this->font();
     font.setFamily("MicrosoftYaHei");

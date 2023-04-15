@@ -2,6 +2,8 @@
 
 QScreenShotToolBarWnd::QScreenShotToolBarWnd(QWidget* p /*= nullptr*/)
 {
+    setObjectName("QScreenShotToolBarWnd");
+
     setWindowFlags(Qt::FramelessWindowHint);
     setStyleSheet("background-color:rgb(234,238,245);");
     m_hLayout = new QHBoxLayout();

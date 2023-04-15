@@ -4,6 +4,8 @@
 
 QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QCreateGroupListItemWithSelBtnWnd");
+
     m_hLayout = new QHBoxLayout();
     setLayout(m_hLayout);
 
@@ -28,6 +30,8 @@ QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p,
                                                                      const char* rolename)
     : QWidget(p), m_friendid(friendid)
 {
+    setObjectName("QCreateGroupListItemWithSelBtnWnd");
+
     m_hLayout = new QHBoxLayout();
     m_hLayout->setAlignment(Qt::AlignHCenter);
     setLayout(m_hLayout);

@@ -11,6 +11,8 @@
 
 QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QFindFriendOrGroupWnd");
+
     m_vLayout = new QVBoxLayout(this);
     m_vLayout->setContentsMargins(5, 5, 5, 5);
     setLayout(m_vLayout);

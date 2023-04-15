@@ -6,6 +6,8 @@
 
 QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QCommContactInfo");
+
     QFont font1;
     font1.setPointSize(15);
 
@@ -142,7 +144,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
 
     setLayout(m_vLayout1);
     setAttribute(Qt::WA_StyledBackground);
-    
 
     // setStyleSheet("background-color:white;border-image:url(./img/emptybg.png)");
     connect(m_sendMsgBtn, SIGNAL(clicked()), this, SLOT(slot_sendMsgBtnClick()));

@@ -2,6 +2,7 @@
 
 QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    setObjectName("QSessionTopWnd");
     m_vLayout = new QVBoxLayout(this);
 
     m_vLayout->setContentsMargins(0, 0, 0, 0);
