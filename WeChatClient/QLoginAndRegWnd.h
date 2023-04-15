@@ -22,10 +22,10 @@ public slots:
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
-    void slot_closeWnd();
-    void slot_minWnd();
-    void slot_regOrLoginChx(bool isSel = false);
-    void slot_regOrLoginBtn();
+    void slotCloseWnd();
+    void slotMinWnd();
+    void slotRegOrLoginSel(bool isSel = false);
+    void slotRegOrLoginBtn();
 
 public:
     QVBoxLayout* m_vLayout;

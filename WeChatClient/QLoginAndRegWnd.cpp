@@ -114,11 +114,11 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vLayout->addWidget(m_bottomWnd);
 
-    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slot_minWnd()));
-    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slot_closeWnd()));
-    connect(m_regOrLoginChx, SIGNAL(clicked(bool)), this, SLOT(slot_regOrLoginChx(bool)));
-    connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(slot_regOrLoginBtn()));
-    connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(slot_regOrLoginBtn()));
+    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotMinWnd()));
+    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
+    connect(m_regOrLoginChx, SIGNAL(clicked(bool)), this, SLOT(slotRegOrLoginSel(bool)));
+    connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(slotRegOrLoginBtn()));
+    connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(slotRegOrLoginBtn()));
 }
 
 void QLoginAndRegWnd::mouseMoveEvent(QMouseEvent* event)
@@ -141,17 +141,17 @@ void QLoginAndRegWnd::mouseReleaseEvent(QMouseEvent* event)
     m_bPress = false;
 }
 
-void QLoginAndRegWnd::slot_closeWnd()
+void QLoginAndRegWnd::slotCloseWnd()
 {
     close();
 }
 
-void QLoginAndRegWnd::slot_minWnd()
+void QLoginAndRegWnd::slotMinWnd()
 {
     showMinimized();
 }
 
-void QLoginAndRegWnd::slot_regOrLoginChx(bool isSel /*= false*/)
+void QLoginAndRegWnd::slotRegOrLoginSel(bool isSel /*= false*/)
 {
     if (isSel)
     {
@@ -165,7 +165,7 @@ void QLoginAndRegWnd::slot_regOrLoginChx(bool isSel /*= false*/)
     }
 }
 
-void QLoginAndRegWnd::slot_regOrLoginBtn()
+void QLoginAndRegWnd::slotRegOrLoginBtn()
 {
     if (m_bReg)
     {
