@@ -17,6 +17,9 @@ class QLoginAndRegWnd : public QWidget
     Q_OBJECT
 public:
     QLoginAndRegWnd(QWidget* p = nullptr);
+
+    void regSignalSlot();
+
 public slots:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
