@@ -39,17 +39,24 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_titleLabel = new QLabel();
     m_minBtn = new QPushButton();
     m_closeBtn = new QPushButton();
+    m_settingBtn = new QPushButton();
 
     m_titleLabel->setText("ÄªÍüÊäÓ®/ÖÆ×÷");
-    m_minBtn->setIcon(QPixmap("./img/minWnd1.png"));
-    m_minBtn->setIconSize(QSize(20, 20));
-    m_minBtn->setFixedSize(20, 20);
 
-    m_closeBtn->setIcon(QPixmap("./img/closeWnd1.png"));
-    m_closeBtn->setIconSize(QSize(20, 20));
-    m_closeBtn->setFixedSize(20, 20);
+    m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20,20));
+    m_settingBtn->setIconSize(QSize(30, 30));
+    m_settingBtn->setFixedSize(30, 30);
+
+    m_minBtn->setIcon(QPixmap("./img/minBtn_.png").scaled(20,20));
+    m_minBtn->setIconSize(QSize(30, 30));
+    m_minBtn->setFixedSize(30, 30);
+
+    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png").scaled(20,20));
+    m_closeBtn->setIconSize(QSize(30, 30));
+    m_closeBtn->setFixedSize(30, 30);
 
     m_hTopLayout->addWidget(m_titleLabel);
+    m_hTopLayout->addWidget(m_settingBtn);
     m_hTopLayout->addWidget(m_minBtn);
     m_hTopLayout->addWidget(m_closeBtn);
 

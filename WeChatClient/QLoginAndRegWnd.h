@@ -40,6 +40,7 @@ public:
     QLabel* m_titleLabel;
     QPushButton* m_minBtn;
     QPushButton* m_closeBtn;
+    QPushButton* m_settingBtn;
 
     QWidget* m_bottomWnd;
     QHBoxLayout* m_hBottomLayout1;

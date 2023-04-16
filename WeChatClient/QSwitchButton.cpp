@@ -10,8 +10,7 @@ QSwitchButton::QSwitchButton(QWidget *parent) : QWidget(parent)
     bgColorOn = QColor(50, 205, 50);
     sliderColorOff = QColor(255, 255, 255);
     sliderColorOn = QColor(255, 255, 255);  //
-    // sliderColorOff = QColor(100, 100, 100);//
-    // sliderColorOn = QColor(100, 184, 255);
+
     sliderColor = sliderColorOff;
     textColorOn = QColor(255, 255, 255);
     textColorOff = QColor(0, 0, 0);
