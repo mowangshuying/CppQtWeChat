@@ -120,8 +120,6 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     connect(m_systemTrayIconExitAction, &QAction::triggered, this, &QMainWnd::closeWnd);
     connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &QMainWnd::showNormalWnd);
-
-    // 托盘功能实现
     connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &QMainWnd::slot_onSystemTrayIconClick);
 
     if (objectName().isEmpty())
@@ -134,11 +132,11 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_voiceTelphoneWnd->hide();
 }
 
-QMainWnd::~QMainWnd()
-{
-    // m_systemTrayIcon->hide();
-    // delete m_systemTrayIcon;
-}
+//QMainWnd::~QMainWnd()
+//{
+//    // m_systemTrayIcon->hide();
+//    // delete m_systemTrayIcon;
+//}
 
 void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 {
