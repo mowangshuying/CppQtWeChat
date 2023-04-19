@@ -89,18 +89,18 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_MsgWndList->setAttribute(Qt::WA_StyledBackground);
     m_MsgWndList->setAcceptDrops(true);
     //按钮点击时候发送消息
-    connect(m_sendTextBtn, SIGNAL(clicked()), this, SLOT(slot_sendTextBtnClick()));
+    connect(m_sendTextBtn, SIGNAL(clicked()), this, SLOT(slotSendTextBtnClick()));
     m_sendTextBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     setAttribute(Qt::WA_StyledBackground);
     setStyleSheet("background-color:white;border:0px;");
 
-    connect(m_sesToolBar->m_emoijWnd, SIGNAL(signal_emoijClicked(QString)), this, SLOT(slot_emoijClicked(QString)));
-    connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slot_moreBtnClick()));
+    connect(m_sesToolBar->m_emoijWnd, SIGNAL(signalEmoijClicked(QString)), this, SLOT(slotEmoijClicked(QString)));
+    connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slotMoreBtnClick()));
     connect(m_sesToolBar->m_voiceTelphoneBtn, &QPushButton::clicked, this, &QSessionWnd::slotVoiceTelPhoneBtnClick);
 }
 
-void QSessionWnd::slot_sendTextBtnClick()
+void QSessionWnd::slotSendTextBtnClick()
 {
     QString msgText = m_sendTextEdit->toPlainText();
 
@@ -161,14 +161,14 @@ void QSessionWnd::slot_sendTextBtnClick()
     }
 }
 
-void QSessionWnd::slot_emoijClicked(QString str)
+void QSessionWnd::slotEmoijClicked(QString str)
 {
     QString tempStr = m_sendTextEdit->toPlainText() + str;
     m_sendTextEdit->setText(tempStr);
     LogDebug << tempStr;
 }
 
-void QSessionWnd::slot_moreBtnClick()
+void QSessionWnd::slotMoreBtnClick()
 {
     //设置相应的位置
     QRect rect = m_sesTopWnd->geometry();
@@ -387,7 +387,7 @@ void QSessionWnd::resizeEvent(QResizeEvent* event)
         int nTempHeight = height() - m_sesTopWnd->height();
         m_groupInfoWnd->setMinimumHeight(nTempHeight);
         m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
-        //return;
+        // return;
     }
 
     // 重新设置msgItem的大小
@@ -405,7 +405,5 @@ void QSessionWnd::resizeEvent(QResizeEvent* event)
 
             pWnd->setFixedWidth(m_MsgWndList->width());
         }
-
     }
-
 }

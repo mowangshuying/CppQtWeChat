@@ -15,10 +15,10 @@ class QChatFileInnerWnd : public QWidget
 public:
     QChatFileInnerWnd(QWidget* p = nullptr);
 public slots:
-    void slot_openFileBtnClick();
-    void slot_copyFileBtnClick();
-    void slot_openFileDirBtnClick();
-    void slot_downloadFileBtnClick();
+    void slotOpenFileBtnClick();
+    void slotCopyFileBtnClick();
+    void slotOpenFileDirBtnClick();
+    void slotDownloadFileBtnClick();
 
 public:
     void sendFileShow();

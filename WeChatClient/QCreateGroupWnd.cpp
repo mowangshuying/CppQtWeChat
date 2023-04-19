@@ -93,7 +93,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
-    connect(m_comfirmBtn, SIGNAL(clicked()), this, SLOT(slot_comfirmBtnClick()));
+    connect(m_comfirmBtn, SIGNAL(clicked()), this, SLOT(slotComfirmBtnClick()));
 }
 
 void QCreateGroupWnd::mouseMoveEvent(QMouseEvent* event)
@@ -123,7 +123,7 @@ void QCreateGroupWnd::addListWnd1Item(const char* headUrl, int64_t friendid, con
     pListItem->setSizeHint(QSize(275, 35));
     m_listWnd1->setItemWidget(pListItem, pListwnd1Item);
 
-    connect(pListwnd1Item, SIGNAL(signal_selRBtnClick(QMap<QString, QString>)), this, SLOT(slot_selRBtnClick(QMap<QString, QString>)));
+    connect(pListwnd1Item, SIGNAL(signalSelRBtnClick(QMap<QString, QString>)), this, SLOT(slotSelRBtnClick(QMap<QString, QString>)));
 }
 
 void QCreateGroupWnd::addListWnd2Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename)
@@ -259,7 +259,7 @@ void QCreateGroupWnd::minWnd()
     showMinimized();
 }
 
-void QCreateGroupWnd::slot_selRBtnClick(QMap<QString, QString> map)
+void QCreateGroupWnd::slotSelRBtnClick(QMap<QString, QString> map)
 {
     // LogDebug << "map" << map;
     if (map["isSel"] == "true")
@@ -282,7 +282,7 @@ void QCreateGroupWnd::slot_selRBtnClick(QMap<QString, QString> map)
     m_hasSelLabel->setText(str);
 }
 
-void QCreateGroupWnd::slot_comfirmBtnClick()
+void QCreateGroupWnd::slotComfirmBtnClick()
 {
     //先直接隐藏创建群聊的对话框
     hide();

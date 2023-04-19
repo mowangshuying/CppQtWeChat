@@ -105,11 +105,11 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
     setLayout(m_hLayout);
     setFixedHeight(60);
 
-    connect(m_AgreeBtn, SIGNAL(clicked()), this, SLOT(slot_onAgreeBtnClick()));
-    connect(m_refuseBtn, SIGNAL(clicked()), this, SLOT(slot_onRefuseBtnClick()));
+    connect(m_AgreeBtn, SIGNAL(clicked()), this, SLOT(slotOnAgreeBtnClick()));
+    connect(m_refuseBtn, SIGNAL(clicked()), this, SLOT(slotOnRefuseBtnClick()));
 }
 
-void QDealNewFriendsApplyItemWnd::slot_onAgreeBtnClick()
+void QDealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
 {
     //向远端发送同意好友申请
     neb::CJsonObject json;
@@ -124,7 +124,7 @@ void QDealNewFriendsApplyItemWnd::slot_onAgreeBtnClick()
     });
 }
 
-void QDealNewFriendsApplyItemWnd::slot_onRefuseBtnClick()
+void QDealNewFriendsApplyItemWnd::slotOnRefuseBtnClick()
 {
     //向远端发送拒绝好友申请
     neb::CJsonObject json;

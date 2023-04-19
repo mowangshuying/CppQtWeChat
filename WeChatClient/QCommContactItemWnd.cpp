@@ -30,7 +30,7 @@ QCommContactItemWnd::QCommContactItemWnd(QWidget* p, const char* headUrl, const 
     //向远端请求头像的信息
     QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(friendid);
     m_networkMgr = new QNetworkAccessManager();
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
+    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 
     if (name != NULL && !bNewFriend)
@@ -42,7 +42,7 @@ QCommContactItemWnd::QCommContactItemWnd(QWidget* p, const char* headUrl, const 
     setObjectName("QCommContactItemWnd");
 }
 
-void QCommContactItemWnd::slot_replyFinished(QNetworkReply* reply)
+void QCommContactItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)
     {

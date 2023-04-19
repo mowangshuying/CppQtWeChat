@@ -36,11 +36,11 @@ QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidg
     m_crateGroupWnd = new QCreateGroupWnd();
     m_crateGroupWnd->hide();
 
-    connect(m_addContactsOrGroupBtn, SIGNAL(clicked()), this, SLOT(slot_addContactsOrGroupBtnClick()));
-    connect(m_createGroupBtn, SIGNAL(clicked()), this, SLOT(slot_createGroup()));
+    connect(m_addContactsOrGroupBtn, SIGNAL(clicked()), this, SLOT(slotAddContactsOrGroupBtnClick()));
+    connect(m_createGroupBtn, SIGNAL(clicked()), this, SLOT(slotCreateGroup()));
 }
 
-void QSelectAddGroupOrAddFriendWnd::slot_addContactsOrGroupBtnClick()
+void QSelectAddGroupOrAddFriendWnd::slotAddContactsOrGroupBtnClick()
 {
     if (m_findFriendOrGroupWnd != nullptr)
     {
@@ -49,7 +49,7 @@ void QSelectAddGroupOrAddFriendWnd::slot_addContactsOrGroupBtnClick()
     }
 }
 
-void QSelectAddGroupOrAddFriendWnd::slot_createGroup()
+void QSelectAddGroupOrAddFriendWnd::slotCreateGroup()
 {
     if (m_crateGroupWnd != nullptr)
     {

@@ -146,13 +146,13 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     setAttribute(Qt::WA_StyledBackground);
 
     // setStyleSheet("background-color:white;border-image:url(./img/emptybg.png)");
-    connect(m_sendMsgBtn, SIGNAL(clicked()), this, SLOT(slot_sendMsgBtnClick()));
+    connect(m_sendMsgBtn, SIGNAL(clicked()), this, SLOT(slotSendMsgBtnClick()));
 
     showBgPng();
     setMouseTracking(true);
 }
 
-void QCommContactInfo::slot_contactInfoChange(QMap<QString, QString> map)
+void QCommContactInfo::slotContactInfoChange(QMap<QString, QString> map)
 {
     LogDebug << "contactInfoChange map = " << map;
     //根据map中name字段修改昵称字段
@@ -165,12 +165,12 @@ void QCommContactInfo::slot_contactInfoChange(QMap<QString, QString> map)
     hideBgPng();
 }
 
-void QCommContactInfo::slot_sendMsgBtnClick()
+void QCommContactInfo::slotSendMsgBtnClick()
 {
     //点击发送按钮，创建一个会话，并切换过去
     QMap<QString, QString> map;
     map["name"] = m_nickNameLabel->text();
-    emit signal_sendMsgBtnClick(map);
+    emit signalSendMsgBtnClick(map);
 }
 
 //显示空白背景图片
@@ -204,8 +204,3 @@ void QCommContactInfo::hideBgPng()
     m_sendMsgBtn->show();
     setStyleSheet("background-color:white;");
 }
-
-// void QCommContactInfo::slot_test()
-//{
-//	LogDebug << "slot_tst" << endl;
-//}

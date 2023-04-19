@@ -27,7 +27,7 @@ public:
 public slots:
     void closeWnd();
     void minWnd();
-    void slot_onSearchBtnClicked();
+    void slotOnSearchBtnClicked();
 
 public:
     QVBoxLayout* m_vLayout;

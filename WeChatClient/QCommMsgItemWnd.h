@@ -19,7 +19,7 @@ public:
     QCommMsgItemWnd(QWidget* p);
     QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg);
 public slots:
-    void slot_replyFinished(QNetworkReply* reply);
+    void slotReplyFinished(QNetworkReply* reply);
 
 public:
     QVBoxLayout* m_vLayout;

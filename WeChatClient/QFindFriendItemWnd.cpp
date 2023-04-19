@@ -38,10 +38,10 @@ QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p, const char* headUrl, const ch
     setObjectName("QCommContactItemWnd");
     setStyleSheet("#QCommContactItemWnd{border-bottom:1px solid red;}");
 
-    connect(m_addFriendBtn, SIGNAL(clicked()), this, SLOT(slot_addFriendBtnClick()));
+    connect(m_addFriendBtn, SIGNAL(clicked()), this, SLOT(slotAddFriendBtnClick()));
 }
 
-void QFindFriendItemWnd::slot_addFriendBtnClick()
+void QFindFriendItemWnd::slotAddFriendBtnClick()
 {
     m_nextWnd = new QApplyFriendNextWnd(nullptr, m_friendid, m_username);
     m_nextWnd->show();

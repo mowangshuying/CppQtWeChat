@@ -64,7 +64,7 @@ QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         emoijFile.close();
     }
 
-    connect(m_centerWnd, SIGNAL(cellClicked(int, int)), this, SLOT(slot_cellClicked(int, int)));
+    connect(m_centerWnd, SIGNAL(cellClicked(int, int)), this, SLOT(slotCellClicked(int, int)));
 }
 
 bool QEmoijWnd::event(QEvent* event)
@@ -98,14 +98,14 @@ void QEmoijWnd::paintEvent(QPaintEvent* paintEvent)
     painter.drawPath(drawPath);
 }
 
-void QEmoijWnd::slot_cellClicked(int x, int y)
+void QEmoijWnd::slotCellClicked(int x, int y)
 {
-    LogDebug << "slot_cellClicked:" << x << "," << y;
+    LogDebug << "slotCellClicked:" << x << "," << y;
     //点击完成后隐藏窗口
     if (x * 10 + y >= 0 && x * 10 + y < m_emoijStrList.size())
     {
         LogDebug << m_emoijStrList[x * 10 + y] << endl;
-        emit signal_emoijClicked(m_emoijStrList[x * 10 + y]);
+        emit signalEmoijClicked(m_emoijStrList[x * 10 + y]);
     }
     hide();
 }

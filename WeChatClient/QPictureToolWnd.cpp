@@ -61,9 +61,9 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     }
     m_vLayout->addLayout(m_hLayout2);
 
-    connect(m_uploadBtn, SIGNAL(clicked()), this, SLOT(slot_uploadBtnClicked()));
-    connect(m_cancelBtn, SIGNAL(clicked()), this, SLOT(slot_cancelBtnClicked()));
-    connect(m_determineBtn, SIGNAL(clicked()), this, SLOT(slot_determineBtnClicked()));
+    connect(m_uploadBtn, SIGNAL(clicked()), this, SLOT(slotUploadBtnClicked()));
+    connect(m_cancelBtn, SIGNAL(clicked()), this, SLOT(slotCancelBtnClicked()));
+    connect(m_determineBtn, SIGNAL(clicked()), this, SLOT(slotDetermineBtnClicked()));
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
@@ -89,7 +89,7 @@ void QPictureToolWnd::mouseReleaseEvent(QMouseEvent* event)
     m_bPress = false;
 }
 
-void QPictureToolWnd::slot_uploadBtnClicked()
+void QPictureToolWnd::slotUploadBtnClicked()
 {
     QString filepath = QFileDialog::getOpenFileName(nullptr, "Ñ¡ÔñÍ¼Æ¬", ".", "*.png");
     if (filepath.trimmed().isEmpty() == false)
@@ -106,12 +106,12 @@ void QPictureToolWnd::slot_uploadBtnClicked()
     }
 }
 
-void QPictureToolWnd::slot_cancelBtnClicked()
+void QPictureToolWnd::slotCancelBtnClicked()
 {
     hide();
 }
 
-void QPictureToolWnd::slot_determineBtnClicked()
+void QPictureToolWnd::slotDetermineBtnClicked()
 {
     hide();
     QByteArray byteArr;

@@ -61,11 +61,11 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
         QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(userid);
     }
     m_networkMgr = new QNetworkAccessManager();
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
+    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
 
-void QCommMsgItemWnd::slot_replyFinished(QNetworkReply* reply)
+void QCommMsgItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)
     {

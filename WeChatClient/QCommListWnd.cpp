@@ -129,7 +129,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
             if (pWnd->m_isGroupMsg && pWnd->m_userid == groupid)
             {
                 msgListWidget->setCurrentItem(pitem);
-                QMainWnd::getInstance()->slot_sesIdToIndex(pWnd->m_sesId);
+                QMainWnd::getInstance()->slotSesIdToIndex(pWnd->m_sesId);
                 break;
             }
         }

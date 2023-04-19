@@ -72,7 +72,7 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t frien
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
-    connect(m_pushBtn, SIGNAL(clicked()), this, SLOT(slot_pushBtnClick()));
+    connect(m_pushBtn, SIGNAL(clicked()), this, SLOT(slotPushBtnClick()));
 }
 
 void QApplyFriendNextWnd::mouseMoveEvent(QMouseEvent* event)
@@ -95,7 +95,7 @@ void QApplyFriendNextWnd::mouseReleaseEvent(QMouseEvent* event)
     m_bPress = false;
 }
 
-void QApplyFriendNextWnd::slot_pushBtnClick()
+void QApplyFriendNextWnd::slotPushBtnClick()
 {
     if (m_state == Ps_Next)
     {

@@ -30,14 +30,14 @@ QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p, const char* headUrl, const char
     //关于请求图片信息
     QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(groupId);
     m_networkMgr = new QNetworkAccessManager();
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
+    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 
     setFixedHeight(65);
     setObjectName("QCommGroupItemWnd");
 }
 
-void QCommGroupItemWnd::slot_replyFinished(QNetworkReply* reply)
+void QCommGroupItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)
     {

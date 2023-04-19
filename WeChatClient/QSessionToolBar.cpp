@@ -45,11 +45,11 @@ QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout->addWidget(m_voiceTelphoneBtn);
     m_hLayout->addSpacing(15);
 
-    connect(m_emojiBtn, SIGNAL(clicked()), this, SLOT(slot_emojiBtnClick()));
-    connect(m_screenshotBtn, SIGNAL(clicked()), this, SLOT(slot_screenshotBtnClick()));
+    connect(m_emojiBtn, SIGNAL(clicked()), this, SLOT(slotEmojiBtnClick()));
+    connect(m_screenshotBtn, SIGNAL(clicked()), this, SLOT(slotScreenshotBtnClick()));
 }
 
-void QSessionToolBar::slot_emojiBtnClick()
+void QSessionToolBar::slotEmojiBtnClick()
 {
     QPoint gPoint = m_emojiBtn->mapToGlobal(QPoint(0, 0));
 
@@ -63,7 +63,7 @@ void QSessionToolBar::slot_emojiBtnClick()
 }
 
 // ²Î¿¼×ÊÁÏ£ºhttps://www.cnblogs.com/syh6324/p/9502307.html
-void QSessionToolBar::slot_screenshotBtnClick()
+void QSessionToolBar::slotScreenshotBtnClick()
 {
     LogDebug << "desktop winId:" << QApplication::desktop()->winId();
     LogDebug << "desktop sceen count:" << QApplication::desktop()->screenCount();

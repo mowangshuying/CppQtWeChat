@@ -16,7 +16,7 @@ public:
 
     QCommGroupItemWnd(QWidget* p, const char* headUrl, const char* name, int groupId = -1);
 public slots:
-    void slot_replyFinished(QNetworkReply* reply);
+    void slotReplyFinished(QNetworkReply* reply);
 
 public:
     QHBoxLayout* m_hLayout;

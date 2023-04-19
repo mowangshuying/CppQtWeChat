@@ -20,8 +20,8 @@ public:
     QSelectAddGroupOrAddFriendWnd(QWidget* p);
 
 public slots:
-    void slot_addContactsOrGroupBtnClick();
-    void slot_createGroup();
+    void slotAddContactsOrGroupBtnClick();
+    void slotCreateGroup();
 
 public:
     //将玩家的数据设置到QListWidget中

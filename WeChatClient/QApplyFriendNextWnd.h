@@ -29,7 +29,7 @@ public:
 public slots:
     void closeWnd();
     void minWnd();
-    void slot_pushBtnClick();
+    void slotPushBtnClick();
 
 public:
     int m_index = 0;

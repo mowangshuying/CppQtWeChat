@@ -12,8 +12,8 @@ class QSessionToolBar : public QWidget
 public:
     QSessionToolBar(QWidget* p = nullptr);
 public slots:
-    void slot_emojiBtnClick();
-    void slot_screenshotBtnClick();
+    void slotEmojiBtnClick();
+    void slotScreenshotBtnClick();
 
 public:
     QHBoxLayout* m_hLayout;

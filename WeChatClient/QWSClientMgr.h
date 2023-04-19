@@ -50,10 +50,10 @@ public:
     void onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson);
 
 public slots:
-    void slot_connected();
-    void slot_disconnected();
-    void slot_recvMsg(const QString& message);
-    void slot_timer();
+    void slotConnected();
+    void slotDisconnected();
+    void slotRecvMsg(const QString& message);
+    void slotTimer();
 
 public:
     static QWSClientMgr* m_WsClientMgr;

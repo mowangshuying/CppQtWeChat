@@ -37,9 +37,9 @@ public slots:
     void minWnd();
 
     //接收到来自单选的按钮的选择时候
-    void slot_selRBtnClick(QMap<QString, QString> map);
+    void slotSelRBtnClick(QMap<QString, QString> map);
     //点击确认按钮的响应
-    void slot_comfirmBtnClick();
+    void slotComfirmBtnClick();
 
 public:
     QVBoxLayout* m_vLayout;

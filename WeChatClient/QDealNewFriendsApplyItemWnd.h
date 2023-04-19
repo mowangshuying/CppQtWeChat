@@ -21,8 +21,8 @@ public:
                                 bool isApplyer = false,
                                 int userid = 0);
 public slots:
-    void slot_onAgreeBtnClick();
-    void slot_onRefuseBtnClick();
+    void slotOnAgreeBtnClick();
+    void slotOnRefuseBtnClick();
 
 public:
     QVBoxLayout* m_vLayout;

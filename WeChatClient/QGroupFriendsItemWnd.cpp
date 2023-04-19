@@ -33,11 +33,11 @@ void QGroupFriendsItemWnd::requestHeadImg()
     //向远端请求头像的信息
     QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(m_friendId);
     m_networkMgr = new QNetworkAccessManager();
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
+    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
 
-void QGroupFriendsItemWnd::slot_replyFinished(QNetworkReply* reply)
+void QGroupFriendsItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)
     {

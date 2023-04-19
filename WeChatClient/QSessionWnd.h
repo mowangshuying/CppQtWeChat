@@ -26,9 +26,9 @@ public:
     //»á»°´°¿Ú
     QSessionWnd(QWidget* p = nullptr);
 public slots:
-    void slot_sendTextBtnClick();
-    void slot_emoijClicked(QString str);
-    void slot_moreBtnClick();
+    void slotSendTextBtnClick();
+    void slotEmoijClicked(QString str);
+    void slotMoreBtnClick();
     void slotVoiceTelPhoneBtnClick();
 
 protected:

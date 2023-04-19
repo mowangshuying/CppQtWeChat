@@ -83,7 +83,7 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
-    connect(m_searchBtn, SIGNAL(clicked()), this, SLOT(slot_onSearchBtnClicked()));
+    connect(m_searchBtn, SIGNAL(clicked()), this, SLOT(slotOnSearchBtnClicked()));
 }
 
 void QFindFriendOrGroupWnd::mouseMoveEvent(QMouseEvent* event)
@@ -128,7 +128,7 @@ void QFindFriendOrGroupWnd::minWnd()
     showMinimized();
 }
 
-void QFindFriendOrGroupWnd::slot_onSearchBtnClicked()
+void QFindFriendOrGroupWnd::slotOnSearchBtnClicked()
 {
     //点击了查找按钮向远端服务器发送查找请求
     if (m_findPersonChx->isChecked())

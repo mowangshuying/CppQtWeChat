@@ -15,10 +15,10 @@ class QCommContactInfo : public QWidget
 public:
     QCommContactInfo(QWidget* p = nullptr);
 signals:
-    void signal_sendMsgBtnClick(QMap<QString, QString> map);
+    void signalSendMsgBtnClick(QMap<QString, QString> map);
 public slots:
-    void slot_contactInfoChange(QMap<QString, QString> map);
-    void slot_sendMsgBtnClick();
+    void slotContactInfoChange(QMap<QString, QString> map);
+    void slotSendMsgBtnClick();
 
 public:
     void showBgPng();

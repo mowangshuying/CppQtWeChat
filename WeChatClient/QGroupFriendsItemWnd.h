@@ -16,7 +16,7 @@ public:
     //向远端请求图片信息
     void requestHeadImg();
 public slots:
-    void slot_replyFinished(QNetworkReply* reply);
+    void slotReplyFinished(QNetworkReply* reply);
 
 public:
     QHBoxLayout* m_hLayout;  //

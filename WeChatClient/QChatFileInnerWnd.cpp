@@ -71,12 +71,12 @@ QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setObjectName("QChatFileWnd");
     setStyleSheet("#QChatFileWnd{border:4px solid gray;}");
 
-    connect(m_openFileDir, SIGNAL(clicked()), this, SLOT(slot_openFileDirBtnClick()));
-    connect(m_openFile, SIGNAL(clicked()), this, SLOT(slot_openFileBtnClick()));
-    connect(m_downLoad, SIGNAL(clicked()), this, SLOT(slot_downloadFileBtnClick()));
+    connect(m_openFileDir, SIGNAL(clicked()), this, SLOT(slotOpenFileDirBtnClick()));
+    connect(m_openFile, SIGNAL(clicked()), this, SLOT(slotOpenFileBtnClick()));
+    connect(m_downLoad, SIGNAL(clicked()), this, SLOT(slotDownloadFileBtnClick()));
 }
 
-void QChatFileInnerWnd::slot_openFileBtnClick()
+void QChatFileInnerWnd::slotOpenFileBtnClick()
 {
     if (m_fileFullpath != "")
     {
@@ -84,11 +84,11 @@ void QChatFileInnerWnd::slot_openFileBtnClick()
     }
 }
 
-void QChatFileInnerWnd::slot_copyFileBtnClick()
+void QChatFileInnerWnd::slotCopyFileBtnClick()
 {
 }
 
-void QChatFileInnerWnd::slot_openFileDirBtnClick()
+void QChatFileInnerWnd::slotOpenFileDirBtnClick()
 {
     //
     if (m_fileFullDir != "")
@@ -97,7 +97,7 @@ void QChatFileInnerWnd::slot_openFileDirBtnClick()
     }
 }
 
-void QChatFileInnerWnd::slot_downloadFileBtnClick()
+void QChatFileInnerWnd::slotDownloadFileBtnClick()
 {
     if (m_serveFilePath != "")
     {

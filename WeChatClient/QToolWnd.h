@@ -26,14 +26,14 @@ public:
     //¹¤¾ßÀ¸´°¿Ú
     QToolWnd(QWidget* p = nullptr);
 signals:
-    void signal_toolWndPageChanged(int num);
+    void signalToolWndPageChanged(int num);
 public slots:
-    void slot_onClickMsgBtn();
-    void slot_onClickContactsBtn();
-    void slot_onClickHeadUrlLabel();
-    void slot_onClickChangeHeadImgBtn();
-    void slot_onClickGroupsBtn();
-    void slot_onClickMoreBtn();
+    void slotOnClickMsgBtn();
+    void slotOnClickContactsBtn();
+    void slotOnClickHeadUrlLabel();
+    void slotOnClickChangeHeadImgBtn();
+    void slotOnClickGroupsBtn();
+    void slotOnClickMoreBtn();
 
 public:
     int m_selectIndex;

@@ -15,9 +15,9 @@ public:
     QCreateGroupListItemWithSelBtnWnd(QWidget* p = nullptr);
     QCreateGroupListItemWithSelBtnWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
 signals:
-    void signal_selRBtnClick(QMap<QString, QString> map);
+    void signalSelRBtnClick(QMap<QString, QString> map);
 public slots:
-    void slot_clickedSelBtn(bool isSel = false);
+    void slotClickedSelBtn(bool isSel = false);
 
 public:
     QHBoxLayout* m_hLayout;

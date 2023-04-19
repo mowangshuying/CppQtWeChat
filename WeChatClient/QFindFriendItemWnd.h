@@ -16,7 +16,7 @@ public:
     QFindFriendItemWnd(QWidget* p);
     QFindFriendItemWnd(QWidget* p, const char* headUrl, const char* name);
 public slots:
-    void slot_addFriendBtnClick();
+    void slotAddFriendBtnClick();
 
 public:
     QHBoxLayout* m_hLayout;

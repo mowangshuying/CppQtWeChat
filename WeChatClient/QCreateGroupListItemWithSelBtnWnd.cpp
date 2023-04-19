@@ -63,10 +63,10 @@ QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p,
     m_hLayout->addStretch();
     m_hLayout->addWidget(m_selRBtn);
 
-    connect(m_selRBtn, SIGNAL(clicked(bool)), this, SLOT(slot_clickedSelBtn(bool)));
+    connect(m_selRBtn, SIGNAL(clicked(bool)), this, SLOT(slotClickedSelBtn(bool)));
 }
 
-void QCreateGroupListItemWithSelBtnWnd::slot_clickedSelBtn(bool isSel /* = false*/)
+void QCreateGroupListItemWithSelBtnWnd::slotClickedSelBtn(bool isSel /* = false*/)
 {
     LogDebug << "isSel" << isSel;
 
@@ -84,5 +84,5 @@ void QCreateGroupListItemWithSelBtnWnd::slot_clickedSelBtn(bool isSel /* = false
     {
         sMap["isSel"] = "false";
     }
-    emit signal_selRBtnClick(sMap);
+    emit signalSelRBtnClick(sMap);
 }

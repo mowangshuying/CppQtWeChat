@@ -13,10 +13,10 @@ QWSClientMgr::QWSClientMgr()
     m_timer = new QTimer();
     m_timer->start(1000);
 
-    connect(m_timer, &QTimer::timeout, this, &QWSClientMgr::slot_timer);
-    connect(m_webSock, &QWebSocket::connected, this, &QWSClientMgr::slot_connected);
-    connect(m_webSock, &QWebSocket::disconnected, this, &QWSClientMgr::slot_disconnected);
-    connect(m_webSock, &QWebSocket::textMessageReceived, this, &QWSClientMgr::slot_recvMsg);
+    connect(m_timer, &QTimer::timeout, this, &QWSClientMgr::slotTimer);
+    connect(m_webSock, &QWebSocket::connected, this, &QWSClientMgr::slotConnected);
+    connect(m_webSock, &QWebSocket::disconnected, this, &QWSClientMgr::slotDisconnected);
+    connect(m_webSock, &QWebSocket::textMessageReceived, this, &QWSClientMgr::slotRecvMsg);
 
     //连接远端服务器
     m_webSock->open(QUrl("ws://49.232.169.205:5000"));
@@ -41,7 +41,7 @@ void QWSClientMgr::sendMsg(const QString& message)
 void QWSClientMgr::regMsgCall(QString cmd, NetEventCall netEventCall)
 {
     m_Msg2CallbackMap[cmd] = netEventCall;
-    //LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
+    // LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
 }
 
 void QWSClientMgr::transfer(neb::CJsonObject& msg)
@@ -103,10 +103,10 @@ void QWSClientMgr::onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson)
     LogDebug << "can not find cmd = " << qcmdStr << " in onNetMsgDo ";
 }
 
-void QWSClientMgr::slot_connected()
+void QWSClientMgr::slotConnected()
 {
     LogDebug << "slot_connected()...";
-    //LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
+    // LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
     //向远端服务器发送一个注册消息
     neb::CJsonObject json;
     json.Add("type", "Client");
@@ -117,13 +117,13 @@ void QWSClientMgr::slot_connected()
     });
 }
 
-void QWSClientMgr::slot_disconnected()
+void QWSClientMgr::slotDisconnected()
 {
     LogDebug << "slot_disconnected...";
     m_bConn = false;
 }
 
-void QWSClientMgr::slot_recvMsg(const QString& message)
+void QWSClientMgr::slotRecvMsg(const QString& message)
 {
     // LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
     neb::CJsonObject json;
@@ -167,7 +167,7 @@ void QWSClientMgr::slot_recvMsg(const QString& message)
     }
 }
 
-void QWSClientMgr::slot_timer()
+void QWSClientMgr::slotTimer()
 {
     m_time++;
     if (m_time % 5 == 0)

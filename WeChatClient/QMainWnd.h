@@ -107,16 +107,12 @@ public slots:
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
-    void slot_sesIdToIndex(int sesid);
+    void slotSesIdToIndex(int sesid);
 
-    void slot_sendMsgBtnClick(QMap<QString, QString> infoMap);
-    void slot_toolWndPageChanged(int page);
-    void slot_replyFinished(QNetworkReply* reply);
-    // void slot_moreBtnClicked();
-    // protected:
-    //	virtual void paintEvent(QPaintEvent* event);
-    void slot_onSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason);
-
+    void slotSendMsgBtnClick(QMap<QString, QString> infoMap);
+    void slotToolWndPageChanged(int page);
+    void slotReplyFinished(QNetworkReply* reply);
+    void slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason);
 public:
     QHBoxLayout* m_hLayout;
     QToolWnd* m_toolWnd;
@@ -132,8 +128,6 @@ public:
     QSessionWnd* m_sessionWnd;
     QStackedLayout* m_sLayout1;
     QStackedLayout* m_sLayout2;
-
-    // QGroupInfoWnd* m_groupInfoWnd;
 
     int m_lastSesId = -1;
     int m_lastContactId = -1;

@@ -85,13 +85,13 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setAttribute(Qt::WA_TranslucentBackground);
 
     //
-    connect(m_toolWnd, SIGNAL(signal_toolWndPageChanged(int)), this, SLOT(slot_toolWndPageChanged(int)));
-    connect(m_commMsgListWnd, SIGNAL(signalCommListChanged(int)), this, SLOT(slot_sesIdToIndex(int)));
+    connect(m_toolWnd, SIGNAL(signalToolWndPageChanged(int)), this, SLOT(slotToolWndPageChanged(int)));
+    connect(m_commMsgListWnd, SIGNAL(signalCommListChanged(int)), this, SLOT(slotSesIdToIndex(int)));
     connect(m_commContactsListWnd,
             SIGNAL(signalContactInfoChange(QMap<QString, QString>)),
             m_commContactInfo,
-            SLOT(slot_contactInfoChange(QMap<QString, QString>)));
-    connect(m_commContactInfo, SIGNAL(signal_sendMsgBtnClick(QMap<QString, QString>)), this, SLOT(slot_sendMsgBtnClick(QMap<QString, QString>)));
+            SLOT(slotContactInfoChange(QMap<QString, QString>)));
+    connect(m_commContactInfo, SIGNAL(signalSendMsgBtnClick(QMap<QString, QString>)), this, SLOT(slotSendMsgBtnClick(QMap<QString, QString>)));
 
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendmsg", std::bind(&QMainWnd::cs_msg_sendmsg, this, std::placeholders::_1));
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
@@ -100,7 +100,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
 
     m_networkMgr = new QNetworkAccessManager();
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slot_replyFinished(QNetworkReply*)));
+    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
 
     // 系统托盘功能
     m_systemTrayIcon = new QSystemTrayIcon(this);
@@ -120,7 +120,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     connect(m_systemTrayIconExitAction, &QAction::triggered, this, &QMainWnd::closeWnd);
     connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &QMainWnd::showNormalWnd);
-    connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &QMainWnd::slot_onSystemTrayIconClick);
+    connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &QMainWnd::slotOnSystemTrayIconClick);
 
     if (objectName().isEmpty())
         setObjectName("QMainWnd");
@@ -132,7 +132,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_voiceTelphoneWnd->hide();
 }
 
-//QMainWnd::~QMainWnd()
+// QMainWnd::~QMainWnd()
 //{
 //    // m_systemTrayIcon->hide();
 //    // delete m_systemTrayIcon;
@@ -863,7 +863,7 @@ void QMainWnd::mouseReleaseEvent(QMouseEvent* event)
     // setCursor(Qt::ArrowCursor);
 }
 
-void QMainWnd::slot_sesIdToIndex(int sesid)
+void QMainWnd::slotSesIdToIndex(int sesid)
 {
     int layoutId = 0;
     if (sesid != 0)
@@ -894,7 +894,7 @@ void QMainWnd::slot_sesIdToIndex(int sesid)
     m_sLayout2->setCurrentIndex(layoutId);
 }
 
-void QMainWnd::slot_sendMsgBtnClick(QMap<QString, QString> infoMap)
+void QMainWnd::slotSendMsgBtnClick(QMap<QString, QString> infoMap)
 {
     bool has = false;
     int sesid = -1;
@@ -917,11 +917,11 @@ void QMainWnd::slot_sendMsgBtnClick(QMap<QString, QString> infoMap)
     {
         m_lastSesId = sesid;
         m_toolWnd->m_msgBtn->click();
-        slot_sesIdToIndex(sesid);
+        slotSesIdToIndex(sesid);
     }
 }
 
-void QMainWnd::slot_toolWndPageChanged(int page)
+void QMainWnd::slotToolWndPageChanged(int page)
 {
     m_sLayout1->setCurrentIndex(page);
     if (page == 0)
@@ -929,7 +929,7 @@ void QMainWnd::slot_toolWndPageChanged(int page)
         requestSessionList();
         if (m_lastSesId != -1)
         {  //上次的会话窗口
-            slot_sesIdToIndex(m_lastSesId);
+            slotSesIdToIndex(m_lastSesId);
         }
         else
         {
@@ -942,7 +942,7 @@ void QMainWnd::slot_toolWndPageChanged(int page)
     {  //请求好友信息
         requestFriendList();
         m_commContactInfo->showBgPng();
-        slot_sesIdToIndex(0);
+        slotSesIdToIndex(0);
     }
 
     if (page == 2)
@@ -951,7 +951,7 @@ void QMainWnd::slot_toolWndPageChanged(int page)
     }
 }
 
-void QMainWnd::slot_replyFinished(QNetworkReply* reply)
+void QMainWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)
     {
@@ -964,7 +964,7 @@ void QMainWnd::slot_replyFinished(QNetworkReply* reply)
     }
 }
 
-void QMainWnd::slot_onSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason)
+void QMainWnd::slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason)
 {
     switch (reason)
     {

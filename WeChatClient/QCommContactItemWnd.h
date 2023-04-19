@@ -16,7 +16,7 @@ public:
 
     QCommContactItemWnd(QWidget* p, const char* headUrl, const char* name, bool bNewFriend = false, int friendid = -1);
 public slots:
-    void slot_replyFinished(QNetworkReply* reply);
+    void slotReplyFinished(QNetworkReply* reply);
 
 public:
     QHBoxLayout* m_hLayout;

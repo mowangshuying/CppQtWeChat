@@ -20,9 +20,9 @@ public:
     void mouseReleaseEvent(QMouseEvent* event);
 
 public slots:
-    void slot_uploadBtnClicked();
-    void slot_cancelBtnClicked();
-    void slot_determineBtnClicked();
+    void slotUploadBtnClicked();
+    void slotCancelBtnClicked();
+    void slotDetermineBtnClicked();
     void closeWnd();
     void minWnd();
 

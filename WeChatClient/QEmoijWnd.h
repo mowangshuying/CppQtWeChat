@@ -17,10 +17,10 @@ protected:
 
     void paintEvent(QPaintEvent* paintEvent);
 signals:
-    void signal_emoijClicked(QString m_emoijString);
+    void signalEmoijClicked(QString m_emoijString);
 public slots:
     //判断哪个单元格子被点击
-    void slot_cellClicked(int x, int y);
+    void slotCellClicked(int x, int y);
 
 public:
     QStringList m_emoijStrList;

@@ -73,34 +73,34 @@ QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_selectMoreWnd = new QSelectMoreWnd();
     m_selectMoreWnd->hide();
 
-    connect(m_msgBtn, SIGNAL(clicked()), this, SLOT(slot_onClickMsgBtn()));
-    connect(m_contactsBtn, SIGNAL(clicked()), this, SLOT(slot_onClickContactsBtn()));
-    connect(m_groupsBtn, SIGNAL(clicked()), this, SLOT(slot_onClickGroupsBtn()));
-    connect(m_headUrlLabel, SIGNAL(clicked()), this, SLOT(slot_onClickHeadUrlLabel()));
-    connect(m_userInfoWnd->m_changeHeadImgBtn, SIGNAL(clicked()), this, SLOT(slot_onClickChangeHeadImgBtn()));
-    connect(m_moreBtn, SIGNAL(clicked()), this, SLOT(slot_onClickMoreBtn()));
+    connect(m_msgBtn, SIGNAL(clicked()), this, SLOT(slotOnClickMsgBtn()));
+    connect(m_contactsBtn, SIGNAL(clicked()), this, SLOT(slotOnClickContactsBtn()));
+    connect(m_groupsBtn, SIGNAL(clicked()), this, SLOT(slotOnClickGroupsBtn()));
+    connect(m_headUrlLabel, SIGNAL(clicked()), this, SLOT(slotOnClickHeadUrlLabel()));
+    connect(m_userInfoWnd->m_changeHeadImgBtn, SIGNAL(clicked()), this, SLOT(slotOnClickChangeHeadImgBtn()));
+    connect(m_moreBtn, SIGNAL(clicked()), this, SLOT(slotOnClickMoreBtn()));
 }
 
-void QToolWnd::slot_onClickMsgBtn()
+void QToolWnd::slotOnClickMsgBtn()
 {
     m_selectIndex = 0;
     m_msgBtn->setIcon(QPixmap("./img/msgBtnClicked.png"));
     m_contactsBtn->setIcon(QPixmap("./img/contactsBtnNomal.png"));
     m_groupsBtn->setIcon(QPixmap("./img/groupBtnNomal.png"));
     //发出信号
-    signal_toolWndPageChanged(0);
+    signalToolWndPageChanged(0);
 }
 
-void QToolWnd::slot_onClickContactsBtn()
+void QToolWnd::slotOnClickContactsBtn()
 {
     m_selectIndex = 0;
     m_msgBtn->setIcon(QPixmap("./img/msgBtnNormal.png"));
     m_contactsBtn->setIcon(QPixmap("./img/contactsBtnClicked.png"));
     m_groupsBtn->setIcon(QPixmap("./img/groupBtnNomal.png"));
-    signal_toolWndPageChanged(1);
+    signalToolWndPageChanged(1);
 }
 
-void QToolWnd::slot_onClickHeadUrlLabel()
+void QToolWnd::slotOnClickHeadUrlLabel()
 {
     if (m_userInfoWnd->isHidden())
     {
@@ -117,21 +117,21 @@ void QToolWnd::slot_onClickHeadUrlLabel()
     }
 }
 
-void QToolWnd::slot_onClickChangeHeadImgBtn()
+void QToolWnd::slotOnClickChangeHeadImgBtn()
 {
     m_pictureToolWnd->show();
 }
 
-void QToolWnd::slot_onClickGroupsBtn()
+void QToolWnd::slotOnClickGroupsBtn()
 {
     // m_selectIndex = 0;
     m_msgBtn->setIcon(QPixmap("./img/msgBtnNormal.png"));
     m_contactsBtn->setIcon(QPixmap("./img/contactsBtnNomal.png"));
     m_groupsBtn->setIcon(QPixmap("./img/groupBtnClicked.png"));
-    signal_toolWndPageChanged(2);  //暂时先注释，待会放出来
+    signalToolWndPageChanged(2);  //暂时先注释，待会放出来
 }
 
-void QToolWnd::slot_onClickMoreBtn()
+void QToolWnd::slotOnClickMoreBtn()
 {
     if (m_selectMoreWnd->isHidden())
     {
