@@ -93,6 +93,10 @@ public:
 
     int64_t m_recvId = -1;
     int64_t m_sesId = -1;
+    // 打电话时间，等待对方接听电话
+    int64_t m_calltimeCount = 0;
+    // 在通话的时间，显示当前已经通话的时间
+    int64_t m_phoningTimeCount = 0;
 
     // 是否在通话中
     VoiceTelphoneState m_state = VoiceTelphoneState::VTS_none;

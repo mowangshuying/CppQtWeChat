@@ -36,7 +36,7 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
 
     // 通话时长
     m_timeLabel = new QLabel(this);
-    m_timeLabel->setText("05:35");
+    m_timeLabel->setText("00:00");
     m_timeLabel->setAlignment(Qt::AlignCenter);
     m_timeLabel->setStyleSheet("color:white");
     m_timeLabel->setGeometry(width() / 2 - m_timeLabel->width() / 2, 450, m_timeLabel->width(), m_timeLabel->height());
@@ -81,6 +81,11 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
     regSignalSlot();
     // 注册网络消息
     regNetMsg();
+
+    // 定时器一直打开
+    m_timerId = startTimer(30);
+    m_calltimeCount = 0;
+    m_phoningTimeCount = 0;
 }
 
 void QVoiceTelphoneWnd::regSignalSlot()
@@ -102,13 +107,35 @@ void QVoiceTelphoneWnd::regNetMsg()
 
 void QVoiceTelphoneWnd::timerEvent(QTimerEvent* event)
 {
-    // LogDebug << "called";
-    // 读取所有语音数据并发送到服务器
-    QByteArray inputByteArray = m_inputDevice->readAll();
-    requestSendVoiceDataToServer(inputByteArray);
+    if (VoiceTelphoneState::VTS_phoning == m_state)
+    {
+        // 读取所有语音数据并发送到服务器
+        QByteArray inputByteArray = m_inputDevice->readAll();
+        requestSendVoiceDataToServer(inputByteArray);
 
-    // 播放音频
-    playAudioFormByteArrayVct();
+        // 播放音频
+        playAudioFormByteArrayVct();
+
+        m_phoningTimeCount += 30;
+        // 通话显示几分几秒中
+        int nMin = m_phoningTimeCount / (60 * 1000);
+        int nSec = (m_phoningTimeCount % (60 * 1000)) / 1000;
+        char timeStr[24] = {0};
+        sprintf(timeStr, "通话中:%02d:%02d", nMin, nSec);
+        m_timeLabel->setText(timeStr);
+    }
+
+    // 处于15秒未接电话状态的话，直接挂掉电话
+    if (VoiceTelphoneState::VTS_waitAccept == m_state)
+    {
+        m_calltimeCount += 30;
+        if (m_calltimeCount >= 30 * 500)
+        {
+            slotOnRefuseBtnClick();
+            m_calltimeCount = 0;
+            m_state = VoiceTelphoneState::VTS_close;
+        }
+    }
 }
 
 void QVoiceTelphoneWnd::playAudioFormByteArrayVct()
@@ -164,6 +191,8 @@ void QVoiceTelphoneWnd::requestSendCallPhoneToServer()
     QWSClientMgr::getInstance()->request("cs_msg_call_phone", json, [=](neb::CJsonObject& msg) {
         LogDebug << "recv cs_msg_call_phone";
         m_state = VoiceTelphoneState::VTS_waitAccept;
+        m_phoningTimeCount = 0;
+        m_timeLabel->hide();
     });
 }
 
@@ -178,7 +207,8 @@ void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
         LogDebug << "accept phone";
         m_bells->stop();  // 停止振铃
         m_state = VoiceTelphoneState::VTS_phoning;
-        m_timerId = startTimer(30);
+        m_timeLabel->show();
+        // m_timerId = startTimer(30);
         m_acceptBtn->hide();
         m_refuseBtn->show();
     });
@@ -217,7 +247,7 @@ void QVoiceTelphoneWnd::closePhone()
     // 向远端服务器请求关闭电话
     // 远端返回后，隐藏窗口
     LogDebug << "called";
-    killTimer(m_timerId);
+    // killTimer(m_timerId);
     m_bells->stop();
     hide();
     m_state = VoiceTelphoneState::VTS_close;
@@ -259,6 +289,11 @@ void QVoiceTelphoneWnd::cs_msg_call_phone(neb::CJsonObject& msg)
     show();
     m_bells->play();
     m_refuseBtn->hide();
+    m_acceptBtn->show();
+    m_state = VoiceTelphoneState::VTS_waitAccept;
+    m_phoningTimeCount = 0;
+    m_calltimeCount = 0;
+    m_timeLabel->hide();
 }
 
 void QVoiceTelphoneWnd::cs_msg_accept_phone(neb::CJsonObject& msg)
@@ -286,9 +321,10 @@ void QVoiceTelphoneWnd::cs_msg_accept_phone(neb::CJsonObject& msg)
     setRecvIdAndSesId(sendid, sesid);
     m_bells->stop();
     m_state = VoiceTelphoneState::VTS_phoning;
-    m_timerId = startTimer(30);
+    // m_timerId = startTimer(30);
     m_refuseBtn->show();
     m_acceptBtn->hide();
+    m_timeLabel->show();
 }
 
 void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
