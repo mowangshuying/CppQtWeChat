@@ -27,7 +27,7 @@ QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, int64_t recvi
     //关闭自动填充窗口背景
     m_loadingLable->setAutoFillBackground(false);
     setAttribute(Qt::WA_StyledBackground);
-    //setStyleSheet("background-color:yellow;");
+    // setStyleSheet("background-color:yellow;");
 }
 
 QSize QChatMsgWnd::fontRect(QString str)
@@ -97,56 +97,23 @@ QSize QChatMsgWnd::fontRect(QString str)
 
 QSize QChatMsgWnd::getRealStringSize(QString str)
 {
-    // LogDebug() << "getRealStringSize start------------------------------";
     QFontMetricsF fm(this->font());
-
-    // m_lineHeight = fm.lineSpacing();
-    // int fontHeight = fm.height();
     int fontw = fm.width(" ");
     m_lineHeight = 20;
     int nCount = str.count("\n");
     int nLineNum = 0;
     int nMaxWidth = 0;
 
-    // 计算表情包字符数量
-    int nEmoijCount = 0;
-    for (int i = 0; i < QDataManager::getInstance()->m_emoijStrList.size(); i++)
-    {
-        QString tempStr = QDataManager::getInstance()->m_emoijStrList[i];
-        int tempCount = str.count(tempStr);
-        nEmoijCount += tempCount;
-    }
-
-    // int nLength = str.length();
-    for (int i = 0; i < str.length(); i++)
-    {
-        LogDebug << "str.at(" << i << ") width:" << fm.width(str.at(i));
-    }
-
-    int nAllTextLen = fm.width(str) + nEmoijCount;
-    LogDebug << "nAllTextLen:" << fm.width(str);
+    int nAllTextLen = fm.width(str) + 1;
     if (nCount == 0)
     {
         nMaxWidth = nAllTextLen;
-        // nMaxWidth = 10*str.length();
-
         QString value = str;
         if (nMaxWidth > m_textWidth)
         {
             nMaxWidth = m_textWidth;
-            //获取每行的最大存放字符数量
-            // int size = m_textWidth/fm.width(" ");
-            // int size = m_textWidth /10;
-
-            //计算含有几行
-            // int num = fm.width(value)/m_textWidth;
             int num = nAllTextLen / m_textWidth;
-
             nLineNum = num;
-            /*if( fm.width(value)/m_textWidth-num>0) {
-                    nLineNum += 1;
-            }*/
-
             if (nAllTextLen / m_textWidth != 0)
             {
                 nLineNum += 1;
@@ -163,17 +130,7 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
         for (int i = 0; i <= nCount; i++)
         {
             QString tempSplitStr = str.split("\n").at(i);
-            int nEmoijCount = 0;
-            for (int i = 0; i < QDataManager::getInstance()->m_emoijStrList.size(); i++)
-            {
-                QString tempStr = QDataManager::getInstance()->m_emoijStrList[i];
-                int tempCount = tempSplitStr.count(tempStr);
-                nEmoijCount += tempCount;
-            }
-
-            int nAllTextLen = fm.width(tempSplitStr) + nEmoijCount;
-
-            // int valueWidth = fm.width(value);
+            int nAllTextLen = fm.width(tempSplitStr) + 1;
             if (nAllTextLen > nMaxWidth)
             {
                 nMaxWidth = nAllTextLen;
@@ -182,9 +139,7 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
             if (nMaxWidth > m_textWidth)
             {
                 nMaxWidth = m_textWidth;
-                //获取每行的最大存放字符数量
-                // int size = m_textWidth / fm.width(" ");
-                //计算含有几行
+                //获取每行的最大存放字符数量，计算含有几行
                 int num = nAllTextLen / m_textWidth;
                 nLineNum = num;
                 if (nAllTextLen % m_textWidth != 0)
@@ -234,12 +189,13 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
         painter.setBrush(color);
         painter.drawRoundedRect(m_outerFrameLeftRect, 4, 4);
 
+        // 绘制三角形
         QPointF points[3] = {QPointF(m_triangleLeftRect.x(), 25),
                              QPointF(m_triangleLeftRect.x() + m_triangleLeftRect.width(), 20),
                              QPointF(m_triangleLeftRect.x() + m_triangleLeftRect.width(), 30)};
-
         painter.drawPolygon(points, 3);
 
+        // 绘制文字
         QPen penText;
         penText.setColor(QColor(51, 51, 51));
         painter.setPen(penText);
