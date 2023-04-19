@@ -27,6 +27,7 @@ QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, int64_t recvi
     //关闭自动填充窗口背景
     m_loadingLable->setAutoFillBackground(false);
     setAttribute(Qt::WA_StyledBackground);
+    //setStyleSheet("background-color:yellow;");
 }
 
 QSize QChatMsgWnd::fontRect(QString str)
@@ -98,6 +99,7 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
 {
     // LogDebug() << "getRealStringSize start------------------------------";
     QFontMetricsF fm(this->font());
+
     // m_lineHeight = fm.lineSpacing();
     // int fontHeight = fm.height();
     int fontw = fm.width(" ");
@@ -106,9 +108,8 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
     int nLineNum = 0;
     int nMaxWidth = 0;
 
+    // 计算表情包字符数量
     int nEmoijCount = 0;
-    // for(int i=0;i<QMainWnd::getSinletonInstance()->m_toolWnd->m_)
-
     for (int i = 0; i < QDataManager::getInstance()->m_emoijStrList.size(); i++)
     {
         QString tempStr = QDataManager::getInstance()->m_emoijStrList[i];
@@ -117,8 +118,13 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
     }
 
     // int nLength = str.length();
+    for (int i = 0; i < str.length(); i++)
+    {
+        LogDebug << "str.at(" << i << ") width:" << fm.width(str.at(i));
+    }
 
     int nAllTextLen = fm.width(str) + nEmoijCount;
+    LogDebug << "nAllTextLen:" << fm.width(str);
     if (nCount == 0)
     {
         nMaxWidth = nAllTextLen;
@@ -209,6 +215,9 @@ void QChatMsgWnd::setText(QString text, QString time, QSize allSize, ChatMsgType
 void QChatMsgWnd::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
+
+    // 重新计算fontRect大小
+    fontRect(m_msg);
 
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);

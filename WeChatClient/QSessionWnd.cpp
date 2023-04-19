@@ -143,7 +143,7 @@ void QSessionWnd::slot_sendTextBtnClick()
     if (m_isGroupSes == true)
     {
         QWSClientMgr::getInstance()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
-            LogDebug << "cs_msg_sendgroupmsg:msg=" << msg.ToString().c_str();
+            LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
             //向远端发送消息
             QString time = QString::number(QDateTime::currentDateTime().toTime_t());
             QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getInstance()->m_userid, m_recvId);
@@ -382,12 +382,30 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 
 void QSessionWnd::resizeEvent(QResizeEvent* event)
 {
-    if (m_groupInfoWnd == nullptr)
+    if (m_groupInfoWnd != nullptr)
     {
-        return;
+        int nTempHeight = height() - m_sesTopWnd->height();
+        m_groupInfoWnd->setMinimumHeight(nTempHeight);
+        m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
+        //return;
     }
 
-    int nTempHeight = height() - m_sesTopWnd->height();
-    m_groupInfoWnd->setMinimumHeight(nTempHeight);
-    m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
+    // 重新设置msgItem的大小
+    if (m_MsgWndList != nullptr)
+    {
+        int count = m_MsgWndList->count();
+        for (int i = 0; i < count; i++)
+        {
+            QListWidgetItem* pitem = m_MsgWndList->item(i);
+            QWidget* pWnd = m_MsgWndList->itemWidget(pitem);
+
+            QSize tmpSize = pitem->sizeHint();
+            tmpSize.setWidth(m_MsgWndList->width());
+            pitem->setSizeHint(tmpSize);
+
+            pWnd->setFixedWidth(m_MsgWndList->width());
+        }
+
+    }
+
 }
