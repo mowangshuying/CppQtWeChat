@@ -202,31 +202,31 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
                 return;
             }
 
-            int userId = -1;
-            if (!msg["data"].Get("userId", userId))
-            {
-                return;
-            }
-
-            std::string infoStr = "×¢²áÊ§°Ü";
+            std::string infoStr = "×¢²áÊ§°Ü:" + msg["data"].ToString();
             if (state == 0)
             {
                 infoStr = "×¢²á³É¹¦";
-            }
 
-            QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
-            QNetworkRequest request;
-            request.setUrl(QUrl("http://49.232.169.205:80/UploadDemo/UploadServlet"));
-            QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
-            QHttpPart part;
-            part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));
-            part.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
-            QFile* file = new QFile("./img/default.png");
-            file->open(QFile::ReadOnly);
-            part.setBodyDevice(file);
-            file->setParent(multiPart);
-            multiPart->append(part);
-            QNetworkReply* reply = pManager->post(request, multiPart);
+                int userId = -1;
+                if (!msg["data"].Get("userId", userId))
+                {
+                    return;
+                }
+
+                QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
+                QNetworkRequest request;
+                request.setUrl(QUrl("http://49.232.169.205:80/UploadDemo/UploadServlet"));
+                QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
+                QHttpPart part;
+                part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));
+                part.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
+                QFile* file = new QFile("./img/default.png");
+                file->open(QFile::ReadOnly);
+                part.setBodyDevice(file);
+                file->setParent(multiPart);
+                multiPart->append(part);
+                QNetworkReply* reply = pManager->post(request, multiPart);
+            }
 
             //×¢²á³É¹¦ºó£¬µ¯³ö´°¿Ú
             QMessageBox::information(nullptr, "info", infoStr.c_str());

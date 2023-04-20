@@ -146,10 +146,6 @@ void QPictureToolWnd::slotDetermineBtnClicked()
         QString str = QString(all);
         LogDebug << str << endl;
 
-        // neb::CJsonObject json0;
-        // json0.Add("headimg", "/xx/xx/x.png");
-        // std::string str0 = json0.ToString();
-
         neb::CJsonObject json1(str.toStdString());
         std::string headimgstr = "";
         if (!json1.Get("headimg", headimgstr))
@@ -163,6 +159,7 @@ void QPictureToolWnd::slotDetermineBtnClicked()
         //告诉远端服务器该玩家的头像数据
         QWSClientMgr::getInstance()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
             LogDebug << msg.ToString().c_str() << endl;
+            QMainWnd::getInstance()->m_toolWnd->m_headImg = QMainWnd::getInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
             QMainWnd::getInstance()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg);
             QDataManager::getInstance()->m_UserId2HeadImgMap[QMainWnd::getInstance()->m_userid] =
                 QMainWnd::getInstance()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
