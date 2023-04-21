@@ -16,20 +16,24 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/) : QWi
 
     m_hLayout = new QHBoxLayout();
 
-    m_minBtn = new QPushButton();
-    m_minBtn->setIcon(QPixmap("./img/minWnd.png"));
+    m_minBtn = new QPushButton(this);
+    m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
+    m_minBtn->setStyleSheet("border:0px;");
 
-    m_maxBtn = new QPushButton();
-    m_maxBtn->setIcon(QPixmap("./img/maxWnd.png"));
+    m_maxBtn = new QPushButton(this);
+    m_maxBtn->setIcon(QPixmap("./img/normalBtn_.png"));
     m_maxBtn->setIconSize(QSize(20, 20));
     m_maxBtn->setFixedSize(20, 20);
+    m_maxBtn->setStyleSheet("border:0px;");
 
-    m_closeBtn = new QPushButton();
-    m_closeBtn->setIcon(QPixmap("./img/closeWnd.png"));
+    m_closeBtn = new QPushButton(this);
+    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
+    m_closeBtn->setStyleSheet("border:0px;");
+
 
     m_hLayout->addSpacing(20);
     m_hLayout->addStretch();

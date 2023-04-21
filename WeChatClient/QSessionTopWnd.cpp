@@ -14,13 +14,13 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout1->setSpacing(0);
 
     m_minBtn = new QPushButton(this);
-    m_minBtn->setIcon(QPixmap("./img/minWnd.png"));
+    m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_maxBtn = new QPushButton(this);
-    m_maxBtn->setIcon(QPixmap("./img/maxWnd.png"));
+    m_maxBtn->setIcon(QPixmap("./img/normalBtn_.png"));
     m_maxBtn->setIconSize(QSize(20, 20));
     m_closeBtn = new QPushButton(this);
-    m_closeBtn->setIcon(QPixmap("./img/closeWnd.png"));
+    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
 
     m_minBtn->setFixedSize(20, 20);

@@ -26,12 +26,16 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout1 = new QHBoxLayout();
     m_minBtn = new QPushButton(this);
     m_closeBtn = new QPushButton(this);
-    m_minBtn->setIcon(QPixmap("./img/minWnd.png"));
+    m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    m_closeBtn->setIcon(QPixmap("./img/closeWnd.png"));
+    m_minBtn->setStyleSheet("border:0px;");
+
+    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
+    m_closeBtn->setStyleSheet("border:0px");
+
     m_hLayout1->addStretch();
     m_hLayout1->addWidget(m_minBtn);
     m_hLayout1->addWidget(m_closeBtn);

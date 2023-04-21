@@ -30,13 +30,15 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t frien
 
     m_titleLabel->setText("don't forget win or lost - Ìí¼ÓºÃÓÑ");
 
-    m_minBtn->setIcon(QPixmap("./img/minWnd.png"));
+    m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
+    m_minBtn->setStyleSheet("border:0px");
 
-    m_closeBtn->setIcon(QPixmap("./img/closeWnd.png"));
+    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
+    m_closeBtn->setStyleSheet("border:0px;");
 
     m_hLayout1->addWidget(m_titleLabel);
     m_hLayout1->addWidget(m_minBtn);
