@@ -46,9 +46,10 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_MsgWndList->setMinimumWidth(this->width());
 
     // 发送消息窗口
-    m_sendTextEdit = new QTextEdit(this);
+    m_sendTextEdit = new QSelfTextEdit(this);
     m_sendTextEdit->setStyleSheet("border:0px;");
     m_sendTextEdit->setAcceptDrops(false);
+    m_sendTextEdit->setAcceptRichText(true);
 
     // 会话窗口的工具栏部分
     m_sesToolBar = new QSessionToolBar();

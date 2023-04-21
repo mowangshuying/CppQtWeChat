@@ -200,6 +200,7 @@
     <ClCompile Include="QSelectAddGroupOrAddFriendWnd.cpp" />
     <ClCompile Include="QSelectMoreWnd.cpp" />
     <ClCompile Include="QSelfLog.cpp" />
+    <ClCompile Include="QSelfTextEdit.cpp" />
     <ClCompile Include="QSessionToolBar.cpp" />
     <ClCompile Include="QSessionTopWnd.cpp" />
     <ClCompile Include="QSessionWnd.cpp" />
@@ -261,6 +262,7 @@
     <ClInclude Include="json\CJsonObject.hpp" />
     <ClInclude Include="QPch.h" />
     <ClInclude Include="QSelfLog.h" />
+    <ClInclude Include="QSelfTextEdit.h" />
     <QtMoc Include="QVoiceTelphoneWnd.h" />
     <QtMoc Include="QScreenShotToolBarWnd.h" />
     <QtMoc Include="QSelectMoreWnd.h" />
