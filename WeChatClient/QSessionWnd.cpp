@@ -114,7 +114,7 @@ void QSessionWnd::slotSendTextBtnClick()
     m_sendTextEdit->setText("");
 
     neb::CJsonObject json;
-    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
     json.Add("msgtext", msgText.toStdString().c_str());
@@ -123,10 +123,10 @@ void QSessionWnd::slotSendTextBtnClick()
     //如果不是发送群消息
     if (m_isGroupSes == false)
     {
-        QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
+        QWSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
             //向远端发送消息
             QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-            QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getInstance()->m_userid, m_recvId);
+            QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, m_recvId);
             QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
             msgWnd->setFixedWidth(this->width());
             QSize msgSize = msgWnd->fontRect(msgText);
@@ -143,11 +143,11 @@ void QSessionWnd::slotSendTextBtnClick()
     //发送的是群消息
     if (m_isGroupSes == true)
     {
-        QWSClientMgr::getInstance()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
+        QWSClientMgr::getMgr()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
             LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
             //向远端发送消息
             QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-            QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getInstance()->m_userid, m_recvId);
+            QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, m_recvId);
             QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
             msgWnd->setFixedWidth(this->width());
             QSize msgSize = msgWnd->fontRect(msgText);
@@ -183,7 +183,7 @@ void QSessionWnd::slotMoreBtnClick()
     //向远端服务器发送请求
     neb::CJsonObject json;
     json.Add("groupId", m_recvId);
-    QWSClientMgr::getInstance()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
+    QWSClientMgr::getMgr()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
         LogDebug << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
         // 向群好友列表中嵌入数据
         neb::CJsonObject datajson;
@@ -262,7 +262,7 @@ void QSessionWnd::slotMoreBtnClick()
 
 void QSessionWnd::slotVoiceTelPhoneBtnClick()
 {
-    QMainWnd* mainWnd = QMainWnd::getInstance();
+    QMainWnd* mainWnd = QMainWnd::getMainWnd();
     QVoiceTelphoneWnd* telphoneWnd = mainWnd->m_voiceTelphoneWnd;
     telphoneWnd->setRecvIdAndSesId(m_recvId, m_sesId);
     if (telphoneWnd->windowState() == Qt::WindowMinimized)
@@ -317,7 +317,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
         sizeStr = QString("%1 M").arg(size);
     }
 
-    QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, QMainWnd::getInstance()->m_userid, m_recvId);
+    QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, QMainWnd::getMainWnd()->m_userid, m_recvId);
     fileWnd->m_innerWnd->m_fileName->setText(filename);
     fileWnd->m_innerWnd->m_fileSize->setText(sizeStr);
     fileWnd->m_innerWnd->m_fileFullDir = fileInfo.absolutePath();
@@ -332,8 +332,8 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 
     QDateTime currentDateTime = QDateTime::currentDateTime();
     QString currentDate = currentDateTime.toString("yyyy_MM_dd_hh_mm_ss_zzz_");
-    QString httpHeader = QString("form-data;name=\"file\";filename=\"%1_%2_%3\"").arg(QMainWnd::getInstance()->m_userid).arg(currentDate).arg(filename);
-    QString fileNameStr = QString("%1_%2_%3").arg(QMainWnd::getInstance()->m_userid).arg(currentDate).arg(filename);
+    QString httpHeader = QString("form-data;name=\"file\";filename=\"%1_%2_%3\"").arg(QMainWnd::getMainWnd()->m_userid).arg(currentDate).arg(filename);
+    QString fileNameStr = QString("%1_%2_%3").arg(QMainWnd::getMainWnd()->m_userid).arg(currentDate).arg(filename);
 
     // 文件名
     QFile* file = new QFile(strFileName);
@@ -367,7 +367,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
         fileWnd->m_innerWnd->m_sendState->setText("已发送");
 
         neb::CJsonObject json;
-        json.Add("sendid", QMainWnd::getInstance()->m_userid);
+        json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
         json.Add("recvid", m_recvId);
         json.Add("sesid", m_sesId);
         json.Add("msgtype", 1);
@@ -377,7 +377,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
         filejson.Add("filesize", sizeStr.toStdString());
         json.Add("msgtext", filejson.ToString());
 
-        QWSClientMgr::getInstance()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogDebug << "after upload file recv msg from server!"; });
+        QWSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogDebug << "after upload file recv msg from server!"; });
     });
 }
 

@@ -25,11 +25,12 @@ public:
 
     void addFriendItem(const char* headUrl, const char* name, int64_t userid);
 public slots:
-    void closeWnd();
-    void minWnd();
+    void slotCloseWnd();
+    void slotMinWnd();
     void slotOnSearchBtnClicked();
 
 public:
+    QWidget* m_centerWnd;
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout1;
     // QHBoxLayout* m_hLayout2;

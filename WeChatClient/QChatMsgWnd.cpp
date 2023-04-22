@@ -207,7 +207,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
 
     if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_Owner)
     {
-        m_rightPixmap = QMainWnd::getInstance()->m_toolWnd->m_headImg;
+        m_rightPixmap = QMainWnd::getMainWnd()->m_toolWnd->m_headImg;
         m_rightPixmap = m_rightPixmap.scaled(30, 30);
 
         //»æÖÆÍæ¼ÒÍ·Ïñ

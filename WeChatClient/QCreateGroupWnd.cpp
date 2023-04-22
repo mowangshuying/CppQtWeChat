@@ -329,7 +329,7 @@ void QCreateGroupWnd::slotComfirmBtnClick()
         json["groupfriends"].Add(groupfriendIdVct[i]);
     }
     //向远端服务器发送请求
-    QWSClientMgr::getInstance()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
+    QWSClientMgr::getMgr()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
         LogDebug << "msg:" << msg.ToString().c_str();
         //现在服务端仅仅返回 createid，groupname,groupid,groupfriends
         int groupid = -1;
@@ -339,6 +339,6 @@ void QCreateGroupWnd::slotComfirmBtnClick()
             return;
         }
         //接收到创建群组成功的时候，向列表中嵌入一条数据
-        QMainWnd::getInstance()->m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.toStdString().c_str(), groupid);
+        QMainWnd::getMainWnd()->m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.toStdString().c_str(), groupid);
     });
 }

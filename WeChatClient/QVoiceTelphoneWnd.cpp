@@ -96,13 +96,13 @@ void QVoiceTelphoneWnd::regSignalSlot()
 
 void QVoiceTelphoneWnd::regNetMsg()
 {
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_call_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_call_phone, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_call_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_call_phone, this, std::placeholders::_1));
     // cs_msg_accept_phone
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_accept_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_accept_phone, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_accept_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_accept_phone, this, std::placeholders::_1));
     // cs_msg_phonemsg
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_phonemsg", std::bind(&QVoiceTelphoneWnd::cs_msg_phonemsg, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_phonemsg", std::bind(&QVoiceTelphoneWnd::cs_msg_phonemsg, this, std::placeholders::_1));
     // cs_msg_close_phone
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_close_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_close_phone, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_close_phone", std::bind(&QVoiceTelphoneWnd::cs_msg_close_phone, this, std::placeholders::_1));
 }
 
 void QVoiceTelphoneWnd::timerEvent(QTimerEvent* event)
@@ -166,7 +166,7 @@ void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
     }
 
     neb::CJsonObject json;
-    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
     std::string msgText = inputByteArray.toBase64().toStdString();
@@ -175,7 +175,7 @@ void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
     // LogDebug << "intputByteArray:" << inputByteArray.length() << "msgtext:" << msgText.length() << "json:" << json.ToString().length();
 
     // 不请求消息
-    QWSClientMgr::getInstance()->request("cs_msg_phonemsg", json, [](neb::CJsonObject& msg) {
+    QWSClientMgr::getMgr()->request("cs_msg_phonemsg", json, [](neb::CJsonObject& msg) {
         //向远端发送消息
         // LogDebug << "send msg suc!";
     });
@@ -184,11 +184,11 @@ void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
 void QVoiceTelphoneWnd::requestSendCallPhoneToServer()
 {
     neb::CJsonObject json;
-    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
     // 将拨打电话的请求推送到服务器，如果推送成功，设置当前状态为等待接听电话
-    QWSClientMgr::getInstance()->request("cs_msg_call_phone", json, [=](neb::CJsonObject& msg) {
+    QWSClientMgr::getMgr()->request("cs_msg_call_phone", json, [=](neb::CJsonObject& msg) {
         LogDebug << "recv cs_msg_call_phone";
         m_state = VoiceTelphoneState::VTS_waitAccept;
         m_phoningTimeCount = 0;
@@ -199,11 +199,11 @@ void QVoiceTelphoneWnd::requestSendCallPhoneToServer()
 void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
 {
     neb::CJsonObject json;
-    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
 
-    QWSClientMgr::getInstance()->request("cs_msg_accept_phone", json, [=](neb::CJsonObject& msg) {
+    QWSClientMgr::getMgr()->request("cs_msg_accept_phone", json, [=](neb::CJsonObject& msg) {
         LogDebug << "accept phone";
         m_bells->stop();  // 停止振铃
         m_state = VoiceTelphoneState::VTS_phoning;
@@ -217,10 +217,10 @@ void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
 void QVoiceTelphoneWnd::requestSendClosePhoneToServer()
 {
     neb::CJsonObject json;
-    json.Add("sendid", QMainWnd::getInstance()->m_userid);
+    json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
-    QWSClientMgr::getInstance()->request("cs_msg_close_phone", json, [=](neb::CJsonObject& msg) {
+    QWSClientMgr::getMgr()->request("cs_msg_close_phone", json, [=](neb::CJsonObject& msg) {
         closePhone();  //
     });
 }

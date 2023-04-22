@@ -56,7 +56,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
     <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;network;gui;multimedia;widgets;websockets;multimediawidgets</QtModules>
+    <QtModules>core;gui;network;widgets;multimedia;websockets;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="QtSettings">
@@ -206,6 +206,7 @@
     <ClCompile Include="QSessionWnd.cpp" />
     <ClCompile Include="QSimpleLabel.cpp" />
     <ClCompile Include="QSimpleSplit.cpp" />
+    <ClCompile Include="QStyleSheetMgr.cpp" />
     <ClCompile Include="QSwitchButton.cpp" />
     <ClCompile Include="QToolWnd.cpp" />
     <ClCompile Include="QUserInfoWnd.cpp" />
@@ -263,6 +264,7 @@
     <ClInclude Include="QPch.h" />
     <ClInclude Include="QSelfLog.h" />
     <ClInclude Include="QSelfTextEdit.h" />
+    <QtMoc Include="QStyleSheetMgr.h" />
     <QtMoc Include="QVoiceTelphoneWnd.h" />
     <QtMoc Include="QScreenShotToolBarWnd.h" />
     <QtMoc Include="QSelectMoreWnd.h" />

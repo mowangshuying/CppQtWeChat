@@ -34,7 +34,6 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/) : QWi
     m_closeBtn->setFixedSize(20, 20);
     m_closeBtn->setStyleSheet("border:0px;");
 
-
     m_hLayout->addSpacing(20);
     m_hLayout->addStretch();
     m_hLayout->addWidget(m_minBtn);
@@ -84,8 +83,8 @@ void QDealNewFriendsApplyWnd::setFriendApplyList()
 {
     //
     neb::CJsonObject json;
-    json.Add("ownerid", QMainWnd::getInstance()->m_userid);
-    QWSClientMgr::getInstance()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
+    json.Add("ownerid", QMainWnd::getMainWnd()->m_userid);
+    QWSClientMgr::getMgr()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
         LogDebug << msg.ToString().c_str();
         for (int i = 0; i < msg["data"].GetArraySize(); i++)
         {
@@ -108,7 +107,7 @@ void QDealNewFriendsApplyWnd::setFriendApplyList()
                 continue;
             }
 
-            if (ownerid == QMainWnd::getInstance()->m_userid)
+            if (ownerid == QMainWnd::getMainWnd()->m_userid)
             {
                 std::string username;
                 if (!tempJsonObj.Get("friendusername", username))

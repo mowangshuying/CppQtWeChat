@@ -24,7 +24,7 @@ QWSClientMgr::QWSClientMgr()
     LogDebug << "threadId:" << QThread::currentThread()->currentThreadId();
 }
 
-QWSClientMgr* QWSClientMgr::getInstance()
+QWSClientMgr* QWSClientMgr::getMgr()
 {
     if (m_WsClientMgr == nullptr)
     {

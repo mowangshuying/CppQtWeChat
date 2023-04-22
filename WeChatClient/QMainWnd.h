@@ -46,7 +46,7 @@ private:
     };
 
 public:
-    static QMainWnd* getInstance()
+    static QMainWnd* getMainWnd()
     {
         if (m_mainWnd == nullptr)
         {
@@ -114,6 +114,8 @@ public slots:
     void slotReplyFinished(QNetworkReply* reply);
     void slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason);
 public:
+    QWidget* m_centerWnd;
+
     QHBoxLayout* m_hLayout;
     QToolWnd* m_toolWnd;
 

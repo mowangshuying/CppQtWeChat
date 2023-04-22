@@ -158,6 +158,9 @@
     <ClCompile Include="QSelfTextEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QStyleSheetMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QWSClientMgr.h">
@@ -278,6 +281,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QVoiceTelphoneWnd.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QStyleSheetMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

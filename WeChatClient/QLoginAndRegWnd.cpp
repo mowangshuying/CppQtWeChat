@@ -11,22 +11,32 @@
 #include "QDataManager.h"
 
 #include "./json/CJsonObject.hpp"
+#include "QStyleSheetMgr.h"
 
 QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setObjectName("QLoginAndRegWnd");
+    m_centerWnd = new QWidget(this);
+
+    m_centerWnd->setObjectName("QLoginAndRegWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     setFixedSize(430, 330);
     setContentsMargins(0, 0, 0, 0);
+
     m_vLayout = new QVBoxLayout();
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
-    setLayout(m_vLayout);
+    m_centerWnd->setLayout(m_vLayout);
+
     setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
 
     m_topWnd = new QWidget();
     m_topWnd->setFixedSize(430, 130);
-    m_topWnd->setStyleSheet("background-color:#1aad19;border-style: none;");
+    // m_topWnd->setStyleSheet("background-color:#1aad19;border-style: none;");
     m_topWnd->setContentsMargins(0, 0, 0, 0);
 
     //顶部的窗口的布局
@@ -41,17 +51,17 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_closeBtn = new QPushButton();
     m_settingBtn = new QPushButton();
 
-    m_titleLabel->setText("莫忘输赢/制作");
+    // m_titleLabel->setText("莫忘输赢/制作");
 
-    m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20,20));
+    m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20, 20));
     m_settingBtn->setIconSize(QSize(30, 30));
     m_settingBtn->setFixedSize(30, 30);
 
-    m_minBtn->setIcon(QPixmap("./img/minBtn_.png").scaled(20,20));
+    m_minBtn->setIcon(QPixmap("./img/minBtn_.png").scaled(20, 20));
     m_minBtn->setIconSize(QSize(30, 30));
     m_minBtn->setFixedSize(30, 30);
 
-    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png").scaled(20,20));
+    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png").scaled(20, 20));
     m_closeBtn->setIconSize(QSize(30, 30));
     m_closeBtn->setFixedSize(30, 30);
 
@@ -62,20 +72,20 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vTopLayout->addLayout(m_hTopLayout);
 
-    {
-        QSimpleSplit* sp = new QSimpleSplit();
-        sp->setStyleSheet("background-color:gray;border:0px;");
-        m_vTopLayout->addWidget(sp);
-    }
+    /* {
+         QSimpleSplit* sp = new QSimpleSplit();
+         sp->setStyleSheet("background-color:gray;border:0px;");
+         m_vTopLayout->addWidget(sp);
+     }*/
 
     m_vTopLayout->addStretch();
 
     m_vLayout->addWidget(m_topWnd);
 
-    {
-        QSimpleSplit* sp = new QSimpleSplit();
-        m_vLayout->addWidget(sp);
-    }
+    /* {
+          QSimpleSplit* sp = new QSimpleSplit();
+          m_vLayout->addWidget(sp);
+      }*/
 
     m_bottomWnd = new QWidget();
     m_bottomWnd->setFixedHeight(200);
@@ -97,7 +107,7 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_regOrLoginBtn = new QPushButton();
     m_regOrLoginBtn->setFixedSize(240, 40);
-    m_regOrLoginBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
+    // m_regOrLoginBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
     m_regOrLoginBtn->setText("登录");
 
     m_hBottomLayout2 = new QHBoxLayout();
@@ -195,7 +205,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
         json.Add("nickname", nickname);
         json.Add("sex", sex);
 
-        QWSClientMgr::getInstance()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
+        QWSClientMgr::getMgr()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
             int state = 0;
             if (!msg.Get("state", state))
             {
@@ -243,7 +253,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
         json.Add("username", username);
         json.Add("password", password);
 
-        QWSClientMgr::getInstance()->request("cs_msg_login", json, [this](neb::CJsonObject& msg) {
+        QWSClientMgr::getMgr()->request("cs_msg_login", json, [this](neb::CJsonObject& msg) {
             //
             int state = 0;
             if (!msg.Get("state", state))
@@ -263,7 +273,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
 
             LogDebug << msg.ToString().c_str();
 
-            m_mainWnd = QMainWnd::getInstance();
+            m_mainWnd = QMainWnd::getMainWnd();
             if (m_mainWnd == nullptr)
                 return;
 

@@ -32,6 +32,7 @@ public slots:
     void slotPushBtnClick();
 
 public:
+    QWidget* m_centerWnd;
     int m_index = 0;
 
     QLabel* m_titleLabel;

@@ -3,7 +3,8 @@
 QApplyFriendWaitInfoWnd::QApplyFriendWaitInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     setContentsMargins(0, 0, 0, 0);
-    setFixedSize(460, 300);
+    setFixedSize(460, 280);
+   // setStyleSheet("background-color:red;");
 
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);

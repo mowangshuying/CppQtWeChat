@@ -138,8 +138,7 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_sendMsgBtn = new QPushButton("·¢ËÍÏûÏ¢");
     m_sendMsgBtn->setFixedSize(140, 35);
     m_sendMsgBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
-    // m_hLayout2->addStretch(1);
-    // m_hLayout2->addStretch(1);
+
     m_hLayout5->addSpacing(155);
     m_hLayout5->addWidget(m_sendMsgBtn);
     m_hLayout5->addStretch();
@@ -150,7 +149,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     setLayout(m_vLayout1);
     setAttribute(Qt::WA_StyledBackground);
 
-    // setStyleSheet("background-color:white;border-image:url(./img/emptybg.png)");
     connect(m_sendMsgBtn, SIGNAL(clicked()), this, SLOT(slotSendMsgBtnClick()));
 
     showBgPng();

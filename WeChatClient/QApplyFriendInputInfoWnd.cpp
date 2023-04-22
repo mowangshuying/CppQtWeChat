@@ -1,12 +1,17 @@
 ﻿#include "QApplyFriendInputInfoWnd.h"
 #include "QSimpleLabel.h"
+#include "QStyleSheetMgr.h"
 
 QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     setObjectName("QApplyFriendInputInfoWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
+    object.m_widget = this;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     setContentsMargins(0, 0, 0, 0);
-    setFixedSize(460, 300);
+    setFixedSize(460, 280);
 
     // 窗口主要布局为水平布局
     m_hLayout = new QHBoxLayout();
@@ -37,7 +42,6 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
     m_vUserInfoLayout->addStretch();
 
     m_userInfoWnd->setLayout(m_vUserInfoLayout);
-
     m_userInfoWnd->setFixedWidth(130);
     m_userInfoWnd->setWindowFlags(Qt::FramelessWindowHint);
     // m_userInfoWnd->setStyleSheet("background-color:#aaa;border:0px;");
@@ -51,8 +55,9 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
     m_inputMsgLabel = new QLabel();
     m_inputMsgEdit = new QTextEdit();
 
-    m_inputMsgLabel->setText("请输入验证信息:`-`");
-    m_inputMsgEdit->setFixedHeight(80);
+    m_inputMsgLabel->setText("请输入验证信息:");
+    m_inputMsgEdit->setFixedWidth(280);
+    m_inputMsgEdit->setFixedHeight(150);
 
     m_vLayout->addWidget(m_inputMsgLabel);
     m_vLayout->addWidget(m_inputMsgEdit);

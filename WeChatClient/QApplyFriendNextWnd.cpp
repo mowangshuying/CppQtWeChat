@@ -8,37 +8,47 @@
 
 #include "QWSClientMgr.h"
 #include "QMainWnd.h"
+#include "QStyleSheetMgr.h"
 
 QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString username /*= ""*/)
     : QWidget(p), m_friendid(friendid), m_username(username)
 {
-    setObjectName("QApplyFriendNextWnd");
+    setFixedSize(460, 360);
+    m_centerWnd = new QWidget(this);
+    m_centerWnd->setFixedSize(460, 360);
+    m_centerWnd->setObjectName("QApplyFriendNextWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     m_state = Ps_Next;
 
-    m_vLayout = new QVBoxLayout(this);
-    m_vLayout->setContentsMargins(0, 0, 0, 0);
-    setLayout(m_vLayout);
-    setFixedSize(460, 360);
-    setWindowFlags(Qt::FramelessWindowHint);
+    m_vLayout = new QVBoxLayout(m_centerWnd);
+    m_vLayout->setContentsMargins(10, 10, 10, 10);
+    // m_vLayout->setContentsMargins(0, 0, 0, 0);
+    m_centerWnd->setLayout(m_vLayout);
 
-    m_hLayout1 = new QHBoxLayout();
+    setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    m_hLayout1 = new QHBoxLayout(m_centerWnd);
 
     m_titleLabel = new QLabel();
     m_minBtn = new QPushButton();
     m_closeBtn = new QPushButton();
 
-    m_titleLabel->setText("don't forget win or lost - 添加好友");
+    m_titleLabel->setText("添加好友");
 
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    m_minBtn->setStyleSheet("border:0px");
+    // m_minBtn->setStyleSheet("border:0px");
 
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
-    m_closeBtn->setStyleSheet("border:0px;");
+    // m_closeBtn->setStyleSheet("border:0px;");
 
     m_hLayout1->addWidget(m_titleLabel);
     m_hLayout1->addWidget(m_minBtn);
@@ -46,10 +56,11 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t frien
 
     m_vLayout->addLayout(m_hLayout1);
 
-    QSimpleSplit* sp1 = new QSimpleSplit();
-    m_vLayout->addWidget(sp1);
+    // QSimpleSplit* sp1 = new QSimpleSplit();
+    //  m_vLayout->addWidget(sp1);
 
-    m_sLayout = new QStackedLayout(this);
+    ////////////////////////////////////////
+    m_sLayout = new QStackedLayout(m_centerWnd);
     m_sLayout->setContentsMargins(0, 0, 0, 0);
 
     m_wnd1 = new QApplyFriendInputInfoWnd();
@@ -57,15 +68,17 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t frien
 
     m_wnd2 = new QApplyFriendWaitInfoWnd();
     m_sLayout->addWidget(m_wnd2);
+    ////////////////////////////////////////
 
     m_vLayout->addLayout(m_sLayout);
 
-    QSimpleSplit* sp2 = new QSimpleSplit();
-    m_vLayout->addWidget(sp2);
+    // QSimpleSplit* sp2 = new QSimpleSplit();
+    // m_vLayout->addWidget(sp2);
 
-    m_hLayout2 = new QHBoxLayout();
-    m_pushBtn = new QPushButton(this);
+    m_hLayout2 = new QHBoxLayout(m_centerWnd);
+    m_pushBtn = new QPushButton();
     m_pushBtn->setText("下一步");
+    // m_pushBtn->setFixedWidth(60);
     // m_pushBtn->raise();
 
     m_hLayout2->addStretch();
@@ -109,14 +122,14 @@ void QApplyFriendNextWnd::slotPushBtnClick()
 
         //向远端服务器发送添加好友申请
         neb::CJsonObject json;
-        json.Add("ownerid", QMainWnd::getInstance()->m_userid);
+        json.Add("ownerid", QMainWnd::getMainWnd()->m_userid);
         json.Add("friendid", m_friendid);
 
         //获取验证的消息
         auto pApplyWnd1 = dynamic_cast<QApplyFriendInputInfoWnd*>(m_wnd1);
         json.Add("applymsg", pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
 
-        QWSClientMgr::getInstance()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
+        QWSClientMgr::getMgr()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
             int state = 0;
             if (!msg.Get("state", state))
             {

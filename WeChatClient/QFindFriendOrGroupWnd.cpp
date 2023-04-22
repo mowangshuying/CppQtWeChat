@@ -3,6 +3,7 @@
 #include "QFindFriendOrGroupWnd.h"
 #include "QWSClientMgr.h"
 #include "./json/CJsonObject.hpp"
+#include "QStyleSheetMgr.h"
 
 #include <QMessageBox>
 #include <QMouseEvent>
@@ -11,23 +12,27 @@
 
 QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setObjectName("QFindFriendOrGroupWnd");
+    setMinimumSize(600, 400);
+    m_centerWnd = new QWidget(this);
+    m_centerWnd->setObjectName("QFindFriendOrGroupWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    m_vLayout = new QVBoxLayout(this);
-    m_vLayout->setContentsMargins(5, 5, 5, 5);
-    setLayout(m_vLayout);
+    m_centerWnd->setMinimumSize(600, 400);
+    m_vLayout = new QVBoxLayout(m_centerWnd);
+    m_vLayout->setContentsMargins(10, 10, 10, 10);
+    m_centerWnd->setLayout(m_vLayout);
     setWindowFlags(Qt::FramelessWindowHint);
-    setFixedSize(600, 400);
+    setAttribute(Qt::WA_TranslucentBackground);
 
     m_vLayout->addSpacing(5);
 
     m_hLayout1 = new QHBoxLayout();
-    m_titleLabel = new QLabel(this);
     m_minBtn = new QPushButton(this);
     m_closeBtn = new QPushButton(this);
 
-    m_hLayout1->addWidget(m_titleLabel);
-    m_titleLabel->setText("²éÕÒ");
     m_hLayout1->addStretch();
     m_hLayout1->addWidget(m_minBtn);
     m_hLayout1->addWidget(m_closeBtn);
@@ -35,16 +40,14 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    m_minBtn->setStyleSheet("border:0px;");
 
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
-    m_closeBtn->setStyleSheet("border:0px;");
     m_vLayout->addLayout(m_hLayout1);
 
-    QSimpleSplit* pSplitWnd1 = new QSimpleSplit(this);
-    m_vLayout->addWidget(pSplitWnd1);
+    // QSimpleSplit* pSplitWnd1 = new QSimpleSplit(this);
+    // m_vLayout->addWidget(pSplitWnd1);
 
     m_hLayout2 = new QHBoxLayout();
     m_searchEdit = new QLineEdit();
@@ -54,10 +57,9 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget
     m_findGroupChx->setText("ÕÒÈº");
     m_searchBtn = new QPushButton();
 
-    m_searchEdit->setFixedSize(350, 30);
+    //m_searchEdit->setFixedSize(350, 30);
 
     m_hLayout2->addWidget(m_searchEdit);
-
     m_hLayout2->addWidget(m_findPersonChx);
     m_hLayout2->addWidget(m_findGroupChx);
 
@@ -69,22 +71,22 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget
 
     m_searchBtn->setText("²éÕÒ");
     m_searchBtn->setFixedSize(100, 30);
-    m_searchBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
+    // m_searchBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     m_vLayout->addLayout(m_hLayout2);
 
-    QSimpleSplit* pSplitWnd2 = new QSimpleSplit(this);
-    m_vLayout->addWidget(pSplitWnd2);
+    // QSimpleSplit* pSplitWnd2 = new QSimpleSplit(this);
+    // m_vLayout->addWidget(pSplitWnd2);
 
     m_listWidget = new QListWidget(this);
-    m_listWidget->setFixedHeight(330);
+    m_listWidget->setFixedHeight(310);
     m_listWidget->setStyleSheet("border:0px;");
     m_vLayout->addWidget(m_listWidget);
 
     m_vLayout->addStretch();
 
-    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
-    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
+    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotMinWnd()));
+    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
     connect(m_searchBtn, SIGNAL(clicked()), this, SLOT(slotOnSearchBtnClicked()));
 }
 
@@ -120,12 +122,12 @@ void QFindFriendOrGroupWnd::addFriendItem(const char* headUrl, const char* name,
     m_listWidget->setItemWidget(pListItem, pMsgItem);
 }
 
-void QFindFriendOrGroupWnd::closeWnd()
+void QFindFriendOrGroupWnd::slotCloseWnd()
 {
     hide();
 }
 
-void QFindFriendOrGroupWnd::minWnd()
+void QFindFriendOrGroupWnd::slotMinWnd()
 {
     showMinimized();
 }
@@ -147,7 +149,7 @@ void QFindFriendOrGroupWnd::slotOnSearchBtnClicked()
             delete pitem;
         }
 
-        QWSClientMgr::getInstance()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
+        QWSClientMgr::getMgr()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
             int state;
             if (!msg.Get("state", state))
             {

@@ -1,4 +1,5 @@
 #include "QFindFriendItemWnd.h"
+#include "QStyleSheetMgr.h"
 
 QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p) : QWidget(p)
 {
@@ -8,6 +9,10 @@ QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p) : QWidget(p)
 QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p, const char* headUrl, const char* name) : QWidget(p), m_username(name)
 {
     setObjectName("QFindFriendItemWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
+    object.m_widget = this;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     m_hLayout = new QHBoxLayout(this);
 
@@ -27,16 +32,16 @@ QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p, const char* headUrl, const ch
 
     m_hLayout->addStretch();
     m_addFriendBtn = new QPushButton();
-    m_addFriendBtn->setText("+ ºÃÓÑ");
-    m_addFriendBtn->setFixedSize(60, 30);
+    m_addFriendBtn->setText("Ìí¼ÓºÃÓÑ");
+    // m_addFriendBtn->setFixedSize(60, 30);
     m_hLayout->addWidget(m_addFriendBtn);
     m_hLayout->addSpacing(80);
 
-    m_addFriendBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
+    // m_addFriendBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     setFixedHeight(60);
-    setObjectName("QCommContactItemWnd");
-    setStyleSheet("#QCommContactItemWnd{border-bottom:1px solid red;}");
+    //  setObjectName("QCommContactItemWnd");
+    //  setStyleSheet("#QCommContactItemWnd{border-bottom:1px solid red;}");
 
     connect(m_addFriendBtn, SIGNAL(clicked()), this, SLOT(slotAddFriendBtnClick()));
 }

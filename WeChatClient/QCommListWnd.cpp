@@ -79,10 +79,10 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
         QCommContactItemWnd* wnd = dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pCustItem));
         if (wnd->m_bNewFriend)
         {
-            QMainWnd::getInstance()->m_dealNewFriendsApplyWnd->setFriendApplyList();
+            QMainWnd::getMainWnd()->m_dealNewFriendsApplyWnd->setFriendApplyList();
             //切换窗口到新的朋友窗口
             // m_sLayout2中位置为1的窗口为新的朋友的窗口
-            QMainWnd::getInstance()->m_sLayout2->setCurrentIndex(1);
+            QMainWnd::getMainWnd()->m_sLayout2->setCurrentIndex(1);
         }
         else
         {
@@ -93,7 +93,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
             infoMap["friendid"] = QString::number(wnd->m_friendId, 10);
 
             //切换到展示联系人信息的页面
-            QMainWnd::getInstance()->m_sLayout2->setCurrentIndex(0);
+            QMainWnd::getMainWnd()->m_sLayout2->setCurrentIndex(0);
 
             //联系人的信息改变
             emit signalContactInfoChange(infoMap);
@@ -118,9 +118,9 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
         //获取到群的id
         int groupid = wnd->m_groupId;
         //右边工具栏需要跳转到msg那一栏
-        QMainWnd::getInstance()->m_toolWnd->m_msgBtn->click();
+        QMainWnd::getMainWnd()->m_toolWnd->m_msgBtn->click();
         //先找到消息列表中所在的位置
-        auto msgListWidget = QMainWnd::getInstance()->m_commMsgListWnd->m_listWidget;
+        auto msgListWidget = QMainWnd::getMainWnd()->m_commMsgListWnd->m_listWidget;
 
         for (int i = 0; i < msgListWidget->count(); i++)
         {
@@ -129,7 +129,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
             if (pWnd->m_isGroupMsg && pWnd->m_userid == groupid)
             {
                 msgListWidget->setCurrentItem(pitem);
-                QMainWnd::getInstance()->slotSesIdToIndex(pWnd->m_sesId);
+                QMainWnd::getMainWnd()->slotSesIdToIndex(pWnd->m_sesId);
                 break;
             }
         }

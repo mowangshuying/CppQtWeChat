@@ -19,6 +19,7 @@ public:
     QApplyFriendInputInfoWnd(QWidget* p = nullptr);
 
 public:
+    QWidget* m_centerWnd;
     //主要布局
     QHBoxLayout* m_hLayout;
     QVBoxLayout* m_vLayout;

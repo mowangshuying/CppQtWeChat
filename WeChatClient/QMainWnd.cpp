@@ -16,13 +16,24 @@
 #include <cstdlib>
 #include <qmath.h>
 #include <QGraphicsDropShadowEffect>
+#include "QStyleSheetMgr.h"
 
 QMainWnd* QMainWnd::m_mainWnd = nullptr;
 
 QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setObjectName("QMainWnd");
-    m_hLayout = new QHBoxLayout(this);
+    m_centerWnd = new QWidget(this);
+
+    // 注册QMainWnd的qss
+    m_centerWnd->setObjectName("QMainWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+
+    m_hLayout = new QHBoxLayout();
+    m_centerWnd->setLayout(m_hLayout);
+
     m_toolWnd = new QToolWnd(this);
 
     m_commMsgListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::MsgItemWndTpye);
@@ -93,11 +104,11 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
             SLOT(slotContactInfoChange(QMap<QString, QString>)));
     connect(m_commContactInfo, SIGNAL(signalSendMsgBtnClick(QMap<QString, QString>)), this, SLOT(slotSendMsgBtnClick(QMap<QString, QString>)));
 
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendmsg", std::bind(&QMainWnd::cs_msg_sendmsg, this, std::placeholders::_1));
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_sessionlist", std::bind(&QMainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_grouplist", std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
-    QWSClientMgr::getInstance()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_sendmsg", std::bind(&QMainWnd::cs_msg_sendmsg, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_update_sessionlist", std::bind(&QMainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_update_grouplist", std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
+    QWSClientMgr::getMgr()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
 
     m_networkMgr = new QNetworkAccessManager();
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
@@ -404,8 +415,8 @@ void QMainWnd::requestFriendList()
 {
     //
     neb::CJsonObject json;
-    json.Add("ownerid", QMainWnd::getInstance()->m_userid);
-    QWSClientMgr::getInstance()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg) {
+    json.Add("ownerid", QMainWnd::getMainWnd()->m_userid);
+    QWSClientMgr::getMgr()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg) {
         // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
         if (!msg["data"].IsArray())
         {
@@ -441,8 +452,8 @@ void QMainWnd::requestSessionList()
 {
     //向远端请求会话列表
     neb::CJsonObject json;
-    json.Add("ownerid", QMainWnd::getInstance()->getInstance()->m_userid);
-    QWSClientMgr::getInstance()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg) {
+    json.Add("ownerid", QMainWnd::getMainWnd()->getMainWnd()->m_userid);
+    QWSClientMgr::getMgr()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg) {
         // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
         LogDebug << "msg:" << msg.ToString().c_str();
         //向会话列表中添加一些数据
@@ -553,8 +564,8 @@ bool QMainWnd::hasSessionWndBySessionId(int sesid)
 void QMainWnd::requestGroupList()
 {
     neb::CJsonObject json;
-    json.Add("ownerid", QMainWnd::getInstance()->getInstance()->m_userid);
-    QWSClientMgr::getInstance()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
+    json.Add("ownerid", QMainWnd::getMainWnd()->getMainWnd()->m_userid);
+    QWSClientMgr::getMgr()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
         LogDebug << "requestGroupList:" << msg.ToString().c_str();
         //先判断传入是否是msg["data"]是否是array
         if (!msg["data"].IsArray())

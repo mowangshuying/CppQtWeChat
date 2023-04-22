@@ -31,6 +31,8 @@ public slots:
     void slotRegOrLoginBtn();
 
 public:
+    QWidget* m_centerWnd;
+    
     QVBoxLayout* m_vLayout;
 
     QWidget* m_topWnd;
