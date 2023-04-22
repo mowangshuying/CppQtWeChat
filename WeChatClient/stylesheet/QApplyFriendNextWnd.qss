@@ -1,7 +1,17 @@
-#QApplyFriendNextWnd{
-    background-color: rgb(149,236,105);
+#QApplyFriendNextWnd {
+    background-color: rgb(238,244,249);
     border-radius: 4px;
 }
+
+#QApplyFriendNextWnd:!active {
+    background-color: rgb(243,243,243); 
+}
+
+#QApplyFriendNextWnd:active {
+    background-color: rgb(238,244,249);
+}
+
+
 
 QLabel {
     font: 14px 'Segoe UI', 'Microsoft YaHei';

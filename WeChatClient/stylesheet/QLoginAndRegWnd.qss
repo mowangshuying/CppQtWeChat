@@ -1,7 +1,16 @@
 #QLoginAndRegWnd {
-    background-color: rgb(149,236,105);
+    background-color: rgb(238,244,249);
     border-radius: 4px;
 }
+
+#QLoginAndRegWnd:!active {
+    background-color: rgb(243,243,243); 
+}
+
+#QLoginAndRegWnd:active {
+    background-color: rgb(238,244,249);
+}
+
 
 QPushButton {
     color: black;
@@ -58,6 +67,7 @@ QCheckBox::indicator:indeterminate {
 }
 
 QCheckBox::indicator:checked {
+    background-color: rgb(0,102,180);
     image: url(./img/check_box/Accept_white.svg);
 }
 

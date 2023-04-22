@@ -11,16 +11,27 @@
 #include <QNetworkReply>
 #include "QDataManager.h"
 #include "QSimpleSplit.h"
+#include "QStyleSheetMgr.h"
 
 QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setObjectName("QPictureToolWnd");
+    // m_centerWnd->setFixedSize(460, 360);
+    m_centerWnd = new QWidget(this);
+    m_centerWnd->setFixedSize(460, 360);
+    m_centerWnd->setObjectName("QPictureToolWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+
+    // setObjectName("QPictureToolWnd");
     setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
 
     m_vLayout = new QVBoxLayout();
-    setLayout(m_vLayout);
+    m_centerWnd->setLayout(m_vLayout);
     m_picLable = new QLabel();
-    m_picLable->setFixedSize(350, 350);
+    m_picLable->setFixedSize(249, 249);
 
     m_hLayout1 = new QHBoxLayout();
     m_minBtn = new QPushButton(this);
@@ -28,12 +39,12 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    m_minBtn->setStyleSheet("border:0px;");
+    //  m_minBtn->setStyleSheet("border:0px;");
 
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
-    m_closeBtn->setStyleSheet("border:0px");
+    // m_closeBtn->setStyleSheet("border:0px");
 
     m_hLayout1->addStretch();
     m_hLayout1->addWidget(m_minBtn);
@@ -70,6 +81,8 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
+
+    // setFixedSize(m_centerWnd->size());
 }
 
 void QPictureToolWnd::mouseMoveEvent(QMouseEvent* event)

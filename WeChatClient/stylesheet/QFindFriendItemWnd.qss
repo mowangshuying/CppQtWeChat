@@ -1,8 +1,16 @@
 #QFindFriendItemWnd {
-    background-color: rgb(149,236,105);
+    background-color: rgb(238,244,249);
     border-radius: 4px;
-    font: 14px 'Segoe UI', 'Microsoft YaHei';
 }
+
+#QFindFriendItemWnd:!active {
+    background-color: rgb(243,243,243); 
+}
+
+#QFindFriendItemWnd:active {
+    background-color: rgb(238,244,249);
+}
+
 
 QLabel {
     font: 14px 'Segoe UI', 'Microsoft YaHei';

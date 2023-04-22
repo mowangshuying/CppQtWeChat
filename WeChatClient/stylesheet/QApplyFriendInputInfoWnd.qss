@@ -1,5 +1,14 @@
-#QApplyFriendInputInfoWnd{
-     background-color: rgb(149,236,105);
+#QApplyFriendInputInfoWnd {
+    background-color: rgb(238,244,249);
+    border-radius: 4px;
+}
+
+#QApplyFriendInputInfoWnd:!active {
+    background-color: rgb(243,243,243); 
+}
+
+#QApplyFriendInputInfoWnd:active {
+    background-color: rgb(238,244,249);
 }
 
 QLabel {

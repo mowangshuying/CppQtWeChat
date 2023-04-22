@@ -1,7 +1,16 @@
 #QFindFriendOrGroupWnd {
-    background-color: rgb(149,236,105);
+    background-color: rgb(238,244,249);
     border-radius: 4px;
 }
+
+#QFindFriendOrGroupWnd:!active {
+    background-color: rgb(243,243,243); 
+}
+
+#QFindFriendOrGroupWnd:active {
+    background-color: rgb(238,244,249);
+}
+
 
 QPushButton {
     color: black;
@@ -59,7 +68,7 @@ QCheckBox::indicator:indeterminate {
 
 QCheckBox::indicator:checked {
     image: url(./img/check_box/Accept_white.svg);
-    background-color: rgb(149,236,105);
+    background-color: blue;
 }
 
 QCheckBox::indicator:indeterminate {
@@ -69,13 +78,13 @@ QCheckBox::indicator:indeterminate {
 QCheckBox::indicator:checked:hover,
 QCheckBox::indicator:indeterminate:hover {
     border: 1px solid --ThemeColorLight1;
-    background-color: rgb(149,236,105);
+    background-color: blue;
 }
 
 QCheckBox::indicator:checked:pressed,
 QCheckBox::indicator:indeterminate:pressed {
     border: 1px solid --ThemeColorLight3;
-    background-color: rgb(149,236,105);
+    background-color: blue;
 }
 
 QCheckBox:disabled {
@@ -90,7 +99,7 @@ QCheckBox::indicator:disabled {
 QCheckBox::indicator:checked:disabled,
 QCheckBox::indicator:indeterminate:disabled {
     border: 1px solid rgb(199, 199, 199);
-    background-color: rgb(149,236,105);
+    background-color: blue;
 }
 
 QLineEdit {

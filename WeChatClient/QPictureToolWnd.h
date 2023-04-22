@@ -27,6 +27,8 @@ public slots:
     void minWnd();
 
 public:
+    QWidget* m_centerWnd;
+
     // "./img/default.png"
     QLabel* m_picLable;
     QPixmap m_HeadImg;
