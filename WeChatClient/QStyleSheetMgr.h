@@ -4,6 +4,7 @@
 #include <map>
 #include <QFile>
 #include <QTimer>
+#include <QFileSystemWatcher>
 
 class QStyleSheetObject
 {
@@ -12,13 +13,21 @@ public:
     QString m_qssFileName;
 };
 
-typedef std::vector<QStyleSheetObject> QStyleSheetObjectVct;  
+typedef std::vector<QStyleSheetObject> QStyleSheetObjectVct;
+
+class QStyleSheetObectWatcher
+{
+public:
+    QFileSystemWatcher* m_watcher;
+    QStyleSheetObjectVct m_objectVct;
+};
 
 class QStyleSheetMgr : public QObject
 {
     Q_OBJECT
 private:
     QStyleSheetMgr(QObject* parent = nullptr);
+    ~QStyleSheetMgr();
     static QStyleSheetMgr* m_mgr;
 
 public slots:
@@ -41,6 +50,8 @@ public:  // ³ÉÔ±º¯Êý
     static void freeMgr();
 
 public:
-    std::map<QString, QStyleSheetObjectVct> m_map;
+    std::map<QString, QStyleSheetObectWatcher> m_map;
+    // std::vector<QString, QFileSystemWatcher> m_watches;
+
     QTimer m_timer;
 };
