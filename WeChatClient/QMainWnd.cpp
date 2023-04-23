@@ -23,13 +23,12 @@ QMainWnd* QMainWnd::m_mainWnd = nullptr;
 QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     m_centerWnd = new QWidget(this);
-
-    // ×¢²áQMainWndµÄqss
     m_centerWnd->setObjectName("QMainWnd");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
     object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+
 
     m_hLayout = new QHBoxLayout();
     m_centerWnd->setLayout(m_hLayout);
@@ -135,7 +134,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     if (objectName().isEmpty())
         setObjectName("QMainWnd");
-    setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
+   // setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
     setMinimumSize(800, 600);
     setMouseTracking(true);
 

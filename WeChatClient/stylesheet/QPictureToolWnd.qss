@@ -1,19 +1,20 @@
-#QMainWnd {
-    background-color: white;
+#QPictureToolWnd {
+    background-color: rgb(238,244,249);
     border-radius: 4px;
-    border: 1px black solid;
 }
 
-QLabel {
-    font: 14px 'Segoe UI', 'Microsoft YaHei';
-    color: black;
-    border:none;
+#QPictureToolWnd:!active {
+    background-color: rgb(243,243,243); 
 }
+
+#QPictureToolWnd:active {
+    background-color: rgb(238,244,249);
+}
+
 
 QPushButton {
     color: black;
     background: rgba(255, 255, 255, 0.7);
-    /*background: red;*/
     border: 1px solid rgba(0, 0, 0, 0.073);
     border-bottom: 1px solid rgba(0, 0, 0, 0.183);
     border-radius: 5px;

@@ -10,31 +10,47 @@
 #include "QDataManager.h"
 #include "QWSClientMgr.h"
 #include "QMainWnd.h"
+#include "QStyleSheetMgr.h"
 
 QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setObjectName("QCreateGroupWnd");
+    // setObjectName("QCreateGroupWnd");
 
-    m_vLayout = new QVBoxLayout(this);
-    setLayout(m_vLayout);
-    setFixedSize(600, 400);
+    m_centerWnd = new QWidget(this);
+    // m_centerWnd->setFixedSize(460, 360);
+    m_centerWnd->setObjectName("QCreateGroupWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+
+    m_vLayout = new QVBoxLayout(m_centerWnd);
+    m_vLayout->setContentsMargins(10, 10, 10, 10);
+
+    m_centerWnd->setLayout(m_vLayout);
+    m_centerWnd->setFixedSize(640, 420);
+
+
     setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
 
-    m_hLayout1 = new QHBoxLayout();
-    m_titleLabel = new QLabel(this);
-    m_minBtn = new QPushButton(this);
-    m_closeBtn = new QPushButton(this);
+    m_titleLabel = new QLabel(m_centerWnd);
+    m_minBtn = new QPushButton(m_centerWnd);
+    m_closeBtn = new QPushButton(m_centerWnd);
+
     m_titleLabel->setText("创建群聊");
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    m_minBtn->setStyleSheet("border:0px;");
+    // m_minBtn->setStyleSheet("border:0px;");
 
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
-    m_closeBtn->setStyleSheet("border:0px");
+    //   m_closeBtn->setStyleSheet("border:0px");
 
+    // 标题栏
+    m_hLayout1 = new QHBoxLayout();
     m_hLayout1->addWidget(m_titleLabel);
     m_hLayout1->addStretch();
     m_hLayout1->addWidget(m_minBtn);
@@ -51,7 +67,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_listWnd1->setFixedHeight(300);
 
     m_serchEdit->setFixedWidth(280);
-    m_serchEdit->setPlaceholderText("输入查找关键字`-`");
+    m_serchEdit->setPlaceholderText("输入查找关键字:");
 
     m_vLayout1->addWidget(m_serchEdit);
     m_vLayout1->addWidget(m_listWnd1);
@@ -68,7 +84,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hasSelLabel->setText("已选联系人:0");
     m_listWnd2->setFixedHeight(280);
 
-    m_groupNameEdit->setPlaceholderText("请输入群名称`-`");
+    m_groupNameEdit->setPlaceholderText("请输入群名称:");
 
     m_hLayout3 = new QHBoxLayout();
     m_comfirmBtn = new QPushButton();
@@ -86,14 +102,6 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_hLayout2->addLayout(m_vLayout2);
     m_vLayout->addLayout(m_hLayout2);
-
-    ///
-    // for (int i = 0; i < 5; i++) {
-    //	QString str1 = QString("角色%1号").arg(i);
-    //	//QString str1 = QString("添加新的朋友%1号")).arg(i);
-    //	QString str2 = QString("0000000%1").arg(i);
-    //	addListWnd1Item("./img/head2.png", str1.toLocal8Bit().data(),str2.toLocal8Bit().data());
-    //}
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));

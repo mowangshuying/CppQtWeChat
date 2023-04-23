@@ -1,0 +1,30 @@
+#QSelectAddGroupOrAddFriendWnd {
+    background-color: rgb(238,244,249);
+    border-radius: 4px;
+}
+
+#QSelectAddGroupOrAddFriendWnd:!active {
+    background-color: rgb(243,243,243); 
+}
+
+#QSelectAddGroupOrAddFriendWnd:active {
+    background-color: rgb(238,244,249);
+}
+
+QPushButton {
+    color: black;
+     background-color: rgb(238,244,249);
+    font: 14px 'Segoe UI', 'Microsoft YaHei';
+    outline: none;
+    border: 0px;
+}
+
+QPushButton:hover {
+    background-color: rgb(243,243,243); 
+
+}
+
+QPushButton:disabled {
+}
+
+

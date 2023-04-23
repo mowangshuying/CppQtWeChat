@@ -42,6 +42,8 @@ public slots:
     void slotComfirmBtnClick();
 
 public:
+    QWidget* m_centerWnd;
+
     QVBoxLayout* m_vLayout;
 
     QHBoxLayout* m_hLayout1;

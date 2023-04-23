@@ -27,6 +27,7 @@ public:
     //将玩家的数据设置到QListWidget中
     // void updateData();
 public:
+    QWidget* m_centerWnd;
     QVBoxLayout* m_vLayout;
     QPushButton* m_addContactsOrGroupBtn;
     QPushButton* m_createGroupBtn;

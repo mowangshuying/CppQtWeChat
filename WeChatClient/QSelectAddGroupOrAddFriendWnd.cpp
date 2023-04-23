@@ -4,31 +4,39 @@
 #include <QDebug>
 #include <QApplication>
 
+#include "QStyleSheetMgr.h"
+
 QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget(p)
 {
-    setObjectName("QSelectAddGroupOrAddFriendWnd");
-    setAttribute(Qt::WA_StyledBackground);
+    m_centerWnd = new QWidget(this);
+
+    m_centerWnd->setObjectName("QSelectAddGroupOrAddFriendWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+
+    setAttribute(Qt::WA_TranslucentBackground);
     setWindowFlags(Qt::FramelessWindowHint);
-    setFixedWidth(100);
-    m_vLayout = new QVBoxLayout(this);
-    m_vLayout->setContentsMargins(0, 0, 0, 0);
+
+    setFixedSize(120, 100);
+
+    m_vLayout = new QVBoxLayout(m_centerWnd);
+    m_vLayout->setContentsMargins(10, 10, 10, 10);
     m_vLayout->setSpacing(0);
 
-    m_addContactsOrGroupBtn = new QPushButton("添加好友或群", this);
-    m_createGroupBtn = new QPushButton("创建群聊", this);
-
-    m_addContactsOrGroupBtn->setStyleSheet("border:0px;");
-    m_createGroupBtn->setStyleSheet("border:0px;");
+    m_addContactsOrGroupBtn = new QPushButton("添加好友或群");
+    m_createGroupBtn = new QPushButton("创建群聊");
 
     m_vLayout->addWidget(m_addContactsOrGroupBtn);
-    {
-        QSimpleSplit* sp = new QSimpleSplit();
-        m_vLayout->addWidget(sp);
-    }
+   ///* {
+   //     QSimpleSplit* sp = new QSimpleSplit();
+   //     m_vLayout->addWidget(sp);
+   // }*/
     m_vLayout->addWidget(m_createGroupBtn);
 
-    setFixedHeight(m_createGroupBtn->height() + m_addContactsOrGroupBtn->height());
-    setLayout(m_vLayout);
+  //  setFixedHeight(m_createGroupBtn->height() + m_addContactsOrGroupBtn->height());
+    m_centerWnd->setLayout(m_vLayout);
 
     m_findFriendOrGroupWnd = new QFindFriendOrGroupWnd();
     m_findFriendOrGroupWnd->hide();
