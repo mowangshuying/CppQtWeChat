@@ -29,15 +29,14 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-
-    m_hLayout = new QHBoxLayout();
+    m_hLayout = new QHBoxLayout(m_centerWnd);
     m_centerWnd->setLayout(m_hLayout);
 
     m_toolWnd = new QToolWnd(this);
 
-    m_commMsgListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::MsgItemWndTpye);
-    m_commContactsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::ContactItemWndType);
-    m_commGroupsListWnd = new QCommListWnd(this, QCommListWnd::QCommListWndEnum::GroupItemWndType);
+    m_commMsgListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::MsgItemWndTpye);
+    m_commContactsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::ContactItemWndType);
+    m_commGroupsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::GroupItemWndType);
 
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
@@ -134,7 +133,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     if (objectName().isEmpty())
         setObjectName("QMainWnd");
-   // setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
+    // setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
     setMinimumSize(800, 600);
     setMouseTracking(true);
 

@@ -19,16 +19,22 @@
 #include <QJsonParseError>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "QStyleSheetMgr.h"
 
 QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     setObjectName("QSessionWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
+    object.m_widget = this;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+
     setMinimumSize(640, 600);
     setWindowTitle("会话窗口");
     setAcceptDrops(true);
     setMouseTracking(true);
 
-    m_vLayout = new QVBoxLayout();
+    m_vLayout = new QVBoxLayout(this);
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
@@ -47,7 +53,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     // 发送消息窗口
     m_sendTextEdit = new QSelfTextEdit(this);
-    m_sendTextEdit->setStyleSheet("border:0px;");
+    //m_sendTextEdit->setStyleSheet("border:0px;");
     m_sendTextEdit->setAcceptDrops(false);
     m_sendTextEdit->setAcceptRichText(true);
 
@@ -94,7 +100,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_sendTextBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     setAttribute(Qt::WA_StyledBackground);
-    setStyleSheet("background-color:white;border:0px;");
+   // setStyleSheet("background-color:white;border:0px;");
 
     connect(m_sesToolBar->m_emoijWnd, SIGNAL(signalEmoijClicked(QString)), this, SLOT(slotEmoijClicked(QString)));
     connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slotMoreBtnClick()));

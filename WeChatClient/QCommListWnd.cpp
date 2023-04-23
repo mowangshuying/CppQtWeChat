@@ -9,19 +9,24 @@
 #include "QCommContactItemWnd.h"
 #include "QCustomListWidgetItem.h"
 #include "QCommGroupItemWnd.h"
+#include "QStyleSheetMgr.h"
 
 QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*QCommMsgItemWnd_Tpye*/) : QWidget(p), m_WndType(wndType)
 {
     setObjectName("QCommListWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
+    object.m_widget = this;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    m_vLayout = new QVBoxLayout();
+    m_vLayout = new QVBoxLayout(this);
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
     setFixedWidth(250);
     setMouseTracking(true);
 
-    m_hLayout = new QHBoxLayout();
+    m_hLayout = new QHBoxLayout(this);
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
     m_searchEdit = new QLineEdit(this);
@@ -48,7 +53,7 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
 
     m_listWidget = new QListWidget();
     m_listWidget->setFixedWidth(250);
-    m_listWidget->setAttribute(Qt::WA_StyledBackground);
+   // m_listWidget->setAttribute(Qt::WA_StyledBackground);
     m_listWidget->setWindowFlags(Qt::FramelessWindowHint);
     m_vLayout->addWidget(m_listWidget);
 
@@ -56,14 +61,16 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     m_selectWnd->hide();
 
     setFixedWidth(250);
-    setObjectName("QCommListWnd");
-    setStyleSheet("#QCommListWnd{background:white;border:0px;}");
+    // setObjectName("QCommListWnd");
+    // setStyleSheet("#QCommListWnd{background:white;border:0px;}");
     setAttribute(Qt::WA_StyledBackground);
-    setWindowFlags(Qt::FramelessWindowHint);
+    //setWindowFlags(Qt::FramelessWindowHint);
 
-    m_listWidget->setStyleSheet("border:0px;");
+    // m_listWidget->setStyleSheet("border:0px;");
     connect(m_listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotOnCurrentItemClicked(QListWidgetItem*)));
     connect(m_startGroupBtn, SIGNAL(clicked()), this, SLOT(slotOnStartGroupBtnClicked()));
+   // setStyleSheet("background-color:red;");
+   
 }
 
 void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)

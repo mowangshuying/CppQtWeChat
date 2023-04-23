@@ -3,8 +3,8 @@
 QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     setObjectName("QSessionTopWnd");
-    m_vLayout = new QVBoxLayout(this);
 
+    m_vLayout = new QVBoxLayout(this);
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
 
@@ -75,5 +75,5 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // setStyleSheet("background-color:white;border:0px;");
     if (objectName().isEmpty())
         setObjectName("QSessionTopWnd");
-    setStyleSheet("QWidget#QSessionTopWnd{border-top-right-radius:4px;background-color:white;border:none;}");
+  //  setStyleSheet("QWidget#QSessionTopWnd{border-top-right-radius:4px;background-color:white;border:none;}");
 }
