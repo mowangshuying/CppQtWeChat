@@ -270,3 +270,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 ### 2023/04/08 日志优化
 
 ![image-20230408101649768](./images/image-20230408101649768.png)
+
+## 2023/04/24 界面优化
+
+![image-20230424002228889](../docs/images/image-20230424002228889.png)
