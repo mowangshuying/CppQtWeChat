@@ -113,6 +113,7 @@ public slots:
     void slotToolWndPageChanged(int page);
     void slotReplyFinished(QNetworkReply* reply);
     void slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason);
+
 public:
     QWidget* m_centerWnd;
 
