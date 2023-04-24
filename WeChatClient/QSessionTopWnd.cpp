@@ -11,7 +11,7 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout1 = new QHBoxLayout();
 
     m_hLayout1->setContentsMargins(0, 0, 0, 0);
-    m_hLayout1->setSpacing(0);
+    m_hLayout1->setSpacing(5);
 
     m_minBtn = new QPushButton(this);
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
@@ -23,10 +23,11 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
 
+    
     m_minBtn->setFixedSize(20, 20);
     m_maxBtn->setFixedSize(20, 20);
     m_closeBtn->setFixedSize(20, 20);
-
+    
     // m_minBtn->setStyleSheet("");
 
     m_hLayout1->addStretch();
