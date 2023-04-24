@@ -20,20 +20,23 @@ QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
     m_emojiBtn = new QPushButton();
     m_emojiBtn->setIcon(QPixmap("./img/emojiBtn.png"));
     m_emojiBtn->setIconSize(QSize(30, 30));
+    m_emojiBtn->setFixedSize(QSize(30, 30));
 
     m_sendFileBtn = new QPushButton();
     m_sendFileBtn->setIcon(QPixmap("./img/sendFileBtn.png"));
     m_sendFileBtn->setIconSize(QSize(30, 30));
+    m_sendFileBtn->setFixedSize(QSize(30, 30));
 
     m_screenshotBtn = new QPushButton();
     m_screenshotBtn->setIcon(QPixmap("./img/screenshotBtn.png"));
     m_screenshotBtn->setIconSize(QSize(30, 30));
+    m_screenshotBtn->setFixedSize(QSize(30, 30));
 
     m_voiceTelphoneBtn = new QPushButton();
     m_voiceTelphoneBtn->setIcon(QPixmap("./img/voiceTelphoneBtn.png"));
     m_voiceTelphoneBtn->setIconSize(QSize(30, 30));
     m_voiceTelphoneBtn->setFixedSize(QSize(30, 30));
-    m_voiceTelphoneBtn->setStyleSheet(" border:2px solid rgb(0,0,0);");
+    // m_voiceTelphoneBtn->setStyleSheet(" border:2px solid rgb(0,0,0);");
 
     m_emoijWnd = new QEmoijWnd();
     m_emoijWnd->hide();
