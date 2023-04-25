@@ -24,10 +24,11 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     setFixedSize(430, 330);
-    setContentsMargins(0, 0, 0, 0);
+    m_centerWnd->setFixedSize(430, 330);
+    setContentsMargins(10, 10, 10, 10);
 
     m_vLayout = new QVBoxLayout();
-    m_vLayout->setContentsMargins(0, 0, 0, 0);
+    // m_vLayout->setContentsMargins(10, 10, 10, 10);
     m_vLayout->setSpacing(0);
     m_centerWnd->setLayout(m_vLayout);
 
@@ -35,7 +36,7 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setAttribute(Qt::WA_TranslucentBackground);
 
     m_topWnd = new QWidget();
-    m_topWnd->setFixedSize(430, 130);
+   // m_topWnd->setFixedSize(430, 110);
     // m_topWnd->setStyleSheet("background-color:#1aad19;border-style: none;");
     m_topWnd->setContentsMargins(0, 0, 0, 0);
 
@@ -54,16 +55,16 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // m_titleLabel->setText("ÄªÍüÊäÓ®/ÖÆ×÷");
 
     m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20, 20));
-    m_settingBtn->setIconSize(QSize(30, 30));
-    m_settingBtn->setFixedSize(30, 30);
+    m_settingBtn->setIconSize(QSize(20, 20));
+    m_settingBtn->setFixedSize(20, 20);
 
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png").scaled(20, 20));
-    m_minBtn->setIconSize(QSize(30, 30));
-    m_minBtn->setFixedSize(30, 30);
+    m_minBtn->setIconSize(QSize(20, 20));
+    m_minBtn->setFixedSize(20, 20);
 
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png").scaled(20, 20));
-    m_closeBtn->setIconSize(QSize(30, 30));
-    m_closeBtn->setFixedSize(30, 30);
+    m_closeBtn->setIconSize(QSize(20, 20));
+    m_closeBtn->setFixedSize(20, 20);
 
     m_hTopLayout->addWidget(m_titleLabel);
     m_hTopLayout->addWidget(m_settingBtn);
