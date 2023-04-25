@@ -1,0 +1,105 @@
+#QGroupInfoWnd, #QSimpleGroupInfoWnd, #QGroupInfoExitWnd, #QSimpleGroupSettingWnd, #QGroupFriendsWnd, #QGroupInfoCenterWnd {
+    background-color: rgb(238,244,249);
+    border-radius: 4px;
+}
+
+QLabel {
+    font: 14px 'Segoe UI', 'Microsoft YaHei';
+    color: black;
+    border:none;
+}
+
+QPushButton {
+    color: black;
+    background: rgba(255, 255, 255, 0.7);
+    /*background: red;*/
+    border: 1px solid rgba(0, 0, 0, 0.073);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.183);
+    border-radius: 5px;
+    font: 14px 'Segoe UI', 'Microsoft YaHei';
+    padding: 5px 12px 6px 12px;
+    outline: none;
+}
+
+QPushButton:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.073);
+}
+
+QPushButton:disabled {
+    color: rgba(0, 0, 0, 0.36);
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+QListView {
+    alternate-background-color: blue;
+    /*设置背景颜色*/
+    background:rgb(238,244,249);
+    selection-color: white;
+    border: none;
+    /*border-radius: 5px;*/
+    outline: 0;
+    padding-right: 5px;
+    font: 13px 'Segoe UI', 'Microsoft YaHei';
+    selection-background-color: transparent;
+}
+
+
+QListView::item {
+    padding: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-left: 20px;
+    border-radius: 5px;
+    color: black;
+}
+
+QListView::item:alternate {
+    /*background: #EEEEEE;*/
+    background: rgba(255, 255, 255, 0.8);
+}
+
+QListView::item:selected {
+    background: rgba(255, 255, 255, 1);
+   /* border: 1px solid rgb(149,236,105); */
+}
+
+QListView::item:selected:!active {
+   /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ABAFE5, stop: 1 #8588B2);*/
+}
+
+QListView::item:selected:active {
+    /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6a6ea9, stop: 1 #888dd9);*/
+}
+
+QListView::item:hover {
+    /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FAFBFE, stop: 1 #DCDEF1);*/
+    /* background: rgba(255, 255, 255, 0.3); */
+}
+
+QLineEdit {
+    color: black;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 13);
+    border-bottom: 1px solid rgba(0, 0, 0, 100);
+    border-radius: 5px;
+    font: 14px "Segoe UI", "Microsoft YaHei";
+    padding: 0px 10px;
+    selection-background-color: --ThemeColorLight1;
+}
+
+QLineEdit:hover {
+    background-color: rgb(252, 252, 252);
+    border: 1px solid rgba(0, 0, 0, 13);
+    border-bottom: 1px solid rgba(0, 0, 0, 100);
+}
+
+QLineEdit:focus {
+    border-bottom: 1px solid rgba(0, 0, 0, 13);
+}
+
+
+QScrollArea {
+    background-color: rgb(238,244,249);
+}
