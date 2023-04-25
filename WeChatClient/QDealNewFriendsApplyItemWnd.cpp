@@ -31,8 +31,8 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
 
     m_refuseBtn->setText("¾Ü¾ø");
 
-    m_refuseBtn->setFixedWidth(60);
-    m_AgreeBtn->setFixedWidth(60);
+  //  m_refuseBtn->setFixedWidth(60);
+  //  m_AgreeBtn->setFixedWidth(60);
 
     m_vLayout->addSpacing(10);
     m_vLayout->addWidget(m_name);
