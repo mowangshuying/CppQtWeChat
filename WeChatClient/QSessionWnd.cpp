@@ -53,7 +53,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     // 发送消息窗口
     m_sendTextEdit = new QSelfTextEdit(this);
-    //m_sendTextEdit->setStyleSheet("border:0px;");
+    // m_sendTextEdit->setStyleSheet("border:0px;");
     m_sendTextEdit->setAcceptDrops(false);
     m_sendTextEdit->setAcceptRichText(true);
 
@@ -100,7 +100,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_sendTextBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     setAttribute(Qt::WA_StyledBackground);
-   // setStyleSheet("background-color:white;border:0px;");
+    // setStyleSheet("background-color:white;border:0px;");
 
     connect(m_sesToolBar->m_emoijWnd, SIGNAL(signalEmoijClicked(QString)), this, SLOT(slotEmoijClicked(QString)));
     connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slotMoreBtnClick()));

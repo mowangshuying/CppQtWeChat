@@ -90,6 +90,10 @@ void QSessionToolBar::slotScreenshotBtnClick()
 
     LogDebug << __FUNCTION__ << " nCurScreenIndex:" << nCurScreenIndex;
 
-    QScreenShotWnd* s = new QScreenShotWnd();
-    s->showFullScreen();
+    if (m_screenShotWnd != nullptr)
+    {
+        delete m_screenShotWnd;
+    }
+    m_screenShotWnd = new QScreenShotWnd();
+    m_screenShotWnd->showFullScreen();
 }

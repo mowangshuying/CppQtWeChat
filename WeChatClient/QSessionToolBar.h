@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include "QEmoijWnd.h"
 #include "QVoiceTelphoneWnd.h"
+#include "QScreenShotWnd.h"
 
 class QSessionToolBar : public QWidget
 {
@@ -14,14 +15,13 @@ public:
 public slots:
     void slotEmojiBtnClick();
     void slotScreenshotBtnClick();
-
 public:
     QHBoxLayout* m_hLayout;
-    QPushButton* m_emojiBtn;
-    QPushButton* m_sendFileBtn;
-    QPushButton* m_screenshotBtn;
-    QPushButton* m_voiceTelphoneBtn;
-
     QEmoijWnd* m_emoijWnd;
+    QPushButton* m_emojiBtn;
+    QPushButton* m_screenshotBtn;
+    QPushButton* m_sendFileBtn;
+    QPushButton* m_voiceTelphoneBtn;
+    QScreenShotWnd* m_screenShotWnd = nullptr;
     QVoiceTelphoneWnd* m_phoneWnd;
 };
