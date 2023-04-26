@@ -1,6 +1,22 @@
-#QGroupInfoWnd, #QSimpleGroupInfoWnd, #QGroupInfoExitWnd, #QSimpleGroupSettingWnd, #QGroupFriendsWnd, #QGroupInfoCenterWnd {
+#QSimpleGroupInfoWnd, #QSimpleGroupSettingWnd, #QGroupFriendsWnd, #QGroupInfoCenterWnd {
     background-color: rgb(238,244,249);
     border-radius: 4px;
+}
+
+#QGroupInfoCenterWnd {
+    border: 1px solid rgba(0, 0, 0, 0.073);
+    background-color: rgb(238,244,249);
+    border-radius: 10px;
+}
+
+#QGroupInfoExitWnd {
+    background-color: rgb(238,244,249);
+    border-radius: 4px;
+}
+
+#QGroupInfoWnd {
+    background-color: rgb(238,244,249);
+    border-radius: 5px;
 }
 
 QLabel {
@@ -34,13 +50,11 @@ QPushButton:disabled {
 
 QListView {
     alternate-background-color: blue;
-    /*设置背景颜色*/
-    background:rgb(238,244,249);
+    background: rgb(238,244,249);
     selection-color: white;
     border: none;
-    /*border-radius: 5px;*/
+    /*border-radius: 4px;*/
     outline: 0;
-    padding-right: 5px;
     font: 13px 'Segoe UI', 'Microsoft YaHei';
     selection-background-color: transparent;
 }
@@ -101,5 +115,8 @@ QLineEdit:focus {
 
 
 QScrollArea {
+   /* background-color: rgb(238,0,0); */
     background-color: rgb(238,244,249);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.073);
 }

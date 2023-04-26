@@ -15,7 +15,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     // setFixedSize(250, 535);
-    setFixedWidth(250);
+    setFixedWidth(265);
     setMinimumHeight(535);
 
     // 滚动区域
@@ -173,8 +173,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addStretch();
 
     //设置无边框
-    setAttribute(Qt::WA_StyledBackground);
-    setWindowFlags(Qt::FramelessWindowHint);
+   // setAttribute(Qt::WA_StyledBackground);
+   setWindowFlags(Qt::FramelessWindowHint);
 
     m_scrollArea->setWidget(m_centerWnd);
 }

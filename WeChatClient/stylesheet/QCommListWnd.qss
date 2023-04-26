@@ -6,7 +6,8 @@
 QListView {
     alternate-background-color: blue;
     /*设置背景颜色*/
-    background: rgba(255, 255, 255, 0.7);
+    /*background: rgba(255, 255, 255, 0.7);*/
+    background: rgb(238,244,249);
     selection-color: white;
     border: none;
     /*border-radius: 5px;*/
@@ -32,8 +33,8 @@ QListView::item:alternate {
 }
 
 QListView::item:selected {
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgb(149,236,105);
+    background: rgba(255, 255, 255, 1);
+  /*  border: 1px solid rgb(149,236,105); */
 }
 
 QListView::item:selected:!active {
