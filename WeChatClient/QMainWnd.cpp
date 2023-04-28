@@ -70,13 +70,6 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_commContactsListWnd->addContactsItem("./img/head2.png", "新的朋友", true);
 
     m_hLayout->addWidget(m_toolWnd);
-
-    {
-        /*添加分割线的示例代码*/
-        QSimpleSplit* sp = new QSimpleSplit(this, QSimpleSplit::Direction_H);
-        m_hLayout->addWidget(sp);
-    }
-
     m_hLayout->addLayout(m_sLayout1, 0);
 
     {
