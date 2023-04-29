@@ -758,10 +758,10 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
     }
 
     // 鼠标移动的调试信息
-    LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
-    LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
-    LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
-    LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
+    //   LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x() << "y:" << event->pos().y();
+    //   LogDebug << "[mouseMoveEvent and m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
+    //   LogDebug << "[mouseMoveEvent and pos()]: x:" << pos().x() << "y:" << pos().y();
+    //   LogDebug << "[mouseMoveEvent distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
 
     if (m_borderArea == BorderArea::BorderAreaNone)
     {

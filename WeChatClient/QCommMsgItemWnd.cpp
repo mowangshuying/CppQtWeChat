@@ -34,10 +34,10 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
     m_headurl = new QLabel();
     m_headurl->setFixedSize(40, 40);
 
-    m_url = "./img/groupHead.png";
+    m_url = "./img/default.png";
     if (isGroppMsg)
     {
-        m_url = "./img/head1.png";
+        m_url = "./img/groupHead.png";
     }
     m_headurl->setPixmap(QPixmap(m_url));
 
