@@ -1,17 +1,19 @@
 #include "QPictureToolWnd.h"
-#include <QFileDialog>
-#include "./json/CJsonObject.hpp"
-#include "QMainWnd.h"
+
 #include <QBuffer>
 #include <QByteArray>
-#include "QWSClientMgr.h"
 #include <QDebug>
-#include <QNetworkAccessManager>
+#include <QFileDialog>
 #include <QHttpPart>
+#include <QNetworkAccessManager>
 #include <QNetworkReply>
+
+#include "./json/CJsonObject.hpp"
 #include "QDataManager.h"
+#include "QMainWnd.h"
 #include "QSimpleSplit.h"
 #include "QStyleSheetMgr.h"
+#include "QWSClientMgr.h"
 
 QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
