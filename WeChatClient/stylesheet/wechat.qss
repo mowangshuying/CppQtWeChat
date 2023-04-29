@@ -6,7 +6,6 @@ QScrollBar:vertical {
     padding-right: 2px;
 }
 
-
 QScrollBar:horizontal {
     background: transparent;
     height: 4px;
@@ -14,7 +13,6 @@ QScrollBar:horizontal {
     margin-right: 12px;
     padding-bottom: 2px;
 }
-
 
 QScrollBar::sub-line {
     background: transparent;
@@ -34,7 +32,6 @@ QScrollBar::handle:vertical {
     min-height: 8px;
 }
 
-
 QScrollBar::handle:horizontal {
     min-width: 8px;
 }
@@ -45,3 +42,10 @@ QScrollBar::add-page:horizontal,
 QScrollBar::sub-page:horizontal {
     background: none;
 }
+
+
+/*
+QMessageBox {
+    background-color: rgb(238, 244, 249);
+    border-radius: 4px;
+}*/

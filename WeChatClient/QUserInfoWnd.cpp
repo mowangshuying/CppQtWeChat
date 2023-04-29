@@ -5,18 +5,25 @@
 #include "QDataManager.h"
 #include "QMainWnd.h"
 #include <QGraphicsDropShadowEffect>
+#include "QStyleSheetMgr.h"
 
 QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setObjectName("QUserInfoWnd");
-    setAttribute(Qt::WA_StyledBackground);
+    m_centerWnd = new QWidget(this);
+    m_centerWnd->setObjectName("QUserInfoWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    object.m_widget = m_centerWnd;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+
+    //   setObjectName("QUserInfoWnd");
     setWindowFlags(Qt::FramelessWindowHint);
-    // setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_TranslucentBackground);
+
     setFixedSize(300, 240);
-    setStyleSheet("background:#F5F5F5");
 
     m_vLayout = new QVBoxLayout();
-    setLayout(m_vLayout);
+    m_centerWnd->setLayout(m_vLayout);
 
     m_vLayout->addSpacing(25);
 
@@ -48,16 +55,11 @@ QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_headLabel->setFixedSize(40, 40);
 
     m_headLabel->setPixmap(QPixmap("./img/head2.png"));
-    // int64_t userid = QMainWnd::getSinletonInstance()->m_userid;
-    // QPixmap pixmap = QDataManager::getInstance()->m_UserId2HeadImgMap[userid];
-    // m_headLabel->setPixmap(pixmap);
 
     m_changeHeadImgBtn = new QPushButton();
     m_changeHeadImgBtn->setText("修改头像");
-    m_changeHeadImgBtn->setFixedWidth(50);
-    m_changeHeadImgBtn->setFixedHeight(20);
-    // m_changeHeadImgBtn->setStyleSheet("background-color:#1aad19;");
-    m_changeHeadImgBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
+    // m_changeHeadImgBtn->setFixedWidth(50);
+    // m_changeHeadImgBtn->setFixedHeight(20);
 
     m_vLayout2->addWidget(m_headLabel);
     m_vLayout2->addWidget(m_changeHeadImgBtn);
@@ -65,22 +67,12 @@ QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout1->addLayout(m_vLayout2);
     m_vLayout->addLayout(m_hLayout1);
 
-    {
-        QSimpleSplit* sp = new QSimpleSplit();
-        m_vLayout->addWidget(sp);
-    }
+    ///* {
+    //     QSimpleSplit* sp = new QSimpleSplit();
+    //     m_vLayout->addWidget(sp);
+    // }*/
 
     m_vLayout->addStretch();
-
-    //实例阴影shadow
-    /// QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
-    //设置阴影距离
-    // shadow->setOffset(0, 0);
-    //设置阴影颜色
-    // shadow->setColor(Qt::gray);
-    //设置阴影圆角
-    // shadow->setBlurRadius(20);
-    // setGraphicsEffect(shadow);
 }
 
 bool QUserInfoWnd::event(QEvent* event)

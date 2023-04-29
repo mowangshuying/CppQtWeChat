@@ -16,7 +16,6 @@
 QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     m_centerWnd = new QWidget(this);
-
     m_centerWnd->setObjectName("QLoginAndRegWnd");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";

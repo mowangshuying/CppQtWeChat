@@ -43,7 +43,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
 
     m_userInfoWnd->setLayout(m_vUserInfoLayout);
     m_userInfoWnd->setFixedWidth(130);
-    m_userInfoWnd->setWindowFlags(Qt::FramelessWindowHint);
+    // m_userInfoWnd->setWindowFlags(Qt::FramelessWindowHint);
     // m_userInfoWnd->setStyleSheet("background-color:#aaa;border:0px;");
     m_hLayout->addWidget(m_userInfoWnd);
 

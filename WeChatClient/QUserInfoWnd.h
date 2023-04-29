@@ -19,9 +19,8 @@ protected:
     bool event(QEvent* event);
 
 public:
-    //
+    QWidget* m_centerWnd;
     QVBoxLayout* m_vLayout;
-
     QHBoxLayout* m_hLayout1;
     QVBoxLayout* m_vLayout1;
     QLabel* m_usernameLabel;
