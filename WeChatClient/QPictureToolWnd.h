@@ -23,15 +23,14 @@ public slots:
     void slotUploadBtnClicked();
     void slotCancelBtnClicked();
     void slotDetermineBtnClicked();
-    void closeWnd();
-    void minWnd();
+    void slotCloseWnd();
+    void SlotMinWnd();
 
 public:
     QWidget* m_centerWnd;
 
-    // "./img/default.png"
     QLabel* m_picLable;
-    QPixmap m_HeadImg;
+    QPixmap m_headImg;
     QString m_filePath;
 
     QVBoxLayout* m_vLayout;

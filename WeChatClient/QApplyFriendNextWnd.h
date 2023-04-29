@@ -15,10 +15,10 @@ class QApplyFriendNextWnd : public QWidget
 public:
     QApplyFriendNextWnd(QWidget* p = nullptr, int64_t friendid = -1, QString username = "");
 
-    enum PushBtn_State
+    enum class PushBtnState
     {
-        Ps_Next = 0,
-        Ps_Close = 1
+        PBS_Next = 0,
+        PBS_Close = 1
     };
 
 public:
@@ -52,7 +52,7 @@ public:
     bool m_bPress = false;
     QPoint m_poPress;
 
-    PushBtn_State m_state;
+    PushBtnState m_state;
 
     int64_t m_friendid;
     QString m_username;

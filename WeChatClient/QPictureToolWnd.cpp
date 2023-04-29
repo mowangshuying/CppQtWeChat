@@ -36,16 +36,18 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout1 = new QHBoxLayout();
     m_minBtn = new QPushButton(this);
     m_closeBtn = new QPushButton(this);
+
+    // 最小化按钮
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    //  m_minBtn->setStyleSheet("border:0px;");
 
+    // 关闭按钮
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
-    // m_closeBtn->setStyleSheet("border:0px");
 
+    // 添加弹簧
     m_hLayout1->addStretch();
     m_hLayout1->addWidget(m_minBtn);
     m_hLayout1->addWidget(m_closeBtn);
@@ -79,10 +81,8 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_cancelBtn, SIGNAL(clicked()), this, SLOT(slotCancelBtnClicked()));
     connect(m_determineBtn, SIGNAL(clicked()), this, SLOT(slotDetermineBtnClicked()));
 
-    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
-    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
-
-    // setFixedSize(m_centerWnd->size());
+    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(SlotMinWnd()));
+    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
 }
 
 void QPictureToolWnd::mouseMoveEvent(QMouseEvent* event)
@@ -108,18 +108,19 @@ void QPictureToolWnd::mouseReleaseEvent(QMouseEvent* event)
 void QPictureToolWnd::slotUploadBtnClicked()
 {
     QString filepath = QFileDialog::getOpenFileName(nullptr, "选择图片", ".", "*.png");
-    if (filepath.trimmed().isEmpty() == false)
+    if (filepath.trimmed().isEmpty())
     {
-        QPixmap picture;
-        picture.load(filepath);
-        m_filePath = filepath;
-        picture = picture.scaled(m_picLable->width(), m_picLable->height());
-        // picture = picture.scaled(40, 40);
-        // m_HeadImg = picture;
-        m_picLable->setPixmap(picture);
-        picture = picture.scaled(40, 40);
-        m_HeadImg = picture;
+        LogErr << "file path is Empty!";
+        return;
     }
+
+    QPixmap picture;
+    picture.load(filepath);
+    m_filePath = filepath;
+    picture = picture.scaled(m_picLable->width(), m_picLable->height());
+    m_picLable->setPixmap(picture);
+    picture = picture.scaled(40, 40);
+    m_headImg = picture;
 }
 
 void QPictureToolWnd::slotCancelBtnClicked()
@@ -130,12 +131,6 @@ void QPictureToolWnd::slotCancelBtnClicked()
 void QPictureToolWnd::slotDetermineBtnClicked()
 {
     hide();
-    QByteArray byteArr;
-    QBuffer buffer(&byteArr);
-    buffer.open(QIODevice::WriteOnly);
-    m_HeadImg.save(&buffer, "png");
-    QByteArray byteArr2 = byteArr.toBase64();
-    QString headimgdata(byteArr2);
 
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
@@ -174,19 +169,19 @@ void QPictureToolWnd::slotDetermineBtnClicked()
         //告诉远端服务器该玩家的头像数据
         QWSClientMgr::getMgr()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
             LogDebug << msg.ToString().c_str() << endl;
-            QMainWnd::getMainWnd()->m_toolWnd->m_headImg = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
-            QMainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_HeadImg);
-            QDataManager::getMgr()->m_UserId2HeadImgMap[QMainWnd::getMainWnd()->m_userid] = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
+            QMainWnd::getMainWnd()->m_toolWnd->m_headImg = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
+            QMainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg);
+            QDataManager::getMgr()->m_UserId2HeadImgMap[QMainWnd::getMainWnd()->m_userid] = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
         });
     });
 }
 
-void QPictureToolWnd::closeWnd()
+void QPictureToolWnd::slotCloseWnd()
 {
     hide();
 }
 
-void QPictureToolWnd::minWnd()
+void QPictureToolWnd::SlotMinWnd()
 {
     showMinimized();
 }

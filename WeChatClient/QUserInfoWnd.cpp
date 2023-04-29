@@ -16,7 +16,7 @@ QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    //   setObjectName("QUserInfoWnd");
+    // 设置为无边框及背景透明
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 

@@ -22,11 +22,10 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t frien
     object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    m_state = Ps_Next;
+    m_state = PushBtnState::PBS_Next;
 
     m_vLayout = new QVBoxLayout(m_centerWnd);
     m_vLayout->setContentsMargins(10, 10, 10, 10);
-    // m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_centerWnd->setLayout(m_vLayout);
 
     setWindowFlags(Qt::FramelessWindowHint);
@@ -43,21 +42,15 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t frien
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    // m_minBtn->setStyleSheet("border:0px");
 
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
-    // m_closeBtn->setStyleSheet("border:0px;");
 
     m_hLayout1->addWidget(m_titleLabel);
     m_hLayout1->addWidget(m_minBtn);
     m_hLayout1->addWidget(m_closeBtn);
-
     m_vLayout->addLayout(m_hLayout1);
-
-    // QSimpleSplit* sp1 = new QSimpleSplit();
-    //  m_vLayout->addWidget(sp1);
 
     ////////////////////////////////////////
     m_sLayout = new QStackedLayout(m_centerWnd);
@@ -72,14 +65,9 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t frien
 
     m_vLayout->addLayout(m_sLayout);
 
-    // QSimpleSplit* sp2 = new QSimpleSplit();
-    // m_vLayout->addWidget(sp2);
-
     m_hLayout2 = new QHBoxLayout(m_centerWnd);
     m_pushBtn = new QPushButton();
     m_pushBtn->setText("下一步");
-    // m_pushBtn->setFixedWidth(60);
-    // m_pushBtn->raise();
 
     m_hLayout2->addStretch();
     m_hLayout2->addWidget(m_pushBtn);
@@ -112,13 +100,13 @@ void QApplyFriendNextWnd::mouseReleaseEvent(QMouseEvent* event)
 
 void QApplyFriendNextWnd::slotPushBtnClick()
 {
-    if (m_state == Ps_Next)
+    if (m_state == PushBtnState::PBS_Next)
     {
         //设置m_sLayout为第2个窗口
         m_sLayout->setCurrentIndex(1);
         //设置按钮字体为关闭
         m_pushBtn->setText("关闭");
-        m_state = Ps_Close;
+        m_state = PushBtnState::PBS_Close;
 
         //向远端服务器发送添加好友申请
         neb::CJsonObject json;
@@ -135,16 +123,16 @@ void QApplyFriendNextWnd::slotPushBtnClick()
             {
                 return;
             }
-            //添加好友申请
-            // QMessageBox::information(nullptr, "cs_msg_apply_add_friend", msg.ToString().c_str());
+            LogDebug << "recv apply add user";
         });
 
         return;
     }
 
-    if (m_state == Ps_Close)
+    if (m_state == PushBtnState::PBS_Close)
     {
         close();
+        return;
     }
 }
 
