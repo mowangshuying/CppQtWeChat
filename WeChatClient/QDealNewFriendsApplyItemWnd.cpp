@@ -31,8 +31,8 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
 
     m_refuseBtn->setText("¾Ü¾ø");
 
-  //  m_refuseBtn->setFixedWidth(60);
-  //  m_AgreeBtn->setFixedWidth(60);
+    //  m_refuseBtn->setFixedWidth(60);
+    //  m_AgreeBtn->setFixedWidth(60);
 
     m_vLayout->addSpacing(10);
     m_vLayout->addWidget(m_name);
@@ -96,8 +96,8 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
         }
     }
 
-    auto itf = QDataManager::getInstance()->m_UserId2HeadImgMap.find(m_userid);
-    if (itf != QDataManager::getInstance()->m_UserId2HeadImgMap.end())
+    auto itf = QDataManager::getMgr()->m_UserId2HeadImgMap.find(m_userid);
+    if (itf != QDataManager::getMgr()->m_UserId2HeadImgMap.end())
     {
         m_headurl->setPixmap(itf->second);
     }

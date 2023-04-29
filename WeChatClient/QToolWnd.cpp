@@ -109,9 +109,9 @@ void QToolWnd::slotOnClickHeadUrlLabel()
         QRect swRect = m_userInfoWnd->geometry();
         swRect.setX(gPoint.x() + m_headUrlLabel->width() / 2);
         swRect.setY(gPoint.y() + m_headUrlLabel->height() / 2);
-        m_userInfoWnd->m_headLabel->setPixmap(QDataManager::getInstance()->m_UserId2HeadImgMap[QDataManager::getInstance()->m_userid]);
-        m_userInfoWnd->m_usernameLabel->setText(QDataManager::getInstance()->m_username);
-        m_userInfoWnd->m_userIdLabel->setText("用户id:" + QString::number(QDataManager::getInstance()->m_userid));
+        m_userInfoWnd->m_headLabel->setPixmap(QDataManager::getMgr()->m_UserId2HeadImgMap[QDataManager::getMgr()->m_userid]);
+        m_userInfoWnd->m_usernameLabel->setText(QDataManager::getMgr()->m_username);
+        m_userInfoWnd->m_userIdLabel->setText("用户id:" + QString::number(QDataManager::getMgr()->m_userid));
         m_userInfoWnd->setGeometry(swRect);
         m_userInfoWnd->show();
     }

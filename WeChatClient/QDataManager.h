@@ -11,25 +11,12 @@ typedef std::map<int64_t, QString> QFriendId2NameMap;
 class QDataManager
 {
 private:
-    QDataManager()
-    {
-        QFile emoijFile("./emoij/emoij.txt");
-        if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            QString str = emoijFile.readAll();
-            m_emoijStrList = str.split('|', QString::SkipEmptyParts);
-            emoijFile.close();
-        }
-    }
+    QDataManager();
 
 public:
-    static QDataManager* getInstance();
-    static void freeInstance();
-    void setUserIdAndName(int64_t userId, QString userName)
-    {
-        m_userid = userId;
-        m_username = userName;
-    }
+    static QDataManager* getMgr();
+    static void freeMgr();
+    void setUserIdAndName(int64_t userId, QString userName);
 
 private:
     static QDataManager* m_dataManager;

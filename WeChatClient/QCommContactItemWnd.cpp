@@ -35,7 +35,7 @@ QCommContactItemWnd::QCommContactItemWnd(QWidget* p, const char* headUrl, const 
 
     if (name != NULL && !bNewFriend)
     {
-        QDataManager::getInstance()->m_FriendId2NameMap[friendid] = name;
+        QDataManager::getMgr()->m_FriendId2NameMap[friendid] = name;
     }
 
     setFixedHeight(65);
@@ -50,6 +50,6 @@ void QCommContactItemWnd::slotReplyFinished(QNetworkReply* reply)
         pixmap.loadFromData(reply->readAll());
         pixmap = pixmap.scaled(40, 40);
         m_headUrl->setPixmap(pixmap);
-        QDataManager::getInstance()->m_UserId2HeadImgMap[m_friendId] = pixmap;
+        QDataManager::getMgr()->m_UserId2HeadImgMap[m_friendId] = pixmap;
     }
 }

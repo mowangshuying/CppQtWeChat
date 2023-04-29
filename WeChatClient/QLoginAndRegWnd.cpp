@@ -35,7 +35,7 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setAttribute(Qt::WA_TranslucentBackground);
 
     m_topWnd = new QWidget();
-   // m_topWnd->setFixedSize(430, 110);
+    // m_topWnd->setFixedSize(430, 110);
     // m_topWnd->setStyleSheet("background-color:#1aad19;border-style: none;");
     m_topWnd->setContentsMargins(0, 0, 0, 0);
 
@@ -281,7 +281,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
             m_mainWnd->request();
             m_mainWnd->show();
 
-            QDataManager::getInstance()->setUserIdAndName(userid, username.c_str());
+            QDataManager::getMgr()->setUserIdAndName(userid, username.c_str());
             this->hide();
         });
     }

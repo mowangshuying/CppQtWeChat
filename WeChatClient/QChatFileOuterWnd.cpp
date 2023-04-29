@@ -17,7 +17,7 @@ QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /*
 
     m_innerWnd = new QChatFileInnerWnd();
 
-    if (sendid != QDataManager::getInstance()->m_userid)
+    if (sendid != QDataManager::getMgr()->m_userid)
     {
         m_hLayout->setSpacing(0);
         m_hLayout->addSpacing(10);
@@ -26,7 +26,7 @@ QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /*
         m_hLayout->addSpacing(5);
         m_hLayout->addWidget(m_innerWnd);
         m_hLayout->addStretch();
-        QPixmap pixmap = QDataManager::getInstance()->m_UserId2HeadImgMap[sendid];
+        QPixmap pixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[sendid];
         pixmap = pixmap.scaled(30, 30);
         m_headUrl->setPixmap(pixmap);
     }
@@ -39,7 +39,7 @@ QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /*
         m_hLayout->addLayout(m_vLayout);
         m_hLayout->addSpacing(10);
 
-        QPixmap pixmap = QDataManager::getInstance()->m_UserId2HeadImgMap[sendid];
+        QPixmap pixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[sendid];
         pixmap = pixmap.scaled(30, 30);
         m_headUrl->setPixmap(pixmap);
     }

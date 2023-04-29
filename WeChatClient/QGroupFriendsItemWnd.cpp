@@ -45,6 +45,6 @@ void QGroupFriendsItemWnd::slotReplyFinished(QNetworkReply* reply)
         pixmap.loadFromData(reply->readAll());
         pixmap = pixmap.scaled(30, 30);
         m_headImg->setPixmap(pixmap);
-        QDataManager::getInstance()->m_UserId2HeadImgMap[m_friendId] = pixmap;
+        QDataManager::getMgr()->m_UserId2HeadImgMap[m_friendId] = pixmap;
     }
 }

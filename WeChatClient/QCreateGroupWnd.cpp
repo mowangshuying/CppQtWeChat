@@ -30,7 +30,6 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_centerWnd->setLayout(m_vLayout);
     m_centerWnd->setFixedSize(640, 420);
 
-
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
@@ -211,8 +210,8 @@ void QCreateGroupWnd::delThisWndByRolename(QString rolename, QListWidget* listWn
 void QCreateGroupWnd::updateData()
 {
     //向右侧界面中添加相应数据
-    auto itMap = QDataManager::getInstance()->m_FriendId2NameMap.begin();
-    auto itMapEnd = QDataManager::getInstance()->m_FriendId2NameMap.end();
+    auto itMap = QDataManager::getMgr()->m_FriendId2NameMap.begin();
+    auto itMapEnd = QDataManager::getMgr()->m_FriendId2NameMap.end();
     for (; itMap != itMapEnd; itMap++)
     {
         if (hasThisWndByRolename(itMap->second, m_listWnd1) == false)
@@ -300,7 +299,7 @@ void QCreateGroupWnd::slotComfirmBtnClick()
     hide();
 
     //获取当前玩家id，获取群的名称
-    int ownerid = QDataManager::getInstance()->m_userid;
+    int ownerid = QDataManager::getMgr()->m_userid;
     QString groupname = m_groupNameEdit->text();
     // LogDebug << "ownerid:" << ownerid << "groupname:" << groupname;
     if (groupname == "")

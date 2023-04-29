@@ -43,6 +43,6 @@ void QCommGroupItemWnd::slotReplyFinished(QNetworkReply* reply)
         pixmap.loadFromData(reply->readAll());
         pixmap = pixmap.scaled(40, 40);
         m_groupImgUrl->setPixmap(pixmap);
-        QDataManager::getInstance()->m_GroupId2ImgMap[m_groupId] = pixmap;
+        QDataManager::getMgr()->m_GroupId2ImgMap[m_groupId] = pixmap;
     }
 }

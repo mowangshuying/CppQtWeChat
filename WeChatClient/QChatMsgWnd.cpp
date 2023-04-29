@@ -181,7 +181,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
 
     if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_Other)
     {
-        m_leftPixmap = QDataManager::getInstance()->m_UserId2HeadImgMap[m_recvid];
+        m_leftPixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[m_recvid];
         m_leftPixmap = m_leftPixmap.scaled(30, 30);
         painter.drawPixmap(m_iconLeftRect, m_leftPixmap);
         //ªÊ÷∆Õ‚≤ø±ﬂøÚ

@@ -116,7 +116,7 @@ void QChatFileInnerWnd::slotDownloadFileBtnClick()
             {
                 m_sendState->setText("ÏÂÔØÍê³É...");
                 sendFileShow();
-                QString currpath = QDataManager::getInstance()->m_localRecvFileDir + m_fileName->text();
+                QString currpath = QDataManager::getMgr()->m_localRecvFileDir + m_fileName->text();
                 QFile file(currpath);
                 QFileInfo fileinfo = QFileInfo(currpath);
                 if (file.open(QIODevice::WriteOnly))

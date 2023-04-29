@@ -45,7 +45,7 @@ QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p, const char* headimg
     m_headImage->setPixmap(QPixmap(headimg));
     m_headImage->setFixedSize(25, 25);
 
-    QPixmap p1 = QDataManager::getInstance()->m_UserId2HeadImgMap[m_friendid];
+    QPixmap p1 = QDataManager::getMgr()->m_UserId2HeadImgMap[m_friendid];
     p1 = p1.scaled(25, 25);
     m_headImage->setPixmap(p1);
 

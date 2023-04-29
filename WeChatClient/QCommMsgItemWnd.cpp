@@ -76,7 +76,7 @@ void QCommMsgItemWnd::slotReplyFinished(QNetworkReply* reply)
             pixmap.loadFromData(reply->readAll());
             pixmap = pixmap.scaled(40, 40);
             m_headurl->setPixmap(pixmap);
-            QDataManager::getInstance()->m_UserId2HeadImgMap[m_userid] = pixmap;
+            QDataManager::getMgr()->m_UserId2HeadImgMap[m_userid] = pixmap;
         }
         else
         {
@@ -84,7 +84,7 @@ void QCommMsgItemWnd::slotReplyFinished(QNetworkReply* reply)
             pixmap.loadFromData(reply->readAll());
             pixmap = pixmap.scaled(40, 40);
             m_headurl->setPixmap(pixmap);
-            QDataManager::getInstance()->m_GroupId2ImgMap[m_userid] = pixmap;
+            QDataManager::getMgr()->m_GroupId2ImgMap[m_userid] = pixmap;
         }
     }
 }

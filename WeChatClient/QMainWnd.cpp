@@ -962,7 +962,7 @@ void QMainWnd::slotReplyFinished(QNetworkReply* reply)
         pixmap.loadFromData(reply->readAll());
         pixmap = pixmap.scaled(40, 40);
         m_toolWnd->m_headImg = pixmap;
-        QDataManager::getInstance()->m_UserId2HeadImgMap[m_userid] = m_toolWnd->m_headImg;
+        QDataManager::getMgr()->m_UserId2HeadImgMap[m_userid] = m_toolWnd->m_headImg;
         m_toolWnd->m_headUrlLabel->setPixmap(m_toolWnd->m_headImg);
     }
 }

@@ -176,7 +176,7 @@ void QPictureToolWnd::slotDetermineBtnClicked()
             LogDebug << msg.ToString().c_str() << endl;
             QMainWnd::getMainWnd()->m_toolWnd->m_headImg = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
             QMainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_HeadImg);
-            QDataManager::getInstance()->m_UserId2HeadImgMap[QMainWnd::getMainWnd()->m_userid] = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
+            QDataManager::getMgr()->m_UserId2HeadImgMap[QMainWnd::getMainWnd()->m_userid] = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_HeadImg;
         });
     });
 }
