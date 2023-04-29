@@ -132,6 +132,10 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_voiceTelphoneWnd = new QVoiceTelphoneWnd();
     m_voiceTelphoneWnd->hide();
+
+    m_settingWnd = new QSettingWnd();
+    m_settingWnd->hide();
+    connect(m_toolWnd->m_selectMoreWnd->m_settingBtn, SIGNAL(clicked()), this, SLOT(slotOnSettingBtnClick()));
 }
 
 // QMainWnd::~QMainWnd()
@@ -1006,4 +1010,9 @@ void QMainWnd::slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reaso
         default:
             break;
     }
+}
+
+void QMainWnd::slotOnSettingBtnClick()
+{
+    m_settingWnd->show();
 }

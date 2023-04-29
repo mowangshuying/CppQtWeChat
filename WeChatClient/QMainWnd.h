@@ -18,6 +18,7 @@
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include "QVoiceTelphoneWnd.h"
+#include "QSettingWnd.h"
 
 /*
  * 主窗口窗口只能有一个，将主窗口设置为单例对象
@@ -113,6 +114,7 @@ public slots:
     void slotToolWndPageChanged(int page);
     void slotReplyFinished(QNetworkReply* reply);
     void slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason);
+    void slotOnSettingBtnClick();
 
 public:
     QWidget* m_centerWnd;
@@ -157,4 +159,5 @@ public:
     QAction* m_systemTrayIconShowMainWndAction;
 
     QVoiceTelphoneWnd* m_voiceTelphoneWnd;
+    QSettingWnd* m_settingWnd;
 };
