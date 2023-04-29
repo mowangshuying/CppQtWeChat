@@ -15,7 +15,6 @@
 
 QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    // m_centerWnd->setFixedSize(460, 360);
     m_centerWnd = new QWidget(this);
     m_centerWnd->setFixedSize(460, 360);
     m_centerWnd->setObjectName("QPictureToolWnd");
@@ -30,8 +29,11 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vLayout = new QVBoxLayout();
     m_centerWnd->setLayout(m_vLayout);
+    //  m_vLayout->setAlignment(Qt::AlignHCenter);
+
     m_picLable = new QLabel();
     m_picLable->setFixedSize(249, 249);
+    m_picLable->setAlignment(Qt::AlignHCenter);
 
     m_hLayout1 = new QHBoxLayout();
     m_minBtn = new QPushButton(this);
@@ -70,7 +72,7 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         QSimpleSplit* sp = new QSimpleSplit();
         m_vLayout->addWidget(sp);
     }
-    m_vLayout->addWidget(m_picLable);
+    m_vLayout->addWidget(m_picLable, 0, Qt::AlignCenter);
     {
         QSimpleSplit* sp = new QSimpleSplit();
         m_vLayout->addWidget(sp);
@@ -87,10 +89,11 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 void QPictureToolWnd::mouseMoveEvent(QMouseEvent* event)
 {
-    if (m_bPress)
+    if (!m_bPress)
     {
-        move(event->pos() - m_poPress + pos());
+        return;
     }
+    move(event->pos() - m_poPress + pos());
 }
 
 void QPictureToolWnd::mousePressEvent(QMouseEvent* event)
