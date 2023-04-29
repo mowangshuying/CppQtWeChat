@@ -17,6 +17,10 @@ public:
     static QDataManager* getMgr();
     static void freeMgr();
     void setUserIdAndName(int64_t userId, QString userName);
+    void setUserHeadImg(int64_t userId, QPixmap pixmap)
+    {
+        m_UserId2HeadImgMap[userId] = pixmap;
+    }
 
 private:
     static QDataManager* m_dataManager;

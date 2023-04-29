@@ -23,17 +23,14 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    // setObjectName("QPictureToolWnd");
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
     m_vLayout = new QVBoxLayout();
     m_centerWnd->setLayout(m_vLayout);
-    //  m_vLayout->setAlignment(Qt::AlignHCenter);
 
     m_picLable = new QLabel();
     m_picLable->setFixedSize(249, 249);
-    m_picLable->setAlignment(Qt::AlignHCenter);
 
     m_hLayout1 = new QHBoxLayout();
     m_minBtn = new QPushButton(this);
@@ -68,15 +65,7 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout2->addWidget(m_cancelBtn);
 
     m_vLayout->addLayout(m_hLayout1);
-    {
-        QSimpleSplit* sp = new QSimpleSplit();
-        m_vLayout->addWidget(sp);
-    }
     m_vLayout->addWidget(m_picLable, 0, Qt::AlignCenter);
-    {
-        QSimpleSplit* sp = new QSimpleSplit();
-        m_vLayout->addWidget(sp);
-    }
     m_vLayout->addLayout(m_hLayout2);
 
     connect(m_uploadBtn, SIGNAL(clicked()), this, SLOT(slotUploadBtnClicked()));
@@ -172,9 +161,10 @@ void QPictureToolWnd::slotDetermineBtnClicked()
         //告诉远端服务器该玩家的头像数据
         QWSClientMgr::getMgr()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
             LogDebug << msg.ToString().c_str() << endl;
-            QMainWnd::getMainWnd()->m_toolWnd->m_headImg = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
-            QMainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg);
-            QDataManager::getMgr()->m_UserId2HeadImgMap[QMainWnd::getMainWnd()->m_userid] = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
+            QPixmap headImg = QMainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
+            QMainWnd::getMainWnd()->m_toolWnd->m_headImg = headImg;
+            QMainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(headImg);
+            QDataManager::getMgr()->setUserHeadImg(QMainWnd::getMainWnd()->m_userid, headImg);
         });
     });
 }
