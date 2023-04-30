@@ -6,7 +6,6 @@
 #include <QPushButton>
 #include <QStackedLayout>
 #include "QSimpleSplit.h"
-#include "QSettingAboutWnd.h"
 #include <QComboBox>
 
 class QSettingWnd : public QWidget
