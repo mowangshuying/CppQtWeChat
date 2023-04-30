@@ -164,9 +164,6 @@
     <ClCompile Include="QSettingWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSettingAboutWnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QWSClientMgr.h">
@@ -290,9 +287,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QStyleSheetMgr.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="QSettingAboutWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
