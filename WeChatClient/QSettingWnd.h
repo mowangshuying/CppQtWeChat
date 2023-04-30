@@ -7,9 +7,11 @@
 #include <QStackedLayout>
 #include "QSimpleSplit.h"
 #include <QComboBox>
+#include <QLabel>
 
 class QSettingWnd : public QWidget
 {
+    Q_OBJECT
 public:
     QSettingWnd(QWidget* p = nullptr);
 
@@ -17,6 +19,10 @@ protected:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
+
+public slots:
+    void slotClickedCloseBtn();
+    void slotClickedMinBtn();
 
 public:
     bool m_leftBtnPressed = false;

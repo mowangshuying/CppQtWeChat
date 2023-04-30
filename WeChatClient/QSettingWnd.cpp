@@ -6,7 +6,6 @@
 #include "QStyleSheetMgr.h"
 #include <QMouseEvent>
 #include "QSimpleSplit.h"
-#include "QSettingAboutWnd.h"
 
 QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
@@ -69,10 +68,12 @@ QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_themeLayout->addWidget(m_valueThemeComboBox);
     m_themeLayout->addStretch();
 
-
     m_vLayout->addLayout(m_themeLayout);
     m_vLayout->addLayout(m_hVerLayout);
     m_vLayout->addStretch();
+
+    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotClickedCloseBtn()));
+    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotClickedMinBtn()));
 }
 
 void QSettingWnd::mouseMoveEvent(QMouseEvent* event)
@@ -94,4 +95,14 @@ void QSettingWnd::mousePressEvent(QMouseEvent* event)
 void QSettingWnd::mouseReleaseEvent(QMouseEvent* event)
 {
     m_leftBtnPressed = false;
+}
+
+void QSettingWnd::slotClickedCloseBtn()
+{
+    hide();
+}
+
+void QSettingWnd::slotClickedMinBtn()
+{
+    showMinimized();
 }

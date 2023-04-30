@@ -289,6 +289,9 @@
     <QtMoc Include="QStyleSheetMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="QSettingWnd.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QCustomListWidgetItem.h">
@@ -310,9 +313,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QSelfTextEdit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QSettingWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
