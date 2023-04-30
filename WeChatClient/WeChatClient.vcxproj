@@ -204,6 +204,7 @@
     <ClCompile Include="QSessionToolBar.cpp" />
     <ClCompile Include="QSessionTopWnd.cpp" />
     <ClCompile Include="QSessionWnd.cpp" />
+    <ClCompile Include="QSettingAboutWnd.cpp" />
     <ClCompile Include="QSettingWnd.cpp" />
     <ClCompile Include="QSimpleLabel.cpp" />
     <ClCompile Include="QSimpleSplit.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="QPch.h" />
     <ClInclude Include="QSelfLog.h" />
     <ClInclude Include="QSelfTextEdit.h" />
+    <QtMoc Include="QSettingAboutWnd.h" />
     <ClInclude Include="QSettingWnd.h" />
     <QtMoc Include="QStyleSheetMgr.h" />
     <QtMoc Include="QVoiceTelphoneWnd.h" />
