@@ -56,7 +56,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_sLayout2 = new QStackedLayout();
     m_sLayout2->setContentsMargins(0, 0, 0, 0);
 
-    m_commContactInfo = new QCommContactInfo(this);
+    m_commContactInfo = new QCommContactInfoWnd(this);
     m_sLayout2->addWidget(m_commContactInfo);
     connect(m_commContactInfo->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
     connect(m_commContactInfo->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
@@ -124,7 +124,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &QMainWnd::showNormalWnd);
     connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &QMainWnd::slotOnSystemTrayIconClick);
 
-    //if (objectName().isEmpty())
+    // if (objectName().isEmpty())
     //    setObjectName("QMainWnd");
     //// setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
     setMinimumSize(800, 600);

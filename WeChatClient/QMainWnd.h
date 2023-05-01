@@ -11,7 +11,7 @@
 #include "QToolWnd.h"
 #include "QCommListWnd.h"
 #include "QSessionWnd.h"
-#include "QCommContactInfo.h"
+#include "QCommContactInfoWnd.h"
 #include "QGroupInfoWnd.h"
 #include "QDealNewFriendsApplyWnd.h"
 #include "./json/CJsonObject.hpp"
@@ -126,7 +126,7 @@ public:
     QCommListWnd* m_commContactsListWnd;
     QCommListWnd* m_commGroupsListWnd;
 
-    QCommContactInfo* m_commContactInfo;
+    QCommContactInfoWnd* m_commContactInfo;
 
     QDealNewFriendsApplyWnd* m_dealNewFriendsApplyWnd;
 

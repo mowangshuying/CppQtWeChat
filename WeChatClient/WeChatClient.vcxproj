@@ -181,7 +181,7 @@
     <ClCompile Include="QApplyFriendInputInfoWnd.cpp" />
     <ClCompile Include="QApplyFriendWaitInfoWnd.cpp" />
     <ClCompile Include="QChatMsgWnd.cpp" />
-    <ClCompile Include="QCommContactInfo.cpp" />
+    <ClCompile Include="QCommContactInfoWnd.cpp" />
     <ClCompile Include="QCommContactItemWnd.cpp" />
     <ClCompile Include="QCommListWnd.cpp" />
     <ClCompile Include="QCommMsgItemWnd.cpp" />
@@ -251,7 +251,7 @@
     <QtMoc Include="QCommListWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCommContactInfo.h" />
+    <QtMoc Include="QCommContactInfoWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QMainWnd.h" />

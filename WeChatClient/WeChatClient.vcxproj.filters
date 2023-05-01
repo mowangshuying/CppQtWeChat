@@ -62,7 +62,7 @@
     <ClCompile Include="QMainWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCommContactInfo.cpp">
+    <ClCompile Include="QCommContactInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QSessionWnd.cpp">
@@ -202,7 +202,7 @@
     <QtMoc Include="QCommListWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCommContactInfo.h">
+    <QtMoc Include="QCommContactInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QMainWnd.h">
