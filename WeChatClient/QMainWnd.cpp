@@ -124,9 +124,9 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &QMainWnd::showNormalWnd);
     connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &QMainWnd::slotOnSystemTrayIconClick);
 
-    if (objectName().isEmpty())
-        setObjectName("QMainWnd");
-    // setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
+    //if (objectName().isEmpty())
+    //    setObjectName("QMainWnd");
+    //// setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
     setMinimumSize(800, 600);
     setMouseTracking(true);
 

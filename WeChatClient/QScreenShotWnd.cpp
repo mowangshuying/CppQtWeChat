@@ -194,15 +194,13 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
         LogDebug << "paint it!";
         painter.drawPixmap(m_screenShotRect, m_fullScreenPixmap, m_screenShotRect);
         painter.drawRect(m_screenShotRect);
-        // painter.drawText(cursor().pos().x(), cursor().pos().y(), tr("(%1,%2)").arg(cursor().pos().x()).arg(cursor().pos().y()));
     }
     m_isPainting = false;
 }
 
 void QScreenShotWnd::contextMenuEvent(QContextMenuEvent*)
 {
-    // this->setCursor(Qt::ArrowCursor);      //设置鼠标的样式为箭头
-    // m_RightBtnMenu->exec(cursor().pos());  //菜单显示的位置跟随鼠标
+
 }
 
 void QScreenShotWnd::keyPressEvent(QKeyEvent* e)
@@ -215,7 +213,6 @@ void QScreenShotWnd::keyPressEvent(QKeyEvent* e)
     else if (e->key() == Qt::Key_C && e->modifiers() == Qt::ControlModifier)
     {
         slotCopyScreenShot();
-
     }  ///截图另存为(Ctrl+S)
     else if (e->key() == Qt::Key_S && e->modifiers() == Qt::ControlModifier)
     {
