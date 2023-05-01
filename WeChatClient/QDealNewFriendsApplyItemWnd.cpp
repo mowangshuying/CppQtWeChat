@@ -28,11 +28,7 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
     m_name->setText(name);
     m_msg->setText(msg);
     m_AgreeBtn->setText("同意");
-
     m_refuseBtn->setText("拒绝");
-
-    //  m_refuseBtn->setFixedWidth(60);
-    //  m_AgreeBtn->setFixedWidth(60);
 
     m_vLayout->addSpacing(10);
     m_vLayout->addWidget(m_name);
@@ -116,8 +112,6 @@ void QDealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
     json.Add("applyid", m_id);
     json.Add("applystate", 1);
     QWSClientMgr::getMgr()->request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
-        //
-        // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
         m_AgreeBtn->setText("已同意");
         m_AgreeBtn->setEnabled(false);
         m_refuseBtn->hide();

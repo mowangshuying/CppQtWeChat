@@ -1,13 +1,13 @@
 #QCommListWnd {
-    background: rgb(238,244,249);
+    background: rgb(238, 244, 249);
     /*border-radius: 4px;*/
 }
 
 QListView {
     alternate-background-color: blue;
     /*设置背景颜色*/
-    /*background: rgba(255, 255, 255, 0.7);*/
-    background: rgb(238,244,249);
+    /*background: rgba(255, 0, 0);*/
+    background: rgb(238, 244, 249);
     selection-color: white;
     border: none;
     /*border-radius: 5px;*/
@@ -17,13 +17,14 @@ QListView {
     selection-background-color: transparent;
 }
 
-
 QListView::item {
     padding: 4px;
+    /*
     margin-top: 2px;
     margin-bottom: 2px;
     padding-left: 20px;
-    border-radius: 5px;
+    border-radius: 5px; */
+    border: 0px;
     color: black;
 }
 
@@ -34,11 +35,11 @@ QListView::item:alternate {
 
 QListView::item:selected {
     background: rgba(255, 255, 255, 1);
-  /*  border: 1px solid rgb(149,236,105); */
+    /*  border: 1px solid rgb(149,236,105); */
 }
 
 QListView::item:selected:!active {
-   /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ABAFE5, stop: 1 #8588B2);*/
+    /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ABAFE5, stop: 1 #8588B2);*/
 }
 
 QListView::item:selected:active {
@@ -53,9 +54,8 @@ QListView::item:hover {
 QLabel {
     font: 14px 'Segoe UI', 'Microsoft YaHei';
     color: black;
-    border:none;
+    border: none;
 }
-
 
 QPushButton {
     color: black;

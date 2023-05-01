@@ -26,21 +26,21 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/) : QWi
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
-    //m_minBtn->setStyleSheet("border:0px;");
+    // m_minBtn->setStyleSheet("border:0px;");
 
     m_maxBtn = new QPushButton(this);
     m_maxBtn->setIcon(QPixmap("./img/normalBtn_.png"));
     m_maxBtn->setIconSize(QSize(20, 20));
     m_maxBtn->setFixedSize(20, 20);
-    //m_maxBtn->setStyleSheet("border:0px;");
+    // m_maxBtn->setStyleSheet("border:0px;");
 
     m_closeBtn = new QPushButton(this);
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
-    //m_closeBtn->setStyleSheet("border:0px;");
+    // m_closeBtn->setStyleSheet("border:0px;");
 
-    //m_hLayout->addSpacing(20);
+    // m_hLayout->addSpacing(20);
     m_hLayout->addStretch();
     m_hLayout->setSpacing(5);
     m_hLayout->addWidget(m_minBtn);
@@ -68,12 +68,30 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/) : QWi
     m_listWnd2->setAttribute(Qt::WA_StyledBackground);
     setAttribute(Qt::WA_StyledBackground);
 
-   // m_listWnd1->setStyleSheet("border:0px;");
-   // m_listWnd2->setStyleSheet("border:0px;");
+    // m_listWnd1->setStyleSheet("border:0px;");
+    // m_listWnd2->setStyleSheet("border:0px;");
 
     if (objectName().isEmpty())
         setObjectName("QDealNewFriendsApplyWnd");
-   // setStyleSheet("QWidget#QDealNewFriendsApplyWnd{border-top-right-radius:4px;border-bottom-right-radius:4px; background-color:white;border:none;}");
+    // setStyleSheet("QWidget#QDealNewFriendsApplyWnd{border-top-right-radius:4px;border-bottom-right-radius:4px; background-color:white;border:none;}");
+}
+
+void QDealNewFriendsApplyWnd::resizeEvent(QResizeEvent* event)
+{
+    // 窗口改变大小时候，调整item的大小
+    Q_UNUSED(event);
+
+    int count = m_listWnd1->count();
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_listWnd1->item(i);
+        QWidget* pWnd = m_listWnd1->itemWidget(pitem);
+        if (pitem != nullptr && pWnd != nullptr)
+        {
+            pWnd->setFixedWidth(this->width() - 50);
+            pitem->setSizeHint(QSize(this->width() - 50, 65));
+        }
+    }
 }
 
 void QDealNewFriendsApplyWnd::addListItem(const char* headurl, const char* name, const char* msg, int state, int id, bool isApplyer, int userid)
@@ -81,8 +99,8 @@ void QDealNewFriendsApplyWnd::addListItem(const char* headurl, const char* name,
     QDealNewFriendsApplyItemWnd* pMsgItem = new QDealNewFriendsApplyItemWnd(m_listWnd1, headurl, name, msg, state, id, isApplyer, userid);
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd1);
 
-    pMsgItem->setFixedWidth(this->width() - 5);
-    pListItem->setSizeHint(QSize(this->width() - 5, 65));
+    pMsgItem->setFixedWidth(this->width() - 50);
+    pListItem->setSizeHint(QSize(this->width() - 50, 65));
     m_listWnd1->setItemWidget(pListItem, pMsgItem);
 }
 

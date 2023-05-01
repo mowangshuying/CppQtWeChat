@@ -39,7 +39,8 @@ QCommContactItemWnd::QCommContactItemWnd(QWidget* p, const char* headUrl, const 
     }
 
     setFixedHeight(65);
-    setObjectName("QCommContactItemWnd");
+
+    LogDebug << "w:" << this->width() << "h:" << this->height();
 }
 
 void QCommContactItemWnd::slotReplyFinished(QNetworkReply* reply)

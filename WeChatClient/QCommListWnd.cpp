@@ -23,7 +23,7 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
-    setFixedWidth(250);
+  //  setFixedWidth(250);
     setMouseTracking(true);
 
     m_hLayout = new QHBoxLayout(this);
@@ -52,15 +52,16 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     }
 
     m_listWidget = new QListWidget();
-    m_listWidget->setFixedWidth(250);
+    m_listWidget->setFixedWidth(255);
    // m_listWidget->setAttribute(Qt::WA_StyledBackground);
     m_listWidget->setWindowFlags(Qt::FramelessWindowHint);
+    m_listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_vLayout->addWidget(m_listWidget);
 
     m_selectWnd = new QSelectAddGroupOrAddFriendWnd(nullptr);
     m_selectWnd->hide();
 
-    setFixedWidth(250);
+    setFixedWidth(255);
     // setObjectName("QCommListWnd");
     // setStyleSheet("#QCommListWnd{background:white;border:0px;}");
     setAttribute(Qt::WA_StyledBackground);

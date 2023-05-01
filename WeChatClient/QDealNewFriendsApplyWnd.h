@@ -18,6 +18,9 @@ class QDealNewFriendsApplyWnd : public QWidget
 public:
     QDealNewFriendsApplyWnd(QWidget* p = nullptr);
 
+protected:
+    void resizeEvent(QResizeEvent* event) override;
+
 public:
     void addListItem(const char* headurl, const char* name, const char* msg, int state, int id, bool isApplyer, int userid);
 

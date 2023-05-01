@@ -37,7 +37,7 @@ public slots:
 protected:
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
-    virtual void resizeEvent(QResizeEvent* event) override;
+    void resizeEvent(QResizeEvent* event) override;
 
 public:
     // QHBoxLayout* m_hLayout;
