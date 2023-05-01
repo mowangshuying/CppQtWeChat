@@ -72,8 +72,8 @@ QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addLayout(m_hVerLayout);
     m_vLayout->addStretch();
 
-    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotClickedCloseBtn()));
-    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotClickedMinBtn()));
+    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotClickedMinBtn()));
+    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotClickedCloseBtn()));
 }
 
 void QSettingWnd::mouseMoveEvent(QMouseEvent* event)

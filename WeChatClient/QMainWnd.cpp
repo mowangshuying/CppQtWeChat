@@ -1015,4 +1015,5 @@ void QMainWnd::slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reaso
 void QMainWnd::slotOnSettingBtnClick()
 {
     m_settingWnd->show();
+    //m_settingWnd->update();
 }
