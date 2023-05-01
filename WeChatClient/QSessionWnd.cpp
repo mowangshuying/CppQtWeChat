@@ -9,7 +9,7 @@
 #include "QSessionWnd.h"
 #include "QChatMsgWnd.h"
 #include "QSessionTopWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QMainWnd.h"
 #include "QWSClientMgr.h"
 #include "json/CJsonObject.hpp"
@@ -69,7 +69,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     {
         /*添加分割线的示例代码*/
-        QSimpleSplit* sp = new QSimpleSplit(this);
+        QSelfSplit* sp = new QSelfSplit(this);
         m_vLayout->addWidget(sp);
     }
 
@@ -77,7 +77,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     {
         /*添加分割线的示例代码*/
-        QSimpleSplit* sp = new QSimpleSplit(this);
+        QSelfSplit* sp = new QSelfSplit(this);
         m_vLayout->addWidget(sp);
     }
 

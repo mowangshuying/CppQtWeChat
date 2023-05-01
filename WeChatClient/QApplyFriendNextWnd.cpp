@@ -1,5 +1,5 @@
 #include "QApplyFriendNextWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QApplyFriendInputInfoWnd.h"
 #include "QApplyFriendWaitInfoWnd.h"
 

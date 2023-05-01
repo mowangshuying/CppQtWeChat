@@ -7,7 +7,7 @@
 #include <QNetworkAccessManager>
 
 #include "QDataManager.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QChatFileInnerWnd.h"
 
 QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)

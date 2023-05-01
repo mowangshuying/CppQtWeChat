@@ -11,7 +11,7 @@
 #include "./json/CJsonObject.hpp"
 #include "QDataManager.h"
 #include "QMainWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QStyleSheetMgr.h"
 #include "QWSClientMgr.h"
 

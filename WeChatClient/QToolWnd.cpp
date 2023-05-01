@@ -18,7 +18,7 @@ QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setAttribute(Qt::WA_StyledBackground);
 
     m_vBoxLayout = new QVBoxLayout(this);
-    m_headUrlLabel = new QSimpleLabel("Í·Ïñ");
+    m_headUrlLabel = new QSelfLabel("Í·Ïñ");
     m_headUrlLabel->setFixedSize(40, 40);
 
     m_msgBtn = new QPushButton(this);

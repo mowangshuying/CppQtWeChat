@@ -1,6 +1,6 @@
 #include <QDebug>
 
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QDataManager.h"
 #include "QCommContactInfo.h"
 #include "QStyleSheetMgr.h"

@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include "QStyleSheetMgr.h"
 #include <QMouseEvent>
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 
 QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {

@@ -3,7 +3,7 @@
 #include "QMainWnd.h"
 
 #include "QSelectAddGroupOrAddFriendWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QCommListWnd.h"
 #include "QCommMsgItemWnd.h"
 #include "QCommContactItemWnd.h"
@@ -23,7 +23,7 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
-  //  setFixedWidth(250);
+    //  setFixedWidth(250);
     setMouseTracking(true);
 
     m_hLayout = new QHBoxLayout(this);
@@ -47,13 +47,13 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
 
     {
         /*添加分割线的示例代码*/
-        QSimpleSplit* sp = new QSimpleSplit(this);
+        QSelfSplit* sp = new QSelfSplit(this);
         m_vLayout->addWidget(sp);
     }
 
     m_listWidget = new QListWidget();
     m_listWidget->setFixedWidth(255);
-   // m_listWidget->setAttribute(Qt::WA_StyledBackground);
+    // m_listWidget->setAttribute(Qt::WA_StyledBackground);
     m_listWidget->setWindowFlags(Qt::FramelessWindowHint);
     m_listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_vLayout->addWidget(m_listWidget);
@@ -65,13 +65,12 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     // setObjectName("QCommListWnd");
     // setStyleSheet("#QCommListWnd{background:white;border:0px;}");
     setAttribute(Qt::WA_StyledBackground);
-    //setWindowFlags(Qt::FramelessWindowHint);
+    // setWindowFlags(Qt::FramelessWindowHint);
 
     // m_listWidget->setStyleSheet("border:0px;");
     connect(m_listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotOnCurrentItemClicked(QListWidgetItem*)));
     connect(m_startGroupBtn, SIGNAL(clicked()), this, SLOT(slotOnStartGroupBtnClicked()));
-   // setStyleSheet("background-color:red;");
-   
+    // setStyleSheet("background-color:red;");
 }
 
 void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)

@@ -1,5 +1,5 @@
 #include "QUserInfoWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include <QApplication>
 #include <QPixmap>
 #include "QDataManager.h"

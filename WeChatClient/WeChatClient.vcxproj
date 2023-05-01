@@ -205,8 +205,8 @@
     <ClCompile Include="QSessionTopWnd.cpp" />
     <ClCompile Include="QSessionWnd.cpp" />
     <ClCompile Include="QSettingWnd.cpp" />
-    <ClCompile Include="QSimpleLabel.cpp" />
-    <ClCompile Include="QSimpleSplit.cpp" />
+    <ClCompile Include="QSelfLabel.cpp" />
+    <ClCompile Include="QSelfSplit.cpp" />
     <ClCompile Include="QStyleSheetMgr.cpp" />
     <ClCompile Include="QSwitchButton.cpp" />
     <ClCompile Include="QToolWnd.cpp" />
@@ -282,7 +282,7 @@
     <QtMoc Include="QScreenShotWnd.h" />
     <QtMoc Include="QEmoijWnd.h" />
     <QtMoc Include="QSessionToolBar.h" />
-    <QtMoc Include="QSimpleLabel.h" />
+    <QtMoc Include="QSelfLabel.h" />
     <QtMoc Include="QDealNewFriendsApplyItemWnd.h" />
     <QtMoc Include="QUserInfoWnd.h" />
     <QtMoc Include="QDealNewFriendsApplyWnd.h" />
@@ -292,7 +292,7 @@
     <QtMoc Include="QCommMsgItemWnd.h" />
     <ClInclude Include="QCustomListWidgetItem.h" />
     <QtMoc Include="QSessionTopWnd.h" />
-    <QtMoc Include="QSimpleSplit.h" />
+    <QtMoc Include="QSelfSplit.h" />
     <QtMoc Include="QSessionWnd.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

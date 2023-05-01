@@ -1,6 +1,6 @@
 #include "QGroupInfoWnd.h"
 #include <QApplication>
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QGroupFriendsItemWnd.h"
 #include <QScrollArea>
 
@@ -173,8 +173,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addStretch();
 
     //ÉèÖÃÎÞ±ß¿ò
-   // setAttribute(Qt::WA_StyledBackground);
-   setWindowFlags(Qt::FramelessWindowHint);
+    // setAttribute(Qt::WA_StyledBackground);
+    setWindowFlags(Qt::FramelessWindowHint);
 
     m_scrollArea->setWidget(m_centerWnd);
 }

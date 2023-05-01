@@ -9,7 +9,7 @@
 #include <QVector>
 #include <QNetworkAccessManager>
 
-#include "QSimpleLabel.h"
+#include "QSelfLabel.h"
 #include "QUserInfoWnd.h"
 #include "QPictureToolWnd.h"
 #include <QNetworkReply>
@@ -41,7 +41,7 @@ public:
     QPushButton* m_msgBtn;
     QPushButton* m_contactsBtn;
     QPushButton* m_groupsBtn;
-    QSimpleLabel* m_headUrlLabel;
+    QSelfLabel* m_headUrlLabel;
     QVector<QPushButton*> m_btnVct;
     QUserInfoWnd* m_userInfoWnd;
     QPictureToolWnd* m_pictureToolWnd;

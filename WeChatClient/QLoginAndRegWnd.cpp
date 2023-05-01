@@ -1,5 +1,5 @@
 #include "QLoginAndRegWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include <QMouseEvent>
 
 #include <QDebug>

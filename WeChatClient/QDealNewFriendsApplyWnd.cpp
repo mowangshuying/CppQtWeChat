@@ -2,7 +2,7 @@
 #include <QScrollBar>
 #include "QDealNewFriendsApplyWnd.h"
 #include "QDealNewFriendsApplyItemWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QWSClientMgr.h"
 #include "QMainWnd.h"
 #include "./json/CJsonObject.hpp"

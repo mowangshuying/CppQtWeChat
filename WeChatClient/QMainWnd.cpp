@@ -1,5 +1,5 @@
 #include "QMainWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "json/CJsonObject.hpp"
 #include "QWSClientMgr.h"
 #include <QApplication>
@@ -74,7 +74,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     {
         /*添加分割线的示例代码*/
-        QSimpleSplit* sp = new QSimpleSplit(this, QSimpleSplit::Direction_V);
+        QSelfSplit* sp = new QSelfSplit(this, QSelfSplit::Direction_V);
         m_hLayout->addWidget(sp);
     }
     m_hLayout->setSpacing(0);

@@ -3,7 +3,7 @@
 #include <QMouseEvent>
 #include <QMessageBox>
 
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QCreateGroupWnd.h"
 #include "QCreateGroupListItemWithSelBtnWnd.h"
 #include "QCreateGroupListItemWnd.h"
@@ -72,7 +72,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout1->addWidget(m_listWnd1);
     m_hLayout2->addLayout(m_vLayout1);
 
-    QSimpleSplit* sp = new QSimpleSplit(nullptr, QSimpleSplit::Direction_H);
+    QSelfSplit* sp = new QSelfSplit(nullptr, QSelfSplit::Direction_H);
     m_hLayout2->addWidget(sp);
 
     m_vLayout2 = new QVBoxLayout();

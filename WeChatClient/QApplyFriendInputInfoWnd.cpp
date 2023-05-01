@@ -1,5 +1,5 @@
 ﻿#include "QApplyFriendInputInfoWnd.h"
-#include "QSimpleLabel.h"
+#include "QSelfLabel.h"
 #include "QStyleSheetMgr.h"
 
 QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
@@ -48,7 +48,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
     m_hLayout->addWidget(m_userInfoWnd);
 
     // 添加一个分割条
-    m_split = new QSimpleSplit(nullptr, QSimpleSplit::Direction_V);
+    m_split = new QSelfSplit(nullptr, QSelfSplit::Direction_V);
     m_hLayout->addWidget(m_split);
 
     m_vLayout = new QVBoxLayout();

@@ -1,4 +1,4 @@
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include "QFindFriendItemWnd.h"
 #include "QFindFriendOrGroupWnd.h"
 #include "QWSClientMgr.h"
@@ -57,7 +57,7 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget
     m_findGroupChx->setText("урх╨");
     m_searchBtn = new QPushButton();
 
-    //m_searchEdit->setFixedSize(350, 30);
+    // m_searchEdit->setFixedSize(350, 30);
 
     m_hLayout2->addWidget(m_searchEdit);
     m_hLayout2->addWidget(m_findPersonChx);

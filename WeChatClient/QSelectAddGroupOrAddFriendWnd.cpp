@@ -1,6 +1,6 @@
 #include "QSelectAddGroupOrAddFriendWnd.h"
 #include "QFindFriendOrGroupWnd.h"
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include <QDebug>
 #include <QApplication>
 
@@ -29,13 +29,13 @@ QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidg
     m_createGroupBtn = new QPushButton("´´½¨ÈºÁÄ");
 
     m_vLayout->addWidget(m_addContactsOrGroupBtn);
-   ///* {
-   //     QSimpleSplit* sp = new QSimpleSplit();
-   //     m_vLayout->addWidget(sp);
-   // }*/
+    ///* {
+    //     QSimpleSplit* sp = new QSimpleSplit();
+    //     m_vLayout->addWidget(sp);
+    // }*/
     m_vLayout->addWidget(m_createGroupBtn);
 
-  //  setFixedHeight(m_createGroupBtn->height() + m_addContactsOrGroupBtn->height());
+    //  setFixedHeight(m_createGroupBtn->height() + m_addContactsOrGroupBtn->height());
     m_centerWnd->setLayout(m_vLayout);
 
     m_findFriendOrGroupWnd = new QFindFriendOrGroupWnd();

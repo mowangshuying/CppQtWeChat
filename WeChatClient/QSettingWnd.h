@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QStackedLayout>
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 #include <QComboBox>
 #include <QLabel>
 

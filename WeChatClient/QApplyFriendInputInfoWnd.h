@@ -9,7 +9,7 @@
 #include <QHBoxLayout>
 #include <QTextEdit>
 
-#include "QSimpleSplit.h"
+#include "QSelfSplit.h"
 
 // 添加好友时候，最先展示的窗口，填写一些验证消息
 class QApplyFriendInputInfoWnd : public QWidget
@@ -36,7 +36,7 @@ public:
     QVBoxLayout* m_vUserInfoLayout;
 
     // 左部窗口与右部串口的分割条
-    QSimpleSplit* m_split;
+    QSelfSplit* m_split;
 
     // 输入验证消息的标签
     QLabel* m_inputMsgLabel;

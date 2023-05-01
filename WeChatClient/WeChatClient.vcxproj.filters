@@ -71,7 +71,7 @@
     <ClCompile Include="QCommMsgItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSimpleSplit.cpp">
+    <ClCompile Include="QSelfSplit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QCustomListWidgetItem.cpp">
@@ -101,7 +101,7 @@
     <ClCompile Include="QUserInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSimpleLabel.cpp">
+    <ClCompile Include="QSelfLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QPictureToolWnd.cpp">
@@ -214,7 +214,7 @@
     <QtMoc Include="QSessionWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSimpleSplit.h">
+    <QtMoc Include="QSelfSplit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QSessionTopWnd.h">
@@ -232,7 +232,7 @@
     <QtMoc Include="QUserInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSimpleLabel.h">
+    <QtMoc Include="QSelfLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QPictureToolWnd.h">
