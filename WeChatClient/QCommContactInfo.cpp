@@ -20,7 +20,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     font2.setPointSize(12);
 
     setMinimumSize(640, 600);
-    // setStyleSheet("border-left:0px");
 
     m_vLayout = new QVBoxLayout(this);
 
@@ -42,10 +41,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_maxBtn->setFixedSize(20, 20);
     m_closeBtn->setFixedSize(20, 20);
 
-    // m_maxBtn->setStyleSheet("border:0px;");
-    // m_minBtn->setStyleSheet("border:0px;");
-    // m_closeBtn->setStyleSheet("border:0px;");
-
     m_hLayout0->addStretch();
     m_hLayout0->addWidget(m_minBtn);
     m_hLayout0->addWidget(m_maxBtn);
@@ -57,9 +52,7 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vLayout->addLayout(m_vLayout1);
 
-    // m_vLayout->setAlignment(Qt::AlignCenter);
     m_vLayout1->setContentsMargins(75, 0, 75, 0);
-    // m_vLayout->addStretch();
     m_vLayout1->addSpacing(100);
 
     m_hLayout1 = new QHBoxLayout();
@@ -73,14 +66,7 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout1->addWidget(m_headimgLabel);
 
     m_vLayout1->addLayout(m_hLayout1);
-    // m_vLayout1->addWidget(m_nickNameLabel);
     m_vLayout1->addSpacing(50);
-
-    /*  {
-            QSimpleSplit* sp = new QSimpleSplit();
-            m_vLayout1->addWidget(sp);
-            m_vLayout1->addSpacing(25);
-        }*/
 
     m_hLayout2 = new QHBoxLayout();
     m_markNameLabel = new QLabel("备  注:");
@@ -89,7 +75,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_markNameLabel->setFont(font2);
     m_markNameFillLabel->setFont(font2);
 
-    // m_hLayout1->addStretch(1);
     m_hLayout2->addSpacing(150);
     m_hLayout2->addWidget(m_markNameLabel);
     m_hLayout2->addSpacing(15);
@@ -105,7 +90,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_rolenameLabel->setFont(font2);
     m_rolenameFillLabel->setFont(font2);
 
-    // m_hLayout2->addStretch(1);
     m_hLayout3->addSpacing(150);
     m_hLayout3->addWidget(m_rolenameLabel);
     m_hLayout3->addSpacing(15);
@@ -122,7 +106,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_channelLabel->setFont(font2);
     m_channelFillLabel->setFont(font2);
 
-    // m_hLayout3->addStretch(1);
     m_hLayout4->addSpacing(150);
     m_hLayout4->addWidget(m_channelLabel);
     m_hLayout4->addSpacing(15);
@@ -130,18 +113,11 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout4->addStretch();
     m_vLayout1->addLayout(m_hLayout4);
 
-    /* {
-          m_vLayout1->addSpacing(25);
-          QSimpleSplit* sp = new QSimpleSplit();
-          m_vLayout1->addWidget(sp);
-      }*/
-
     m_vLayout1->addSpacing(25);
 
     m_hLayout5 = new QHBoxLayout();
     m_sendMsgBtn = new QPushButton("发送消息");
     m_sendMsgBtn->setFixedSize(140, 35);
-    // m_sendMsgBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     m_hLayout5->addSpacing(155);
     m_hLayout5->addWidget(m_sendMsgBtn);
