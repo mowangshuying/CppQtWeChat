@@ -17,7 +17,7 @@ void QSelfTextEdit::insertFromMimeData(const QMimeData *source)
         if (mime->hasImage())
         {
             QImage image = qvariant_cast<QImage>(mime->imageData());
-            textCursor().insertText("\n");
+           // textCursor().insertText("\n");
             textCursor().insertImage(image);
             return;
         }

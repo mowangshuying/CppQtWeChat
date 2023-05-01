@@ -24,7 +24,6 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout = new QVBoxLayout(this);
 
     m_vLayout1 = new QVBoxLayout();
-
     m_hLayout0 = new QHBoxLayout();
     m_hLayout0->setContentsMargins(0, 0, 0, 0);
     m_hLayout0->setSpacing(0);
@@ -50,7 +49,12 @@ QCommContactInfo::QCommContactInfo(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout0->setSpacing(5);
     m_vLayout->addLayout(m_hLayout0);
 
-    m_vLayout->addLayout(m_vLayout1);
+    // m_vLayout->addLayout(m_vLayout1);
+
+    m_contentWnd = new QWidget(this);
+    m_contentWnd->setFixedSize(500, 500);
+    m_contentWnd->setLayout(m_vLayout1);
+    m_vLayout->addWidget(m_contentWnd, 0, Qt::AlignCenter);
 
     m_vLayout1->setContentsMargins(75, 0, 75, 0);
     m_vLayout1->addSpacing(100);

@@ -26,10 +26,11 @@ public:
 
 public:
     QVBoxLayout* m_vLayout;
+
+    QWidget* m_contentWnd;
     QVBoxLayout* m_vLayout1;
 
-    //头部的关闭打开等按钮
-    QHBoxLayout* m_hLayout0;
+    QHBoxLayout* m_hLayout0;  // 顶部的最大化，最小化按钮等
     QHBoxLayout* m_hLayout1;
     QHBoxLayout* m_hLayout2;
     QHBoxLayout* m_hLayout3;
@@ -44,7 +45,7 @@ public:
     QLabel* m_headimgLabel;
 
     QLabel* m_markNameLabel;
-    QLabel* m_rolenameLabel;  //角色名
+    QLabel* m_rolenameLabel;  // 角色名
     QLabel* m_channelLabel;
 
     QLabel* m_markNameFillLabel;
