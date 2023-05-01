@@ -95,6 +95,8 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_MsgWndList->setFocusPolicy(Qt::NoFocus);
     m_MsgWndList->setAttribute(Qt::WA_StyledBackground);
     m_MsgWndList->setAcceptDrops(true);
+    m_MsgWndList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     //按钮点击时候发送消息
     connect(m_sendTextBtn, SIGNAL(clicked()), this, SLOT(slotSendTextBtnClick()));
     m_sendTextBtn->setStyleSheet("background-color:#1aad19;border-style: none;");

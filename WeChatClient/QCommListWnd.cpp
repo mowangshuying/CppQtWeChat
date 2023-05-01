@@ -23,7 +23,6 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
-    //  setFixedWidth(250);
     setMouseTracking(true);
 
     m_hLayout = new QHBoxLayout(this);
