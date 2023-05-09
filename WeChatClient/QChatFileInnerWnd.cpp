@@ -9,10 +9,15 @@
 #include "QDataManager.h"
 #include "QSelfSplit.h"
 #include "QChatFileInnerWnd.h"
+#include "QStyleSheetMgr.h"
 
 QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     setObjectName("QChatFileInnerWnd");
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
+    object.m_widget = this;
+    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);
@@ -39,11 +44,11 @@ QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vLayout->addLayout(m_hLayout1);
 
-    {
+    //{
         m_progressBar = new QProgressBar();
         m_progressBar->setFixedHeight(5);
         m_vLayout->addWidget(m_progressBar);
-    }
+    //}
 
     //{
     //	QSimpleSplit* sp = new QSimpleSplit();
@@ -68,8 +73,8 @@ QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     setAttribute(Qt::WA_StyledBackground);
     setFixedSize(280, 100);
-    setObjectName("QChatFileWnd");
-    setStyleSheet("#QChatFileWnd{border:4px solid gray;}");
+    // setObjectName("QChatFileWnd");
+    // setStyleSheet("#QChatFileWnd{border:4px solid gray;}");
 
     connect(m_openFileDir, SIGNAL(clicked()), this, SLOT(slotOpenFileDirBtnClick()));
     connect(m_openFile, SIGNAL(clicked()), this, SLOT(slotOpenFileBtnClick()));

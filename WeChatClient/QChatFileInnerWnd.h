@@ -29,23 +29,22 @@ public:
 
     QHBoxLayout* m_hLayout1;
     QVBoxLayout* m_vLayout1;
-
-    QProgressBar* m_progressBar;
-    ;
-
     QHBoxLayout* m_hLayout2;
 
-    QLabel* m_fileIcon;
-    QLabel* m_fileName;
-    QLabel* m_fileSize;
+    // 进度条，用于显示文件传进度
+    QProgressBar* m_progressBar;
 
-    QLabel* m_sendState;         //发送状态
-    QPushButton* m_openFile;     //打开文件
-    QPushButton* m_copyFile;     //拷贝
-    QPushButton* m_openFileDir;  //打开所在目录
-    QPushButton* m_downLoad;
+    QLabel* m_fileIcon;            // 文件图标
+    QLabel* m_fileName;            // 文件名
+    QLabel* m_fileSize;            // 文件大小
 
-    QString m_fileFullpath = "";
-    QString m_fileFullDir = "";
-    QString m_serveFilePath = "";  //远程的文件地址
+    QLabel* m_sendState;            // 发送状态
+    QPushButton* m_openFile;        // 打开文件
+    QPushButton* m_copyFile;        // 拷贝
+    QPushButton* m_openFileDir;     // 打开所在目录
+    QPushButton* m_downLoad;        // 下载文件
+
+    QString m_fileFullpath = "";    // 文件全路径
+    QString m_fileFullDir = "";     // 文件所在目录
+    QString m_serveFilePath = "";   //远程的文件地址
 };

@@ -4,7 +4,6 @@
 QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /* = -1*/, int64_t recvid /* = -1*/) : QWidget(p)
 {
     setObjectName("QChatFileOuterWnd");
-
     m_hLayout = new QHBoxLayout();
     m_vLayout = new QVBoxLayout();
     setLayout(m_hLayout);
@@ -16,7 +15,6 @@ QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /*
     m_vLayout->addStretch();
 
     m_innerWnd = new QChatFileInnerWnd();
-
     if (sendid != QDataManager::getMgr()->m_userid)
     {
         m_hLayout->setSpacing(0);
@@ -32,7 +30,6 @@ QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /*
     }
     else
     {
-        // m_hLayout->setSpacing(0);
         m_hLayout->addStretch();
         m_hLayout->addWidget(m_innerWnd);
         m_hLayout->addSpacing(5);
