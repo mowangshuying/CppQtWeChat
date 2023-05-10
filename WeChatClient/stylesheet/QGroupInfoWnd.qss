@@ -1,28 +1,21 @@
-#QSimpleGroupInfoWnd, #QSimpleGroupSettingWnd, #QGroupFriendsWnd, #QGroupInfoCenterWnd {
-    background-color: rgb(238,244,249);
-    border-radius: 4px;
-}
-
+#QSimpleGroupInfoWnd,
+#QSimpleGroupSettingWnd,
+#QGroupFriendsWnd,
 #QGroupInfoCenterWnd {
-    border: 1px solid rgba(0, 0, 0, 0.073);
-    background-color: rgb(238,244,249);
-    border-radius: 10px;
-}
-
-#QGroupInfoExitWnd {
-    background-color: rgb(238,244,249);
-    border-radius: 4px;
+    background-color: rgb(238, 244, 249);
+    /*    border-radius: 4px;*/
 }
 
 #QGroupInfoWnd {
-    background-color: rgb(238,244,249);
-    border-radius: 5px;
+    background-color: rgb(238, 244, 249);
+    /*border-radius: 5px;*/
+    border-top-right-radius: 4px;
 }
 
 QLabel {
     font: 14px 'Segoe UI', 'Microsoft YaHei';
     color: black;
-    border:none;
+    border: none;
 }
 
 QPushButton {
@@ -50,7 +43,7 @@ QPushButton:disabled {
 
 QListView {
     alternate-background-color: blue;
-    background: rgb(238,244,249);
+    background: rgb(238, 244, 249);
     selection-color: white;
     border: none;
     /*border-radius: 4px;*/
@@ -58,7 +51,6 @@ QListView {
     font: 13px 'Segoe UI', 'Microsoft YaHei';
     selection-background-color: transparent;
 }
-
 
 QListView::item {
     padding: 4px;
@@ -76,11 +68,11 @@ QListView::item:alternate {
 
 QListView::item:selected {
     background: rgba(255, 255, 255, 1);
-   /* border: 1px solid rgb(149,236,105); */
+    /* border: 1px solid rgb(149,236,105); */
 }
 
 QListView::item:selected:!active {
-   /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ABAFE5, stop: 1 #8588B2);*/
+    /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ABAFE5, stop: 1 #8588B2);*/
 }
 
 QListView::item:selected:active {
@@ -113,10 +105,9 @@ QLineEdit:focus {
     border-bottom: 1px solid rgba(0, 0, 0, 13);
 }
 
-
 QScrollArea {
-   /* background-color: rgb(238,0,0); */
-    background-color: rgb(238,244,249);
+    /* background-color: rgb(238,0,0); */
+    background-color: rgb(238, 244, 249);
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.073);
 }

@@ -8,10 +8,11 @@
 
 QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    m_centerWnd = new QWidget(this);
     setObjectName("QGroupInfoWnd");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
-    object.m_widget = this;
+    object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     // setFixedSize(250, 535);
@@ -19,18 +20,18 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setMinimumHeight(535);
 
     // 滚动区域
-    m_scrollArea = new QScrollArea(this);
-    m_centerWnd = new QWidget(this);
+    m_scrollArea = new QScrollArea(m_centerWnd);
+    m_scrollAreaWnd = new QWidget(m_centerWnd);
 
-    m_centerWnd->setObjectName("QGroupInfoCenterWnd");
-    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
-    object.m_widget = m_centerWnd;
+    m_scrollAreaWnd->setObjectName("QGroupInfoCenterWnd");
+    object.m_qssFileName = "./stylesheet/" + m_scrollAreaWnd->objectName() + ".qss";
+    object.m_widget = m_scrollAreaWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     m_scrollArea->setGeometry(0, 0, width(), height());
 
     m_vLayout = new QVBoxLayout();
-    m_centerWnd->setLayout(m_vLayout);
+    m_scrollAreaWnd->setLayout(m_vLayout);
 
     m_vLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -175,8 +176,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     //设置无边框
     // setAttribute(Qt::WA_StyledBackground);
     setWindowFlags(Qt::FramelessWindowHint);
-
-    m_scrollArea->setWidget(m_centerWnd);
+    setAttribute(Qt::WA_TranslucentBackground);
+    m_scrollArea->setWidget(m_scrollAreaWnd);
 }
 
 void QGroupInfoWnd::addGroupFriendItem(int64_t ownerId, QString nickName)

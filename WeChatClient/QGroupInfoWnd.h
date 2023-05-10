@@ -27,11 +27,12 @@ public:
     void addGroupFriendItem(int64_t ownerId, QString nickName);
 
 public:
+    QWidget* m_centerWnd;
     //滚动条
     QScrollArea* m_scrollArea;
 
     // 中间窗口
-    QWidget* m_centerWnd;
+    QWidget* m_scrollAreaWnd;
     //暂时用于测试
     // QLabel* m_label;
     QVBoxLayout* m_vLayout;
