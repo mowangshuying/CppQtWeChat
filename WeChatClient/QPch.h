@@ -4,6 +4,5 @@
 #include "QSelfLog.h"
 
 #define WECHAT_VERSION "Ver2.0.0"
-
-#define HTTP_FILE_SERVER_ADDR 
-#define CHAT_SERVER_ADDR
+#define HTTP_FILE_SERVER_ADDR "http://49.232.169.205:80/UploadDemo/UploadServlet"
+#define CHAT_SERVER_ADDR "ws://49.232.169.205:5000"

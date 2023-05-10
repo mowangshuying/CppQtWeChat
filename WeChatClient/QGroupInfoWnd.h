@@ -85,7 +85,4 @@ public:
     QWidget* m_delexitWnd;
     QVBoxLayout* m_vLayout3;
     QPushButton* m_delexitBtn;
-
-    //当前是否是打开状态
-    // bool m_isOpen = false;
 };

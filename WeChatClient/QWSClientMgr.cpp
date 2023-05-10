@@ -19,7 +19,7 @@ QWSClientMgr::QWSClientMgr()
     connect(m_webSock, &QWebSocket::textMessageReceived, this, &QWSClientMgr::slotRecvMsg);
 
     //连接远端服务器
-    m_webSock->open(QUrl("ws://49.232.169.205:5000"));
+    m_webSock->open(QUrl(CHAT_SERVER_ADDR));
     // m_webSock->open(QUrl("ws://127.0.0.1:5000"));
     LogDebug << "threadId:" << QThread::currentThread()->currentThreadId();
 }
@@ -179,7 +179,7 @@ void QWSClientMgr::slotTimer()
 
     if (!m_bConn)
     {
-        m_webSock->open(QUrl("ws://49.232.169.205:5000"));
+        m_webSock->open(QUrl(CHAT_SERVER_ADDR));
         // m_webSock->open(QUrl("ws://127.0.0.1:5000"));
         LogDebug << "Retry to connect server";
     }

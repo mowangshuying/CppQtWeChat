@@ -225,7 +225,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
 
                 QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
                 QNetworkRequest request;
-                request.setUrl(QUrl("http://49.232.169.205:80/UploadDemo/UploadServlet"));
+                request.setUrl(QUrl("HTTP_FILE_SERVER_ADDR"));
                 QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
                 QHttpPart part;
                 part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));

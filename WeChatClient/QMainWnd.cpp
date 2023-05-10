@@ -209,14 +209,14 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         //向会话中嵌入一条数据；
         QString time = QString::number(QDateTime::currentDateTime().toTime_t());
         QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, recvid);
-        QListWidgetItem* msgItem = new QListWidgetItem(ses->m_MsgWndList);
+        QListWidgetItem* msgWndItem = new QListWidgetItem(ses->m_MsgWndList);
         msgWnd->setFixedWidth(640);
         QSize msgSize = msgWnd->fontRect(msgtext.c_str());
-        msgItem->setSizeHint(msgSize);
+        msgWndItem->setSizeHint(msgSize);
         //会设置消息并调用相应的
         msgWnd->setText(msgtext.c_str(), time, msgSize, QChatMsgWnd::ChatMsg_Other);
         //关联项与窗口
-        ses->m_MsgWndList->setItemWidget(msgItem, msgWnd);
+        ses->m_MsgWndList->setItemWidget(msgWndItem, msgWnd);
         return;
     }
 
@@ -412,7 +412,6 @@ void QMainWnd::requestFriendList()
     neb::CJsonObject json;
     json.Add("ownerid", QMainWnd::getMainWnd()->m_userid);
     QWSClientMgr::getMgr()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg) {
-        // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
         if (!msg["data"].IsArray())
         {
             return;
@@ -1015,5 +1014,5 @@ void QMainWnd::slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reaso
 void QMainWnd::slotOnSettingBtnClick()
 {
     m_settingWnd->show();
-    //m_settingWnd->update();
+    // m_settingWnd->update();
 }
