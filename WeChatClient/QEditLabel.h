@@ -1,5 +1,6 @@
 #pragma once
 
+#include "QPch.h"
 #include <QLabel>
 #include <QLineEdit>
 #include <QEvent>

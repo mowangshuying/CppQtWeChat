@@ -5,11 +5,30 @@
 #include <vector>
 #include <QMap>
 #include <map>
+#include <QKeyEvent>
 
 QEditLabel::QEditLabel(QWidget* parent) : QWidget(parent)
 {
     setObjectName("QEditLabel");
-    initCtrls();
+    // initCtrls();
+
+    m_StackLayout = new QStackedLayout(this);
+    setLayout(m_StackLayout);
+
+    m_label = new QLabel(this);
+    m_label->setObjectName("TmpLabel");
+    m_lineEdit = new QLineEdit(this);
+    m_lineEdit->setObjectName("TmpLineEdit");
+    m_label->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+
+    m_label->installEventFilter(this);
+    m_lineEdit->installEventFilter(this);
+
+    //   m_label->setStyleSheet("border:0px;");
+
+    m_StackLayout->addWidget(m_label);
+    m_StackLayout->addWidget(m_lineEdit);
+    m_StackLayout->setCurrentWidget(m_label);
 }
 
 void QEditLabel::setText(const char* text)
@@ -22,18 +41,32 @@ void QEditLabel::setText(const char* text)
 
 bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
 {
-    if (QEvent::Enter == e->type())
+    if (obj == m_label)
     {
-        m_StackLayout->setCurrentWidget(m_lineEdit);
-        m_lineEdit->setText(m_label->text());
-        // LogDebug << "QEvent::Enter..." << endl;
+        if (e->type() == QEvent::MouseButtonDblClick)
+        {
+            m_lineEdit->setText(m_label->text());
+            m_StackLayout->setCurrentWidget(m_lineEdit);
+        }
     }
 
-    if (QEvent::Leave == e->type())
+    if (obj == m_lineEdit)
     {
-        m_StackLayout->setCurrentWidget(m_label);
-        m_label->setText(m_lineEdit->text());
-        // LogDebug << "QEvent::Leave..." << endl;
+        if (e->type() == QEvent::KeyPress)
+        {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(e);
+            if (keyEvent->key() == Qt::Key_Enter)
+            {
+                m_label->setText(m_lineEdit->text());
+                m_StackLayout->setCurrentWidget(m_label);
+            }
+        }
+
+        if (e->type() == QEvent::FocusOut)
+        {
+            m_label->setText(m_lineEdit->text());
+            m_StackLayout->setCurrentWidget(m_label);
+        }
     }
 
     return QWidget::eventFilter(obj, e);
@@ -56,9 +89,4 @@ void QEditLabel::initCtrls()
     m_StackLayout->addWidget(m_label);
     m_StackLayout->addWidget(m_lineEdit);
     m_StackLayout->setCurrentWidget(m_label);
-
-    sizeof(QVector<int>);
-    sizeof(std::vector<int>);
-    sizeof(QMap<int, int>);
-    sizeof(std::map<int, int>);
 }

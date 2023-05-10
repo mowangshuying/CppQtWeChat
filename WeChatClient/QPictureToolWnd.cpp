@@ -128,7 +128,7 @@ void QPictureToolWnd::slotDetermineBtnClicked()
 
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
-    request.setUrl(QUrl("HTTP_FILE_SERVER_ADDR"));
+    request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
     QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
     QHttpPart part;
     part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"u%1.png\"").arg(QMainWnd::getMainWnd()->m_userid));
@@ -139,7 +139,6 @@ void QPictureToolWnd::slotDetermineBtnClicked()
     file->setParent(multiPart);
     multiPart->append(part);
     QNetworkReply* reply = pManager->post(request, multiPart);
-    //
     connect(reply, &QNetworkReply::readyRead, this, [=]() {
         QByteArray all = reply->readAll();
 

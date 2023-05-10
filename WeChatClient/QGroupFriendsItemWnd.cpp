@@ -8,7 +8,6 @@
 QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     setObjectName("QGroupFriendsItemWnd");
-
     m_hLayout = new QHBoxLayout();
     setLayout(m_hLayout);
     m_hLayout->setContentsMargins(0, 0, 0, 0);
@@ -26,13 +25,14 @@ QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p
     setFixedHeight(40);
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_StyledBackground);
+
+    m_networkMgr = new QNetworkAccessManager();
 }
 
 void QGroupFriendsItemWnd::requestHeadImg()
 {
     //向远端请求头像的信息
     QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(m_friendId);
-    m_networkMgr = new QNetworkAccessManager();
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
@@ -46,5 +46,7 @@ void QGroupFriendsItemWnd::slotReplyFinished(QNetworkReply* reply)
         pixmap = pixmap.scaled(30, 30);
         m_headImg->setPixmap(pixmap);
         QDataManager::getMgr()->m_UserId2HeadImgMap[m_friendId] = pixmap;
+
+        reply->deleteLater();
     }
 }
