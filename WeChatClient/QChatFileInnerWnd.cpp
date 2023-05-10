@@ -44,16 +44,9 @@ QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vLayout->addLayout(m_hLayout1);
 
-    //{
-        m_progressBar = new QProgressBar();
-        m_progressBar->setFixedHeight(5);
-        m_vLayout->addWidget(m_progressBar);
-    //}
-
-    //{
-    //	QSimpleSplit* sp = new QSimpleSplit();
-    //	m_vLayout->addWidget(sp);
-    //}
+    m_progressBar = new QProgressBar();
+    m_progressBar->setFixedHeight(10);
+    m_vLayout->addWidget(m_progressBar);
 
     m_hLayout2 = new QHBoxLayout();
     m_sendState = new QLabel("发送中");
@@ -107,31 +100,34 @@ void QChatFileInnerWnd::slotDownloadFileBtnClick()
     if (m_serveFilePath != "")
     {
         //下载远程文件并显示进度条
-        QNetworkAccessManager* pManager = new QNetworkAccessManager();
-        // QString fileurl = /*QString("http://49.232.169.205:80/UploadDemo/img/%1").arg(m_serveFilePath)*/;
-        QString fileurl = m_serveFilePath;
-
-        QNetworkReply* reply = pManager->get(QNetworkRequest(QUrl(fileurl)));
+        m_pNetManager = new QNetworkAccessManager(this);
+        QString downLoadFileUrl = m_serveFilePath;
+        QNetworkReply* reply = m_pNetManager->get(QNetworkRequest(QUrl(downLoadFileUrl)));
         connect(reply, &QNetworkReply::downloadProgress, this, [this, reply](qint64 x, qint64 y) {
             //显示下载进度
             m_progressBar->setMinimum(0);
             m_progressBar->setMaximum(y);
             m_progressBar->setValue(x);
-            if (x == y)
+        });
+
+        connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+            m_sendState->setText("下载完成");
+            sendFileShow();
+            QString currpath = QDataManager::getMgr()->m_localRecvFileDir + m_fileName->text();
+            QFile file(currpath);
+            QFileInfo fileinfo = QFileInfo(currpath);
+            if (file.open(QIODevice::WriteOnly))
             {
-                m_sendState->setText("下载完成...");
-                sendFileShow();
-                QString currpath = QDataManager::getMgr()->m_localRecvFileDir + m_fileName->text();
-                QFile file(currpath);
-                QFileInfo fileinfo = QFileInfo(currpath);
-                if (file.open(QIODevice::WriteOnly))
-                {
-                    file.write(reply->readAll());
-                    file.close();
-                    m_fileFullpath = fileinfo.absoluteFilePath();
-                    m_fileFullDir = fileinfo.absolutePath();
-                }
+                file.write(reply->readAll());
+                file.close();
+                m_fileFullpath = fileinfo.absoluteFilePath();
+                m_fileFullDir = fileinfo.absolutePath();
             }
+
+            // 释放内容
+            reply->deleteLater();
+            delete m_pNetManager;
+            m_pNetManager = nullptr;
         });
     }
 }

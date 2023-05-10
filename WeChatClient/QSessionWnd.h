@@ -12,6 +12,7 @@
 #include "QSessionToolBar.h"
 #include "QGroupInfoWnd.h"
 #include <QListWidget>
+#include <QFileInfo>
 
 // 支持黏贴图片的文本框
 #include "QSelfTextEdit.h"
@@ -37,6 +38,9 @@ public slots:
 protected:
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
+
+    QString getFileSize(QFileInfo& fileInfo);
+
     void resizeEvent(QResizeEvent* event) override;
 
 public:

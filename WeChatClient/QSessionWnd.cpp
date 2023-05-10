@@ -295,42 +295,26 @@ void QSessionWnd::dropEvent(QDropEvent* event)
     const QMimeData* qm = event->mimeData();
     QString strFileName = qm->urls()[0].toLocalFile();
     LogDebug << "strFileName:" << strFileName;
+
     //判断是否是支持的文件
     QFileInfo fileInfo = QFileInfo(strFileName);
-
     if (fileInfo.isDir())
     {
-        LogDebug << "is dir";
+        LogErr << "is dir";
         return;
     }
 
     //获取文件名
     QString filename = fileInfo.fileName();
     QString filepath = fileInfo.filePath();
-
     //获取文件后缀名
     QString suffix = fileInfo.suffix();
     //获取文件大小
-    float size = fileInfo.size() * 100 / 1024 * 0.01;
-    LogDebug << "filename:" << filename << "suffix:" << suffix << "size:" << size << "kb";
+    QString fileSize = getFileSize(fileInfo);
 
-    QString sizeStr;
-    if (size < 1024)
-    {
-        sizeStr = QString("%1 K").arg(size);
-    }
-    else
-    {
-        size = fileInfo.size() * 100 / (1024 * 1024) * 0.01;
-        sizeStr = QString("%1 M").arg(size);
-    }
-
+    // 文件信息窗口
     QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, QMainWnd::getMainWnd()->m_userid, m_recvId);
-    fileWnd->m_innerWnd->m_fileName->setText(filename);
-    fileWnd->m_innerWnd->m_fileSize->setText(sizeStr);
-    fileWnd->m_innerWnd->m_fileFullDir = fileInfo.absolutePath();
-    fileWnd->m_innerWnd->m_fileFullpath = fileInfo.absoluteFilePath();
-    fileWnd->m_innerWnd->sendFileShow();
+    fileWnd->setFileUploadData(filename, fileSize, fileInfo.absolutePath(), fileInfo.absoluteFilePath());
     fileWnd->setFixedWidth(m_MsgWndList->width());
 
     QListWidgetItem* fileItem = new QListWidgetItem(m_MsgWndList);
@@ -349,7 +333,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
 
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
-    request.setUrl(QUrl("http://139.9.93.17:8081/upload"));
+    request.setUrl(QUrl("http://49.232.169.205:80/UploadDemo/UploadServlet"));
     QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
     QHttpPart part;
     part.setHeader(QNetworkRequest::ContentDispositionHeader, httpHeader);
@@ -358,7 +342,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
     multiPart->append(part);
     QNetworkReply* reply = pManager->post(request, multiPart);
 
-    connect(reply, &QNetworkReply::uploadProgress, this, [this, fileWnd, fileNameStr, sizeStr, filename](qint64 x, qint64 y) {
+    connect(reply, &QNetworkReply::uploadProgress, this, [this, fileWnd, fileNameStr, fileSize, filename](qint64 x, qint64 y) {
         if (y != 0)
         {
             fileWnd->m_innerWnd->m_progressBar->setMinimum(0);
@@ -367,7 +351,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
         }
     });
 
-    connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, fileNameStr, sizeStr, filename](QNetworkReply* reply) {
+    connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, fileNameStr, fileSize, filename](QNetworkReply* reply) {
         // 获取响应信息
         QByteArray bytes = reply->readAll();
         std::string str = bytes.toStdString();
@@ -382,11 +366,28 @@ void QSessionWnd::dropEvent(QDropEvent* event)
         neb::CJsonObject filejson;
         filejson.Add("filename_server", str);
         filejson.Add("filename_client", filename.toStdString());
-        filejson.Add("filesize", sizeStr.toStdString());
+        filejson.Add("filesize", fileSize.toStdString());
         json.Add("msgtext", filejson.ToString());
 
         QWSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogDebug << "after upload file recv msg from server!"; });
     });
+}
+
+QString QSessionWnd::getFileSize(QFileInfo& fileInfo)
+{
+    float size = fileInfo.size() * 100 / 1024 * 0.01;
+    QString fileSize;
+    if (size < 1024)
+    {
+        fileSize = QString("%1 K").arg(size);
+    }
+    else
+    {
+        size = fileInfo.size() * 100 / (1024 * 1024) * 0.01;
+        fileSize = QString("%1 M").arg(size);
+    }
+
+    return fileSize;
 }
 
 void QSessionWnd::resizeEvent(QResizeEvent* event)

@@ -18,9 +18,67 @@ public:
     };
 
     QChatFileOuterWnd(QWidget* p = nullptr, int64_t sendid = -1, int64_t recvid = -1);
+
+    void setFileName(QString fileName)
+    {
+        if (m_innerWnd == nullptr)
+        {
+            return;
+        }
+
+        m_innerWnd->m_fileName->setText(fileName);
+    }
+
+    void setFileSize(QString fileSize)
+    {
+        if (m_innerWnd == nullptr)
+        {
+            return;
+        }
+        m_innerWnd->m_fileSize->setText(fileSize);
+    }
+
+    void setFileDir(QString fileDir)
+    {
+        if (m_innerWnd == nullptr)
+        {
+            return;
+        }
+
+        m_innerWnd->m_fileFullDir = fileDir;
+    }
+
+    void setFilePath(QString filePath)
+    {
+        if (m_innerWnd == nullptr)
+        {
+            return;
+        }
+        m_innerWnd->m_fileFullpath = filePath;
+    }
+
+    void setSendFileShow()
+    {
+        if (m_innerWnd == nullptr)
+        {
+            return;
+        }
+
+        m_innerWnd->sendFileShow();
+    }
+
+    void setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath)
+    {
+        setFileName(fileName);
+        setFileSize(fileSize);
+        setFileDir(fileDir);
+        setFilePath(filePath);
+        setSendFileShow();
+    }
+
+public:
     QLabel* m_headUrl; // 头像信息
     QChatFileInnerWnd* m_innerWnd; // 文件框
-    
     QHBoxLayout* m_hLayout;
     QVBoxLayout* m_vLayout;
 };
