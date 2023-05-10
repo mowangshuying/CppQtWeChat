@@ -24,6 +24,9 @@ protected:
     bool event(QEvent* event);
 
 public:
+    void addGroupFriendItem(int64_t ownerId, QString nickName);
+
+public:
     //¹ö¶¯Ìõ
     QScrollArea* m_scrollArea;
 

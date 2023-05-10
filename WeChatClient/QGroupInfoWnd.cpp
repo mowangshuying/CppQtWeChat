@@ -179,6 +179,45 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_scrollArea->setWidget(m_centerWnd);
 }
 
+void QGroupInfoWnd::addGroupFriendItem(int64_t ownerId, QString nickName)
+{
+    // 查看列表中是否存在该用户，如果存在应该不在添加用户信息
+    bool ishas = false;
+    QListWidget* listWidget = m_groupfriendsWnd->m_listWnd;
+    for (int i = 0; i < listWidget->count(); i++)
+    {
+        QListWidgetItem* item = listWidget->item(i);
+        if (item == nullptr)
+        {
+            continue;
+        }
+
+        QGroupFriendsItemWnd* wnd = dynamic_cast<QGroupFriendsItemWnd*>(listWidget->itemWidget(item));
+        if (wnd == nullptr)
+        {
+            continue;
+        }
+
+        if (wnd->m_friendId == ownerId)
+        {
+            ishas = true;
+            break;
+        }
+    }
+
+    if (ishas)
+    {
+        return;
+    }
+
+    QGroupFriendsItemWnd* itemWnd = new QGroupFriendsItemWnd();
+    itemWnd->m_headImg->setPixmap(QPixmap("./img/groupHead.png"));
+    itemWnd->m_friendId = ownerId;
+    itemWnd->m_name->setText(nickName);
+    m_groupfriendsWnd->addItem(itemWnd);
+    itemWnd->requestHeadImg();
+}
+
 bool QGroupInfoWnd::event(QEvent* event)
 {
     if (event->type() == QEvent::ActivationChange)

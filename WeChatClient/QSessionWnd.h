@@ -44,6 +44,11 @@ protected:
     void resizeEvent(QResizeEvent* event) override;
 
 public:
+    void sendMsgToUser(neb::CJsonObject json, QString msgText);
+
+    void sendMsgToGroup(neb::CJsonObject json, QString msgText);
+
+public:
     // QHBoxLayout* m_hLayout;
     // more按钮按下时候会显示这个窗口
     QGroupInfoWnd* m_groupInfoWnd;
