@@ -25,6 +25,7 @@ private:
     QWSClientMgr();
 
 public:
+    static void init();
     static QWSClientMgr* getMgr();
 
     void sendMsg(const QString& message);

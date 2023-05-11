@@ -11,7 +11,6 @@ QStyleSheetMgr::~QStyleSheetMgr()
 {
     for (auto& watch : m_map)
     {
-        // watch.second.m_objectVct.clear();
         delete watch.second.m_watcher;
         watch.second.m_watcher = nullptr;
     }
@@ -19,40 +18,8 @@ QStyleSheetMgr::~QStyleSheetMgr()
     m_map.clear();
 }
 
-void QStyleSheetMgr::init()
-{
-    // m_timer.setInterval(100);
-    // connect(&m_timer, SIGNAL(timeout()), this, SLOT(update()));
-    // m_timer.start();
-}
-
-void QStyleSheetMgr::run()
-{
-    // for (auto itMapBeg = m_map.begin(); itMapBeg != m_map.end(); itMapBeg++)
-    // {
-    //     for (auto itBegVct = itMapBeg->second.begin(); itBegVct != itMapBeg->second.end(); itBegVct++)
-    //     {
-    //         QWidget* wnd = itBegVct->m_widget;
-    //         QString qssFileName = itBegVct->m_qssFileName;
-    //         if (qssFileName.isEmpty() || wnd == nullptr)
-    //         {
-    //             continue;
-    //         }
-
-    //         QFile qss(qssFileName);
-    //         if (qss.open(QFile::ReadOnly))
-    //         {
-    //             wnd->setStyleSheet(qss.readAll());
-    //             LogDebug << "update qss fileName:" << qssFileName << "every 5 s";
-    //             qss.close();
-    //         }
-    //     }
-    // }
-}
-
 void QStyleSheetMgr::reg(QString wndObjectName, QStyleSheetObject object)
 {
-    // m_map[wndObjectName] = object;
     LogDebug << "reg:" << wndObjectName;
     auto itf = m_map.find(wndObjectName);
     if (itf != m_map.end())

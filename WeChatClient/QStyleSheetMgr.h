@@ -30,16 +30,7 @@ private:
     ~QStyleSheetMgr();
     static QStyleSheetMgr* m_mgr;
 
-public slots:
-    void update()
-    {
-        run();
-    }
-
 public:  // 成员函数
-    void init();
-
-    void run();
 
     void reg(QString wndObjectName, QStyleSheetObject object);
 
@@ -51,7 +42,4 @@ public:  // 成员函数
 
 public:
     std::map<QString, QStyleSheetObectWatcher> m_map;
-    // std::vector<QString, QFileSystemWatcher> m_watches;
-
-    QTimer m_timer;
 };
