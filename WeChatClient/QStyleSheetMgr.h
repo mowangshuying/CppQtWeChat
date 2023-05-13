@@ -31,8 +31,15 @@ private:
     static QStyleSheetMgr* m_mgr;
 
 public:  // ³ÉÔ±º¯Êý
-
     void reg(QString wndObjectName, QStyleSheetObject object);
+
+    void reg(QString wndObjectName, QString qssFileName, QWidget* wnd)
+    {
+        QStyleSheetObject styleSheetObject;
+        styleSheetObject.m_widget = wnd;
+        styleSheetObject.m_qssFileName = qssFileName;
+        reg(wndObjectName, styleSheetObject);
+    }
 
     void unReg(QString wndObjectName);
 

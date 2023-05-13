@@ -24,16 +24,12 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     m_centerWnd = new QWidget(this);
     m_centerWnd->setObjectName("QMainWnd");
-    QStyleSheetObject object;
-    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
-    object.m_widget = m_centerWnd;
-    QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+    QString qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    QStyleSheetMgr::getMgr()->reg(m_centerWnd->objectName(), qssFileName, m_centerWnd);
 
     m_hLayout = new QHBoxLayout(m_centerWnd);
     m_centerWnd->setLayout(m_hLayout);
-
     m_toolWnd = new QToolWnd(this);
-
     m_commMsgListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::MsgItemWndTpye);
     m_commContactsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::ContactItemWndType);
     m_commGroupsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::GroupItemWndType);
