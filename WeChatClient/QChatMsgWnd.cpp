@@ -27,7 +27,6 @@ QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, int64_t recvi
     //关闭自动填充窗口背景
     m_loadingLable->setAutoFillBackground(false);
     setAttribute(Qt::WA_StyledBackground);
-    // setStyleSheet("background-color:yellow;");
 }
 
 QSize QChatMsgWnd::fontRect(QString str)
@@ -170,7 +169,6 @@ void QChatMsgWnd::setText(QString text, QString time, QSize allSize, ChatMsgType
 void QChatMsgWnd::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
-
     // 重新计算fontRect大小
     fontRect(m_msg);
 
@@ -236,6 +234,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
 
     if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_Time)
     {
+
     }
 
     // update();

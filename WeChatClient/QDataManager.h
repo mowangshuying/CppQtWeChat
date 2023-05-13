@@ -11,16 +11,13 @@ typedef std::map<int64_t, QString> QFriendId2NameMap;
 class QDataManager
 {
 private:
-    QDataManager();
+    explicit QDataManager();
 
 public:
     static QDataManager* getMgr();
     static void freeMgr();
     void setUserIdAndName(int64_t userId, QString userName);
-    void setUserHeadImg(int64_t userId, QPixmap pixmap)
-    {
-        m_UserId2HeadImgMap[userId] = pixmap;
-    }
+    void setUserHeadImg(int64_t userId, QPixmap pixmap);
 
 private:
     static QDataManager* m_dataManager;

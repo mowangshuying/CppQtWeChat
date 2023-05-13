@@ -138,6 +138,15 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_toolWnd->m_selectMoreWnd->m_settingBtn, SIGNAL(clicked()), this, SLOT(slotOnSettingBtnClick()));
 }
 
+QMainWnd* QMainWnd::getMainWnd()
+{
+    if (m_mainWnd == nullptr)
+    {
+        m_mainWnd = new QMainWnd();
+    }
+    return m_mainWnd;
+}
+
 // QMainWnd::~QMainWnd()
 //{
 //    // m_systemTrayIcon->hide();
@@ -252,10 +261,9 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, sendid, recvid);
         fileWnd->m_innerWnd->m_fileName->setText(filename_client.c_str());
         fileWnd->m_innerWnd->m_fileSize->setText(filesize.c_str());
-        fileWnd->m_innerWnd->m_sendState->setText("等待下载...");
+        fileWnd->m_innerWnd->m_sendState->setText("等待下载");
         fileWnd->m_innerWnd->m_serveFilePath = filename_server.c_str();
         fileWnd->m_innerWnd->recvFileShow();
-
         fileWnd->setFixedWidth(ses->m_MsgWndList->width());
         QListWidgetItem* fileItem = new QListWidgetItem(ses->m_MsgWndList);
         QSize fileWndSize(fileWnd->width(), 100 + 20);

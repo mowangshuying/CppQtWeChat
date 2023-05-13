@@ -90,10 +90,13 @@ void QSessionToolBar::slotScreenshotBtnClick()
 
     LogDebug << __FUNCTION__ << " nCurScreenIndex:" << nCurScreenIndex;
 
+    // 如果原来含有截图窗口，释放原来的截图窗口内存，重新分配内存
     if (m_screenShotWnd != nullptr)
     {
         delete m_screenShotWnd;
+        m_screenShotWnd = nullptr;
     }
+
     m_screenShotWnd = new QScreenShotWnd();
     m_screenShotWnd->showFullScreen();
 }

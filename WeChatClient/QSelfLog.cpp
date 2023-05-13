@@ -17,7 +17,7 @@ QString QSelfLog::getFileName(const char* file)
     return fileNameStr;
 }
 
-void QSelfLog::logSysInit()
+void QSelfLog::init()
 {
     QDateTime dateTime = QDateTime::currentDateTime();
     QString timeStr = dateTime.toString("[yyyy-MM-dd][hh_mm_ss_zzz]");

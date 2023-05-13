@@ -15,7 +15,6 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    // setFixedSize(250, 535);
     setFixedWidth(265);
     setMinimumHeight(535);
 
@@ -174,7 +173,6 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addStretch();
 
     //ÉèÖÃÎÞ±ß¿ò
-    // setAttribute(Qt::WA_StyledBackground);
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
     m_scrollArea->setWidget(m_scrollAreaWnd);

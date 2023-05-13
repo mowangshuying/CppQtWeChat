@@ -11,7 +11,7 @@
 
 int main(int argc, char** argv)
 {
-    QSelfLog::logSysInit();
+    QSelfLog::init();
 
     QTextCodec* codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);

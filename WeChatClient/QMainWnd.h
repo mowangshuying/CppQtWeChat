@@ -47,14 +47,7 @@ private:
     };
 
 public:
-    static QMainWnd* getMainWnd()
-    {
-        if (m_mainWnd == nullptr)
-        {
-            m_mainWnd = new QMainWnd();
-        }
-        return m_mainWnd;
-    }
+    static QMainWnd* getMainWnd();
 
     //接收到别人发送的消息
     void cs_msg_sendmsg(neb::CJsonObject& json);

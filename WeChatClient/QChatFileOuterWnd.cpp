@@ -41,3 +41,60 @@ QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /*
         m_headUrl->setPixmap(pixmap);
     }
 }
+
+void QChatFileOuterWnd::setFileName(QString fileName)
+{
+    if (m_innerWnd == nullptr)
+    {
+        return;
+    }
+
+    m_innerWnd->m_fileName->setText(fileName);
+}
+
+void QChatFileOuterWnd::setFileSize(QString fileSize)
+{
+    if (m_innerWnd == nullptr)
+    {
+        return;
+    }
+    m_innerWnd->m_fileSize->setText(fileSize);
+}
+
+void QChatFileOuterWnd::setFileDir(QString fileDir)
+{
+    if (m_innerWnd == nullptr)
+    {
+        return;
+    }
+
+    m_innerWnd->m_fileFullDir = fileDir;
+}
+
+void QChatFileOuterWnd::setFilePath(QString filePath)
+{
+    if (m_innerWnd == nullptr)
+    {
+        return;
+    }
+    m_innerWnd->m_fileFullpath = filePath;
+}
+
+void QChatFileOuterWnd::setSendFileShow()
+{
+    if (m_innerWnd == nullptr)
+    {
+        return;
+    }
+
+    m_innerWnd->sendFileShow();
+}
+
+void QChatFileOuterWnd::setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath)
+{
+    setFileName(fileName);
+    setFileSize(fileSize);
+    setFileDir(fileDir);
+    setFilePath(filePath);
+    setSendFileShow();
+}

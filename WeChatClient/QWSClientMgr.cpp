@@ -185,7 +185,6 @@ void QWSClientMgr::slotTimer()
     if (!m_bConn)
     {
         m_webSock->open(QUrl(CHAT_SERVER_ADDR));
-        // m_webSock->open(QUrl("ws://127.0.0.1:5000"));
         LogDebug << "Retry to connect server";
     }
 }

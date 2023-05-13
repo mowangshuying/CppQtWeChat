@@ -1,5 +1,6 @@
 #pragma once
 
+#include "QPch.h"
 #include <QDebug>
 #include <QTime>
 #include <QFile>
@@ -7,8 +8,6 @@
 #include <QMessageLogContext>
 #include <qlogging.h>
 #include <QtMsgHandler>
-
-#pragma execution_character_set("utf-8")
 
 // 日志格式统一规范
 // [时间] [等级] [文件名] [函数名] [行数] [内容]
@@ -32,7 +31,7 @@ public:
 
     static QString getFileName(const char* file);
 
-    static void logSysInit();
+    static void init();
 
     static void myMessageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 

@@ -2,7 +2,7 @@
 
 QDataManager* QDataManager::m_dataManager = nullptr;
 
- QDataManager::QDataManager()
+QDataManager::QDataManager()
 {
     QFile emoijFile("./emoij/emoij.txt");
     if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -35,4 +35,9 @@ void QDataManager::setUserIdAndName(int64_t userId, QString userName)
 {
     m_userid = userId;
     m_username = userName;
+}
+
+void QDataManager::setUserHeadImg(int64_t userId, QPixmap pixmap)
+{
+    m_UserId2HeadImgMap[userId] = pixmap;
 }

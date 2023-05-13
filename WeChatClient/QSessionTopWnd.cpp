@@ -2,8 +2,6 @@
 
 QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    setObjectName("QSessionTopWnd");
-
     m_vLayout = new QVBoxLayout(this);
     m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_vLayout->setSpacing(0);
@@ -23,11 +21,10 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
 
-    
     m_minBtn->setFixedSize(20, 20);
     m_maxBtn->setFixedSize(20, 20);
     m_closeBtn->setFixedSize(20, 20);
-    
+
     // m_minBtn->setStyleSheet("");
 
     m_hLayout1->addStretch();
@@ -50,13 +47,10 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_titleLabel->setAlignment(Qt::AlignLeft);
 
     QFont font;
-    // font.setBold(true);
     font.setPointSize(12);
-    // font.setItalic(true);
     m_titleLabel->setFont(font);
 
     m_moreBtn = new QPushButton(this);
-    // m_moreBtn->setText("...");
     m_moreBtn->setFixedSize(30, 30);
     m_moreBtn->setIcon(QPixmap("./img/more.png"));
     m_moreBtn->setIconSize(QSize(30, 30));
@@ -73,8 +67,4 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setFixedHeight(65);
     setAttribute(Qt::WA_StyledBackground);
     setMouseTracking(true);
-    // setStyleSheet("background-color:white;border:0px;");
-    if (objectName().isEmpty())
-        setObjectName("QSessionTopWnd");
-  //  setStyleSheet("QWidget#QSessionTopWnd{border-top-right-radius:4px;background-color:white;border:none;}");
 }
