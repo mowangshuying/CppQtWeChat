@@ -102,7 +102,6 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_sendTextBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     setAttribute(Qt::WA_StyledBackground);
-    // setStyleSheet("background-color:white;border:0px;");
 
     connect(m_sesToolBar->m_emoijWnd, SIGNAL(signalEmoijClicked(QString)), this, SLOT(slotEmoijClicked(QString)));
     connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slotMoreBtnClick()));
@@ -344,7 +343,6 @@ void QSessionWnd::resizeEvent(QResizeEvent* event)
         int nTempHeight = height() - m_sesTopWnd->height();
         m_groupInfoWnd->setMinimumHeight(nTempHeight);
         m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
-        // return;
     }
 
     // 重新设置msgItem的大小

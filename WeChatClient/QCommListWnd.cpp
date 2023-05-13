@@ -95,8 +95,8 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
             // 设置信息
             // 该联系人的名字和该联系人的id信息
             QMap<QString, QString> infoMap;
-            infoMap["name"] = wnd->m_name->text();
-            infoMap["friendid"] = QString::number(wnd->m_friendId, 10);
+            infoMap["name"] = wnd->getContactItemName();
+            infoMap["friendid"] = QString::number(wnd->getFriendId(), 10);
 
             //切换到展示联系人信息的页面
             QMainWnd::getMainWnd()->m_sLayout2->setCurrentIndex(0);
@@ -159,12 +159,12 @@ void QCommListWnd::slotOnStartGroupBtnClicked()
     m_selectWnd->show();
 }
 
-QListWidgetItem* QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg)
+void QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg)
 {
     if (hasMsgItemBySesId(sesid))
     {
         LogDebug << "has same ses sesid = " << sesid;
-        return NULL;
+        return;
     }
 
     QCommMsgItemWnd* pMsgItem = new QCommMsgItemWnd(m_listWidget, name, msg, sesid, userid, isGroupMsg);
@@ -172,7 +172,6 @@ QListWidgetItem* QCommListWnd::addMsgItem(const char* name, const char* msg, qin
     pMsgItem->setFixedWidth(this->width() - 5);
     pListItem->setSizeHint(QSize(this->width() - 5, 65));
     m_listWidget->setItemWidget(pListItem, pMsgItem);
-    return pListItem;
 }
 
 void QCommListWnd::addContactsItem(const char* headUrl, const char* name, bool isNewFriend /*= false*/, int friendid /* = -1*/)

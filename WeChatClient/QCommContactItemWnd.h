@@ -17,6 +17,25 @@ public:
     QCommContactItemWnd(QWidget* p, const char* headUrl, const char* name, bool bNewFriend = false, int friendid = -1);
 public slots:
     void slotReplyFinished(QNetworkReply* reply);
+    QString getContactItemName()
+    {
+        return m_name->text();
+    }
+
+    void setContactItemName(const QString& name)
+    {
+        m_name->setText(name);
+    }
+
+    int64_t getFriendId()
+    {
+        return m_friendId;
+    }
+
+    void setFriendId(int64_t friendId)
+    {
+        m_friendId = friendId;
+    }
 
 public:
     QHBoxLayout* m_hLayout;
@@ -27,6 +46,6 @@ public:
     //是否是新的朋友那一栏消息
     bool m_bNewFriend = false;
     //标识联系人的id
-    int m_friendId = -1;
+    int64_t m_friendId = -1;
     QNetworkAccessManager* m_networkMgr;
 };

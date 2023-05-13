@@ -37,7 +37,7 @@ public slots:
     void slotOnStartGroupBtnClicked();
 
 public:
-    QListWidgetItem* addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg);
+    void addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg);
     void addContactsItem(const char* headUrl, const char* name, bool isNewFriend = false, int friendid = -1);
     void addGroupItem(const char* headUrl, const char* name, int groupid);
 
