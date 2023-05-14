@@ -31,6 +31,27 @@ public:
 
     void setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath);
 
+    void setProgressBarMax(int max)
+    {
+        if (!m_innerWnd)
+            return;
+        m_innerWnd->m_progressBar->setMaximum(max);
+    }
+
+    void setProgressBarMin(int min)
+    {
+        if (!m_innerWnd)
+            return;
+        m_innerWnd->m_progressBar->setMinimum(min);
+    }
+
+    void setProgressBarValue(int value)
+    {
+        if (!m_innerWnd)
+            return;
+        m_innerWnd->m_progressBar->setValue(value);
+    }
+
 public:
     QLabel* m_headUrl;              // 头像信息
     QChatFileInnerWnd* m_innerWnd;  // 文件框

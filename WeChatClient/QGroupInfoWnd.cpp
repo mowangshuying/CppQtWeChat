@@ -5,6 +5,8 @@
 #include <QScrollArea>
 
 #include "QStyleSheetMgr.h"
+#include "QWSClientMgr.h"
+#include "QMainWnd.h"
 
 QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
@@ -176,6 +178,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
     m_scrollArea->setWidget(m_scrollAreaWnd);
+
+    connect(m_groupName2, SIGNAL(saveText()), this, SLOT(slotSetGroupName()));
 }
 
 void QGroupInfoWnd::addGroupFriendItem(int64_t ownerId, QString nickName)
@@ -215,6 +219,21 @@ void QGroupInfoWnd::addGroupFriendItem(int64_t ownerId, QString nickName)
     itemWnd->m_name->setText(nickName);
     m_groupfriendsWnd->addItem(itemWnd);
     itemWnd->requestHeadImg();
+}
+
+void QGroupInfoWnd::slotSetGroupName()
+{
+    LogDebug << "called";
+    neb::CJsonObject json;
+    json.Add("ownerId", QMainWnd::getMainWnd()->m_userid);
+    json.Add("groupId", m_groupId);
+    QString groupName = m_groupName2->getText();
+    json.Add("groupName", groupName.toStdString());
+    QWSClientMgr::getMgr()->request("cs_msg_set_group_name", json, [this, groupName](neb::CJsonObject& msg) {
+        LogDebug << msg.ToString().c_str();
+        // 更新会话窗口中的标题
+        emit signalUpdateGroupName(groupName);
+    });
 }
 
 bool QGroupInfoWnd::event(QEvent* event)

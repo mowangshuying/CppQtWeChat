@@ -14,6 +14,9 @@ public:
     QEditLabel(QWidget* parent = nullptr);
 
     void setText(const char* text);
+    QString getText();
+signals:
+    void saveText();
 
 protected:
     bool eventFilter(QObject* obj, QEvent* e);
@@ -22,7 +25,4 @@ private:
     QStackedLayout* m_StackLayout;
     QLabel* m_label;
     QLineEdit* m_lineEdit;
-
-private:
-    void initCtrls();
 };

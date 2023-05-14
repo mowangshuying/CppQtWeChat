@@ -41,6 +41,10 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     // 每个会话都保存着一个groupInfoWnd
     m_groupInfoWnd = new QGroupInfoWnd();
+    // if (m_isGroupSes)
+    //{
+    //    m_groupInfoWnd->setGroupId(m_recvId);
+    //}
     m_groupInfoWnd->hide();
 
     // 会话窗口的top
@@ -106,6 +110,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_sesToolBar->m_emoijWnd, SIGNAL(signalEmoijClicked(QString)), this, SLOT(slotEmoijClicked(QString)));
     connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slotMoreBtnClick()));
     connect(m_sesToolBar->m_voiceTelphoneBtn, &QPushButton::clicked, this, &QSessionWnd::slotVoiceTelPhoneBtnClick);
+    connect(m_groupInfoWnd, SIGNAL(signalUpdateGroupName(QString)), this, SLOT(slotUpdateGroupName(QString)));
 }
 
 void QSessionWnd::slotSendTextBtnClick()
@@ -220,6 +225,11 @@ void QSessionWnd::slotVoiceTelPhoneBtnClick()
     telphoneWnd->callPhone();
 }
 
+void QSessionWnd::slotUpdateGroupName(QString groupName)
+{
+    m_sesTopWnd->m_titleLabel->setText(groupName);
+}
+
 void QSessionWnd::dragEnterEvent(QDragEnterEvent* event)
 {
     LogDebug << "dragEnterEvent";
@@ -281,12 +291,12 @@ void QSessionWnd::dropEvent(QDropEvent* event)
     QNetworkReply* reply = pManager->post(request, multiPart);
 
     connect(reply, &QNetworkReply::uploadProgress, this, [this, fileWnd, fileName, fileSize, filename](qint64 x, qint64 y) {
-        if (y != 0)
-        {
-            fileWnd->m_innerWnd->m_progressBar->setMinimum(0);
-            fileWnd->m_innerWnd->m_progressBar->setMaximum(y);
-            fileWnd->m_innerWnd->m_progressBar->setValue(x);
-        }
+        if (y == 0)
+            return;
+
+        fileWnd->setProgressBarMin(0);
+        fileWnd->setProgressBarMax(y);
+        fileWnd->setProgressBarValue(x);
     });
 
     connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, fileName, fileSize, filename, &file](QNetworkReply* reply) {

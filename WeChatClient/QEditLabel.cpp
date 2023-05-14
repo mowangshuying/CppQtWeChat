@@ -10,7 +10,6 @@
 QEditLabel::QEditLabel(QWidget* parent) : QWidget(parent)
 {
     setObjectName("QEditLabel");
-    // initCtrls();
 
     m_StackLayout = new QStackedLayout(this);
     setLayout(m_StackLayout);
@@ -24,8 +23,6 @@ QEditLabel::QEditLabel(QWidget* parent) : QWidget(parent)
     m_label->installEventFilter(this);
     m_lineEdit->installEventFilter(this);
 
-    //   m_label->setStyleSheet("border:0px;");
-
     m_StackLayout->addWidget(m_label);
     m_StackLayout->addWidget(m_lineEdit);
     m_StackLayout->setCurrentWidget(m_label);
@@ -37,6 +34,14 @@ void QEditLabel::setText(const char* text)
     {
         m_label->setText(text);
     }
+}
+
+QString QEditLabel::getText()
+{
+    if (m_label == nullptr)
+        return "";
+
+    return m_label->text();
 }
 
 bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
@@ -55,10 +60,12 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
         if (e->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(e);
-            if (keyEvent->key() == Qt::Key_Enter)
+            LogDebug << "key:" << keyEvent->key();
+            if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
             {
                 m_label->setText(m_lineEdit->text());
                 m_StackLayout->setCurrentWidget(m_label);
+                emit saveText();
             }
         }
 
@@ -66,27 +73,9 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
         {
             m_label->setText(m_lineEdit->text());
             m_StackLayout->setCurrentWidget(m_label);
+            emit saveText();
         }
     }
 
     return QWidget::eventFilter(obj, e);
-}
-
-void QEditLabel::initCtrls()
-{
-    m_StackLayout = new QStackedLayout(this);
-    setLayout(m_StackLayout);
-
-    m_label = new QLabel();
-    m_lineEdit = new QLineEdit();
-    // m_label->setFocusPolicy(Qt::FocusPolicy::ClickFocus); // 暂时先注释，并未发现异常
-
-    m_label->installEventFilter(this);
-    m_lineEdit->installEventFilter(this);
-
-    m_label->setStyleSheet("border:0px;");
-
-    m_StackLayout->addWidget(m_label);
-    m_StackLayout->addWidget(m_lineEdit);
-    m_StackLayout->setCurrentWidget(m_label);
 }

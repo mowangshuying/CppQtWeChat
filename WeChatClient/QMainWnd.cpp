@@ -527,6 +527,10 @@ void QMainWnd::requestSessionList()
                 {
                     sesWnd->m_sesTopWnd->m_moreBtn->hide();
                 }
+                else
+                {
+                    sesWnd->m_groupInfoWnd->setGroupId(recvid);
+                }
 
                 connect(sesWnd->m_sesTopWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
                 connect(sesWnd->m_sesTopWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));

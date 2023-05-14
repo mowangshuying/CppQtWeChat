@@ -26,6 +26,20 @@ protected:
 public:
     void addGroupFriendItem(int64_t ownerId, QString nickName);
 
+    void setGroupId(int64_t groupId)
+    {
+        m_groupId = groupId;
+    }
+
+    int64_t getGroupId()
+    {
+        return m_groupId;
+    }
+signals:
+    void signalUpdateGroupName(QString groupName);
+public slots:
+    void slotSetGroupName();
+
 public:
     QWidget* m_centerWnd;
     //滚动条
@@ -50,7 +64,6 @@ public:
 
     //群公告
     QLabel* m_groupNotice1;
-    // QLabel* m_groupNotice2;
     QEditLabel* m_groupNotice2;
     //备注
     QLabel* m_groupRemarks1;
@@ -86,4 +99,6 @@ public:
     QWidget* m_delexitWnd;
     QVBoxLayout* m_vLayout3;
     QPushButton* m_delexitBtn;
+
+    int64_t m_groupId;
 };

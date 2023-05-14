@@ -34,6 +34,7 @@ public slots:
     void slotEmoijClicked(QString str);
     void slotMoreBtnClick();
     void slotVoiceTelPhoneBtnClick();
+    void slotUpdateGroupName(QString groupName);
 
 protected:
     void dragEnterEvent(QDragEnterEvent* event);
@@ -76,6 +77,7 @@ public:
     QString m_name;
     //向何人发送
     int64_t m_recvId;
+
     //是否是群会话
     bool m_isGroupSes = false;
     bool m_isClicked = false;
