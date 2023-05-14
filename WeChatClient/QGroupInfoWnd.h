@@ -35,6 +35,11 @@ public:
     {
         return m_groupId;
     }
+
+    void setGroupName(QString groupName)
+    {
+        m_groupName2->setText(groupName.toStdString().c_str());
+    }
 signals:
     void signalUpdateGroupName(QString groupName);
 public slots:

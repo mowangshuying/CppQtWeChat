@@ -49,6 +49,11 @@ public:
 
     void sendMsgToGroup(neb::CJsonObject json, QString msgText);
 
+    void setTitle(QString title)
+    {
+        m_sesTopWnd->m_titleLabel->setText(title);
+    }
+
 public:
     // QHBoxLayout* m_hLayout;
     // more按钮按下时候会显示这个窗口

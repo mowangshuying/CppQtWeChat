@@ -517,7 +517,7 @@ void QMainWnd::requestSessionList()
             if (!hasSessionWndBySessionId(sesid))
             {
                 QSessionWnd* sesWnd = new QSessionWnd();
-                sesWnd->m_sesTopWnd->m_titleLabel->setText(recvusername.c_str());
+                sesWnd->setTitle(recvusername.c_str());
                 sesWnd->m_sesId = sesid;
                 sesWnd->m_recvId = recvid;
                 sesWnd->m_isGroupSes = isgroupses;
@@ -529,6 +529,7 @@ void QMainWnd::requestSessionList()
                 }
                 else
                 {
+                    sesWnd->m_groupInfoWnd->setGroupName(recvusername.c_str());
                     sesWnd->m_groupInfoWnd->setGroupId(recvid);
                 }
 

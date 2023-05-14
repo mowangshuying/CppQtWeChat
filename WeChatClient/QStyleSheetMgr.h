@@ -33,13 +33,7 @@ private:
 public:  // ³ÉÔ±º¯Êý
     void reg(QString wndObjectName, QStyleSheetObject object);
 
-    void reg(QString wndObjectName, QString qssFileName, QWidget* wnd)
-    {
-        QStyleSheetObject styleSheetObject;
-        styleSheetObject.m_widget = wnd;
-        styleSheetObject.m_qssFileName = qssFileName;
-        reg(wndObjectName, styleSheetObject);
-    }
+    void reg(QString wndObjectName, QString qssFileName, QWidget* wnd);
 
     void unReg(QString wndObjectName);
 

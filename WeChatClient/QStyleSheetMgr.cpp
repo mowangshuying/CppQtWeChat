@@ -42,7 +42,6 @@ void QStyleSheetMgr::reg(QString wndObjectName, QStyleSheetObject object)
             QFile qss(path);
             if (qss.open(QIODevice::ReadOnly))
             {
-                // object.m_widget->setStyleSheet(qss.readAll());
                 QString qssStr = qss.readAll();
                 qss.close();
                 for (auto& object : m_map[wndObjectName].m_objectVct)
@@ -60,6 +59,14 @@ void QStyleSheetMgr::reg(QString wndObjectName, QStyleSheetObject object)
         qss.close();
         object.m_widget->setStyleSheet(qssStr);
     }
+}
+
+void QStyleSheetMgr::reg(QString wndObjectName, QString qssFileName, QWidget* wnd)
+{
+    QStyleSheetObject styleSheetObject;
+    styleSheetObject.m_widget = wnd;
+    styleSheetObject.m_qssFileName = qssFileName;
+    reg(wndObjectName, styleSheetObject);
 }
 
 void QStyleSheetMgr::unReg(QString wndObjectName)
