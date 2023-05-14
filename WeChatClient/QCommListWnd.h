@@ -35,6 +35,7 @@ public slots:
     void slotOnCurrentItemClicked(QListWidgetItem* item);
     //如果点击那个按钮的话
     void slotOnStartGroupBtnClicked();
+
 public:
     void addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg);
     void addContactsItem(const char* headUrl, const char* name, bool isNewFriend = false, int friendid = -1);
@@ -43,6 +44,9 @@ public:
     bool hasMsgItemBySesId(int64_t sesid);
     bool hasGroupItemByGroupId(int64_t groupid);
     bool hasContactsItemByFriendId(int64_t friendId);
+
+    void setGroupItemNameByGroupId(int64_t grouId, QString groupName);
+    void setMsgItemNameBySesId(int64_t sesId, QString msgItemName);
 
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout;

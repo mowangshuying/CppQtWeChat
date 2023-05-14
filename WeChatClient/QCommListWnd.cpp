@@ -253,3 +253,36 @@ bool QCommListWnd::hasContactsItemByFriendId(int64_t friendId)
     }
     return bHas;
 }
+
+void QCommListWnd::setGroupItemNameByGroupId(int64_t grouId, QString groupName)
+{
+    int count = m_listWidget->count();
+    bool bHas = false;
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_listWidget->item(i);
+        QCommGroupItemWnd* pWnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pitem));
+        if (pWnd->m_groupId == grouId)
+        {
+            QString rawGroupName = pWnd->m_groupName->text();
+            pWnd->m_groupName->setText(groupName);
+            LogDebug << "update groupName:" << rawGroupName << " -> " << pWnd->m_groupName->text();
+            break;
+        }
+    }
+}
+
+void QCommListWnd::setMsgItemNameBySesId(int64_t sesId, QString msgItemName)
+{
+    int count = m_listWidget->count();
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_listWidget->item(i);
+        QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
+        if (pWnd->m_sesId == sesId)
+        {
+            pWnd->m_name->setText(msgItemName);
+            break;
+        }
+    }
+}

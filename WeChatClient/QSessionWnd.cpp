@@ -228,6 +228,10 @@ void QSessionWnd::slotVoiceTelPhoneBtnClick()
 void QSessionWnd::slotUpdateGroupName(QString groupName)
 {
     m_sesTopWnd->m_titleLabel->setText(groupName);
+    QCommListWnd* pGroupListWnd = QMainWnd::getMainWnd()->m_commGroupsListWnd;
+    pGroupListWnd->setGroupItemNameByGroupId(m_recvId, groupName);
+    QCommListWnd* pMsgListWnd = QMainWnd::getMainWnd()->m_commMsgListWnd;
+    pMsgListWnd->setMsgItemNameBySesId(m_sesId, groupName);
 }
 
 void QSessionWnd::dragEnterEvent(QDragEnterEvent* event)

@@ -58,7 +58,6 @@ public:
     //会话的上放窗口
     QSessionTopWnd* m_sesTopWnd;
     //窗口列表信息
-    // QListWidget* m_MsgWndList;
 
     QListWidget* m_MsgWndList;
 
