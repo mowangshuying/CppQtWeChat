@@ -11,15 +11,11 @@
 
 int main(int argc, char** argv)
 {
-    QSelfLog::init();
-
-    QTextCodec* codec = QTextCodec::codecForName("UTF-8");
-    QTextCodec::setCodecForLocale(codec);
-
-    LogDebug << "start";
-
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon("./img/wechat.ico"));
+
+    LogDebug << "start";
+    QSelfLog::init();
     //创建网络通信的管理
     QWSClientMgr::init();
 
