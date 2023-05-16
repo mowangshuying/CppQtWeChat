@@ -35,7 +35,7 @@ public:  // ³ÉÔ±º¯Êý
 
     void reg(QString wndObjectName, QString qssFileName, QWidget* wnd);
 
-    void unReg(QString wndObjectName);
+    void unReg(QString wndObjectName, QWidget* wnd);
 
     static QStyleSheetMgr* getMgr();
 

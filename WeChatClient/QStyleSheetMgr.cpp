@@ -69,12 +69,21 @@ void QStyleSheetMgr::reg(QString wndObjectName, QString qssFileName, QWidget* wn
     reg(wndObjectName, styleSheetObject);
 }
 
-void QStyleSheetMgr::unReg(QString wndObjectName)
+void QStyleSheetMgr::unReg(QString wndObjectName, QWidget* wnd)
 {
     auto itf = m_map.find(wndObjectName);
     if (itf != m_map.end())
     {
-        m_map.erase(itf);
+        auto itVctBeg = itf->second.m_objectVct.begin();
+        auto itVctEnd = itf->second.m_objectVct.end();
+        for (; itVctBeg != itVctEnd; itVctBeg++)
+        {
+            if (itVctBeg->m_widget == wnd)
+            {
+                itf->second.m_objectVct.erase(itVctBeg);
+                return;
+            }
+        }
     }
 }
 
