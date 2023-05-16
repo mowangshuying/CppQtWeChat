@@ -29,7 +29,8 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_hLayout = new QHBoxLayout(m_centerWnd);
     m_centerWnd->setLayout(m_hLayout);
-    m_toolWnd = new QToolWnd(this);
+
+    m_toolWnd = new QToolWnd(m_centerWnd);
     m_commMsgListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::MsgItemWndTpye);
     m_commContactsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::ContactItemWndType);
     m_commGroupsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::GroupItemWndType);
@@ -37,7 +38,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
 
-    m_sLayout1 = new QStackedLayout();
+    m_sLayout1 = new QStackedLayout(m_centerWnd);
 
     //消息列表
     m_sLayout1->addWidget(m_commMsgListWnd);
@@ -49,16 +50,16 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_hLayout->setSpacing(0);
 
-    m_sLayout2 = new QStackedLayout();
+    m_sLayout2 = new QStackedLayout(m_centerWnd);
     m_sLayout2->setContentsMargins(0, 0, 0, 0);
 
-    m_commContactInfo = new QCommContactInfoWnd(this);
+    m_commContactInfo = new QCommContactInfoWnd(m_centerWnd);
     m_sLayout2->addWidget(m_commContactInfo);
     connect(m_commContactInfo->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
     connect(m_commContactInfo->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
     connect(m_commContactInfo->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
 
-    m_dealNewFriendsApplyWnd = new QDealNewFriendsApplyWnd(this);
+    m_dealNewFriendsApplyWnd = new QDealNewFriendsApplyWnd(m_centerWnd);
     connect(m_dealNewFriendsApplyWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
     connect(m_dealNewFriendsApplyWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
     connect(m_dealNewFriendsApplyWnd->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
@@ -70,7 +71,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     {
         /*添加分割线的示例代码*/
-        QSelfSplit* sp = new QSelfSplit(this, QSelfSplit::Direction_V);
+        QSelfSplit* sp = new QSelfSplit(m_centerWnd, QSelfSplit::Direction_V);
         m_hLayout->addWidget(sp);
     }
     m_hLayout->setSpacing(0);
@@ -97,7 +98,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     QWSClientMgr::getMgr()->regMsgCall("cs_msg_update_grouplist", std::bind(&QMainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
     QWSClientMgr::getMgr()->regMsgCall("cs_msg_update_friendlist", std::bind(&QMainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
 
-    m_networkMgr = new QNetworkAccessManager();
+    m_networkMgr = new QNetworkAccessManager(this);
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
 
     // 系统托盘功能
@@ -106,12 +107,12 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_systemTrayIcon->setToolTip("QT版微信v2.0.0");
     m_systemTrayIcon->show();
 
-    m_systemTrayIconMenu = new QMenu();
-    m_systemTrayIconShowMainWndAction = new QAction();
+    m_systemTrayIconMenu = new QMenu(this);
+    m_systemTrayIconShowMainWndAction = new QAction(this);
     m_systemTrayIconShowMainWndAction->setText("打开主面板");
     m_systemTrayIconMenu->addAction(m_systemTrayIconShowMainWndAction);
 
-    m_systemTrayIconExitAction = new QAction();
+    m_systemTrayIconExitAction = new QAction(this);
     m_systemTrayIconExitAction->setText("退出");
     m_systemTrayIconMenu->addAction(m_systemTrayIconExitAction);
     m_systemTrayIcon->setContextMenu(m_systemTrayIconMenu);
