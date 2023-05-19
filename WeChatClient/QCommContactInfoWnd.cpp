@@ -13,11 +13,11 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     object.m_widget = this;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    QFont font1;
-    font1.setPointSize(15);
+    QFont fp15;
+    fp15.setPointSize(15);
 
-    QFont font2;
-    font2.setPointSize(12);
+    QFont fp12;
+    fp12.setPointSize(12);
 
     setMinimumSize(640, 600);
 
@@ -61,7 +61,7 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_hLayout1 = new QHBoxLayout();
     m_nickNameLabel = new QLabel("***êÇ³Æ***");
-    m_nickNameLabel->setFont(font1);
+    m_nickNameLabel->setFont(fp15);
 
     m_headimgLabel = new QLabel();
     m_headimgLabel->setFixedSize(60, 60);
@@ -76,8 +76,8 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_markNameLabel = new QLabel("±¸  ×¢:");
     m_markNameFillLabel = new QLabel("***±¸×¢***");
 
-    m_markNameLabel->setFont(font2);
-    m_markNameFillLabel->setFont(font2);
+    m_markNameLabel->setFont(fp12);
+    m_markNameFillLabel->setFont(fp12);
 
     m_hLayout2->addSpacing(150);
     m_hLayout2->addWidget(m_markNameLabel);
@@ -91,8 +91,8 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_rolenameLabel = new QLabel("Î¢ÐÅºÅ:");
     m_rolenameFillLabel = new QLabel("***Î¢ÐÅºÅ***");
 
-    m_rolenameLabel->setFont(font2);
-    m_rolenameFillLabel->setFont(font2);
+    m_rolenameLabel->setFont(fp12);
+    m_rolenameFillLabel->setFont(fp12);
 
     m_hLayout3->addSpacing(150);
     m_hLayout3->addWidget(m_rolenameLabel);
@@ -107,8 +107,8 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_channelLabel = new QLabel("Çþ  µÀ:");
     m_channelFillLabel = new QLabel("***ÇþµÀ***");
 
-    m_channelLabel->setFont(font2);
-    m_channelFillLabel->setFont(font2);
+    m_channelLabel->setFont(fp12);
+    m_channelFillLabel->setFont(fp12);
 
     m_hLayout4->addSpacing(150);
     m_hLayout4->addWidget(m_channelLabel);
@@ -173,7 +173,6 @@ void QCommContactInfoWnd::showBgPng()
     m_headimgLabel->hide();
     //·¢ËÍÏûÏ¢´°¿Ú
     m_sendMsgBtn->hide();
-    // setStyleSheet("background-color:white;border-image:url(./img/emptybg.png)");
 }
 
 //Òþ²Ø¿Õ°×±³¾°Í¼Æ¬
@@ -187,7 +186,5 @@ void QCommContactInfoWnd::hideBgPng()
     m_rolenameFillLabel->show();
     m_channelFillLabel->show();
     m_headimgLabel->show();
-    //·¢ËÍÏûÏ¢´°¿Ú
     m_sendMsgBtn->show();
-    // setStyleSheet("background-color:white;");
 }

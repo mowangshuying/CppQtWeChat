@@ -26,32 +26,27 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_centerWnd->setFixedSize(430, 330);
     setContentsMargins(10, 10, 10, 10);
 
-    m_vLayout = new QVBoxLayout();
-    // m_vLayout->setContentsMargins(10, 10, 10, 10);
+    m_vLayout = new QVBoxLayout(m_centerWnd);
     m_vLayout->setSpacing(0);
     m_centerWnd->setLayout(m_vLayout);
 
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    m_topWnd = new QWidget();
-    // m_topWnd->setFixedSize(430, 110);
-    // m_topWnd->setStyleSheet("background-color:#1aad19;border-style: none;");
+    m_topWnd = new QWidget(m_centerWnd);
     m_topWnd->setContentsMargins(0, 0, 0, 0);
 
     //顶部的窗口的布局
-    m_vTopLayout = new QVBoxLayout();
+    m_vTopLayout = new QVBoxLayout(m_centerWnd);
     m_vTopLayout->setContentsMargins(0, 0, 0, 0);
-    m_hTopLayout = new QHBoxLayout();
+    m_hTopLayout = new QHBoxLayout(m_centerWnd);
 
     m_topWnd->setLayout(m_vTopLayout);
 
-    m_titleLabel = new QLabel();
-    m_minBtn = new QPushButton();
-    m_closeBtn = new QPushButton();
-    m_settingBtn = new QPushButton();
-
-    // m_titleLabel->setText("莫忘输赢/制作");
+    m_titleLabel = new QLabel(m_centerWnd);
+    m_minBtn = new QPushButton(m_centerWnd);
+    m_closeBtn = new QPushButton(m_centerWnd);
+    m_settingBtn = new QPushButton(m_centerWnd);
 
     m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20, 20));
     m_settingBtn->setIconSize(QSize(20, 20));
@@ -72,31 +67,19 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vTopLayout->addLayout(m_hTopLayout);
 
-    /* {
-         QSimpleSplit* sp = new QSimpleSplit();
-         sp->setStyleSheet("background-color:gray;border:0px;");
-         m_vTopLayout->addWidget(sp);
-     }*/
-
     m_vTopLayout->addStretch();
-
     m_vLayout->addWidget(m_topWnd);
 
-    /* {
-          QSimpleSplit* sp = new QSimpleSplit();
-          m_vLayout->addWidget(sp);
-      }*/
-
-    m_bottomWnd = new QWidget();
+    m_bottomWnd = new QWidget(m_centerWnd);
     m_bottomWnd->setFixedHeight(200);
 
-    m_hBottomLayout1 = new QHBoxLayout();
+    m_hBottomLayout1 = new QHBoxLayout(m_centerWnd);
     m_bottomWnd->setLayout(m_hBottomLayout1);
 
-    m_vBottomLayout = new QVBoxLayout();
-    m_accuntEdit = new QLineEdit();
+    m_vBottomLayout = new QVBoxLayout(m_centerWnd);
+    m_accuntEdit = new QLineEdit(m_centerWnd);
     m_accuntEdit->setFixedSize(240, 40);
-    m_pwdEdit = new QLineEdit();
+    m_pwdEdit = new QLineEdit(m_centerWnd);
     m_pwdEdit->setFixedSize(240, 40);
 
     m_accuntEdit->setPlaceholderText("请输入账号");
@@ -107,12 +90,12 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_regOrLoginBtn = new QPushButton();
     m_regOrLoginBtn->setFixedSize(240, 40);
-    // m_regOrLoginBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
+
     m_regOrLoginBtn->setText("登录");
 
-    m_hBottomLayout2 = new QHBoxLayout();
-    m_regOrLoginChx = new QCheckBox();
-    m_remmerPwdChx = new QCheckBox();
+    m_hBottomLayout2 = new QHBoxLayout(m_centerWnd);
+    m_regOrLoginChx = new QCheckBox(m_centerWnd);
+    m_remmerPwdChx = new QCheckBox(m_centerWnd);
 
     m_regOrLoginChx->setText("注册");
     m_remmerPwdChx->setText("找回密码");
