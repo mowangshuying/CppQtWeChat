@@ -80,6 +80,16 @@ void QChatFileOuterWnd::setFilePath(QString filePath)
     m_innerWnd->m_fileFullpath = filePath;
 }
 
+void QChatFileOuterWnd::setFileState(QString fileState)
+{
+    if (!m_innerWnd)
+    {
+        return;
+    }
+
+    m_innerWnd->m_sendState->setText(fileState);
+}
+
 void QChatFileOuterWnd::setSendFileShow()
 {
     if (m_innerWnd == nullptr)
@@ -90,6 +100,26 @@ void QChatFileOuterWnd::setSendFileShow()
     m_innerWnd->sendFileShow();
 }
 
+void QChatFileOuterWnd::setRecvFileShow()
+{
+    if (!m_innerWnd)
+    {
+        return;
+    }
+
+    m_innerWnd->recvFileShow();
+}
+
+void QChatFileOuterWnd::setServerFileName(QString serverFileName)
+{
+    if (!m_innerWnd)
+    {
+        return;
+    }
+
+    m_innerWnd->m_serveFilePath = serverFileName;
+}
+
 void QChatFileOuterWnd::setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath)
 {
     setFileName(fileName);
@@ -97,4 +127,34 @@ void QChatFileOuterWnd::setFileUploadData(QString fileName, QString fileSize, QS
     setFileDir(fileDir);
     setFilePath(filePath);
     setSendFileShow();
+}
+
+void QChatFileOuterWnd::setFileDownLoadData(QString fileName, QString fileSize, QString fileState, QString serverFileName)
+{
+    setFileName(fileName);
+    setFileSize(fileSize);
+    setFileState(fileState);
+    setServerFileName(serverFileName);
+    setRecvFileShow();
+}
+
+void QChatFileOuterWnd::setProgressBarMax(int max)
+{
+    if (!m_innerWnd)
+        return;
+    m_innerWnd->m_progressBar->setMaximum(max);
+}
+
+void QChatFileOuterWnd::setProgressBarMin(int min)
+{
+    if (!m_innerWnd)
+        return;
+    m_innerWnd->m_progressBar->setMinimum(min);
+}
+
+void QChatFileOuterWnd::setProgressBarValue(int value)
+{
+    if (!m_innerWnd)
+        return;
+    m_innerWnd->m_progressBar->setValue(value);
 }

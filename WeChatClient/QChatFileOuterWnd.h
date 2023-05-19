@@ -27,30 +27,21 @@ public:
 
     void setFilePath(QString filePath);
 
+    void setFileState(QString fileState);
+
     void setSendFileShow();
+    void setRecvFileShow();
+
+    void setServerFileName(QString serverFileName);
 
     void setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath);
+    void setFileDownLoadData(QString fileName, QString fileSize, QString fileState, QString serverFileName);
 
-    void setProgressBarMax(int max)
-    {
-        if (!m_innerWnd)
-            return;
-        m_innerWnd->m_progressBar->setMaximum(max);
-    }
+    void setProgressBarMax(int max);
 
-    void setProgressBarMin(int min)
-    {
-        if (!m_innerWnd)
-            return;
-        m_innerWnd->m_progressBar->setMinimum(min);
-    }
+    void setProgressBarMin(int min);
 
-    void setProgressBarValue(int value)
-    {
-        if (!m_innerWnd)
-            return;
-        m_innerWnd->m_progressBar->setValue(value);
-    }
+    void setProgressBarValue(int value);
 
 public:
     QLabel* m_headUrl;              // Õ∑œÒ–≈œ¢

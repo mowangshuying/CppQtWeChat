@@ -372,13 +372,7 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
 
             ////接收端是一个文件
             QChatFileOuterWnd* fileWnd = new QChatFileOuterWnd(nullptr, sendid, recvid);
-            fileWnd->m_innerWnd->m_fileName->setText(filename_client.c_str());
-            fileWnd->m_innerWnd->m_fileSize->setText(filesize.c_str());
-            fileWnd->m_innerWnd->m_sendState->setText("等待下载...");
-            fileWnd->m_innerWnd->m_serveFilePath = filename_server.c_str();
-            fileWnd->m_innerWnd->recvFileShow();
-            //
-
+            fileWnd->setFileDownLoadData(filename_client.c_str(), filesize.c_str(), "等待下载", filename_server.c_str());
             fileWnd->setFixedWidth(ses->m_MsgWndList->width());
             QListWidgetItem* fileItem = new QListWidgetItem(ses->m_MsgWndList);
             QSize fileWndSize(fileWnd->width(), 100 + 20);
