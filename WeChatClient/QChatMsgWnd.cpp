@@ -59,7 +59,6 @@ QSize QChatMsgWnd::fontRect(QString str)
 
     LogDebug << "QChatMsgWnd::fontRect height = " << height;
     m_triangleLeftRect = QRect(iconWH + iconSpaceW + iconRectW, m_lineHeight / 2, triangleW, 5);
-
     m_triangleRightRect = QRect(this->width() - iconRectW - iconWH - iconSpaceW - triangleW, m_lineHeight / 2, triangleW, 5);
 
     if (msgSize.width() < (m_textWidth + m_spaceWidth))
@@ -177,7 +176,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
     painter.setPen(Qt::NoPen);
     painter.setBrush(QBrush(Qt::gray));
 
-    if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_Other)
+    if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_OtherMsgText)
     {
         m_leftPixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[m_recvid];
         m_leftPixmap = m_leftPixmap.scaled(30, 30);
@@ -203,7 +202,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
         painter.drawText(m_textLeftRect, m_msg, option);
     }
 
-    if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_Owner)
+    if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_OwnerMsgText)
     {
         m_rightPixmap = QMainWnd::getMainWnd()->m_toolWnd->m_headImg;
         m_rightPixmap = m_rightPixmap.scaled(30, 30);
@@ -216,13 +215,13 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
         painter.setBrush(color);
         painter.drawRoundedRect(m_outerFrameRightRect, 4, 4);
 
-        //
+        // 绘制三角形
         QPointF points[3] = {QPointF(m_triangleRightRect.x() + m_triangleRightRect.width(), 25),
                              QPointF(m_triangleRightRect.x(), 20),
                              QPointF(m_triangleRightRect.x(), 30)};
-
         painter.drawPolygon(points, 3);
 
+        // 绘制文字
         QPen penText;
         penText.setColor(QColor(51, 51, 51));
         painter.setPen(penText);

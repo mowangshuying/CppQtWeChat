@@ -208,7 +208,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
 
                 QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
                 QNetworkRequest request;
-                request.setUrl(QUrl("HTTP_FILE_SERVER_ADDR"));
+                request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
                 QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
                 QHttpPart part;
                 part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));
@@ -231,13 +231,11 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
     {
         std::string username = m_accuntEdit->text().toStdString().c_str();
         std::string password = m_pwdEdit->text().toStdString().c_str();
-
         neb::CJsonObject json;
         json.Add("username", username);
         json.Add("password", password);
 
         QWSClientMgr::getMgr()->request("cs_msg_login", json, [this](neb::CJsonObject& msg) {
-            //
             int state = 0;
             if (!msg.Get("state", state))
                 return;
@@ -255,7 +253,6 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
                 return;
 
             LogDebug << msg.ToString().c_str();
-
             m_mainWnd = QMainWnd::getMainWnd();
             if (m_mainWnd == nullptr)
                 return;

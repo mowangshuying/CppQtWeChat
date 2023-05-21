@@ -220,7 +220,7 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         QSize msgSize = msgWnd->fontRect(msgtext.c_str());
         msgWndItem->setSizeHint(msgSize);
         //会设置消息并调用相应的
-        msgWnd->setText(msgtext.c_str(), time, msgSize, QChatMsgWnd::ChatMsg_Other);
+        msgWnd->setText(msgtext.c_str(), time, msgSize, QChatMsgWnd::ChatMsg_OtherMsgText);
         //关联项与窗口
         ses->m_MsgWndList->setItemWidget(msgWndItem, msgWnd);
         return;
@@ -338,7 +338,7 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
 
             msgItem->setSizeHint(msgSize);
             //会设置消息并调用相应的
-            msgWnd->setText(msgtext.c_str(), time, msgSize, QChatMsgWnd::ChatMsg_Other);
+            msgWnd->setText(msgtext.c_str(), time, msgSize, QChatMsgWnd::ChatMsg_OtherMsgText);
             //关联项与窗口
             ses->m_MsgWndList->setItemWidget(msgItem, msgWnd);
         }

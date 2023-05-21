@@ -355,8 +355,9 @@ void QSessionWnd::resizeEvent(QResizeEvent* event)
     if (m_groupInfoWnd != nullptr)
     {
         int nTempHeight = height() - m_sesTopWnd->height();
-        m_groupInfoWnd->setMinimumHeight(nTempHeight);
-        m_groupInfoWnd->m_scrollArea->setMinimumHeight(nTempHeight);
+        m_groupInfoWnd->setFixedHeight(nTempHeight);
+        m_groupInfoWnd->m_centerWnd->setFixedHeight(nTempHeight);
+        m_groupInfoWnd->m_scrollArea->setFixedHeight(nTempHeight);
     }
 
     // 重新设置msgItem的大小
@@ -388,7 +389,7 @@ void QSessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
         QSize msgSize = msgWnd->fontRect(msgText);
         msgItem->setSizeHint(msgSize);
         //会设置消息并调用相应的
-        msgWnd->setText(msgText, time, msgSize, QChatMsgWnd::ChatMsg_Owner);
+        msgWnd->setText(msgText, time, msgSize, QChatMsgWnd::ChatMsg_OwnerMsgText);
         //关联项与窗口
         m_MsgWndList->setItemWidget(msgItem, msgWnd);
         //优化逻辑滑动到底部
@@ -408,7 +409,7 @@ void QSessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
         QSize msgSize = msgWnd->fontRect(msgText);
         msgItem->setSizeHint(msgSize);
         //会设置消息并调用相应的
-        msgWnd->setText(msgText, time, msgSize, QChatMsgWnd::ChatMsg_Owner);
+        msgWnd->setText(msgText, time, msgSize, QChatMsgWnd::ChatMsg_OwnerMsgText);
         //关联项与窗口
         m_MsgWndList->setItemWidget(msgItem, msgWnd);
         //优化逻辑滑动到底部

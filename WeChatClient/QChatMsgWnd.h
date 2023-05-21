@@ -14,9 +14,9 @@ public:
     enum ChatMsgTypeEnum
     {
         ChatMsg_System = 10,
-        ChatMsg_Time,   //时间消息 - (一般由自己产生吧)
-        ChatMsg_Owner,  //自己的消息
-        ChatMsg_Other,  //其他人发送的消息
+        ChatMsg_Time,           // 时间消息 - (一般由自己产生吧)
+        ChatMsg_OwnerMsgText,   // 自己的消息
+        ChatMsg_OtherMsgText,   // 其他人发送的消息
     };
 
 public:
@@ -52,14 +52,17 @@ public:
 
     QRect m_iconLeftRect;
     QRect m_iconRightRect;
-    // QRect m_sanJiaoLeftRect;
+    
     QRect m_triangleLeftRect;
     QRect m_triangleRightRect;
 
     QRect m_outerFrameLeftRect;
     QRect m_outerFrameRightRect;
 
-    //
+    QRect m_leftUserNameRect;
+    QRect m_rightUserNameRect;
+
+    // 文字文本框
     QRect m_textLeftRect;
     QRect m_textRigtRect;
 
