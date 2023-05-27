@@ -16,16 +16,18 @@ QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, int64_t recvi
     setFont(font);
     m_leftPixmap = QPixmap("./img/owner.png");
     m_rightPixmap = QPixmap("./img/other.png");
-    m_loadingMovie = new QMovie(this);
-    m_loadingMovie->setFileName("./img/loading.gif");
+    // m_loadingMovie = new QMovie(this);
+    // m_loadingMovie->setFileName("./img/loading.gif");
 
-    m_loadingLable = new QLabel(this);
-    m_loadingLable->setMovie(m_loadingMovie);
-    m_loadingLable->resize(16, 16);
-    //设置窗口背景：透明
-    m_loadingLable->setAttribute(Qt::WA_TranslucentBackground, true);
-    //关闭自动填充窗口背景
-    m_loadingLable->setAutoFillBackground(false);
+    // m_loadingLable = new QLabel(this);
+    // m_loadingLable->setMovie(m_loadingMovie);
+    // m_loadingLable->resize(16, 16);
+    ////设置窗口背景：透明
+    // m_loadingLable->setAttribute(Qt::WA_TranslucentBackground, true);
+    ////关闭自动填充窗口背景
+    // m_loadingLable->setAutoFillBackground(false);
+
+    // setFixedWidth(640);
     setAttribute(Qt::WA_StyledBackground);
 }
 
@@ -33,9 +35,9 @@ QSize QChatMsgWnd::fontRect(QString str)
 {
     m_msg = str;
 
-    int minH = 30;    // 消息的最小高度为30
-    int iconWH = 30;  // 头像的大小
-    int iconSpaceW = 20; // 头像距离边框大小
+    int minH = 30;        // 消息的最小高度为30
+    int iconWH = 30;      // 头像的大小
+    int iconSpaceW = 20;  // 头像距离边框大小
     int iconRectW = 5;
     int iconTMPH = 10;
     int triangleW = 6;
@@ -157,7 +159,8 @@ void QChatMsgWnd::setText(QString text, QString time, QSize allSize, ChatMsgType
     m_msg = text;
     m_chatMsgType = chatMsgType;
     m_time = time;
-    m_curTime = QDateTime::fromTime_t(time.toInt()).toString("dd:hh:mm");
+    // m_curTime = QDateTime::fromTime_t(time.toInt()).toString("dd:hh:mm");
+    m_curTime = time;
     m_allSize = allSize;
     this->update();
 }
@@ -165,8 +168,11 @@ void QChatMsgWnd::setText(QString text, QString time, QSize allSize, ChatMsgType
 void QChatMsgWnd::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
-    // 重新计算fontRect大小
-    fontRect(m_msg);
+
+    if (ChatMsgTypeEnum::ChatMsg_OtherMsgText == m_chatMsgType || ChatMsg_OwnerMsgText == m_chatMsgType)
+    {
+        fontRect(m_msg);
+    }
 
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
@@ -179,7 +185,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
         m_leftPixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[m_recvid];
         m_leftPixmap = m_leftPixmap.scaled(30, 30);
         painter.drawPixmap(m_iconLeftRect, m_leftPixmap);
-        
+
         // 绘制外部边框
         QColor color = QColor(158, 234, 106);
         painter.setBrush(color);
@@ -232,8 +238,15 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
 
     if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_Time)
     {
-
+        QPen penText;
+        penText.setColor(QColor(153, 153, 153));
+        painter.setPen(penText);
+        QTextOption option(Qt::AlignCenter);
+        option.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
+        QFont te_font = this->font();
+        te_font.setFamily("MicrosoftYaHei");
+        te_font.setPointSize(10);
+        painter.setFont(te_font);
+        painter.drawText(this->rect(), m_curTime, option);
     }
-
-    // update();
 }

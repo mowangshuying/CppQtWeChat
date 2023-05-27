@@ -54,6 +54,8 @@ public:
         m_sesTopWnd->m_titleLabel->setText(title);
     }
 
+    void dealMsgTime();
+
 public:
     // QHBoxLayout* m_hLayout;
     // more按钮按下时候会显示这个窗口
@@ -81,6 +83,9 @@ public:
     QString m_name;
     //向何人发送
     int64_t m_recvId;
+
+    // 上次显示时间日期的时间
+    QDateTime m_lastMsgDateTime;
 
     //是否是群会话
     bool m_isGroupSes = false;

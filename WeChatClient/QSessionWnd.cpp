@@ -381,6 +381,30 @@ void QSessionWnd::resizeEvent(QResizeEvent* event)
 void QSessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 {
     QWSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
+        dealMsgTime();
+        //向远端发送消息
+        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+        QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, m_recvId);
+        QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
+        msgWnd->setFixedWidth(this->width());
+
+        QSize msgSize = msgWnd->fontRect(msgText);
+        msgItem->setSizeHint(msgSize);
+        //会设置消息并调用相应的
+        msgWnd->setText(msgText, time, msgSize, QChatMsgWnd::ChatMsg_OwnerMsgText);
+        //关联项与窗口
+        m_MsgWndList->setItemWidget(msgItem, msgWnd);
+        //优化逻辑滑动到底部
+        m_MsgWndList->scrollToBottom();
+    });
+}
+
+void QSessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
+{
+    QWSClientMgr::getMgr()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
+        dealMsgTime();
+
+        LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
         //向远端发送消息
         QString time = QString::number(QDateTime::currentDateTime().toTime_t());
         QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, m_recvId);
@@ -397,22 +421,38 @@ void QSessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
     });
 }
 
-void QSessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
+void QSessionWnd::dealMsgTime()
 {
-    QWSClientMgr::getMgr()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
-        LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
-        //向远端发送消息
-        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-        QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, m_recvId);
-        QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
-        msgWnd->setFixedWidth(this->width());
-        QSize msgSize = msgWnd->fontRect(msgText);
-        msgItem->setSizeHint(msgSize);
-        //会设置消息并调用相应的
-        msgWnd->setText(msgText, time, msgSize, QChatMsgWnd::ChatMsg_OwnerMsgText);
-        //关联项与窗口
-        m_MsgWndList->setItemWidget(msgItem, msgWnd);
-        //优化逻辑滑动到底部
-        m_MsgWndList->scrollToBottom();
-    });
+    bool bShowTime = false;
+    if (m_MsgWndList->count() > 0)
+    {
+        QDateTime nowDateTime = QDateTime::currentDateTime();
+        int64_t distanceS = m_lastMsgDateTime.secsTo(nowDateTime);
+        LogDebug << "distanceS:" << distanceS;
+
+        m_lastMsgDateTime = QDateTime::currentDateTime();
+        if (distanceS >= 60 * 5)
+        {
+            bShowTime = true;
+        }
+    }
+    else
+    {
+        m_lastMsgDateTime = QDateTime::currentDateTime();
+        bShowTime = true;
+    }
+
+    if (bShowTime)
+    {
+        QChatMsgWnd* timeMsgWnd = new QChatMsgWnd(m_MsgWndList);
+        QListWidgetItem* timeListItem = new QListWidgetItem(m_MsgWndList);
+
+        QSize size = QSize(this->width(), 40);
+        timeMsgWnd->resize(size);
+        timeListItem->setSizeHint(size);
+
+        QString curTimeStr = m_lastMsgDateTime.toString("yyyy/MM/dd hh:mm");
+        timeMsgWnd->setText(curTimeStr, curTimeStr, size, QChatMsgWnd::ChatMsg_Time);
+        m_MsgWndList->setItemWidget(timeListItem, timeMsgWnd);
+    }
 }

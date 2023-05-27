@@ -214,11 +214,14 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
     // 发送消息
     if (msgtype == 0)
     {
+        ses->dealMsgTime();
+
         //向会话中嵌入一条数据；
         QString time = QString::number(QDateTime::currentDateTime().toTime_t());
         QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, recvid);
         QListWidgetItem* msgWndItem = new QListWidgetItem(ses->m_MsgWndList);
-        msgWnd->setFixedWidth(640);
+        msgWnd->setFixedWidth(ses->width());
+
         QSize msgSize = msgWnd->fontRect(msgtext.c_str());
         msgWndItem->setSizeHint(msgSize);
         //会设置消息并调用相应的
@@ -231,6 +234,8 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
     // 发送文件
     if (msgtype == 1)
     {
+        ses->dealMsgTime();
+
         neb::CJsonObject json;
         if (!json.Parse(msgtext))
         {
