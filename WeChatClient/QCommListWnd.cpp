@@ -88,7 +88,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
             QMainWnd::getMainWnd()->m_dealNewFriendsApplyWnd->setFriendApplyList();
             //切换窗口到新的朋友窗口
             // m_sLayout2中位置为1的窗口为新的朋友的窗口
-            QMainWnd::getMainWnd()->m_sLayout2->setCurrentIndex(1);
+            QMainWnd::getMainWnd()->m_sRightLayout->setCurrentIndex(1);
         }
         else
         {
@@ -99,7 +99,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
             infoMap["friendid"] = QString::number(wnd->getFriendId(), 10);
 
             //切换到展示联系人信息的页面
-            QMainWnd::getMainWnd()->m_sLayout2->setCurrentIndex(0);
+            QMainWnd::getMainWnd()->m_sRightLayout->setCurrentIndex(0);
 
             //联系人的信息改变
             emit signalContactInfoChange(infoMap);

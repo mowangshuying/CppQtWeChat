@@ -53,12 +53,14 @@ public:
 
     //搜索框
     QLineEdit* m_searchEdit;
+    
     //开始的那个按钮
     QPushButton* m_startGroupBtn;
 
     QSelectAddGroupOrAddFriendWnd* m_selectWnd;
 
     QListWidget* m_listWidget;
+    
     //窗口类型
     QCommListWndEnum m_WndType;
 };

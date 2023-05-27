@@ -124,8 +124,8 @@ public:
     QDealNewFriendsApplyWnd* m_dealNewFriendsApplyWnd;
 
     QSessionWnd* m_sessionWnd;
-    QStackedLayout* m_sLayout1;
-    QStackedLayout* m_sLayout2;
+    QStackedLayout* m_sMiddleLayout;
+    QStackedLayout* m_sRightLayout;
 
     int m_lastSesId = -1;
     int m_lastContactId = -1;

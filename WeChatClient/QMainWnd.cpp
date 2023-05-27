@@ -38,36 +38,38 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
 
-    m_sLayout1 = new QStackedLayout(m_centerWnd);
-
+    // 左边Layout
+    m_sMiddleLayout = new QStackedLayout(m_centerWnd);
     //消息列表
-    m_sLayout1->addWidget(m_commMsgListWnd);
+    m_sMiddleLayout->addWidget(m_commMsgListWnd);
     //联系人列表
-    m_sLayout1->addWidget(m_commContactsListWnd);
+    m_sMiddleLayout->addWidget(m_commContactsListWnd);
     //群组列表
-    m_sLayout1->addWidget(m_commGroupsListWnd);
-    m_sLayout1->setContentsMargins(0, 0, 0, 0);
+    m_sMiddleLayout->addWidget(m_commGroupsListWnd);
+    m_sMiddleLayout->setContentsMargins(0, 0, 0, 0);
 
     m_hLayout->setSpacing(0);
 
-    m_sLayout2 = new QStackedLayout(m_centerWnd);
-    m_sLayout2->setContentsMargins(0, 0, 0, 0);
+    m_sRightLayout = new QStackedLayout(m_centerWnd);
+    m_sRightLayout->setContentsMargins(0, 0, 0, 0);
 
+    // 联系人信息窗口
     m_commContactInfo = new QCommContactInfoWnd(m_centerWnd);
-    m_sLayout2->addWidget(m_commContactInfo);
+    m_sRightLayout->addWidget(m_commContactInfo);
     connect(m_commContactInfo->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
     connect(m_commContactInfo->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
     connect(m_commContactInfo->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
 
+    // 新的朋友
     m_dealNewFriendsApplyWnd = new QDealNewFriendsApplyWnd(m_centerWnd);
     connect(m_dealNewFriendsApplyWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
     connect(m_dealNewFriendsApplyWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
     connect(m_dealNewFriendsApplyWnd->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
-    m_sLayout2->addWidget(m_dealNewFriendsApplyWnd);
+    m_sRightLayout->addWidget(m_dealNewFriendsApplyWnd);
     m_commContactsListWnd->addContactsItem("./img/head2.png", "新的朋友", true);
 
     m_hLayout->addWidget(m_toolWnd);
-    m_hLayout->addLayout(m_sLayout1, 0);
+    m_hLayout->addLayout(m_sMiddleLayout, 0);
 
     {
         /*添加分割线的示例代码*/
@@ -75,7 +77,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         m_hLayout->addWidget(sp);
     }
     m_hLayout->setSpacing(0);
-    m_hLayout->addLayout(m_sLayout2, 1);
+    m_hLayout->addLayout(m_sRightLayout, 1);
     // m_hLayout->addWidget(m_groupInfoWnd);
     m_hLayout->addStretch();
 
@@ -124,7 +126,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // if (objectName().isEmpty())
     //    setObjectName("QMainWnd");
     //// setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
-    setMinimumSize(800, 600);
+    setMinimumSize(880, 660);
     setMouseTracking(true);
 
     m_voiceTelphoneWnd = new QVoiceTelphoneWnd();
@@ -186,7 +188,7 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 
     //查找对应的会话
     QSessionWnd* ses = nullptr;
-    int count = m_sLayout2->count();
+    int count = m_sRightLayout->count();
     for (int i = 0; i < count; i++)
     {
         if (i <= 1)
@@ -194,7 +196,7 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
             continue;
         }
 
-        QLayoutItem* item = m_sLayout2->layout()->itemAt(i);
+        QLayoutItem* item = m_sRightLayout->layout()->itemAt(i);
         QSessionWnd* sesWnd = dynamic_cast<QSessionWnd*>(item->widget());
         if (sesWnd->m_sesId == sesid)
         {
@@ -306,7 +308,7 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
 
     //查找对应的会话
     QSessionWnd* ses = nullptr;
-    int count = m_sLayout2->count();
+    int count = m_sRightLayout->count();
     for (int i = 0; i < count; i++)
     {
         if (i <= 1)
@@ -314,7 +316,7 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
             continue;
         }
 
-        QLayoutItem* item = m_sLayout2->layout()->itemAt(i);
+        QLayoutItem* item = m_sRightLayout->layout()->itemAt(i);
         QSessionWnd* sesWnd = dynamic_cast<QSessionWnd*>(item->widget());
         if (sesWnd->m_sesId == sesid)
         {
@@ -531,7 +533,7 @@ void QMainWnd::requestSessionList()
                 connect(sesWnd->m_sesTopWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(closeWnd()));
                 connect(sesWnd->m_sesTopWnd->m_maxBtn, SIGNAL(clicked()), this, SLOT(maxWnd()));
                 connect(sesWnd->m_sesTopWnd->m_minBtn, SIGNAL(clicked()), this, SLOT(minWnd()));
-                m_sLayout2->addWidget(sesWnd);
+                m_sRightLayout->addWidget(sesWnd);
             }
         }
     });
@@ -540,7 +542,7 @@ void QMainWnd::requestSessionList()
 bool QMainWnd::hasSessionWndBySessionId(int sesid)
 {
     bool bHas = false;
-    int count = m_sLayout2->count();
+    int count = m_sRightLayout->count();
     for (int i = 0; i < count; i++)
     {
         if (i <= 1)
@@ -548,7 +550,7 @@ bool QMainWnd::hasSessionWndBySessionId(int sesid)
             continue;
         }
 
-        QLayoutItem* item = m_sLayout2->layout()->itemAt(i);
+        QLayoutItem* item = m_sRightLayout->layout()->itemAt(i);
         QSessionWnd* sesWnd = dynamic_cast<QSessionWnd*>(item->widget());
         if (sesWnd->m_sesId == sesid)
         {
@@ -878,7 +880,7 @@ void QMainWnd::slotSesIdToIndex(int sesid)
     int layoutId = 0;
     if (sesid != 0)
     {
-        int count = m_sLayout2->count();
+        int count = m_sRightLayout->count();
         for (int i = 0; i < count; i++)
         {
             if (i <= 1)
@@ -886,7 +888,7 @@ void QMainWnd::slotSesIdToIndex(int sesid)
                 continue;
             }
 
-            QLayoutItem* item = m_sLayout2->layout()->itemAt(i);
+            QLayoutItem* item = m_sRightLayout->layout()->itemAt(i);
             QSessionWnd* sesWnd = dynamic_cast<QSessionWnd*>(item->widget());
             if (sesWnd->m_sesId == sesid)
             {
@@ -901,7 +903,7 @@ void QMainWnd::slotSesIdToIndex(int sesid)
         m_lastSesId = layoutId;
     }
 
-    m_sLayout2->setCurrentIndex(layoutId);
+    m_sRightLayout->setCurrentIndex(layoutId);
 }
 
 void QMainWnd::slotSendMsgBtnClick(QMap<QString, QString> infoMap)
@@ -933,7 +935,7 @@ void QMainWnd::slotSendMsgBtnClick(QMap<QString, QString> infoMap)
 
 void QMainWnd::slotToolWndPageChanged(int page)
 {
-    m_sLayout1->setCurrentIndex(page);
+    m_sMiddleLayout->setCurrentIndex(page);
     if (page == 0)
     {
         requestSessionList();
