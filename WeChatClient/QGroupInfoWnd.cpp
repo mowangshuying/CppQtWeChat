@@ -57,7 +57,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_groupName1->setText("群聊名称");
     m_vLayout1->addWidget(m_groupName1);
 
-    m_groupName2 = new QEditLabel();
+    m_groupName2 = new QEditLabel(m_centerWnd);
     m_groupName2->setFixedSize(200, 25);
     m_groupName2->setText("请在此处添加群聊名称...");
     m_vLayout1->addWidget(m_groupName2);
@@ -66,7 +66,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_groupNotice1->setText("群公告");
     m_vLayout1->addWidget(m_groupNotice1);
 
-    m_groupNotice2 = new QEditLabel();
+    m_groupNotice2 = new QEditLabel(m_centerWnd);
     m_groupNotice2->setText("请在此处设置群公告...");
     m_groupNotice2->setFixedSize(200, 25);
     m_vLayout1->addWidget(m_groupNotice2);
@@ -81,7 +81,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // 提供分割线
     m_vLayout1->addSpacing(5);
 
-    m_groupRemarks2 = new QEditLabel();
+    m_groupRemarks2 = new QEditLabel(m_centerWnd);
     m_groupRemarks2->setText("请在此处设置群备注...");
     m_groupRemarks2->setFixedSize(200, 25);
     m_vLayout1->addWidget(m_groupRemarks2);
@@ -96,7 +96,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // 提供分割线
     m_vLayout1->addSpacing(5);
 
-    m_groupRoleName2 = new QEditLabel();
+    m_groupRoleName2 = new QEditLabel(m_centerWnd);
     m_groupRoleName2->setText("请在此处设置备注...");
     m_groupRoleName2->setFixedSize(200, 25);
     ;

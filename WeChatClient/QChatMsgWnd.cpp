@@ -33,16 +33,14 @@ QSize QChatMsgWnd::fontRect(QString str)
 {
     m_msg = str;
 
-    int minH = 30;    //消息的最小高度为30
-    int iconWH = 30;  //头像的大小
-    int iconSpaceW = 20;
+    int minH = 30;    // 消息的最小高度为30
+    int iconWH = 30;  // 头像的大小
+    int iconSpaceW = 20; // 头像距离边框大小
     int iconRectW = 5;
     int iconTMPH = 10;
     int triangleW = 6;
     int outerFrameW = 20;
     int textSpaceRect = 12;  //
-
-    // int width = this->width(); 注释无效变量
 
     m_outerFrameWidth = this->width() - outerFrameW - 2 * (iconWH + iconTMPH + iconSpaceW);
     m_textWidth = m_outerFrameWidth - 2 * textSpaceRect;
@@ -76,7 +74,6 @@ QSize QChatMsgWnd::fontRect(QString str)
     else
     {
         m_outerFrameLeftRect.setRect(m_triangleLeftRect.x() + m_triangleLeftRect.width(), m_lineHeight / 4 * 3, m_outerFrameWidth, height - m_lineHeight);
-
         m_outerFrameRightRect.setRect(m_triangleRightRect.x() - m_outerFrameWidth, m_lineHeight / 4 * 3, m_outerFrameWidth, height - m_lineHeight);
     }
 
@@ -178,10 +175,12 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
 
     if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_OtherMsgText)
     {
+        // 头像
         m_leftPixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[m_recvid];
         m_leftPixmap = m_leftPixmap.scaled(30, 30);
         painter.drawPixmap(m_iconLeftRect, m_leftPixmap);
-        //绘制外部边框
+        
+        // 绘制外部边框
         QColor color = QColor(158, 234, 106);
         painter.setBrush(color);
         painter.drawRoundedRect(m_outerFrameLeftRect, 4, 4);

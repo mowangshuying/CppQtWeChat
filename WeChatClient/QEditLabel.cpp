@@ -52,6 +52,7 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
         {
             m_lineEdit->setText(m_label->text());
             m_StackLayout->setCurrentWidget(m_lineEdit);
+            m_bShowLable = false;
         }
     }
 
@@ -66,6 +67,7 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
                 m_label->setText(m_lineEdit->text());
                 m_StackLayout->setCurrentWidget(m_label);
                 emit saveText();
+                m_bShowLable = true;
             }
         }
 
@@ -74,6 +76,7 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
             m_label->setText(m_lineEdit->text());
             m_StackLayout->setCurrentWidget(m_label);
             emit saveText();
+            m_bShowLable = true;     
         }
     }
 

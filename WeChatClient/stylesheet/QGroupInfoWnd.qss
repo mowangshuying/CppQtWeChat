@@ -3,12 +3,10 @@
 #QGroupFriendsWnd,
 #QGroupInfoCenterWnd {
     background-color: rgb(238, 244, 249);
-    /*    border-radius: 4px;*/
 }
 
 #QGroupInfoWnd {
     background-color: rgb(238, 244, 249);
-    /*border-radius: 5px;*/
     border-top-right-radius: 4px;
 }
 
@@ -16,6 +14,16 @@ QLabel {
     font: 14px 'Segoe UI', 'Microsoft YaHei';
     color: black;
     border: none;
+}
+
+#QEditLabel[showLabel="true"] QLabel {
+    font: 14px 'Segoe UI', 'Microsoft YaHei';
+    color: gray;
+    border: none;
+}
+
+#QEditLabel[showLabel="false"] QLabel {
+    color: black;
 }
 
 QPushButton {
