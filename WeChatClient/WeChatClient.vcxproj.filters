@@ -134,7 +134,7 @@
     <ClCompile Include="QGroupFriendsItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSwitchButton.cpp">
+    <ClCompile Include="QSelfSwitchButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QGroupFriendsWnd.cpp">
@@ -268,7 +268,7 @@
     <QtMoc Include="QGroupFriendsItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSwitchButton.h">
+    <QtMoc Include="QSelfSwitchButton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QGroupFriendsWnd.h">

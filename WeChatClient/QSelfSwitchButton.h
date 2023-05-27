@@ -12,12 +12,12 @@ https://blog.csdn.net/weixin_39572794/article/details/110516773
 #include <QWidget>
 #include <QMouseEvent>
 
-class QSwitchButton : public QWidget
+class QSelfSwitchButton : public QWidget
 {
     Q_OBJECT
 public:
-    QSwitchButton(QWidget *parent = nullptr);
-    ~QSwitchButton();
+    QSelfSwitchButton(QWidget *parent = nullptr);
+    ~QSelfSwitchButton();
 
 protected:
     void paintEvent(QPaintEvent *e);
@@ -42,9 +42,9 @@ public:
     QColor m_textColorOn;     //开状态时文字颜色
     QColor m_textColorOff;    //关状态时文字颜色
 
-    QPoint m_startPoint;      //滑块移动的起始点
-    QPoint m_endPoint;        //滑块移动的终点
-    QPoint m_centerPoint;     //滑块移动的中间某点
+    QPoint m_startPoint;   //滑块移动的起始点
+    QPoint m_endPoint;     //滑块移动的终点
+    QPoint m_centerPoint;  //滑块移动的中间某点
 
     QString m_strText;  //文字内容
 

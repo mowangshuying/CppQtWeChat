@@ -11,7 +11,7 @@
 #include <QScrollArea>
 
 #include "QEditLabel.h"
-#include "QSwitchButton.h"
+#include "QSelfSwitchButton.h"
 #include "QGroupFriendsWnd.h"
 
 class QGroupInfoWnd : public QWidget
@@ -83,22 +83,22 @@ public:
 
     QHBoxLayout* m_hLayout21;
     QLabel* m_showGroupFriendsRoleNameLabel;
-    QSwitchButton* m_showGroupFriendsRoleNameBtn;
+    QSelfSwitchButton* m_showGroupFriendsRoleNameBtn;
 
     //消息免打扰
     QHBoxLayout* m_hLayout22;
     QLabel* m_MsgFreeLabel;
-    QSwitchButton* m_MsgFreeBtn;
+    QSelfSwitchButton* m_MsgFreeBtn;
 
     //置顶聊天
     QHBoxLayout* m_hLayout23;
     QLabel* m_topWndLabel;
-    QSwitchButton* m_topWndBtn;
+    QSelfSwitchButton* m_topWndBtn;
 
     //保存到通讯录
     QHBoxLayout* m_hLayout24;
     QLabel* m_save2AddrBookLabel;
-    QSwitchButton* m_save2AddrBookBtn;
+    QSelfSwitchButton* m_save2AddrBookBtn;
 
     //删除并退出窗口
     QWidget* m_delexitWnd;

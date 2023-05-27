@@ -120,7 +120,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_showGroupFriendsRoleNameLabel->setText("显示群成员昵称");
     m_hLayout21->addWidget(m_showGroupFriendsRoleNameLabel);
 
-    m_showGroupFriendsRoleNameBtn = new QSwitchButton();
+    m_showGroupFriendsRoleNameBtn = new QSelfSwitchButton();
     m_hLayout21->addWidget(m_showGroupFriendsRoleNameBtn);
     m_hLayout21->addSpacing(40);
 
@@ -131,8 +131,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_MsgFreeLabel->setText("消息免打扰");
     m_hLayout22->addWidget(m_MsgFreeLabel);
 
-    m_MsgFreeBtn = new QSwitchButton();
-   // m_MsgFreeBtn->setFixedHeight(20);
+    m_MsgFreeBtn = new QSelfSwitchButton();
+    // m_MsgFreeBtn->setFixedHeight(20);
     m_hLayout22->addWidget(m_MsgFreeBtn);
     m_hLayout22->addSpacing(40);
 
@@ -142,7 +142,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_topWndLabel->setText("置顶聊天");
     m_hLayout23->addWidget(m_topWndLabel);
 
-    m_topWndBtn = new QSwitchButton();
+    m_topWndBtn = new QSelfSwitchButton();
     m_hLayout23->addWidget(m_topWndBtn);
     m_hLayout23->addSpacing(40);
 
@@ -153,7 +153,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_save2AddrBookLabel->setText("保存到通讯录");
     m_hLayout24->addWidget(m_save2AddrBookLabel);
 
-    m_save2AddrBookBtn = new QSwitchButton();
+    m_save2AddrBookBtn = new QSelfSwitchButton();
     m_hLayout24->addWidget(m_save2AddrBookBtn);
     m_hLayout24->addSpacing(40);
 

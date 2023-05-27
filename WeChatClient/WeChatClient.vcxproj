@@ -208,7 +208,7 @@
     <ClCompile Include="QSelfLabel.cpp" />
     <ClCompile Include="QSelfSplit.cpp" />
     <ClCompile Include="QStyleSheetMgr.cpp" />
-    <ClCompile Include="QSwitchButton.cpp" />
+    <ClCompile Include="QSelfSwitchButton.cpp" />
     <ClCompile Include="QToolWnd.cpp" />
     <ClCompile Include="QUserInfoWnd.cpp" />
     <ClCompile Include="QVoiceTelphoneWnd.cpp" />
@@ -272,7 +272,7 @@
     <QtMoc Include="QSelectMoreWnd.h" />
     <QtMoc Include="QEditLabel.h" />
     <QtMoc Include="QGroupFriendsWnd.h" />
-    <QtMoc Include="QSwitchButton.h" />
+    <QtMoc Include="QSelfSwitchButton.h" />
     <QtMoc Include="QGroupFriendsItemWnd.h" />
     <QtMoc Include="QGroupInfoWnd.h" />
     <QtMoc Include="QChatFileInnerWnd.h" />

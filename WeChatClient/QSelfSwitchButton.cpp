@@ -1,8 +1,8 @@
-#include "QSwitchButton.h"
+#include "QSelfSwitchButton.h"
 
 #include <QPainter>
 
-QSwitchButton::QSwitchButton(QWidget *parent) : QWidget(parent)
+QSelfSwitchButton::QSelfSwitchButton(QWidget *parent) : QWidget(parent)
 {
     setObjectName("QSwitchButton");
     m_bSwitch = false;
@@ -21,11 +21,11 @@ QSwitchButton::QSwitchButton(QWidget *parent) : QWidget(parent)
     setFixedHeight(18);
 }
 
-QSwitchButton::~QSwitchButton()
+QSelfSwitchButton::~QSelfSwitchButton()
 {
 }
 
-void QSwitchButton::mousePressEvent(QMouseEvent *e)
+void QSelfSwitchButton::mousePressEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton)
     {
@@ -39,7 +39,7 @@ void QSwitchButton::mousePressEvent(QMouseEvent *e)
     }
 }
 
-void QSwitchButton::mouseMoveEvent(QMouseEvent *e)
+void QSelfSwitchButton::mouseMoveEvent(QMouseEvent *e)
 {
     if (m_bPress)
     {
@@ -53,7 +53,7 @@ void QSwitchButton::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
-void QSwitchButton::mouseReleaseEvent(QMouseEvent *e)
+void QSelfSwitchButton::mouseReleaseEvent(QMouseEvent *e)
 {
     m_bPress = false;
     m_sliderColor = QColor(245, 245, 245);
@@ -76,14 +76,14 @@ void QSwitchButton::mouseReleaseEvent(QMouseEvent *e)
     update();
 }
 
-void QSwitchButton::resizeEvent(QResizeEvent *e)
+void QSelfSwitchButton::resizeEvent(QResizeEvent *e)
 {
     m_startPoint = QPoint(rect().height() / 2, rect().height() / 2);
     m_centerPoint = m_startPoint;
     m_endPoint = QPoint((rect().right() - rect().height() / 2), rect().height() / 2);
 }
 
-void QSwitchButton::paintEvent(QPaintEvent *e)
+void QSelfSwitchButton::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -93,7 +93,7 @@ void QSwitchButton::paintEvent(QPaintEvent *e)
 }
 
 // ªÊ÷∆±≥æ∞
-void QSwitchButton::drawBg(QPainter &painter)
+void QSelfSwitchButton::drawBg(QPainter &painter)
 {
     painter.save();
     painter.setPen(Qt::NoPen);
@@ -120,7 +120,7 @@ void QSwitchButton::drawBg(QPainter &painter)
 }
 
 // ªÊ÷∆ª¨øÈ
-void QSwitchButton::drawSlidBlock(QPainter &painter)
+void QSelfSwitchButton::drawSlidBlock(QPainter &painter)
 {
     painter.save();
     painter.setPen(Qt::NoPen);
@@ -129,7 +129,7 @@ void QSwitchButton::drawSlidBlock(QPainter &painter)
     painter.restore();
 }
 
-void QSwitchButton::drawText(QPainter &painter)
+void QSelfSwitchButton::drawText(QPainter &painter)
 {
     painter.save();
     QFont font("Microsoft YaHei", 12, 50, false);
