@@ -132,6 +132,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout22->addWidget(m_MsgFreeLabel);
 
     m_MsgFreeBtn = new QSwitchButton();
+   // m_MsgFreeBtn->setFixedHeight(20);
     m_hLayout22->addWidget(m_MsgFreeBtn);
     m_hLayout22->addSpacing(40);
 

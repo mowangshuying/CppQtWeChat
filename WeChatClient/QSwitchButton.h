@@ -34,21 +34,22 @@ signals:
     void stateChange(bool state);
 
 public:
-    QColor bgColorOn;   //开状态时的背景颜色
-    QColor bgColorOff;  //关状态时的背景颜色
-    QColor sliderColor;
-    QColor sliderColorOn;   //开状态时滑块的背景颜色
-    QColor sliderColorOff;  //关状态时滑块的背景颜色
-    QColor textColorOn;     //开状态时文字颜色
-    QColor textColorOff;    //关状态时文字颜色
-    QPoint startPoint;      //滑块移动的起始点
-    QPoint endPoint;        //滑块移动的终点
-    QPoint centerPoint;     //滑块移动的中间某点
+    QColor m_bgColorOn;   //开状态时的背景颜色
+    QColor m_bgColorOff;  //关状态时的背景颜色
+    QColor m_sliderColor;
+    QColor m_sliderColorOn;   //开状态时滑块的背景颜色
+    QColor m_sliderColorOff;  //关状态时滑块的背景颜色
+    QColor m_textColorOn;     //开状态时文字颜色
+    QColor m_textColorOff;    //关状态时文字颜色
 
-    QString strText;  //文字内容
+    QPoint m_startPoint;      //滑块移动的起始点
+    QPoint m_endPoint;        //滑块移动的终点
+    QPoint m_centerPoint;     //滑块移动的中间某点
 
-    int mouseX;
+    QString m_strText;  //文字内容
 
-    bool bPress;   //左键是否按下
-    bool bSwitch;  //开关状态:开true，关false
+    int m_mouseX;
+
+    bool m_bPress;   //左键是否按下
+    bool m_bSwitch;  //开关状态:开true，关false
 };

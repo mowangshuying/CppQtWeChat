@@ -5,19 +5,20 @@
 QSwitchButton::QSwitchButton(QWidget *parent) : QWidget(parent)
 {
     setObjectName("QSwitchButton");
-    bSwitch = false;
-    bgColorOff = QColor(192, 192, 192);
-    bgColorOn = QColor(50, 205, 50);
-    sliderColorOff = QColor(255, 255, 255);
-    sliderColorOn = QColor(255, 255, 255);  //
+    m_bSwitch = false;
+    m_bgColorOff = QColor(192, 192, 192);  // 关闭按钮时候背景为灰色
+    m_bgColorOn = QColor(50, 205, 50);     // 开启状态为白色
+    m_sliderColorOff = QColor(255, 255, 255);
+    m_sliderColorOn = QColor(255, 255, 255);  //
 
-    sliderColor = sliderColorOff;
-    textColorOn = QColor(255, 255, 255);
-    textColorOff = QColor(0, 0, 0);
-    mouseX = 0;
-    bPress = false;
+    m_sliderColor = m_sliderColorOff;
+    m_textColorOn = QColor(255, 255, 255);
+    m_textColorOff = QColor(0, 0, 0);
+    m_mouseX = 0;
+    m_bPress = false;
 
     setFixedWidth(40);
+    setFixedHeight(18);
 }
 
 QSwitchButton::~QSwitchButton()
@@ -28,11 +29,11 @@ void QSwitchButton::mousePressEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton)
     {
-        if ((e->pos().x() - centerPoint.x()) * (e->pos().y() - centerPoint.y()) <= ((rect().height() / 2) * (rect().height() / 2)))
+        if ((e->pos().x() - m_centerPoint.x()) * (e->pos().y() - m_centerPoint.y()) <= ((rect().height() / 2) * (rect().height() / 2)))
         {
-            bPress = true;
-            mouseX = e->pos().x();
-            sliderColor = QColor(160, 30, 30);
+            m_bPress = true;
+            m_mouseX = e->pos().x();
+            //  m_sliderColor = QColor(160, 30, 30);
             update();
         }
     }
@@ -40,13 +41,13 @@ void QSwitchButton::mousePressEvent(QMouseEvent *e)
 
 void QSwitchButton::mouseMoveEvent(QMouseEvent *e)
 {
-    if (bPress)
+    if (m_bPress)
     {
-        if ((e->pos().x() >= startPoint.x()) && (e->pos().x() <= endPoint.x()))
+        if ((e->pos().x() >= m_startPoint.x()) && (e->pos().x() <= m_endPoint.x()))
         {
             int tempX = e->pos().x();
-            centerPoint.setX(tempX - mouseX + centerPoint.x());
-            mouseX = centerPoint.x();
+            m_centerPoint.setX(tempX - m_mouseX + m_centerPoint.x());
+            m_mouseX = m_centerPoint.x();
             update();
         }
     }
@@ -54,32 +55,32 @@ void QSwitchButton::mouseMoveEvent(QMouseEvent *e)
 
 void QSwitchButton::mouseReleaseEvent(QMouseEvent *e)
 {
-    bPress = false;
-    sliderColor = QColor(245, 245, 245);
-    if (centerPoint.x() >= rect().width() / 2)
+    m_bPress = false;
+    m_sliderColor = QColor(245, 245, 245);
+    if (m_centerPoint.x() >= rect().width() / 2)
     {
-        centerPoint.setX(endPoint.x());
-        sliderColor = sliderColorOn;
-        if (!bSwitch)
+        m_centerPoint.setX(m_endPoint.x());
+        m_sliderColor = m_sliderColorOn;
+        if (!m_bSwitch)
             emit stateChange(true);
-        bSwitch = true;
+        m_bSwitch = true;
     }
-    else if (centerPoint.x() < rect().width() / 2)
+    else if (m_centerPoint.x() < rect().width() / 2)
     {
-        centerPoint.setX(startPoint.x());
-        sliderColor = sliderColorOff;
-        if (bSwitch)
+        m_centerPoint.setX(m_startPoint.x());
+        m_sliderColor = m_sliderColorOff;
+        if (m_bSwitch)
             emit stateChange(false);
-        bSwitch = false;
+        m_bSwitch = false;
     }
     update();
 }
 
 void QSwitchButton::resizeEvent(QResizeEvent *e)
 {
-    startPoint = QPoint(rect().height() / 2, rect().height() / 2);
-    centerPoint = startPoint;
-    endPoint = QPoint((rect().right() - rect().height() / 2), rect().height() / 2);
+    m_startPoint = QPoint(rect().height() / 2, rect().height() / 2);
+    m_centerPoint = m_startPoint;
+    m_endPoint = QPoint((rect().right() - rect().height() / 2), rect().height() / 2);
 }
 
 void QSwitchButton::paintEvent(QPaintEvent *e)
@@ -96,13 +97,13 @@ void QSwitchButton::drawBg(QPainter &painter)
 {
     painter.save();
     painter.setPen(Qt::NoPen);
-    if (bSwitch)
+    if (m_bSwitch)
     {
-        painter.setBrush(QBrush(bgColorOn));
+        painter.setBrush(QBrush(m_bgColorOn));
     }
     else
     {
-        painter.setBrush(QBrush(bgColorOff));
+        painter.setBrush(QBrush(m_bgColorOff));
     }
 
     // 绘制按钮外边框
@@ -123,8 +124,8 @@ void QSwitchButton::drawSlidBlock(QPainter &painter)
 {
     painter.save();
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QBrush(sliderColor));
-    painter.drawEllipse(centerPoint, rect().height() / 2 - 2, rect().height() / 2 - 2);
+    painter.setBrush(QBrush(m_sliderColor));
+    painter.drawEllipse(m_centerPoint, 5, 5);
     painter.restore();
 }
 
@@ -134,20 +135,20 @@ void QSwitchButton::drawText(QPainter &painter)
     QFont font("Microsoft YaHei", 12, 50, false);
     painter.setFont(font);
     int x, y;
-    if (bSwitch)
+    if (m_bSwitch)
     {
-        painter.setPen(QPen(textColorOn));
+        painter.setPen(QPen(m_textColorOn));
         x = rect().left();
         y = rect().top();
-        strText = "";  // QString("开");
+        m_strText = "";
     }
     else
     {
-        painter.setPen(QPen(textColorOff));
+        painter.setPen(QPen(m_textColorOff));
         x = rect().right() - rect().height();
         y = rect().top();
-        strText = "";  // QString("关");
+        m_strText = "";
     }
-    painter.drawText(x, y, rect().height(), rect().height(), Qt::AlignCenter, strText);
+    painter.drawText(x, y, rect().height(), rect().height(), Qt::AlignCenter, m_strText);
     painter.restore();
 }
