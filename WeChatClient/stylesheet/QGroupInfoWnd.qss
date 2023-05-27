@@ -16,6 +16,15 @@ QLabel {
     border: none;
 }
 
+
+/*自定义属性*/
+
+
+/*
+后代选择器：
+    选择器1 选择器2 { ... }
+*/
+
 #QEditLabel[showLabel="true"] QLabel {
     font: 14px 'Segoe UI', 'Microsoft YaHei';
     color: gray;
