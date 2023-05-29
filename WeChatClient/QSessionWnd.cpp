@@ -126,6 +126,7 @@ void QSessionWnd::slotSendTextBtnClick()
     m_sendTextEdit->setText("");
     neb::CJsonObject json;
     json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
+    json.Add("sendUserName", QMainWnd::getMainWnd()->m_username.toStdString());
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
     json.Add("msgtext", msgText.toStdString().c_str());
@@ -380,11 +381,12 @@ void QSessionWnd::resizeEvent(QResizeEvent* event)
 
 void QSessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 {
+    // QString userName = QMainWnd::getMainWnd()->m_username;
     QWSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
         dealMsgTime();
         //向远端发送消息
         QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-        QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, m_recvId);
+        QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, QMainWnd::getMainWnd()->m_username, m_recvId);
         QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
         msgWnd->setFixedWidth(this->width());
 
@@ -407,7 +409,7 @@ void QSessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
         LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
         //向远端发送消息
         QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-        QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, m_recvId);
+        QChatMsgWnd* msgWnd = new QChatMsgWnd(m_MsgWndList, QMainWnd::getMainWnd()->m_userid, QMainWnd::getMainWnd()->m_username, m_recvId);
         QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
         msgWnd->setFixedWidth(this->width());
         QSize msgSize = msgWnd->fontRect(msgText);

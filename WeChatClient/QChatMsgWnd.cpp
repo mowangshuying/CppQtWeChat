@@ -8,7 +8,8 @@
 
 int QChatMsgWnd::m_tmp = 0;
 
-QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, int64_t recvid) : QWidget(p), m_recvid(recvid), m_sendid(sendid)
+QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, QString userName, int64_t recvid)
+    : QWidget(p), m_recvid(recvid), m_sendid(sendid), m_userName(userName)
 {
     setObjectName("QChatMsgWnd");
     //设置窗体的字体大小
@@ -146,7 +147,7 @@ QSize QChatMsgWnd::fontRect(QString str)
 
         // 计算用户名长度
         QFontMetricsF fm(this->font());
-        int nAllTextLen = fm.width("TestUserName!");
+        int nAllTextLen = fm.width(m_userName);
         m_leftUserNameRect.setRect(m_outerFrameLeftRect.x(), m_outerFrameLeftRect.y() - m_lineHeight * 0.9, nAllTextLen, m_lineHeight);
         m_rightUserNameRect.setRect(m_outerFrameRightRect.x() + m_outerFrameRightRect.width() - nAllTextLen,
                                     m_outerFrameRightRect.y() - m_lineHeight * 0.9,
@@ -283,7 +284,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
             QTextOption option(Qt::AlignLeft | Qt::AlignVCenter);
             option.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
             painter.setFont(this->font());
-            painter.drawText(m_leftUserNameRect, "TestUserName!", option);
+            painter.drawText(m_leftUserNameRect, m_userName, option);
         }
     }
 
@@ -322,7 +323,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
             QTextOption option(Qt::AlignLeft | Qt::AlignVCenter);
             option.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
             painter.setFont(this->font());
-            painter.drawText(m_rightUserNameRect, "TestUserName!", option);
+            painter.drawText(m_rightUserNameRect, m_userName, option);
         }
     }
 

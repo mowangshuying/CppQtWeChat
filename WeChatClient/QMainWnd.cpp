@@ -218,7 +218,7 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 
         //向会话中嵌入一条数据；
         QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-        QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, recvid);
+        QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, QMainWnd::getMainWnd()->m_username, recvid);
         QListWidgetItem* msgWndItem = new QListWidgetItem(ses->m_MsgWndList);
         msgWnd->setFixedWidth(ses->width());
 
@@ -311,6 +311,12 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
         return;
     }
 
+    std::string sendUserName;
+    if (!msg["data"].Get("sendUserName", sendUserName))
+    {
+        return;
+    }
+
     //查找对应的会话
     QSessionWnd* ses = nullptr;
     int count = m_sRightLayout->count();
@@ -336,7 +342,7 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
         {
             //向会话中嵌入一条数据；
             QString time = QString::number(QDateTime::currentDateTime().toTime_t());
-            QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, recvid);
+            QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList, sendid, sendUserName.c_str(), recvid);
             QListWidgetItem* msgItem = new QListWidgetItem(ses->m_MsgWndList);
             msgWnd->setFixedWidth(640);
             QSize msgSize = msgWnd->fontRect(msgtext.c_str());
