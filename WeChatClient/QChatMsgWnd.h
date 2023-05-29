@@ -14,9 +14,9 @@ public:
     enum ChatMsgTypeEnum
     {
         ChatMsg_System = 10,
-        ChatMsg_Time,           // 时间消息 - (一般由自己产生吧)
-        ChatMsg_OwnerMsgText,   // 自己的消息
-        ChatMsg_OtherMsgText,   // 其他人发送的消息
+        ChatMsg_Time,          // 时间消息 - (一般由自己产生吧)
+        ChatMsg_OwnerMsgText,  // 自己的消息
+        ChatMsg_OtherMsgText,  // 其他人发送的消息
     };
 
 public:
@@ -42,17 +42,18 @@ public:
     QString m_time;
     QString m_curTime;
     QSize m_allSize;
+    QString m_userName;
 
     ChatMsgTypeEnum m_chatMsgType = ChatMsg_System;
 
     int m_outerFrameWidth;
     int m_textWidth;
-    int m_spaceWidth;
+    // int m_spaceWidth;
     int m_lineHeight;
 
     QRect m_iconLeftRect;
     QRect m_iconRightRect;
-    
+
     QRect m_triangleLeftRect;
     QRect m_triangleRightRect;
 
@@ -74,4 +75,8 @@ public:
 
     //是否在发送中
     bool m_bSending = false;
+
+    static int m_tmp;
+
+    bool m_bShowName = true;
 };
