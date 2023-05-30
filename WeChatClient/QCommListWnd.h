@@ -24,6 +24,7 @@ public:
         MsgItemWndTpye = 0,
         ContactItemWndType = 1,
         GroupItemWndType = 2,
+        SearchItemWndType = 3
     };
 
     QCommListWnd(QWidget* p = nullptr, QCommListWndEnum wndType = MsgItemWndTpye);
@@ -31,10 +32,14 @@ public:
 signals:
     void signalCommListChanged(int num);
     void signalContactInfoChange(QMap<QString, QString> infoMap);
+    void signalSearchText(QString searchText);
 public slots:
     void slotOnCurrentItemClicked(QListWidgetItem* item);
     //如果点击那个按钮的话
     void slotOnStartGroupBtnClicked();
+
+protected:
+    bool eventFilter(QObject* target, QEvent* event);
 
 public:
     void addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg);
@@ -53,14 +58,14 @@ public:
 
     //搜索框
     QLineEdit* m_searchEdit;
-    
+
     //开始的那个按钮
     QPushButton* m_startGroupBtn;
 
     QSelectAddGroupOrAddFriendWnd* m_selectWnd;
 
     QListWidget* m_listWidget;
-    
+
     //窗口类型
     QCommListWndEnum m_WndType;
 };

@@ -17,6 +17,7 @@
 #include <qmath.h>
 #include <QGraphicsDropShadowEffect>
 #include "QStyleSheetMgr.h"
+#include "QCustomListWidgetItem.h"
 
 QMainWnd* QMainWnd::m_mainWnd = nullptr;
 
@@ -34,18 +35,17 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_commMsgListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::MsgItemWndTpye);
     m_commContactsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::ContactItemWndType);
     m_commGroupsListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::GroupItemWndType);
+    m_commSearchListWnd = new QCommListWnd(m_centerWnd, QCommListWnd::SearchItemWndType);
 
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
 
     // 左边Layout
     m_sMiddleLayout = new QStackedLayout(m_centerWnd);
-    //消息列表
     m_sMiddleLayout->addWidget(m_commMsgListWnd);
-    //联系人列表
     m_sMiddleLayout->addWidget(m_commContactsListWnd);
-    //群组列表
     m_sMiddleLayout->addWidget(m_commGroupsListWnd);
+    m_sMiddleLayout->addWidget(m_commSearchListWnd);
     m_sMiddleLayout->setContentsMargins(0, 0, 0, 0);
 
     m_hLayout->setSpacing(0);
@@ -93,6 +93,13 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
             m_commContactInfo,
             SLOT(slotContactInfoChange(QMap<QString, QString>)));
     connect(m_commContactInfo, SIGNAL(signalSendMsgBtnClick(QMap<QString, QString>)), this, SLOT(slotSendMsgBtnClick(QMap<QString, QString>)));
+
+    connect(m_commMsgListWnd, SIGNAL(signalSearchText(QString)), this, SLOT(slotSearchText(QString)));
+    connect(m_commContactsListWnd, SIGNAL(signalSearchText(QString)), this, SLOT(slotSearchText(QString)));
+    connect(m_commGroupsListWnd, SIGNAL(signalSearchText(QString)), this, SLOT(slotSearchText(QString)));
+    connect(m_commSearchListWnd, SIGNAL(signalSearchText(QString)), this, SLOT(slotSearchText(QString)));
+
+    connect(m_commSearchListWnd, SIGNAL(signalCommListChanged(int)), this, SLOT(slotSesIdToIndex(int)));
 
     QWSClientMgr::getMgr()->regMsgCall("cs_msg_sendmsg", std::bind(&QMainWnd::cs_msg_sendmsg, this, std::placeholders::_1));
     QWSClientMgr::getMgr()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&QMainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
@@ -1032,4 +1039,56 @@ void QMainWnd::slotOnSettingBtnClick()
 {
     m_settingWnd->show();
     // m_settingWnd->update();
+}
+
+void QMainWnd::slotSearchText(QString searchText)
+{
+    LogDebug << " searchText = " << searchText;
+    m_sMiddleLayout->setCurrentIndex(3);
+    // 清空列表项
+    m_commSearchListWnd->m_listWidget->clear();
+
+    //// 嵌入群组与搜索本地群组
+    //{
+    //    QWidget* tmpLabel = new QLabel("群组");
+    //    QListWidgetItem* pListItem = new QCustomListWidgetItem(m_commSearchListWnd->m_listWidget);
+    //    tmpLabel->setFixedWidth(m_commSearchListWnd->m_listWidget->width() - 5);
+    //    pListItem->setSizeHint(QSize(m_commSearchListWnd->m_listWidget->width() - 5, 25));
+    //    m_commSearchListWnd->m_listWidget->setItemWidget(pListItem, tmpLabel);
+
+    //    int count = m_commGroupsListWnd->m_listWidget->count();
+    //    for (int i = 0; i < count; i++)
+    //    {
+    //        QListWidgetItem* pitem = m_commGroupsListWnd->m_listWidget->item(i);
+    //        QCommGroupItemWnd* pWnd = dynamic_cast<QCommGroupItemWnd*>(m_commGroupsListWnd->m_listWidget->itemWidget(pitem));
+    //        if (pWnd->m_groupName->text().contains(searchText))
+    //        {
+    //            // 创建item并添加到
+    //            m_commSearchListWnd->addGroupItem("", pWnd->m_groupName->text().toStdString().c_str(), pWnd->m_groupId);
+    //        }
+    //    }
+    //}
+
+    //{
+    // 嵌入联系人标签与搜索联系人
+    //  QWidget* tmpLabel = new QLabel("消息");
+    // QListWidgetItem* pListItem = new QCustomListWidgetItem(m_commSearchListWnd->m_listWidget);
+    // tmpLabel->setFixedWidth(m_commSearchListWnd->m_listWidget->width() - 5);
+    // pListItem->setSizeHint(QSize(m_commSearchListWnd->m_listWidget->width() - 5, 25));
+    // m_commSearchListWnd->m_listWidget->setItemWidget(pListItem, tmpLabel);
+
+    // 遍历 找到包含搜索的字段，添加到列表中
+    int count = m_commMsgListWnd->m_listWidget->count();
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_commMsgListWnd->m_listWidget->item(i);
+        QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_commMsgListWnd->m_listWidget->itemWidget(pitem));
+        if (pWnd->m_name->text().contains(searchText))
+        {
+            // 创建item并添加到
+            m_commSearchListWnd->addMsgItem(
+                pWnd->m_name->text().toStdString().c_str(), pWnd->m_msg->text().toStdString().c_str(), pWnd->m_sesId, pWnd->m_userid, pWnd->m_isGroupMsg);
+        }
+    }
+    //}
 }

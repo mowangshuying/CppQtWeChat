@@ -60,6 +60,8 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     m_selectWnd = new QSelectAddGroupOrAddFriendWnd(nullptr);
     m_selectWnd->hide();
 
+    m_searchEdit->installEventFilter(this);
+
     setFixedWidth(255);
     // setObjectName("QCommListWnd");
     // setStyleSheet("#QCommListWnd{background:white;border:0px;}");
@@ -80,7 +82,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
     LogDebug << "sesid:" << pCustItem->sesId();
 
     //当前点击的是联系人列表中的某一项目
-    if (m_WndType == ContactItemWndType)
+    if (m_WndType == QCommListWndEnum::ContactItemWndType)
     {
         QCommContactItemWnd* wnd = dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pCustItem));
         if (wnd->m_bNewFriend)
@@ -108,7 +110,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
     }
 
     //当前点击的是消息列表中的某一项
-    if (m_WndType == MsgItemWndTpye)
+    if (m_WndType == QCommListWndEnum::MsgItemWndTpye || m_WndType == QCommListWndEnum::SearchItemWndType)
     {
         QCommMsgItemWnd* wnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pCustItem));
         qint64 sesid = wnd->m_sesId;
@@ -117,7 +119,7 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
     }
 
     //当前点击的我是群列表中的某一项
-    if (m_WndType == GroupItemWndType)
+    if (m_WndType == QCommListWndEnum::GroupItemWndType)
     {
         //判断当前点击是那一项
         QCommGroupItemWnd* wnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pCustItem));
@@ -157,6 +159,22 @@ void QCommListWnd::slotOnStartGroupBtnClicked()
     swRect.setY(gPoint.y() + m_startGroupBtn->height() + 5);
     m_selectWnd->setGeometry(swRect);
     m_selectWnd->show();
+}
+
+bool QCommListWnd::eventFilter(QObject* target, QEvent* event)
+{
+    if (target == m_searchEdit && event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent* tmpKeyEvent = (QKeyEvent*)event;
+        if (tmpKeyEvent->key() == Qt::Key_Return)
+        {
+            LogDebug << "Press Enter Key searchText = " << m_searchEdit->text();
+            emit signalSearchText(m_searchEdit->text());
+            return true;
+        }
+    }
+
+    return QWidget::eventFilter(target, event);
 }
 
 void QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg)
@@ -209,9 +227,9 @@ bool QCommListWnd::hasMsgItemBySesId(int64_t sesid)
     int count = m_listWidget->count();
     for (int i = 0; i < count; i++)
     {
-        QListWidgetItem* pitem = m_listWidget->item(i);
+        QCustomListWidgetItem* pitem = (QCustomListWidgetItem*)m_listWidget->item(i);
         QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
-        if (pWnd->m_sesId == sesid)
+        if (pWnd && pWnd->m_sesId == sesid)
         {
             bHas = true;
             break;
@@ -229,7 +247,7 @@ bool QCommListWnd::hasGroupItemByGroupId(int64_t groupid)
     {
         QListWidgetItem* pitem = m_listWidget->item(i);
         QCommGroupItemWnd* pWnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pitem));
-        if (pWnd->m_groupId == groupid)
+        if (pWnd && pWnd->m_groupId == groupid)
         {
             bHas = true;
             break;

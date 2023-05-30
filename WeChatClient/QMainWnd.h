@@ -108,6 +108,7 @@ public slots:
     void slotReplyFinished(QNetworkReply* reply);
     void slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason);
     void slotOnSettingBtnClick();
+    void slotSearchText(QString searchText);
 
 public:
     QWidget* m_centerWnd;
@@ -118,6 +119,7 @@ public:
     QCommListWnd* m_commMsgListWnd;
     QCommListWnd* m_commContactsListWnd;
     QCommListWnd* m_commGroupsListWnd;
+    QCommListWnd* m_commSearchListWnd;
 
     QCommContactInfoWnd* m_commContactInfo;
 

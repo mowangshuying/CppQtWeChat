@@ -7,7 +7,8 @@
 class QCustomListWidgetItem : public QListWidgetItem
 {
 public:
-    explicit QCustomListWidgetItem(QListWidget* view = nullptr, int type = Type);
+    explicit QCustomListWidgetItem(QListWidget* view = nullptr, int type = 0);
+
     int sesId() const;
     void setSesId(int sesid);
 
