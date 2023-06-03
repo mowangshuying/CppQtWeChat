@@ -185,6 +185,7 @@ void QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, i
         return;
     }
 
+    LogDebug << "msg:" << msg;
     QCommMsgItemWnd* pMsgItem = new QCommMsgItemWnd(m_listWidget, name, msg, sesid, userid, isGroupMsg);
     QListWidgetItem* pListItem = new QCustomListWidgetItem(m_listWidget);
     pMsgItem->setFixedWidth(this->width() - 5);

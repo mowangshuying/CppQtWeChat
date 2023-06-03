@@ -17,6 +17,11 @@ class QLoginAndRegWnd : public QWidget
     Q_OBJECT
 public:
     QLoginAndRegWnd(QWidget* p = nullptr);
+    ~QLoginAndRegWnd()
+    {
+        if (m_mainWnd != nullptr)
+            delete m_mainWnd;
+    }
 
     void regSignalSlot();
 
@@ -32,7 +37,7 @@ public slots:
 
 public:
     QWidget* m_centerWnd;
-    
+
     QVBoxLayout* m_vLayout;
 
     QWidget* m_topWnd;

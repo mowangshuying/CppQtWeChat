@@ -39,7 +39,16 @@ public:  // ³ÉÔ±º¯Êý
 
     static QStyleSheetMgr* getMgr();
 
-    static void freeMgr();
+    static void initMgr()
+    {
+        getMgr();
+    }
+
+    static void exitMgr()
+    {
+        if (m_mgr)
+            delete m_mgr;
+    }
 
 public:
     std::map<QString, QStyleSheetObectWatcher> m_map;

@@ -17,7 +17,7 @@ QString QSelfLog::getFileName(const char* file)
     return fileNameStr;
 }
 
-void QSelfLog::init()
+void QSelfLog::initLog()
 {
     QDateTime dateTime = QDateTime::currentDateTime();
     QString timeStr = dateTime.toString("[yyyy-MM-dd][hh_mm_ss_zzz]");
@@ -26,10 +26,17 @@ void QSelfLog::init()
     gFileLog = new QFile(filePath);
     if (!gFileLog->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
     {
+        delete gFileLog;
         return;
     }
     //初始化自定义日志处理函数myMessageOutput
     gDefaultHandler = qInstallMessageHandler(myMessageOutput);
+}
+
+void QSelfLog::exitLog()
+{
+    gFileLog->close();
+    delete gFileLog;
 }
 
 void QSelfLog::myMessageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg)

@@ -23,9 +23,17 @@ class QWSClientMgr : public QObject
     Q_OBJECT
 private:
     QWSClientMgr();
+    ~QWSClientMgr();
 
 public:
-    static void init();
+    static void initMgr();
+    static void ExitMgr()
+    {
+        if (m_WsClientMgr)
+        {
+            delete m_WsClientMgr;
+        }
+    }
     static QWSClientMgr* getMgr();
 
     void sendMsg(const QString& message);

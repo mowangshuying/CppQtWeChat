@@ -31,7 +31,8 @@ public:
 
     static QString getFileName(const char* file);
 
-    static void init();
+    static void initLog();
+    static void exitLog();
 
     static void myMessageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 

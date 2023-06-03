@@ -24,7 +24,19 @@ QWSClientMgr::QWSClientMgr()
     LogDebug << "threadId:" << QThread::currentThread()->currentThreadId();
 }
 
-void QWSClientMgr::init()
+QWSClientMgr::~QWSClientMgr()
+{
+    if (m_webSock)
+        delete m_webSock;
+
+    if (m_timer)
+    {
+        m_timer->stop();
+        delete m_timer;
+    }
+}
+
+void QWSClientMgr::initMgr()
 {
     getMgr();
 }

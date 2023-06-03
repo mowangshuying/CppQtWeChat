@@ -1046,6 +1046,17 @@ void QMainWnd::slotSearchText(QString searchText)
     LogDebug << " searchText = " << searchText;
     m_sMiddleLayout->setCurrentIndex(3);
     // 清空列表项
+    int count = m_commSearchListWnd->m_listWidget->count();
+    for (int i = 0; i < count; i++)
+    {
+        QListWidgetItem* pitem = m_commSearchListWnd->m_listWidget->item(i);
+        QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_commMsgListWnd->m_listWidget->itemWidget(pitem));
+        if (pWnd)
+        {
+            delete pWnd;
+            pWnd = nullptr;
+        }
+    }
     m_commSearchListWnd->m_listWidget->clear();
 
     //// 嵌入群组与搜索本地群组
@@ -1078,7 +1089,7 @@ void QMainWnd::slotSearchText(QString searchText)
     // m_commSearchListWnd->m_listWidget->setItemWidget(pListItem, tmpLabel);
 
     // 遍历 找到包含搜索的字段，添加到列表中
-    int count = m_commMsgListWnd->m_listWidget->count();
+    count = m_commMsgListWnd->m_listWidget->count();
     for (int i = 0; i < count; i++)
     {
         QListWidgetItem* pitem = m_commMsgListWnd->m_listWidget->item(i);

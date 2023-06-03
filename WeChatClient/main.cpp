@@ -1,3 +1,16 @@
+//#define _CRTDBG_MAP_ALLOC
+//#include <cstdlib>
+//#include <crtdbg.h>
+//
+//#ifdef _DEBUG
+//#ifndef DBG_NEW
+//#define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
+//#define new DBG_NEW
+//#endif
+//
+//#endif  //
+
+#include <vld.h>
 
 #include <QApplication>
 #include <QMessageBox>
@@ -11,13 +24,16 @@
 
 int main(int argc, char** argv)
 {
+    //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon("./img/wechat.ico"));
 
     LogDebug << "start";
-    QSelfLog::init();
+    QSelfLog::initLog();
+    QStyleSheetMgr::initMgr();
     //创建网络通信的管理
-    QWSClientMgr::init();
+    QWSClientMgr::initMgr();
 
     //加载本地的样式表
     QFile qss("./stylesheet/wechat.qss");
@@ -32,4 +48,8 @@ int main(int argc, char** argv)
     lgw.show();
 
     app.exec();
+
+    QWSClientMgr::ExitMgr();
+    QStyleSheetMgr::exitMgr();
+    QSelfLog::exitLog();
 }
