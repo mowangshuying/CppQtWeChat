@@ -10,7 +10,7 @@
 //
 //#endif  //
 
-#include <vld.h>
+//#include <vld.h>
 
 #include <QApplication>
 #include <QMessageBox>
@@ -23,6 +23,7 @@
 #include "QStyleSheetMgr.h"
 #include "QDataManager.h"
 #include "QSelfLog.h"
+#include <QThread>
 
 // int g_counter = 0;
 // void* operator new(size_t size)
@@ -70,5 +71,7 @@ int main(int argc, char** argv)
     QDataManager::exitMgr();
     QWSClientMgr::ExitMgr();
     QStyleSheetMgr::exitMgr();
+
+    QThread::msleep(15000);
     QSelfLog::exitLog();
 }

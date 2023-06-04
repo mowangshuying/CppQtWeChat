@@ -4,13 +4,11 @@
 
 QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p) : QWidget(p)
 {
-    LogFunc;
     setObjectName("QCommMsgItemWnd");
 }
 
 QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg)
 {
-    LogFunc;
     setObjectName("QCommMsgItemWnd");
 
     m_sesId = sesid;
@@ -67,26 +65,46 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
 
+ QCommMsgItemWnd::~QCommMsgItemWnd()
+{
+    LogFunc;
+    if (m_networkMgr)
+    {
+        delete m_networkMgr;
+        m_networkMgr = nullptr;
+    }
+}
+
 void QCommMsgItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)
     {
-        //如果不是群组消息，好友之间的消息
         if (!m_isGroupMsg)
         {
-            QPixmap pixmap;
-            pixmap.loadFromData(reply->readAll());
-            pixmap = pixmap.scaled(40, 40);
-            m_headurl->setPixmap(pixmap);
-            QDataManager::getMgr()->m_UserId2HeadImgMap[m_userid] = pixmap;
+            loadUserHeadPixmap(reply);
+
         }
         else
         {
-            QPixmap pixmap;
-            pixmap.loadFromData(reply->readAll());
-            pixmap = pixmap.scaled(40, 40);
-            m_headurl->setPixmap(pixmap);
-            QDataManager::getMgr()->m_GroupId2ImgMap[m_userid] = pixmap;
+            loadGroupHeadPixmap(reply);
         }
     }
+}
+
+void QCommMsgItemWnd::loadUserHeadPixmap(QNetworkReply* reply)
+{
+    QPixmap pixmap;
+    pixmap.loadFromData(reply->readAll());
+    pixmap = pixmap.scaled(40, 40);
+    m_headurl->setPixmap(pixmap);
+    QDataManager::getMgr()->m_UserId2HeadImgMap[m_userid] = pixmap;
+}
+
+void QCommMsgItemWnd::loadGroupHeadPixmap(QNetworkReply* reply)
+{
+    QPixmap pixmap;
+    pixmap.loadFromData(reply->readAll());
+    pixmap = pixmap.scaled(40, 40);
+    m_headurl->setPixmap(pixmap);
+    QDataManager::getMgr()->m_GroupId2ImgMap[m_userid] = pixmap;
 }
