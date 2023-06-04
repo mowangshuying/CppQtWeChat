@@ -15,6 +15,8 @@ public:
     QCommGroupItemWnd(QWidget* p);
 
     QCommGroupItemWnd(QWidget* p, const char* headUrl, const char* name, int groupId = -1);
+
+    ~QCommGroupItemWnd();
 public slots:
     void slotReplyFinished(QNetworkReply* reply);
 

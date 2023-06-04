@@ -7,13 +7,13 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p) : QWidget(p)
     setObjectName("QCommMsgItemWnd");
 }
 
-QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg)
+QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroupMsg)
 {
     setObjectName("QCommMsgItemWnd");
 
     m_sesId = sesid;
     m_userid = userid;
-    m_isGroupMsg = isGroppMsg;
+    m_isGroupMsg = isGroupMsg;
 
     m_vLayout = new QVBoxLayout();
     m_hLayout = new QHBoxLayout();
@@ -35,7 +35,7 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
     m_headurl->setFixedSize(40, 40);
 
     m_url = "./img/default.png";
-    if (isGroppMsg)
+    if (isGroupMsg)
     {
         m_url = "./img/groupHead.png";
     }
@@ -55,17 +55,22 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
     // ./img/groupHead.png
     // ./img/head1.png
 
-    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(userid);
-    if (isGroppMsg)
+    requestHeadImg(userid, isGroupMsg);
+}
+
+void QCommMsgItemWnd::requestHeadImg(int id, bool isGroupMsg)
+{
+    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(id);
+    if (isGroupMsg)
     {
-        QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(userid);
+        QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(id);
     }
     m_networkMgr = new QNetworkAccessManager();
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
 
- QCommMsgItemWnd::~QCommMsgItemWnd()
+QCommMsgItemWnd::~QCommMsgItemWnd()
 {
     LogFunc;
     if (m_networkMgr)
@@ -82,13 +87,14 @@ void QCommMsgItemWnd::slotReplyFinished(QNetworkReply* reply)
         if (!m_isGroupMsg)
         {
             loadUserHeadPixmap(reply);
-
         }
         else
         {
             loadGroupHeadPixmap(reply);
         }
     }
+
+    reply->deleteLater();
 }
 
 void QCommMsgItemWnd::loadUserHeadPixmap(QNetworkReply* reply)

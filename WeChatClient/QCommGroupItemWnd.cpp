@@ -37,6 +37,15 @@ QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p, const char* headUrl, const char
     setFixedHeight(65);
 }
 
+ QCommGroupItemWnd::~QCommGroupItemWnd()
+{
+     if (m_networkMgr)
+    {
+         m_networkMgr = nullptr;
+        delete m_networkMgr;
+    }
+ }
+
 void QCommGroupItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)

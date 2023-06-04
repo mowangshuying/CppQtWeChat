@@ -71,7 +71,5 @@ int main(int argc, char** argv)
     QDataManager::exitMgr();
     QWSClientMgr::ExitMgr();
     QStyleSheetMgr::exitMgr();
-
-    QThread::msleep(15000);
     QSelfLog::exitLog();
 }

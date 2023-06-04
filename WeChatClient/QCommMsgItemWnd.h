@@ -19,17 +19,12 @@ public:
     QCommMsgItemWnd(QWidget* p);
     QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg);
     ~QCommMsgItemWnd();
+
+    void requestHeadImg(int id, bool isGroupMsg);
+    void loadUserHeadPixmap(QNetworkReply* reply);
+    void loadGroupHeadPixmap(QNetworkReply* reply);
 public slots:
     void slotReplyFinished(QNetworkReply* reply);
-
-    void readGroupPixmap(QNetworkReply* reply)
-    {
-        QPixmap pixmap;
-        pixmap.loadFromData(reply->readAll());
-        pixmap = pixmap.scaled(40, 40);
-        m_headurl->setPixmap(pixmap);
-        QDataManager::getMgr()->m_GroupId2ImgMap[m_userid] = pixmap;
-    }
 
 public:
     QVBoxLayout* m_vLayout;

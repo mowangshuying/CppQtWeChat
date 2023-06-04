@@ -140,6 +140,10 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setMouseTracking(true);
 }
 
+ QCommContactInfoWnd::~QCommContactInfoWnd()
+{
+}
+
 void QCommContactInfoWnd::slotContactInfoChange(QMap<QString, QString> map)
 {
     LogDebug << "contactInfoChange map = " << map;

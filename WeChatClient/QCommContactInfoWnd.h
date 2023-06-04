@@ -14,6 +14,7 @@ class QCommContactInfoWnd : public QWidget
     Q_OBJECT
 public:
     QCommContactInfoWnd(QWidget* p = nullptr);
+    ~QCommContactInfoWnd();
 signals:
     void signalSendMsgBtnClick(QMap<QString, QString> map);
 public slots:

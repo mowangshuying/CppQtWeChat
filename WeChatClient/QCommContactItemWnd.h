@@ -15,6 +15,8 @@ public:
     QCommContactItemWnd(QWidget* p);
 
     QCommContactItemWnd(QWidget* p, const char* headUrl, const char* name, bool bNewFriend = false, int friendid = -1);
+
+    ~QCommContactItemWnd();
 public slots:
     void slotReplyFinished(QNetworkReply* reply);
     QString getContactItemName()

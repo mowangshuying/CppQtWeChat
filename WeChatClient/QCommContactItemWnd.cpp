@@ -45,6 +45,15 @@ QCommContactItemWnd::QCommContactItemWnd(QWidget* p, const char* headUrl, const 
     LogDebug << "w:" << this->width() << "h:" << this->height();
 }
 
+ QCommContactItemWnd::~QCommContactItemWnd()
+{
+     if (m_networkMgr)
+     {
+         delete m_networkMgr;
+         m_networkMgr = nullptr;
+     }
+ }
+
 void QCommContactItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
     if (reply->error() == QNetworkReply::NoError)
