@@ -23,6 +23,7 @@ QMainWnd* QMainWnd::m_mainWnd = nullptr;
 
 QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     m_centerWnd = new QWidget(this);
     m_centerWnd->setObjectName("QMainWnd");
     QString qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
@@ -153,11 +154,12 @@ QMainWnd* QMainWnd::getMainWnd()
     return m_mainWnd;
 }
 
-// QMainWnd::~QMainWnd()
-//{
-//    // m_systemTrayIcon->hide();
-//    // delete m_systemTrayIcon;
-//}
+QMainWnd::~QMainWnd()
+{
+    qDebug() << "~QMainWnd()";
+    // m_systemTrayIcon->hide();
+    // delete m_systemTrayIcon;
+}
 
 void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 {

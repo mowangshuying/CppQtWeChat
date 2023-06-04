@@ -3,6 +3,7 @@
 
 QGroupFriendsWnd::QGroupFriendsWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QGroupFriendsWnd");
 
     m_vLayout = new QVBoxLayout();

@@ -13,6 +13,7 @@
 
 QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*QCommMsgItemWnd_Tpye*/) : QWidget(p), m_WndType(wndType)
 {
+    LogFunc;
     setObjectName("QCommListWnd");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";

@@ -10,6 +10,7 @@
 
 QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     m_centerWnd = new QWidget(this);
     setObjectName("QGroupInfoWnd");
     QStyleSheetObject object;

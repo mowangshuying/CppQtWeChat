@@ -23,6 +23,7 @@
 
 QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QSessionWnd");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
@@ -111,6 +112,15 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slotMoreBtnClick()));
     connect(m_sesToolBar->m_voiceTelphoneBtn, &QPushButton::clicked, this, &QSessionWnd::slotVoiceTelPhoneBtnClick);
     connect(m_groupInfoWnd, SIGNAL(signalUpdateGroupName(QString)), this, SLOT(slotUpdateGroupName(QString)));
+}
+
+QSessionWnd::~QSessionWnd()
+{
+    if (m_groupInfoWnd)
+    {
+        delete m_groupInfoWnd;
+        m_groupInfoWnd = nullptr;
+    }
 }
 
 void QSessionWnd::slotSendTextBtnClick()

@@ -4,6 +4,7 @@
 
 QSelfSwitchButton::QSelfSwitchButton(QWidget *parent) : QWidget(parent)
 {
+    LogFunc;
     setObjectName("QSwitchButton");
     m_bSwitch = false;
     m_bgColorOff = QColor(192, 192, 192);  // 关闭按钮时候背景为灰色

@@ -9,6 +9,7 @@
 
 QSessionToolBar::QSessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QSessionToolBar");
 
     setFixedHeight(40);

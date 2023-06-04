@@ -13,6 +13,7 @@
 QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString username /*= ""*/)
     : QWidget(p), m_friendid(friendid), m_username(username)
 {
+    LogFunc;
     setFixedSize(460, 360);
     m_centerWnd = new QWidget(this);
     m_centerWnd->setFixedSize(460, 360);

@@ -15,7 +15,11 @@ private:
 
 public:
     static QDataManager* getMgr();
-    static void freeMgr();
+    static void initMgr()
+    {
+        getMgr();
+    }
+    static void exitMgr();
     void setUserIdAndName(int64_t userId, QString userName);
     void setUserHeadImg(int64_t userId, QPixmap pixmap);
 

@@ -3,11 +3,13 @@
 
 QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QFindFriendItemWnd");
 }
 
 QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p, const char* headUrl, const char* name) : QWidget(p), m_username(name)
 {
+    LogFunc;
     setObjectName("QFindFriendItemWnd");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";

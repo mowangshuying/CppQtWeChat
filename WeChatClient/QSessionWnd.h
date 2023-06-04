@@ -29,6 +29,7 @@ class QSessionWnd : public QWidget
 public:
     //»á»°´°¿Ú
     QSessionWnd(QWidget* p = nullptr);
+    ~QSessionWnd();
 public slots:
     void slotSendTextBtnClick();
     void slotEmoijClicked(QString str);

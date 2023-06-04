@@ -1,7 +1,9 @@
+#include "QPch.h"
 #include "QScreenShotToolBarWnd.h"
 
 QScreenShotToolBarWnd::QScreenShotToolBarWnd(QWidget* p /*= nullptr*/)
 {
+    LogFunc;
     setObjectName("QScreenShotToolBarWnd");
 
     setWindowFlags(Qt::FramelessWindowHint);

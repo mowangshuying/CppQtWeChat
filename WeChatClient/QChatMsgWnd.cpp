@@ -11,6 +11,7 @@ int QChatMsgWnd::m_tmp = 0;
 QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, QString userName, int64_t recvid)
     : QWidget(p), m_recvid(recvid), m_sendid(sendid), m_userName(userName)
 {
+    LogFunc;
     setObjectName("QChatMsgWnd");
     //设置窗体的字体大小
     QFont font = this->font();

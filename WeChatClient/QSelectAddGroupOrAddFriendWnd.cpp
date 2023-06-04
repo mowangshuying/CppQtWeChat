@@ -8,6 +8,7 @@
 
 QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget(p)
 {
+    LogFunc;
     m_centerWnd = new QWidget(this);
 
     m_centerWnd->setObjectName("QSelectAddGroupOrAddFriendWnd");

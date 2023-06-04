@@ -4,6 +4,7 @@
 
 QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QToolWnd");
     setFixedWidth(55);
     setWindowFlags(Qt::FramelessWindowHint);

@@ -1,9 +1,11 @@
 #include "QDataManager.h"
+#include "QPch.h"
 
 QDataManager* QDataManager::m_dataManager = nullptr;
 
 QDataManager::QDataManager()
 {
+    LogFunc;
     QFile emoijFile("./emoij/emoij.txt");
     if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -22,7 +24,7 @@ QDataManager* QDataManager::getMgr()
     return m_dataManager;
 }
 
-void QDataManager::freeMgr()
+void QDataManager::exitMgr()
 {
     if (m_dataManager != nullptr)
     {

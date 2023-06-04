@@ -27,6 +27,7 @@ void QSelfLog::initLog()
     if (!gFileLog->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
     {
         delete gFileLog;
+        gFileLog = nullptr;
         return;
     }
     //初始化自定义日志处理函数myMessageOutput
@@ -35,8 +36,12 @@ void QSelfLog::initLog()
 
 void QSelfLog::exitLog()
 {
-    gFileLog->close();
-    delete gFileLog;
+    if (gFileLog != nullptr)
+    {
+        gFileLog->close();
+        delete gFileLog;
+        gFileLog = nullptr;
+    }
 }
 
 void QSelfLog::myMessageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg)

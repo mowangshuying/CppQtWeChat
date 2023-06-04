@@ -9,6 +9,7 @@
 
 QEditLabel::QEditLabel(QWidget* parent) : QWidget(parent)
 {
+    LogFunc;
     setObjectName("QEditLabel");
 
     m_StackLayout = new QStackedLayout(this);
@@ -76,7 +77,7 @@ bool QEditLabel::eventFilter(QObject* obj, QEvent* e)
             m_label->setText(m_lineEdit->text());
             m_StackLayout->setCurrentWidget(m_label);
             emit saveText();
-            m_bShowLable = true;     
+            m_bShowLable = true;
         }
     }
 

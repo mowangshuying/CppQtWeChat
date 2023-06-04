@@ -2,6 +2,7 @@
 
 QCustomListWidgetItem::QCustomListWidgetItem(QListWidget* view /*= nullptr*/, int type /*= Type*/) : QListWidgetItem(view, type)
 {
+    LogFunc;
     m_sesId = 0;
 }
 

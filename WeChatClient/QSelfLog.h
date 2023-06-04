@@ -41,6 +41,8 @@ public:
     static QtMessageHandler gDefaultHandler;
 };
 
+#define LogFunc LogDebug << "called.";
+
 #define LogDebug                                                           \
     qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]" \
              << "["                                                        \

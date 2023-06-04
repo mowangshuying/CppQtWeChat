@@ -31,7 +31,8 @@ private:
     //»á»°´°¿Ú
     QMainWnd(QWidget* p = nullptr);
 
-    //~QMainWnd();
+public:
+    ~QMainWnd();
 
     enum BorderArea
     {

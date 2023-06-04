@@ -21,11 +21,28 @@
 #include "QDealNewFriendsApplyWnd.h"
 #include <QDir>
 #include "QStyleSheetMgr.h"
+#include "QDataManager.h"
+#include "QSelfLog.h"
+
+// int g_counter = 0;
+// void* operator new(size_t size)
+//{
+//    ++g_counter;
+//    qDebug() << "new mem:" << g_counter;
+//
+//    return ::malloc(size);
+//}
+//
+// void operator delete(void* ptr)
+//{
+//    --g_counter;
+//    qDebug() << "delete mem:" << g_counter;
+//    ::free(ptr);
+//}
 
 int main(int argc, char** argv)
 {
-    //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
+    LogFunc;
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon("./img/wechat.ico"));
 
@@ -34,6 +51,7 @@ int main(int argc, char** argv)
     QStyleSheetMgr::initMgr();
     //创建网络通信的管理
     QWSClientMgr::initMgr();
+    QDataManager::initMgr();
 
     //加载本地的样式表
     QFile qss("./stylesheet/wechat.qss");
@@ -49,6 +67,7 @@ int main(int argc, char** argv)
 
     app.exec();
 
+    QDataManager::exitMgr();
     QWSClientMgr::ExitMgr();
     QStyleSheetMgr::exitMgr();
     QSelfLog::exitLog();

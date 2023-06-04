@@ -4,11 +4,13 @@
 
 QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QCommMsgItemWnd");
 }
 
 QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg)
 {
+    LogFunc;
     setObjectName("QCommMsgItemWnd");
 
     m_sesId = sesid;

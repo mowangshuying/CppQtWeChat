@@ -7,6 +7,7 @@
 
 QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QVoiceTelphoneWnd");
     setFixedSize(350, 600);
     setStyleSheet("background-color:rgb(25,25,25)");

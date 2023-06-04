@@ -17,6 +17,7 @@
 
 QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     m_centerWnd = new QWidget(this);
     m_centerWnd->setFixedSize(460, 360);
     m_centerWnd->setObjectName("QPictureToolWnd");

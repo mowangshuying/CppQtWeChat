@@ -15,6 +15,7 @@
 
 QScreenShotWnd::QScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QScreenShotWnd");
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
@@ -55,14 +56,14 @@ QScreenShotWnd::QScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_toolBarWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(slotExitSccreenShot()));
 }
 
- QScreenShotWnd::~QScreenShotWnd()
+QScreenShotWnd::~QScreenShotWnd()
 {
-     delete m_toolBarWnd;
+    delete m_toolBarWnd;
     m_toolBarWnd = nullptr;
 
     delete m_RightBtnMenu;
     m_RightBtnMenu = nullptr;
- }
+}
 
 void QScreenShotWnd::slotCopyScreenShot()
 {
@@ -200,7 +201,6 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
 
 void QScreenShotWnd::contextMenuEvent(QContextMenuEvent*)
 {
-
 }
 
 void QScreenShotWnd::keyPressEvent(QKeyEvent* e)

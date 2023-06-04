@@ -7,6 +7,7 @@
 
 QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogDebug;
     setObjectName("QCommContactInfo");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";

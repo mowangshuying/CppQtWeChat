@@ -9,6 +9,7 @@
 
 QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     m_centerWnd = new QWidget(this);
     m_centerWnd->setFixedSize(560, 480);
     m_centerWnd->setObjectName("QSettingWnd");

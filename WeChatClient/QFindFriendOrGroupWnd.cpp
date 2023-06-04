@@ -12,6 +12,7 @@
 
 QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setMinimumSize(600, 400);
     m_centerWnd = new QWidget(this);
     m_centerWnd->setObjectName("QFindFriendOrGroupWnd");

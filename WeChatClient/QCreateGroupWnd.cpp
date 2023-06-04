@@ -14,6 +14,7 @@
 
 QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     // setObjectName("QCreateGroupWnd");
 
     m_centerWnd = new QWidget(this);

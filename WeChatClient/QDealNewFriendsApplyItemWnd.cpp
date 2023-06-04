@@ -14,6 +14,7 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
     : QWidget(p), m_state(state), m_id(id), m_userid(userid), m_isApplyer(isApplyer)
 
 {
+    LogFunc;
     setObjectName("QDealNewFriendsApplyItemWnd");
 
     m_vLayout = new QVBoxLayout();

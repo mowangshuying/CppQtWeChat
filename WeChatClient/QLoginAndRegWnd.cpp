@@ -15,6 +15,7 @@
 
 QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     m_centerWnd = new QWidget(this);
     m_centerWnd->setObjectName("QLoginAndRegWnd");
     QStyleSheetObject object;

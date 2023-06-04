@@ -3,6 +3,7 @@
 
 QSelectMoreWnd::QSelectMoreWnd(QWidget* p) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QSelectMoreWnd");
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_StyledBackground);

@@ -3,6 +3,7 @@
 
 QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /* = -1*/, int64_t recvid /* = -1*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QChatFileOuterWnd");
     m_hLayout = new QHBoxLayout();
     m_vLayout = new QVBoxLayout();

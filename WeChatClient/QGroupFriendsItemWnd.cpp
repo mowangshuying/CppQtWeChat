@@ -7,12 +7,13 @@
 
 QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QGroupFriendsItemWnd");
     m_hLayout = new QHBoxLayout();
     setLayout(m_hLayout);
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     setContentsMargins(5, 5, 5, 5);
-    // setWindowFlags(Qt::FramelessWindowHint);
+
     m_headImg = new QLabel();
     m_headImg->setFixedSize(30, 30);
     m_hLayout->addWidget(m_headImg);

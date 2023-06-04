@@ -4,6 +4,7 @@
 
 QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
+    LogFunc;
     setObjectName("QCreateGroupListItemWnd");
     m_hLayout = new QHBoxLayout();
     setLayout(m_hLayout);
@@ -23,6 +24,7 @@ QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p /*= nullptr*/) : QWi
 QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename)
     : QWidget(p), m_friendid(friendid)
 {
+    LogFunc;
     setObjectName("QCreateGroupListItemWnd");
     m_hLayout = new QHBoxLayout();
     m_hLayout->setAlignment(Qt::AlignHCenter);

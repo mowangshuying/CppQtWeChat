@@ -1,3 +1,4 @@
+#include "QPch.h"
 #include "QSelfTextEdit.h"
 #include <QApplication>
 #include <QClipboard>
@@ -6,6 +7,7 @@
 
 QSelfTextEdit::QSelfTextEdit(QWidget *parent /*= nullptr*/) : QTextEdit(parent)
 {
+    LogFunc;
     setAcceptRichText(true);
 }
 
