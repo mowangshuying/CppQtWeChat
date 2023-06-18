@@ -17,17 +17,18 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
     LogFunc;
     setObjectName("QDealNewFriendsApplyItemWnd");
 
-    m_vLayout = new QVBoxLayout();
-    m_hLayout = new QHBoxLayout();
-    m_name = new QLabel();
-    m_msg = new QLabel();
-    m_AgreeBtn = new QPushButton();
-    m_refuseBtn = new QPushButton();
+    m_vLayout = new QVBoxLayout(this);
+    m_hLayout = new QHBoxLayout(this);
+    m_name = new QLabel(this);
+    m_msg = new QLabel(this);
+    m_AgreeBtn = new QPushButton(this);
+    m_refuseBtn = new QPushButton(this);
 
     setAttribute(Qt::WA_StyledBackground);
 
     m_name->setText(name);
     m_msg->setText(msg);
+    m_msg->setWordWrap(true);
     m_AgreeBtn->setText("Í¬Òâ");
     m_refuseBtn->setText("¾Ü¾ø");
 
