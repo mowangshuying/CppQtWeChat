@@ -1,6 +1,7 @@
 #QSettingWnd {
     background-color: rgb(238, 244, 249);
     border-radius: 4px;
+    border: 1px solid rgb(130, 145, 144);
 }
 
 QLabel {

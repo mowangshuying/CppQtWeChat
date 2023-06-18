@@ -20,6 +20,8 @@ protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
+    void paintEvent(QPaintEvent* event);
+
 public slots:
     void slotClickedCloseBtn();
     void slotClickedMinBtn();

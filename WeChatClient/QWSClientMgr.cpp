@@ -41,6 +41,14 @@ void QWSClientMgr::initMgr()
     getMgr();
 }
 
+void QWSClientMgr::exitMgr()
+{
+    if (m_WsClientMgr)
+    {
+        delete m_WsClientMgr;
+    }
+}
+
 QWSClientMgr* QWSClientMgr::getMgr()
 {
     if (m_WsClientMgr == nullptr)

@@ -69,7 +69,7 @@ int main(int argc, char** argv)
     app.exec();
 
     QDataManager::exitMgr();
-    QWSClientMgr::ExitMgr();
+    QWSClientMgr::exitMgr();
     QStyleSheetMgr::exitMgr();
     QSelfLog::exitLog();
 }

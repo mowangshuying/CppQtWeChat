@@ -27,13 +27,7 @@ private:
 
 public:
     static void initMgr();
-    static void ExitMgr()
-    {
-        if (m_WsClientMgr)
-        {
-            delete m_WsClientMgr;
-        }
-    }
+    static void exitMgr();
     static QWSClientMgr* getMgr();
 
     void sendMsg(const QString& message);
