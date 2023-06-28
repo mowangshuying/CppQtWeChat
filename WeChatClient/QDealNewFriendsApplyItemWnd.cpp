@@ -28,7 +28,6 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
 
     m_name->setText(name);
     m_msg->setText(msg);
-    m_msg->setWordWrap(true);
     m_AgreeBtn->setText("Í¬Òâ");
     m_refuseBtn->setText("¾Ü¾ø");
 
