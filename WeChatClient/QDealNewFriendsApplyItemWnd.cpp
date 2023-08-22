@@ -17,7 +17,7 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
     LogFunc;
     setObjectName("QDealNewFriendsApplyItemWnd");
 
-    m_vLayout = new QVBoxLayout(this);
+    m_vLayout = new QVBoxLayout();
     m_hLayout = new QHBoxLayout(this);
     m_name = new QLabel(this);
     m_msg = new QLabel(this);
@@ -108,7 +108,7 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*
 
 void QDealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
 {
-    //向远端发送同意好友申请
+    // 向远端发送同意好友申请
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 1);
@@ -121,7 +121,7 @@ void QDealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
 
 void QDealNewFriendsApplyItemWnd::slotOnRefuseBtnClick()
 {
-    //向远端发送拒绝好友申请
+    // 向远端发送拒绝好友申请
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 2);
