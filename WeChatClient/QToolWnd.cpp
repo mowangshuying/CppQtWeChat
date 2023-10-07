@@ -13,7 +13,9 @@ QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     if (objectName().isEmpty())
         setObjectName("QToolWnd");
-    setStyleSheet("QWidget#QToolWnd{border-top-left-radius:4px;border-bottom-left-radius:4px; background-color:#2E2E2E;border:none;}");
+    setStyleSheet(
+        "QWidget#QToolWnd{border-top-left-radius:4px;border-bottom-left-radius:"
+        "4px; background-color:#2E2E2E;border:none;}");
 
     //脱离父窗口的样式控制
     setAttribute(Qt::WA_StyledBackground);
@@ -75,10 +77,19 @@ QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_selectMoreWnd->hide();
 
     connect(m_msgBtn, SIGNAL(clicked()), this, SLOT(slotOnClickMsgBtn()));
-    connect(m_contactsBtn, SIGNAL(clicked()), this, SLOT(slotOnClickContactsBtn()));
+    connect(m_contactsBtn,
+            SIGNAL(clicked()),
+            this,
+            SLOT(slotOnClickContactsBtn()));
     connect(m_groupsBtn, SIGNAL(clicked()), this, SLOT(slotOnClickGroupsBtn()));
-    connect(m_headUrlLabel, SIGNAL(clicked()), this, SLOT(slotOnClickHeadUrlLabel()));
-    connect(m_userInfoWnd->m_changeHeadImgBtn, SIGNAL(clicked()), this, SLOT(slotOnClickChangeHeadImgBtn()));
+    connect(m_headUrlLabel,
+            SIGNAL(clicked()),
+            this,
+            SLOT(slotOnClickHeadUrlLabel()));
+    connect(m_userInfoWnd->m_changeHeadImgBtn,
+            SIGNAL(clicked()),
+            this,
+            SLOT(slotOnClickChangeHeadImgBtn()));
     connect(m_moreBtn, SIGNAL(clicked()), this, SLOT(slotOnClickMoreBtn()));
 }
 
@@ -110,9 +121,13 @@ void QToolWnd::slotOnClickHeadUrlLabel()
         QRect swRect = m_userInfoWnd->geometry();
         swRect.setX(gPoint.x() + m_headUrlLabel->width() / 2);
         swRect.setY(gPoint.y() + m_headUrlLabel->height() / 2);
-        m_userInfoWnd->m_headLabel->setPixmap(QDataManager::getMgr()->m_UserId2HeadImgMap[QDataManager::getMgr()->m_userid]);
-        m_userInfoWnd->m_usernameLabel->setText(QDataManager::getMgr()->m_username);
-        m_userInfoWnd->m_userIdLabel->setText("用户id:" + QString::number(QDataManager::getMgr()->m_userid));
+        m_userInfoWnd->m_headLabel->setPixmap(
+            QDataManager::getMgr()
+                ->m_UserId2HeadImgMap[QDataManager::getMgr()->m_userid]);
+        m_userInfoWnd->m_usernameLabel->setText(
+            QDataManager::getMgr()->m_username);
+        m_userInfoWnd->m_userIdLabel->setText(
+            "用户id:" + QString::number(QDataManager::getMgr()->m_userid));
         m_userInfoWnd->setGeometry(swRect);
         m_userInfoWnd->show();
     }
@@ -136,7 +151,8 @@ void QToolWnd::slotOnClickMoreBtn()
 {
     if (m_selectMoreWnd->isHidden())
     {
-        QPoint gPoint = m_moreBtn->mapToGlobal(QPoint(m_moreBtn->width(), m_moreBtn->height()));
+        QPoint gPoint = m_moreBtn->mapToGlobal(
+            QPoint(m_moreBtn->width(), m_moreBtn->height()));
         QRect swRect = m_selectMoreWnd->geometry();
         swRect.setX(gPoint.x());
         swRect.setY(gPoint.y() - swRect.height());

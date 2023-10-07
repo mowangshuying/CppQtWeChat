@@ -2,7 +2,9 @@
 #include "QDataManager.h"
 #include "QCreateGroupListItemWithSelBtnWnd.h"
 
-QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p /*= nullptr*/) : QWidget(p)
+QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(
+    QWidget* p /*= nullptr*/)
+    : QWidget(p)
 {
     LogFunc;
     setObjectName("QCreateGroupListItemWithSelBtnWnd");
@@ -24,11 +26,12 @@ QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p 
     m_hLayout->addWidget(m_selRBtn);
 }
 
-QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p,
-                                                                     const char* headimg,
-                                                                     int64_t friendid,
-                                                                     const char* nickname,
-                                                                     const char* rolename)
+QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(
+    QWidget* p,
+    const char* headimg,
+    int64_t friendid,
+    const char* nickname,
+    const char* rolename)
     : QWidget(p), m_friendid(friendid)
 {
     LogFunc;
@@ -51,7 +54,8 @@ QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p,
 
     m_headImgStr = headimg;
     QPixmap pixmap1 = QPixmap(headimg);
-    QPixmap pixmap2 = pixmap1.scaled(25, 25, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap pixmap2 =
+        pixmap1.scaled(25, 25, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     m_headImage->setPixmap(QPixmap(headimg));
     m_headImage->setFixedSize(25, 25);
 
@@ -65,10 +69,14 @@ QCreateGroupListItemWithSelBtnWnd::QCreateGroupListItemWithSelBtnWnd(QWidget* p,
     m_hLayout->addStretch();
     m_hLayout->addWidget(m_selRBtn);
 
-    connect(m_selRBtn, SIGNAL(clicked(bool)), this, SLOT(slotClickedSelBtn(bool)));
+    connect(m_selRBtn,
+            SIGNAL(clicked(bool)),
+            this,
+            SLOT(slotClickedSelBtn(bool)));
 }
 
-void QCreateGroupListItemWithSelBtnWnd::slotClickedSelBtn(bool isSel /* = false*/)
+void QCreateGroupListItemWithSelBtnWnd::slotClickedSelBtn(
+    bool isSel /* = false*/)
 {
     LogDebug << "isSel" << isSel;
 

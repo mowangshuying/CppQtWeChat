@@ -12,20 +12,20 @@
 class QCommContactInfoWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QCommContactInfoWnd(QWidget* p = nullptr);
     ~QCommContactInfoWnd();
-signals:
+  signals:
     void signalSendMsgBtnClick(QMap<QString, QString> map);
-public slots:
+  public slots:
     void slotContactInfoChange(QMap<QString, QString> map);
     void slotSendMsgBtnClick();
 
-public:
+  public:
     void showBgPng();
     void hideBgPng();
 
-public:
+  public:
     QVBoxLayout* m_vLayout;
 
     QWidget* m_contentWnd;

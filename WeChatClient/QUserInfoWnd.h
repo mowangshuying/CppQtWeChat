@@ -12,13 +12,13 @@
 class QUserInfoWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QUserInfoWnd(QWidget* p = nullptr);
 
-protected:
+  protected:
     bool event(QEvent* event);
 
-public:
+  public:
     QWidget* m_centerWnd;
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout1;

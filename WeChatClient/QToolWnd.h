@@ -22,12 +22,12 @@ class QToolWnd : public QWidget
 {
     //添加消息映射支持
     Q_OBJECT
-public:
+  public:
     //工具栏窗口
     QToolWnd(QWidget* p = nullptr);
-signals:
+  signals:
     void signalToolWndPageChanged(int num);
-public slots:
+  public slots:
     void slotOnClickMsgBtn();
     void slotOnClickContactsBtn();
     void slotOnClickHeadUrlLabel();
@@ -35,7 +35,7 @@ public slots:
     void slotOnClickGroupsBtn();
     void slotOnClickMoreBtn();
 
-public:
+  public:
     int m_selectIndex;
     QVBoxLayout* m_vBoxLayout;
     QPushButton* m_msgBtn;

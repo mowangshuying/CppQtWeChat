@@ -1,8 +1,9 @@
-ï»¿#include "QApplyFriendInputInfoWnd.h"
+#include "QApplyFriendInputInfoWnd.h"
 #include "QSelfLabel.h"
 #include "QStyleSheetMgr.h"
 
-QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
+QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
+    : QWidget(p)
 {
     LogFunc;
     setObjectName("QApplyFriendInputInfoWnd");
@@ -14,7 +15,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
     setContentsMargins(0, 0, 0, 0);
     setFixedSize(460, 280);
 
-    // çª—å£ä¸»è¦å¸ƒå±€ä¸ºæ°´å¹³å¸ƒå±€
+    // ´°¿ÚÖ÷Òª²¼¾ÖÎªË®Æ½²¼¾Ö
     m_hLayout = new QHBoxLayout();
     setLayout(m_hLayout);
 
@@ -25,15 +26,16 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
     m_userName = new QLabel();
     m_moreInfo = new QLabel();
 
-    // è®¾ç½®å¤´åƒ
+    // ÉèÖÃÍ·Ïñ
     m_headUrl->setFixedSize(80, 80);
     QPixmap headImg = QPixmap("./img/head2.png");
-    headImg = headImg.scaled(80, 80, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    headImg =
+        headImg.scaled(80, 80, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     m_headUrl->setPixmap(headImg);
 
-    // ç”¨æˆ·å
-    m_userName->setText("çŽ©å®¶çš„ç¼–å·");
-    m_moreInfo->setText("æ›´å¤šçš„ä¿¡æ¯...");
+    // ÓÃ»§Ãû
+    m_userName->setText("Íæ¼ÒµÄ±àºÅ");
+    m_moreInfo->setText("¸ü¶àµÄÐÅÏ¢...");
 
     m_vUserInfoLayout->addWidget(m_headUrl);
     m_vUserInfoLayout->addSpacing(20);
@@ -48,7 +50,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
     // m_userInfoWnd->setStyleSheet("background-color:#aaa;border:0px;");
     m_hLayout->addWidget(m_userInfoWnd);
 
-    // æ·»åŠ ä¸€ä¸ªåˆ†å‰²æ¡
+    // Ìí¼ÓÒ»¸ö·Ö¸îÌõ
     m_split = new QSelfSplit(nullptr, QSelfSplit::Direction_V);
     m_hLayout->addWidget(m_split);
 
@@ -56,7 +58,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : Q
     m_inputMsgLabel = new QLabel();
     m_inputMsgEdit = new QTextEdit();
 
-    m_inputMsgLabel->setText("è¯·è¾“å…¥éªŒè¯ä¿¡æ¯:");
+    m_inputMsgLabel->setText("ÇëÊäÈëÑéÖ¤ÐÅÏ¢:");
     m_inputMsgEdit->setFixedWidth(280);
     m_inputMsgEdit->setFixedHeight(150);
 

@@ -13,19 +13,19 @@
 class QChatFileInnerWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QChatFileInnerWnd(QWidget* p = nullptr);
-public slots:
+  public slots:
     void slotOpenFileBtnClick();
     void slotCopyFileBtnClick();
     void slotOpenFileDirBtnClick();
     void slotDownloadFileBtnClick();
 
-public:
+  public:
     void sendFileShow();
     void recvFileShow();
 
-public:
+  public:
     QVBoxLayout* m_vLayout;
 
     QHBoxLayout* m_hLayout1;

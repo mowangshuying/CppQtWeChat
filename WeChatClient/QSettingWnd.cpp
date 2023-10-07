@@ -103,25 +103,25 @@ void QSettingWnd::mouseReleaseEvent(QMouseEvent* event)
 
 void QSettingWnd::paintEvent(QPaintEvent* event)
 {
-   //QPainter painter(m_centerWnd);
-   // painter.setRenderHint(QPainter::Antialiasing, true);
+    // QPainter painter(m_centerWnd);
+    // painter.setRenderHint(QPainter::Antialiasing, true);
 
-   // QColor color(165, 165, 165);
-   // for (int i = 0; i < 10; i++)
-   // {
-   //     QPainterPath path;
-   //     path.setFillRule(Qt::WindingFill);
-   //     
-   //     qreal tmpX = 10 - i;
-   //     qreal tmpY = 10 - i;
-   //     qreal tmpW = this->width() - (10 - i) * 2;
-   //     qreal tmpH = this->height() - (10 - i) * 2;
+    // QColor color(165, 165, 165);
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     QPainterPath path;
+    //     path.setFillRule(Qt::WindingFill);
+    //
+    //     qreal tmpX = 10 - i;
+    //     qreal tmpY = 10 - i;
+    //     qreal tmpW = this->width() - (10 - i) * 2;
+    //     qreal tmpH = this->height() - (10 - i) * 2;
 
-   //     path.addRect(tmpX, tmpY, tmpW, tmpH);
-   //     color.setAlpha(150 - qSqrt(i) * 50);
-   //     painter.setPen(color);
-   //     painter.drawPath(path);
-   // }
+    //     path.addRect(tmpX, tmpY, tmpW, tmpH);
+    //     color.setAlpha(150 - qSqrt(i) * 50);
+    //     painter.setPen(color);
+    //     painter.drawPath(path);
+    // }
 }
 
 void QSettingWnd::slotClickedCloseBtn()

@@ -9,13 +9,13 @@
 class QSelectMoreWnd : public QWidget
 {
     Q_OBJECT
-protected:
+  protected:
     bool event(QEvent* event);
 
-public:
+  public:
     QSelectMoreWnd(QWidget* p = nullptr);
 
-public:
+  public:
     QVBoxLayout* m_vLayout;
     //¹ØÓÚ°´Å¥
     QPushButton* m_settingBtn;

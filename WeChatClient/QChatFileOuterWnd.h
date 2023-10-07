@@ -9,7 +9,7 @@
 class QChatFileOuterWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     // 文件类型
     enum class ChatFileTypeEnum
     {
@@ -17,7 +17,9 @@ public:
         ChatFile_Other,      // 接收到他人的文件
     };
 
-    QChatFileOuterWnd(QWidget* p = nullptr, int64_t sendid = -1, int64_t recvid = -1);
+    QChatFileOuterWnd(QWidget* p = nullptr,
+                      int64_t sendid = -1,
+                      int64_t recvid = -1);
 
     void setFileName(QString fileName);
 
@@ -34,8 +36,14 @@ public:
 
     void setServerFileName(QString serverFileName);
 
-    void setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath);
-    void setFileDownLoadData(QString fileName, QString fileSize, QString fileState, QString serverFileName);
+    void setFileUploadData(QString fileName,
+                           QString fileSize,
+                           QString fileDir,
+                           QString filePath);
+    void setFileDownLoadData(QString fileName,
+                             QString fileSize,
+                             QString fileState,
+                             QString serverFileName);
 
     void setProgressBarMax(int max);
 
@@ -43,7 +51,7 @@ public:
 
     void setProgressBarValue(int value);
 
-public:
+  public:
     QLabel* m_headUrl;              // 头像信息
     QChatFileInnerWnd* m_innerWnd;  // 文件框
     QHBoxLayout* m_hLayout;

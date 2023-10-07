@@ -9,11 +9,11 @@
 #include <qlogging.h>
 #include <QtMsgHandler>
 
-// 日志格式统一规范
-// [时间] [等级] [文件名] [函数名] [行数] [内容]
+// 鏃ュ織鏍煎紡缁熶竴瑙勮寖
+// [鏃堕棿] [绛夌骇] [鏂囦欢鍚峕 [鍑芥暟鍚峕 [琛屾暟] [鍐呭]
 class QSelfLog
 {
-public:
+  public:
     enum LogLevel
     {
         Debug,
@@ -22,7 +22,7 @@ public:
         Err,
     };
 
-public:
+  public:
     QSelfLog()
     {
     }
@@ -34,39 +34,48 @@ public:
     static void initLog();
     static void exitLog();
 
-    static void myMessageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg);
+    static void myMessageOutput(QtMsgType type,
+                                const QMessageLogContext& context,
+                                const QString& msg);
 
-public:
+  public:
     static QFile* gFileLog;
     static QtMessageHandler gDefaultHandler;
 };
 
 #define LogFunc LogDebug << "called.";
 
-#define LogDebug                                                           \
-    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]" \
-             << "["                                                        \
-             << "debug"                                                    \
-             << "]"                                                        \
-             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() << "." << __FUNCTION__ << "." << __LINE__ << "]"
+#define getLogTimeStr QSelfLog::getTimeStr().toStdString().c_str()
+#define getLogFileStr QSelfLog::getFileName(__FILE__).toStdString().c_str()
 
-#define LogInfo                                                            \
-    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]" \
-             << "["                                                        \
-             << "info"                                                     \
-             << "]"                                                        \
-             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() << "." << __FUNCTION__ << "." << __LINE__ << "]"
+#define LogDebug                                                             \
+    qDebug() << "[" << getLogTimeStr << "]"                                  \
+             << "["                                                          \
+             << "debug"                                                      \
+             << "]"                                                          \
+             << "[" << getLogFileStr                                         \
+             << "." << __FUNCTION__ << "." << __LINE__ << "]"
 
-#define LogWarn                                                            \
-    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]" \
-             << "["                                                        \
-             << "warn"                                                     \
-             << "]"                                                        \
-             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() << "." << __FUNCTION__ << "." << __LINE__ << "]"
+#define LogInfo                                                              \
+    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]"   \
+             << "["                                                          \
+             << "info"                                                       \
+             << "]"                                                          \
+             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() \
+             << "." << __FUNCTION__ << "." << __LINE__ << "]"
 
-#define LogErr                                                             \
-    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]" \
-             << "["                                                        \
-             << "err"                                                      \
-             << "]"                                                        \
-             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() << "." << __FUNCTION__ << "." << __LINE__ << "]"
+#define LogWarn                                                              \
+    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]"   \
+             << "["                                                          \
+             << "warn"                                                       \
+             << "]"                                                          \
+             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() \
+             << "." << __FUNCTION__ << "." << __LINE__ << "]"
+
+#define LogErr                                                               \
+    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]"   \
+             << "["                                                          \
+             << "err"                                                        \
+             << "]"                                                          \
+             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() \
+             << "." << __FUNCTION__ << "." << __LINE__ << "]"

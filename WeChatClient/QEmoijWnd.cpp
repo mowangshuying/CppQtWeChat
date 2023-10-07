@@ -51,7 +51,8 @@ QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setAttribute(Qt::WA_StyledBackground);
     ///读取文件
     QFile emoijFile("./emoij/emoij.txt");
-    if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (emoijFile.exists() &&
+        emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QString str = emoijFile.readAll();
         m_emoijStrList = str.split('|', QString::SkipEmptyParts);
@@ -59,13 +60,18 @@ QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         {
             int col = i / 10;
             int row = i % 10;
-            m_centerWnd->setItem(col, row, new QTableWidgetItem(m_emoijStrList[i]));
+            m_centerWnd->setItem(col,
+                                 row,
+                                 new QTableWidgetItem(m_emoijStrList[i]));
         }
         //关闭文件
         emoijFile.close();
     }
 
-    connect(m_centerWnd, SIGNAL(cellClicked(int, int)), this, SLOT(slotCellClicked(int, int)));
+    connect(m_centerWnd,
+            SIGNAL(cellClicked(int, int)),
+            this,
+            SLOT(slotCellClicked(int, int)));
 }
 
 bool QEmoijWnd::event(QEvent* event)
@@ -88,7 +94,9 @@ void QEmoijWnd::paintEvent(QPaintEvent* paintEvent)
     painter.setBrush(QColor(128, 128, 128));
 
     QPainterPath drawPath;
-    drawPath.addRoundedRect(QRect(5, 5, width() - 10, height() - 10 - 15), 5, 5);
+    drawPath.addRoundedRect(QRect(5, 5, width() - 10, height() - 10 - 15),
+                            5,
+                            5);
 
     QPolygon triPolygon;
     triPolygon << QPoint(width() / 2, height());

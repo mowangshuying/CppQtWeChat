@@ -11,7 +11,7 @@
 class QDealNewFriendsApplyItemWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QDealNewFriendsApplyItemWnd(QWidget* p = nullptr,
                                 const char* headurl = "",
                                 const char* name = "",
@@ -20,11 +20,11 @@ public:
                                 int id = 0,
                                 bool isApplyer = false,
                                 int userid = 0);
-public slots:
+  public slots:
     void slotOnAgreeBtnClick();
     void slotOnRefuseBtnClick();
 
-public:
+  public:
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout;
     QLabel* m_headurl;

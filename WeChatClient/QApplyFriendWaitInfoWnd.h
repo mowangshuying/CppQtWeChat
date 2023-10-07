@@ -12,10 +12,10 @@
 class QApplyFriendWaitInfoWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QApplyFriendWaitInfoWnd(QWidget* p = nullptr);
 
-public:
+  public:
     //窗口主要布局
     QVBoxLayout* m_vLayout;
 

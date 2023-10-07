@@ -12,21 +12,21 @@
 class QPictureToolWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QPictureToolWnd(QWidget* p = nullptr);
 
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
-public slots:
+  public slots:
     void slotUploadBtnClicked();
     void slotCancelBtnClicked();
     void slotDetermineBtnClicked();
     void slotCloseWnd();
     void SlotMinWnd();
 
-public:
+  public:
     QWidget* m_centerWnd;
 
     QLabel* m_picLable;

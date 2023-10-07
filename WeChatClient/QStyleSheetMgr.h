@@ -8,7 +8,7 @@
 
 class QStyleSheetObject
 {
-public:
+  public:
     QWidget* m_widget;  // 窗口
     QString m_qssFileName;
 };
@@ -17,7 +17,7 @@ typedef std::vector<QStyleSheetObject> QStyleSheetObjectVct;
 
 class QStyleSheetObectWatcher
 {
-public:
+  public:
     QFileSystemWatcher* m_watcher;
     QStyleSheetObjectVct m_objectVct;
 };
@@ -25,12 +25,12 @@ public:
 class QStyleSheetMgr : public QObject
 {
     Q_OBJECT
-private:
+  private:
     QStyleSheetMgr(QObject* parent = nullptr);
     ~QStyleSheetMgr();
     static QStyleSheetMgr* m_mgr;
 
-public:  // 成员函数
+  public:  // 成员函数
     void reg(QString wndObjectName, QStyleSheetObject object);
 
     void reg(QString wndObjectName, QString qssFileName, QWidget* wnd);
@@ -50,6 +50,6 @@ public:  // 成员函数
             delete m_mgr;
     }
 
-public:
+  public:
     std::map<QString, QStyleSheetObectWatcher> m_map;
 };

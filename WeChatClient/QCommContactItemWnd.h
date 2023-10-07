@@ -11,13 +11,17 @@
 class QCommContactItemWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QCommContactItemWnd(QWidget* p);
 
-    QCommContactItemWnd(QWidget* p, const char* headUrl, const char* name, bool bNewFriend = false, int friendid = -1);
+    QCommContactItemWnd(QWidget* p,
+                        const char* headUrl,
+                        const char* name,
+                        bool bNewFriend = false,
+                        int friendid = -1);
 
     ~QCommContactItemWnd();
-public slots:
+  public slots:
     void slotReplyFinished(QNetworkReply* reply);
     QString getContactItemName()
     {
@@ -39,7 +43,7 @@ public slots:
         m_friendId = friendId;
     }
 
-public:
+  public:
     QHBoxLayout* m_hLayout;
     //联系人头像
     QLabel* m_headUrl;

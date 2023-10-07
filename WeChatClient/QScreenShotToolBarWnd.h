@@ -7,10 +7,10 @@
 class QScreenShotToolBarWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QScreenShotToolBarWnd(QWidget* p = nullptr);
 
-public:
+  public:
     QHBoxLayout* m_hLayout;
     QPushButton* m_saveBtn;
     QPushButton* m_copyBtn;

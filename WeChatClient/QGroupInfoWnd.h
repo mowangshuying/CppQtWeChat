@@ -17,13 +17,13 @@
 class QGroupInfoWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QGroupInfoWnd(QWidget* p = nullptr);
 
-protected:
+  protected:
     bool event(QEvent* event);
 
-public:
+  public:
     void addGroupFriendItem(int64_t ownerId, QString nickName);
 
     void setGroupId(int64_t groupId)
@@ -40,12 +40,12 @@ public:
     {
         m_groupName2->setText(groupName.toStdString().c_str());
     }
-signals:
+  signals:
     void signalUpdateGroupName(QString groupName);
-public slots:
+  public slots:
     void slotSetGroupName();
 
-public:
+  public:
     QWidget* m_centerWnd;
     //¹ö¶¯Ìõ
     QScrollArea* m_scrollArea;

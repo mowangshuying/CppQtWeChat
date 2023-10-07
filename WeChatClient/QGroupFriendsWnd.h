@@ -12,11 +12,11 @@
 class QGroupFriendsWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QGroupFriendsWnd(QWidget* p = nullptr);
     void addItem(QGroupFriendsItemWnd* w);
 
-public:
+  public:
     QVBoxLayout* m_vLayout;
     QListWidget* m_listWnd;
 };

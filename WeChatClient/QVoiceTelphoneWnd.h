@@ -16,7 +16,7 @@
 class QVoiceTelphoneWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     enum class VoiceTelphoneState
     {
         VTS_none = 0,    // ��ʼ״̬
@@ -27,7 +27,7 @@ public:
         VTS_close,       // �Ҷϵ绰
     };
 
-public:
+  public:
     QVoiceTelphoneWnd(QWidget* p = nullptr);
 
     void regSignalSlot();
@@ -66,11 +66,11 @@ public:
     void cs_msg_accept_phone(neb::CJsonObject& msg);
     void cs_msg_phonemsg(neb::CJsonObject& msg);
     void cs_msg_close_phone(neb::CJsonObject& msg);
-public slots:
+  public slots:
     void slotOnAcceptBtnClick();
     void slotOnRefuseBtnClick();
 
-public:
+  public:
     QAudioFormat m_format;
     int m_timerId;
     QVBoxLayout* m_vLayout;

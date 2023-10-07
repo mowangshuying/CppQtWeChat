@@ -70,9 +70,15 @@ QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // setObjectName("QChatFileWnd");
     // setStyleSheet("#QChatFileWnd{border:4px solid gray;}");
 
-    connect(m_openFileDir, SIGNAL(clicked()), this, SLOT(slotOpenFileDirBtnClick()));
+    connect(m_openFileDir,
+            SIGNAL(clicked()),
+            this,
+            SLOT(slotOpenFileDirBtnClick()));
     connect(m_openFile, SIGNAL(clicked()), this, SLOT(slotOpenFileBtnClick()));
-    connect(m_downLoad, SIGNAL(clicked()), this, SLOT(slotDownloadFileBtnClick()));
+    connect(m_downLoad,
+            SIGNAL(clicked()),
+            this,
+            SLOT(slotDownloadFileBtnClick()));
 }
 
 void QChatFileInnerWnd::slotOpenFileBtnClick()
@@ -103,18 +109,23 @@ void QChatFileInnerWnd::slotDownloadFileBtnClick()
         //下载远程文件并显示进度条
         m_pNetManager = new QNetworkAccessManager(this);
         QString downLoadFileUrl = m_serveFilePath;
-        QNetworkReply* reply = m_pNetManager->get(QNetworkRequest(QUrl(downLoadFileUrl)));
-        connect(reply, &QNetworkReply::downloadProgress, this, [this, reply](qint64 x, qint64 y) {
-            //显示下载进度
-            m_progressBar->setMinimum(0);
-            m_progressBar->setMaximum(y);
-            m_progressBar->setValue(x);
-        });
+        QNetworkReply* reply =
+            m_pNetManager->get(QNetworkRequest(QUrl(downLoadFileUrl)));
+        connect(reply,
+                &QNetworkReply::downloadProgress,
+                this,
+                [this, reply](qint64 x, qint64 y) {
+                    //显示下载进度
+                    m_progressBar->setMinimum(0);
+                    m_progressBar->setMaximum(y);
+                    m_progressBar->setValue(x);
+                });
 
         connect(reply, &QNetworkReply::finished, this, [this, reply]() {
             m_sendState->setText("下载完成");
             sendFileShow();
-            QString currpath = QDataManager::getMgr()->m_localRecvFileDir + m_fileName->text();
+            QString currpath =
+                QDataManager::getMgr()->m_localRecvFileDir + m_fileName->text();
             QFile file(currpath);
             QFileInfo fileinfo = QFileInfo(currpath);
             if (file.open(QIODevice::WriteOnly))

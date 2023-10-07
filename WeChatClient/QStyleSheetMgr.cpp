@@ -37,19 +37,21 @@ void QStyleSheetMgr::reg(QString wndObjectName, QStyleSheetObject object)
         watcher.m_watcher = fileWatcher;
         m_map[wndObjectName] = watcher;
 
-        connect(fileWatcher, &QFileSystemWatcher::fileChanged, [wndObjectName, this](const QString& path) {
-            LogDebug << "file changed path:" << path;
-            QFile qss(path);
-            if (qss.open(QIODevice::ReadOnly))
-            {
-                QString qssStr = qss.readAll();
-                qss.close();
-                for (auto& object : m_map[wndObjectName].m_objectVct)
-                {
-                    object.m_widget->setStyleSheet(qssStr);
-                }
-            }
-        });
+        connect(fileWatcher,
+                &QFileSystemWatcher::fileChanged,
+                [wndObjectName, this](const QString& path) {
+                    LogDebug << "file changed path:" << path;
+                    QFile qss(path);
+                    if (qss.open(QIODevice::ReadOnly))
+                    {
+                        QString qssStr = qss.readAll();
+                        qss.close();
+                        for (auto& object : m_map[wndObjectName].m_objectVct)
+                        {
+                            object.m_widget->setStyleSheet(qssStr);
+                        }
+                    }
+                });
     }
 
     QFile qss(object.m_qssFileName);
@@ -61,7 +63,9 @@ void QStyleSheetMgr::reg(QString wndObjectName, QStyleSheetObject object)
     }
 }
 
-void QStyleSheetMgr::reg(QString wndObjectName, QString qssFileName, QWidget* wnd)
+void QStyleSheetMgr::reg(QString wndObjectName,
+                         QString qssFileName,
+                         QWidget* wnd)
 {
     QStyleSheetObject styleSheetObject;
     styleSheetObject.m_widget = wnd;

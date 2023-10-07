@@ -13,7 +13,8 @@ QString QSelfLog::getTimeStr()
 QString QSelfLog::getFileName(const char* file)
 {
     QString fileStr = file;
-    QString fileNameStr = fileStr.right(fileStr.size() - fileStr.lastIndexOf("\\") - 1);
+    QString fileNameStr =
+        fileStr.right(fileStr.size() - fileStr.lastIndexOf("\\") - 1);
     return fileNameStr;
 }
 
@@ -24,7 +25,8 @@ void QSelfLog::initLog()
     QString filePath = QString("./log/log_%1.txt").arg(timeStr);
 
     gFileLog = new QFile(filePath);
-    if (!gFileLog->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
+    if (!gFileLog->open(QIODevice::WriteOnly | QIODevice::Text |
+                        QIODevice::Append))
     {
         delete gFileLog;
         gFileLog = nullptr;
@@ -44,7 +46,9 @@ void QSelfLog::exitLog()
     }
 }
 
-void QSelfLog::myMessageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg)
+void QSelfLog::myMessageOutput(QtMsgType type,
+                               const QMessageLogContext& context,
+                               const QString& msg)
 {
     if (gFileLog)
     {

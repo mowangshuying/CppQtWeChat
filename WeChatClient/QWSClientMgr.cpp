@@ -14,9 +14,18 @@ QWSClientMgr::QWSClientMgr()
     m_timer->start(1000);
 
     connect(m_timer, &QTimer::timeout, this, &QWSClientMgr::slotTimer);
-    connect(m_webSock, &QWebSocket::connected, this, &QWSClientMgr::slotConnected);
-    connect(m_webSock, &QWebSocket::disconnected, this, &QWSClientMgr::slotDisconnected);
-    connect(m_webSock, &QWebSocket::textMessageReceived, this, &QWSClientMgr::slotRecvMsg);
+    connect(m_webSock,
+            &QWebSocket::connected,
+            this,
+            &QWSClientMgr::slotConnected);
+    connect(m_webSock,
+            &QWebSocket::disconnected,
+            this,
+            &QWSClientMgr::slotDisconnected);
+    connect(m_webSock,
+            &QWebSocket::textMessageReceived,
+            this,
+            &QWSClientMgr::slotRecvMsg);
 
     //连接远端服务器
     m_webSock->open(QUrl(CHAT_SERVER_ADDR));
@@ -91,7 +100,9 @@ void QWSClientMgr::request(const std::string& cmd, neb::CJsonObject& data)
     transfer(msg);
 }
 
-void QWSClientMgr::request(const std::string& cmd, neb::CJsonObject& json, NetEventCall call)
+void QWSClientMgr::request(const std::string& cmd,
+                           neb::CJsonObject& json,
+                           NetEventCall call)
 {
     request(cmd, json);
     if (call != nullptr)

@@ -11,10 +11,10 @@
 class QScreenShotWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QScreenShotWnd(QWidget* p = nullptr);
     ~QScreenShotWnd();
-public slots:
+  public slots:
     //复制截图
     void slotCopyScreenShot();
     //保存截图
@@ -22,7 +22,7 @@ public slots:
     //退出截图
     void slotExitSccreenShot();
 
-protected:
+  protected:
     void showEvent(QShowEvent*) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
@@ -31,10 +31,10 @@ protected:
 
     void contextMenuEvent(QContextMenuEvent*) override;  //--右键菜单事件
     void keyPressEvent(QKeyEvent* e) override;           //--按键事件
-public:
+  public:
     QPixmap m_fullScreenPixmap;
 
-private:
+  private:
     //鼠标开始位置
     QPoint m_begPos;
     //鼠标结束位置

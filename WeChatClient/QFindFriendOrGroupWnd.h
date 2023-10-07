@@ -16,7 +16,7 @@
 class QFindFriendOrGroupWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QFindFriendOrGroupWnd(QWidget* p = nullptr);
 
     void mouseMoveEvent(QMouseEvent* event);
@@ -24,12 +24,12 @@ public:
     void mouseReleaseEvent(QMouseEvent* event);
 
     void addFriendItem(const char* headUrl, const char* name, int64_t userid);
-public slots:
+  public slots:
     void slotCloseWnd();
     void slotMinWnd();
     void slotOnSearchBtnClicked();
 
-public:
+  public:
     QWidget* m_centerWnd;
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout1;

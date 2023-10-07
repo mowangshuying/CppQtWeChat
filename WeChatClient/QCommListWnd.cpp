@@ -11,7 +11,9 @@
 #include "QCommGroupItemWnd.h"
 #include "QStyleSheetMgr.h"
 
-QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*QCommMsgItemWnd_Tpye*/) : QWidget(p), m_WndType(wndType)
+QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/,
+                           QCommListWndEnum wndType /*QCommMsgItemWnd_Tpye*/)
+    : QWidget(p), m_WndType(wndType)
 {
     LogFunc;
     setObjectName("QCommListWnd");
@@ -70,8 +72,14 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*
     // setWindowFlags(Qt::FramelessWindowHint);
 
     // m_listWidget->setStyleSheet("border:0px;");
-    connect(m_listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotOnCurrentItemClicked(QListWidgetItem*)));
-    connect(m_startGroupBtn, SIGNAL(clicked()), this, SLOT(slotOnStartGroupBtnClicked()));
+    connect(m_listWidget,
+            SIGNAL(itemClicked(QListWidgetItem*)),
+            this,
+            SLOT(slotOnCurrentItemClicked(QListWidgetItem*)));
+    connect(m_startGroupBtn,
+            SIGNAL(clicked()),
+            this,
+            SLOT(slotOnStartGroupBtnClicked()));
     // setStyleSheet("background-color:red;");
 }
 
@@ -79,16 +87,19 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
 {
     // 自定义列表
     // 包含如下列表信息：联系人列表、消息列表、群聊列表
-    QCustomListWidgetItem* pCustItem = dynamic_cast<QCustomListWidgetItem*>(item);
+    QCustomListWidgetItem* pCustItem =
+        dynamic_cast<QCustomListWidgetItem*>(item);
     LogDebug << "sesid:" << pCustItem->sesId();
 
     //当前点击的是联系人列表中的某一项目
     if (m_WndType == QCommListWndEnum::ContactItemWndType)
     {
-        QCommContactItemWnd* wnd = dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pCustItem));
+        QCommContactItemWnd* wnd = dynamic_cast<QCommContactItemWnd*>(
+            m_listWidget->itemWidget(pCustItem));
         if (wnd->m_bNewFriend)
         {
-            QMainWnd::getMainWnd()->m_dealNewFriendsApplyWnd->setFriendApplyList();
+            QMainWnd::getMainWnd()
+                ->m_dealNewFriendsApplyWnd->setFriendApplyList();
             //切换窗口到新的朋友窗口
             // m_sLayout2中位置为1的窗口为新的朋友的窗口
             QMainWnd::getMainWnd()->m_sRightLayout->setCurrentIndex(1);
@@ -111,9 +122,11 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
     }
 
     //当前点击的是消息列表中的某一项
-    if (m_WndType == QCommListWndEnum::MsgItemWndTpye || m_WndType == QCommListWndEnum::SearchItemWndType)
+    if (m_WndType == QCommListWndEnum::MsgItemWndTpye ||
+        m_WndType == QCommListWndEnum::SearchItemWndType)
     {
-        QCommMsgItemWnd* wnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pCustItem));
+        QCommMsgItemWnd* wnd =
+            dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pCustItem));
         qint64 sesid = wnd->m_sesId;
         signalCommListChanged(sesid);
         return;
@@ -123,18 +136,21 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
     if (m_WndType == QCommListWndEnum::GroupItemWndType)
     {
         //判断当前点击是那一项
-        QCommGroupItemWnd* wnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pCustItem));
+        QCommGroupItemWnd* wnd = dynamic_cast<QCommGroupItemWnd*>(
+            m_listWidget->itemWidget(pCustItem));
         //获取到群的id
         int groupid = wnd->m_groupId;
         //右边工具栏需要跳转到msg那一栏
         QMainWnd::getMainWnd()->m_toolWnd->m_msgBtn->click();
         //先找到消息列表中所在的位置
-        auto msgListWidget = QMainWnd::getMainWnd()->m_commMsgListWnd->m_listWidget;
+        auto msgListWidget =
+            QMainWnd::getMainWnd()->m_commMsgListWnd->m_listWidget;
 
         for (int i = 0; i < msgListWidget->count(); i++)
         {
             QListWidgetItem* pitem = msgListWidget->item(i);
-            QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(msgListWidget->itemWidget(pitem));
+            QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(
+                msgListWidget->itemWidget(pitem));
             if (pWnd->m_isGroupMsg && pWnd->m_userid == groupid)
             {
                 msgListWidget->setCurrentItem(pitem);
@@ -178,7 +194,11 @@ bool QCommListWnd::eventFilter(QObject* target, QEvent* event)
     return QWidget::eventFilter(target, event);
 }
 
-void QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg)
+void QCommListWnd::addMsgItem(const char* name,
+                              const char* msg,
+                              qint64 sesid,
+                              int64_t userid,
+                              bool isGroupMsg)
 {
     if (hasMsgItemBySesId(sesid))
     {
@@ -187,28 +207,35 @@ void QCommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, i
     }
 
     LogDebug << "msg:" << msg;
-    QCommMsgItemWnd* pMsgItem = new QCommMsgItemWnd(m_listWidget, name, msg, sesid, userid, isGroupMsg);
+    QCommMsgItemWnd* pMsgItem =
+        new QCommMsgItemWnd(m_listWidget, name, msg, sesid, userid, isGroupMsg);
     QListWidgetItem* pListItem = new QCustomListWidgetItem(m_listWidget);
     pMsgItem->setFixedWidth(this->width() - 5);
     pListItem->setSizeHint(QSize(this->width() - 5, 65));
     m_listWidget->setItemWidget(pListItem, pMsgItem);
 }
 
-void QCommListWnd::addContactsItem(const char* headUrl, const char* name, bool isNewFriend /*= false*/, int friendid /* = -1*/)
+void QCommListWnd::addContactsItem(const char* headUrl,
+                                   const char* name,
+                                   bool isNewFriend /*= false*/,
+                                   int friendid /* = -1*/)
 {
     if (hasContactsItemByFriendId(friendid))
     {
         LogDebug << "has same friend friendId = " << friendid;
         return;
     }
-    QCommContactItemWnd* pMsgItem = new QCommContactItemWnd(m_listWidget, headUrl, name, isNewFriend, friendid);
+    QCommContactItemWnd* pMsgItem = new QCommContactItemWnd(
+        m_listWidget, headUrl, name, isNewFriend, friendid);
     QListWidgetItem* pListItem = new QCustomListWidgetItem(m_listWidget);
     pMsgItem->setFixedWidth(this->width() - 5);
     pListItem->setSizeHint(QSize(this->width() - 5, 65));
     m_listWidget->setItemWidget(pListItem, pMsgItem);
 }
 
-void QCommListWnd::addGroupItem(const char* headUrl, const char* name, int groupid)
+void QCommListWnd::addGroupItem(const char* headUrl,
+                                const char* name,
+                                int groupid)
 {
     if (hasGroupItemByGroupId(groupid))
     {
@@ -216,7 +243,8 @@ void QCommListWnd::addGroupItem(const char* headUrl, const char* name, int group
         return;
     }
 
-    QCommGroupItemWnd* pGroupItem = new QCommGroupItemWnd(m_listWidget, headUrl, name, groupid);
+    QCommGroupItemWnd* pGroupItem =
+        new QCommGroupItemWnd(m_listWidget, headUrl, name, groupid);
     QListWidgetItem* pListItem = new QCustomListWidgetItem(m_listWidget);
     pGroupItem->setFixedWidth(this->width() - 5);
     pListItem->setSizeHint(QSize(this->width() - 5, 65));
@@ -229,8 +257,10 @@ bool QCommListWnd::hasMsgItemBySesId(int64_t sesid)
     int count = m_listWidget->count();
     for (int i = 0; i < count; i++)
     {
-        QCustomListWidgetItem* pitem = (QCustomListWidgetItem*)m_listWidget->item(i);
-        QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
+        QCustomListWidgetItem* pitem =
+            (QCustomListWidgetItem*)m_listWidget->item(i);
+        QCommMsgItemWnd* pWnd =
+            dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
         if (pWnd && pWnd->m_sesId == sesid)
         {
             bHas = true;
@@ -248,7 +278,8 @@ bool QCommListWnd::hasGroupItemByGroupId(int64_t groupid)
     for (int i = 0; i < count; i++)
     {
         QListWidgetItem* pitem = m_listWidget->item(i);
-        QCommGroupItemWnd* pWnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pitem));
+        QCommGroupItemWnd* pWnd =
+            dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pitem));
         if (pWnd && pWnd->m_groupId == groupid)
         {
             bHas = true;
@@ -265,7 +296,8 @@ bool QCommListWnd::hasContactsItemByFriendId(int64_t friendId)
     for (int i = 0; i < count; i++)
     {
         QListWidgetItem* pitem = m_listWidget->item(i);
-        QCommContactItemWnd* pWnd = dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pitem));
+        QCommContactItemWnd* pWnd =
+            dynamic_cast<QCommContactItemWnd*>(m_listWidget->itemWidget(pitem));
         if (pWnd->m_friendId == friendId)
         {
             bHas = true;
@@ -281,12 +313,14 @@ void QCommListWnd::setGroupItemNameByGroupId(int64_t grouId, QString groupName)
     for (int i = 0; i < count; i++)
     {
         QListWidgetItem* pitem = m_listWidget->item(i);
-        QCommGroupItemWnd* pWnd = dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pitem));
+        QCommGroupItemWnd* pWnd =
+            dynamic_cast<QCommGroupItemWnd*>(m_listWidget->itemWidget(pitem));
         if (pWnd->m_groupId == grouId)
         {
             QString rawGroupName = pWnd->m_groupName->text();
             pWnd->m_groupName->setText(groupName);
-            LogDebug << "update groupName:" << rawGroupName << " -> " << pWnd->m_groupName->text();
+            LogDebug << "update groupName:" << rawGroupName << " -> "
+                     << pWnd->m_groupName->text();
             break;
         }
     }
@@ -298,7 +332,8 @@ void QCommListWnd::setMsgItemNameBySesId(int64_t sesId, QString msgItemName)
     for (int i = 0; i < count; i++)
     {
         QListWidgetItem* pitem = m_listWidget->item(i);
-        QCommMsgItemWnd* pWnd = dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
+        QCommMsgItemWnd* pWnd =
+            dynamic_cast<QCommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
         if (pWnd->m_sesId == sesId)
         {
             pWnd->m_name->setText(msgItemName);

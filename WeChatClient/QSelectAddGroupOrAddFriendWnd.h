@@ -13,20 +13,20 @@
 class QSelectAddGroupOrAddFriendWnd : public QWidget
 {
     Q_OBJECT
-protected:
+  protected:
     bool event(QEvent* event);
 
-public:
+  public:
     QSelectAddGroupOrAddFriendWnd(QWidget* p);
 
-public slots:
+  public slots:
     void slotAddContactsOrGroupBtnClick();
     void slotCreateGroup();
 
-public:
+  public:
     //将玩家的数据设置到QListWidget中
     // void updateData();
-public:
+  public:
     QWidget* m_centerWnd;
     QVBoxLayout* m_vLayout;
     QPushButton* m_addContactsOrGroupBtn;

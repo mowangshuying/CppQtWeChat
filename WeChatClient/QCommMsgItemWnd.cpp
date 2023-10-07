@@ -7,7 +7,12 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p) : QWidget(p)
     setObjectName("QCommMsgItemWnd");
 }
 
-QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroupMsg)
+QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p,
+                                 const char* name,
+                                 const char* msg,
+                                 int64_t sesid,
+                                 int64_t userid,
+                                 bool isGroupMsg)
 {
     setObjectName("QCommMsgItemWnd");
 
@@ -60,13 +65,18 @@ QCommMsgItemWnd::QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, 
 
 void QCommMsgItemWnd::requestHeadImg(int id, bool isGroupMsg)
 {
-    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(id);
+    QString imgurl =
+        QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(id);
     if (isGroupMsg)
     {
-        QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(id);
+        QString imgurl =
+            QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(id);
     }
     m_networkMgr = new QNetworkAccessManager();
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
+    connect(m_networkMgr,
+            SIGNAL(finished(QNetworkReply*)),
+            this,
+            SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
 

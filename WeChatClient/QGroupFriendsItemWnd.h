@@ -11,14 +11,14 @@
 class QGroupFriendsItemWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QGroupFriendsItemWnd(QWidget* p = nullptr);
     //向远端请求图片信息
     void requestHeadImg();
-public slots:
+  public slots:
     void slotReplyFinished(QNetworkReply* reply);
 
-public:
+  public:
     QHBoxLayout* m_hLayout;  //
     QLabel* m_headImg;       //头像
     QLabel* m_name;          //名称

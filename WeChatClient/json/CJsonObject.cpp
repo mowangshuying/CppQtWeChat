@@ -17,12 +17,14 @@ CJsonObject::CJsonObject() : m_pJsonData(NULL), m_pExternJsonDataRef(NULL)
     // m_pJsonData = cJSON_CreateObject();
 }
 
-CJsonObject::CJsonObject(const std::string& strJson) : m_pJsonData(NULL), m_pExternJsonDataRef(NULL)
+CJsonObject::CJsonObject(const std::string& strJson)
+    : m_pJsonData(NULL), m_pExternJsonDataRef(NULL)
 {
     Parse(strJson);
 }
 
-CJsonObject::CJsonObject(const CJsonObject* pJsonObject) : m_pJsonData(NULL), m_pExternJsonDataRef(NULL)
+CJsonObject::CJsonObject(const CJsonObject* pJsonObject)
+    : m_pJsonData(NULL), m_pExternJsonDataRef(NULL)
 {
     if (pJsonObject)
     {
@@ -30,7 +32,8 @@ CJsonObject::CJsonObject(const CJsonObject* pJsonObject) : m_pJsonData(NULL), m_
     }
 }
 
-CJsonObject::CJsonObject(const CJsonObject& oJsonObject) : m_pJsonData(NULL), m_pExternJsonDataRef(NULL)
+CJsonObject::CJsonObject(const CJsonObject& oJsonObject)
+    : m_pJsonData(NULL), m_pExternJsonDataRef(NULL)
 {
     Parse(oJsonObject.ToString());
 }
@@ -195,19 +198,22 @@ CJsonObject& CJsonObject::operator[](const std::string& strKey)
         {
             if (m_pExternJsonDataRef->type == cJSON_Object)
             {
-                pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+                pJsonStruct =
+                    cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
             }
         }
         if (pJsonStruct == NULL)
         {
             CJsonObject* pJsonObject = new CJsonObject();
-            m_mapJsonObjectRef.insert(std::pair<std::string, CJsonObject*>(strKey, pJsonObject));
+            m_mapJsonObjectRef.insert(
+                std::pair<std::string, CJsonObject*>(strKey, pJsonObject));
             return (*pJsonObject);
         }
         else
         {
             CJsonObject* pJsonObject = new CJsonObject(pJsonStruct);
-            m_mapJsonObjectRef.insert(std::pair<std::string, CJsonObject*>(strKey, pJsonObject));
+            m_mapJsonObjectRef.insert(
+                std::pair<std::string, CJsonObject*>(strKey, pJsonObject));
             return (*pJsonObject);
         }
     }
@@ -241,13 +247,15 @@ CJsonObject& CJsonObject::operator[](unsigned int uiWhich)
         if (pJsonStruct == NULL)
         {
             CJsonObject* pJsonObject = new CJsonObject();
-            m_mapJsonArrayRef.insert(std::pair<unsigned int, CJsonObject*>(uiWhich, pJsonObject));
+            m_mapJsonArrayRef.insert(
+                std::pair<unsigned int, CJsonObject*>(uiWhich, pJsonObject));
             return (*pJsonObject);
         }
         else
         {
             CJsonObject* pJsonObject = new CJsonObject(pJsonStruct);
-            m_mapJsonArrayRef.insert(std::pair<unsigned int, CJsonObject*>(uiWhich, pJsonObject));
+            m_mapJsonArrayRef.insert(
+                std::pair<unsigned int, CJsonObject*>(uiWhich, pJsonObject));
             return (*pJsonObject);
         }
     }
@@ -271,7 +279,8 @@ std::string CJsonObject::operator()(const std::string& strKey) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -287,24 +296,37 @@ std::string CJsonObject::operator()(const std::string& strKey) const
         char szNumber[128] = {0};
         if (pJsonStruct->sign == -1)
         {
-            if ((int64)pJsonStruct->valueint <= (int64)INT_MAX && (int64)pJsonStruct->valueint >= (int64)INT_MIN)
+            if ((int64)pJsonStruct->valueint <= (int64)INT_MAX &&
+                (int64)pJsonStruct->valueint >= (int64)INT_MIN)
             {
-                snprintf(szNumber, sizeof(szNumber), "%d", (int32)pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%d",
+                         (int32)pJsonStruct->valueint);
             }
             else
             {
-                snprintf(szNumber, sizeof(szNumber), "%lld", (int64)pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%lld",
+                         (int64)pJsonStruct->valueint);
             }
         }
         else
         {
             if (pJsonStruct->valueint <= (uint64)UINT_MAX)
             {
-                snprintf(szNumber, sizeof(szNumber), "%u", (uint32)pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%u",
+                         (uint32)pJsonStruct->valueint);
             }
             else
             {
-                snprintf(szNumber, sizeof(szNumber), "%llu", pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%llu",
+                         pJsonStruct->valueint);
             }
         }
         return (std::string(szNumber));
@@ -312,13 +334,20 @@ std::string CJsonObject::operator()(const std::string& strKey) const
     else if (pJsonStruct->type == cJSON_Double)
     {
         char szNumber[128] = {0};
-        if (fabs(pJsonStruct->valuedouble) < 1.0e-6 || fabs(pJsonStruct->valuedouble) > 1.0e9)
+        if (fabs(pJsonStruct->valuedouble) < 1.0e-6 ||
+            fabs(pJsonStruct->valuedouble) > 1.0e9)
         {
-            snprintf(szNumber, sizeof(szNumber), "%e", pJsonStruct->valuedouble);
+            snprintf(szNumber,
+                     sizeof(szNumber),
+                     "%e",
+                     pJsonStruct->valuedouble);
         }
         else
         {
-            snprintf(szNumber, sizeof(szNumber), "%f", pJsonStruct->valuedouble);
+            snprintf(szNumber,
+                     sizeof(szNumber),
+                     "%f",
+                     pJsonStruct->valuedouble);
         }
     }
     else if (pJsonStruct->type == cJSON_False)
@@ -362,24 +391,37 @@ std::string CJsonObject::operator()(unsigned int uiWhich) const
         char szNumber[128] = {0};
         if (pJsonStruct->sign == -1)
         {
-            if ((int64)pJsonStruct->valueint <= (int64)INT_MAX && (int64)pJsonStruct->valueint >= (int64)INT_MIN)
+            if ((int64)pJsonStruct->valueint <= (int64)INT_MAX &&
+                (int64)pJsonStruct->valueint >= (int64)INT_MIN)
             {
-                snprintf(szNumber, sizeof(szNumber), "%d", (int32)pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%d",
+                         (int32)pJsonStruct->valueint);
             }
             else
             {
-                snprintf(szNumber, sizeof(szNumber), "%lld", (int64)pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%lld",
+                         (int64)pJsonStruct->valueint);
             }
         }
         else
         {
             if (pJsonStruct->valueint <= (uint64)UINT_MAX)
             {
-                snprintf(szNumber, sizeof(szNumber), "%u", (uint32)pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%u",
+                         (uint32)pJsonStruct->valueint);
             }
             else
             {
-                snprintf(szNumber, sizeof(szNumber), "%llu", pJsonStruct->valueint);
+                snprintf(szNumber,
+                         sizeof(szNumber),
+                         "%llu",
+                         pJsonStruct->valueint);
             }
         }
         return (std::string(szNumber));
@@ -387,13 +429,20 @@ std::string CJsonObject::operator()(unsigned int uiWhich) const
     else if (pJsonStruct->type == cJSON_Double)
     {
         char szNumber[128] = {0};
-        if (fabs(pJsonStruct->valuedouble) < 1.0e-6 || fabs(pJsonStruct->valuedouble) > 1.0e9)
+        if (fabs(pJsonStruct->valuedouble) < 1.0e-6 ||
+            fabs(pJsonStruct->valuedouble) > 1.0e9)
         {
-            snprintf(szNumber, sizeof(szNumber), "%e", pJsonStruct->valuedouble);
+            snprintf(szNumber,
+                     sizeof(szNumber),
+                     "%e",
+                     pJsonStruct->valuedouble);
         }
         else
         {
-            snprintf(szNumber, sizeof(szNumber), "%f", pJsonStruct->valuedouble);
+            snprintf(szNumber,
+                     sizeof(szNumber),
+                     "%f",
+                     pJsonStruct->valuedouble);
         }
     }
     else if (pJsonStruct->type == cJSON_False)
@@ -413,7 +462,8 @@ bool CJsonObject::Parse(const std::string& strJson)
     m_pJsonData = cJSON_Parse(strJson.c_str());
     if (m_pJsonData == NULL)
     {
-        m_strErrMsg = std::string("prase json string error at ") + cJSON_GetErrorPtr();
+        m_strErrMsg =
+            std::string("prase json string error at ") + cJSON_GetErrorPtr();
         return (false);
     }
     return (true);
@@ -427,7 +477,10 @@ void CJsonObject::Clear()
         cJSON_Delete(m_pJsonData);
         m_pJsonData = NULL;
     }
-    for (std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.begin(); iter != m_mapJsonArrayRef.end(); ++iter)
+    for (std::map<unsigned int, CJsonObject*>::iterator iter =
+             m_mapJsonArrayRef.begin();
+         iter != m_mapJsonArrayRef.end();
+         ++iter)
     {
         if (iter->second != NULL)
         {
@@ -436,7 +489,10 @@ void CJsonObject::Clear()
         }
     }
     m_mapJsonArrayRef.clear();
-    for (std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.begin(); iter != m_mapJsonObjectRef.end(); ++iter)
+    for (std::map<std::string, CJsonObject*>::iterator iter =
+             m_mapJsonObjectRef.begin();
+         iter != m_mapJsonObjectRef.end();
+         ++iter)
     {
         if (iter->second != NULL)
         {
@@ -542,7 +598,8 @@ bool CJsonObject::Get(const std::string& strKey, CJsonObject& oJsonObject) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -576,7 +633,8 @@ bool CJsonObject::Get(const std::string& strKey, std::string& strValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -605,7 +663,8 @@ bool CJsonObject::Get(const std::string& strKey, int32& iValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -639,7 +698,8 @@ bool CJsonObject::Get(const std::string& strKey, uint32& uiValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -673,7 +733,8 @@ bool CJsonObject::Get(const std::string& strKey, int64& llValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -707,7 +768,8 @@ bool CJsonObject::Get(const std::string& strKey, uint64& ullValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -741,7 +803,8 @@ bool CJsonObject::Get(const std::string& strKey, bool& bValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -770,7 +833,8 @@ bool CJsonObject::Get(const std::string& strKey, float& fValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -804,7 +868,8 @@ bool CJsonObject::Get(const std::string& strKey, double& dValue) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -838,7 +903,8 @@ bool CJsonObject::IsNull(const std::string& strKey) const
     {
         if (m_pExternJsonDataRef->type == cJSON_Object)
         {
-            pJsonStruct = cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
+            pJsonStruct =
+                cJSON_GetObjectItem(m_pExternJsonDataRef, strKey.c_str());
         }
     }
     if (pJsonStruct == NULL)
@@ -882,7 +948,8 @@ bool CJsonObject::Add(const std::string& strKey, const CJsonObject& oJsonObject)
     cJSON* pJsonStruct = cJSON_Parse(oJsonObject.ToString().c_str());
     if (pJsonStruct == NULL)
     {
-        m_strErrMsg = std::string("prase json string error at ") + cJSON_GetErrorPtr();
+        m_strErrMsg =
+            std::string("prase json string error at ") + cJSON_GetErrorPtr();
         return (false);
     }
     cJSON_AddItemToObject(pFocusData, strKey.c_str(), pJsonStruct);
@@ -890,7 +957,8 @@ bool CJsonObject::Add(const std::string& strKey, const CJsonObject& oJsonObject)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1295,7 +1363,8 @@ bool CJsonObject::Delete(const std::string& strKey)
         return (false);
     }
     cJSON_DeleteItemFromObject(pFocusData, strKey.c_str());
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1309,7 +1378,8 @@ bool CJsonObject::Delete(const std::string& strKey)
     return (true);
 }
 
-bool CJsonObject::Replace(const std::string& strKey, const CJsonObject& oJsonObject)
+bool CJsonObject::Replace(const std::string& strKey,
+                          const CJsonObject& oJsonObject)
 {
     cJSON* pFocusData = NULL;
     if (m_pJsonData == NULL)
@@ -1333,7 +1403,8 @@ bool CJsonObject::Replace(const std::string& strKey, const CJsonObject& oJsonObj
     cJSON* pJsonStruct = cJSON_Parse(oJsonObject.ToString().c_str());
     if (pJsonStruct == NULL)
     {
-        m_strErrMsg = std::string("prase json string error at ") + cJSON_GetErrorPtr();
+        m_strErrMsg =
+            std::string("prase json string error at ") + cJSON_GetErrorPtr();
         return (false);
     }
     cJSON_ReplaceItemInObject(pFocusData, strKey.c_str(), pJsonStruct);
@@ -1341,7 +1412,8 @@ bool CJsonObject::Replace(const std::string& strKey, const CJsonObject& oJsonObj
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1354,7 +1426,8 @@ bool CJsonObject::Replace(const std::string& strKey, const CJsonObject& oJsonObj
     return (true);
 }
 
-bool CJsonObject::Replace(const std::string& strKey, const std::string& strValue)
+bool CJsonObject::Replace(const std::string& strKey,
+                          const std::string& strValue)
 {
     cJSON* pFocusData = NULL;
     if (m_pJsonData == NULL)
@@ -1380,7 +1453,8 @@ bool CJsonObject::Replace(const std::string& strKey, const std::string& strValue
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1424,7 +1498,8 @@ bool CJsonObject::Replace(const std::string& strKey, int32 iValue)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1468,7 +1543,8 @@ bool CJsonObject::Replace(const std::string& strKey, uint32 uiValue)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1512,7 +1588,8 @@ bool CJsonObject::Replace(const std::string& strKey, int64 llValue)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1556,7 +1633,8 @@ bool CJsonObject::Replace(const std::string& strKey, uint64 ullValue)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1574,7 +1652,9 @@ bool CJsonObject::Replace(const std::string& strKey, uint64 ullValue)
     return (true);
 }
 
-bool CJsonObject::Replace(const std::string& strKey, bool bValue, bool bValueAgain)
+bool CJsonObject::Replace(const std::string& strKey,
+                          bool bValue,
+                          bool bValueAgain)
 {
     cJSON* pFocusData = NULL;
     if (m_pJsonData == NULL)
@@ -1600,7 +1680,8 @@ bool CJsonObject::Replace(const std::string& strKey, bool bValue, bool bValueAga
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1644,7 +1725,8 @@ bool CJsonObject::Replace(const std::string& strKey, float fValue)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1688,7 +1770,8 @@ bool CJsonObject::Replace(const std::string& strKey, double dValue)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -1732,7 +1815,8 @@ bool CJsonObject::ReplaceWithNull(const std::string& strKey)
     {
         return (false);
     }
-    std::map<std::string, CJsonObject*>::iterator iter = m_mapJsonObjectRef.find(strKey);
+    std::map<std::string, CJsonObject*>::iterator iter =
+        m_mapJsonObjectRef.find(strKey);
     if (iter != m_mapJsonObjectRef.end())
     {
         if (iter->second != NULL)
@@ -2123,7 +2207,8 @@ bool CJsonObject::Add(const CJsonObject& oJsonObject)
     cJSON* pJsonStruct = cJSON_Parse(oJsonObject.ToString().c_str());
     if (pJsonStruct == NULL)
     {
-        m_strErrMsg = std::string("prase json string error at ") + cJSON_GetErrorPtr();
+        m_strErrMsg =
+            std::string("prase json string error at ") + cJSON_GetErrorPtr();
         return (false);
     }
     int iArraySizeBeforeAdd = cJSON_GetArraySize(pFocusData);
@@ -2134,7 +2219,9 @@ bool CJsonObject::Add(const CJsonObject& oJsonObject)
         return (false);
     }
     unsigned int uiLastIndex = (unsigned int)cJSON_GetArraySize(pFocusData) - 1;
-    for (std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.begin(); iter != m_mapJsonArrayRef.end();)
+    for (std::map<unsigned int, CJsonObject*>::iterator iter =
+             m_mapJsonArrayRef.begin();
+         iter != m_mapJsonArrayRef.end();)
     {
         if (iter->first >= uiLastIndex)
         {
@@ -2561,7 +2648,8 @@ bool CJsonObject::AddAsFirst(const CJsonObject& oJsonObject)
     cJSON* pJsonStruct = cJSON_Parse(oJsonObject.ToString().c_str());
     if (pJsonStruct == NULL)
     {
-        m_strErrMsg = std::string("prase json string error at ") + cJSON_GetErrorPtr();
+        m_strErrMsg =
+            std::string("prase json string error at ") + cJSON_GetErrorPtr();
         return (false);
     }
     int iArraySizeBeforeAdd = cJSON_GetArraySize(pFocusData);
@@ -2571,7 +2659,9 @@ bool CJsonObject::AddAsFirst(const CJsonObject& oJsonObject)
     {
         return (false);
     }
-    for (std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.begin(); iter != m_mapJsonArrayRef.end();)
+    for (std::map<unsigned int, CJsonObject*>::iterator iter =
+             m_mapJsonArrayRef.begin();
+         iter != m_mapJsonArrayRef.end();)
     {
         if (iter->second != NULL)
         {
@@ -2983,7 +3073,9 @@ bool CJsonObject::Delete(int iWhich)
         return (false);
     }
     cJSON_DeleteItemFromArray(pFocusData, iWhich);
-    for (std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.begin(); iter != m_mapJsonArrayRef.end();)
+    for (std::map<unsigned int, CJsonObject*>::iterator iter =
+             m_mapJsonArrayRef.begin();
+         iter != m_mapJsonArrayRef.end();)
     {
         if (iter->first >= (unsigned int)iWhich)
         {
@@ -3026,7 +3118,8 @@ bool CJsonObject::Replace(int iWhich, const CJsonObject& oJsonObject)
     cJSON* pJsonStruct = cJSON_Parse(oJsonObject.ToString().c_str());
     if (pJsonStruct == NULL)
     {
-        m_strErrMsg = std::string("prase json string error at ") + cJSON_GetErrorPtr();
+        m_strErrMsg =
+            std::string("prase json string error at ") + cJSON_GetErrorPtr();
         return (false);
     }
     cJSON_ReplaceItemInArray(pFocusData, iWhich, pJsonStruct);
@@ -3034,7 +3127,8 @@ bool CJsonObject::Replace(int iWhich, const CJsonObject& oJsonObject)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3073,7 +3167,8 @@ bool CJsonObject::Replace(int iWhich, const std::string& strValue)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3117,7 +3212,8 @@ bool CJsonObject::Replace(int iWhich, int32 iValue)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3161,7 +3257,8 @@ bool CJsonObject::Replace(int iWhich, uint32 uiValue)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3205,7 +3302,8 @@ bool CJsonObject::Replace(int iWhich, int64 llValue)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3249,7 +3347,8 @@ bool CJsonObject::Replace(int iWhich, uint64 ullValue)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3293,7 +3392,8 @@ bool CJsonObject::Replace(int iWhich, bool bValue, bool bValueAgain)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3337,7 +3437,8 @@ bool CJsonObject::Replace(int iWhich, float fValue)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3381,7 +3482,8 @@ bool CJsonObject::Replace(int iWhich, double dValue)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3425,7 +3527,8 @@ bool CJsonObject::ReplaceWithNull(int iWhich)
     {
         return (false);
     }
-    std::map<unsigned int, CJsonObject*>::iterator iter = m_mapJsonArrayRef.find(iWhich);
+    std::map<unsigned int, CJsonObject*>::iterator iter =
+        m_mapJsonArrayRef.find(iWhich);
     if (iter != m_mapJsonArrayRef.end())
     {
         if (iter->second != NULL)
@@ -3443,7 +3546,8 @@ bool CJsonObject::ReplaceWithNull(int iWhich)
     return (true);
 }
 
-CJsonObject::CJsonObject(cJSON* pJsonData) : m_pJsonData(NULL), m_pExternJsonDataRef(pJsonData)
+CJsonObject::CJsonObject(cJSON* pJsonData)
+    : m_pJsonData(NULL), m_pExternJsonDataRef(pJsonData)
 {
 }
 }  // namespace neb

@@ -9,20 +9,20 @@
 class QEmoijWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QEmoijWnd(QWidget* p = nullptr);
 
-protected:
+  protected:
     bool event(QEvent* event);
 
     void paintEvent(QPaintEvent* paintEvent);
-signals:
+  signals:
     void signalEmoijClicked(QString m_emoijString);
-public slots:
+  public slots:
     //判断哪个单元格子被点击
     void slotCellClicked(int x, int y);
 
-public:
+  public:
     QStringList m_emoijStrList;
     QTableWidget* m_centerWnd;
     QVBoxLayout* m_vLayout;

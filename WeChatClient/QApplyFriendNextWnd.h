@@ -12,8 +12,10 @@
 class QApplyFriendNextWnd : public QWidget
 {
     Q_OBJECT
-public:
-    QApplyFriendNextWnd(QWidget* p = nullptr, int64_t friendid = -1, QString username = "");
+  public:
+    QApplyFriendNextWnd(QWidget* p = nullptr,
+                        int64_t friendid = -1,
+                        QString username = "");
 
     enum class PushBtnState
     {
@@ -21,17 +23,17 @@ public:
         PBS_Close = 1
     };
 
-public:
+  public:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
-public slots:
+  public slots:
     void closeWnd();
     void minWnd();
     void slotPushBtnClick();
 
-public:
+  public:
     QWidget* m_centerWnd;
     int m_index = 0;
 

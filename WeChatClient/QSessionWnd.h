@@ -26,18 +26,18 @@ class QSessionWnd : public QWidget
 {
     //添加消息映射支持
     Q_OBJECT
-public:
+  public:
     //会话窗口
     QSessionWnd(QWidget* p = nullptr);
     ~QSessionWnd();
-public slots:
+  public slots:
     void slotSendTextBtnClick();
     void slotEmoijClicked(QString str);
     void slotMoreBtnClick();
     void slotVoiceTelPhoneBtnClick();
     void slotUpdateGroupName(QString groupName);
 
-protected:
+  protected:
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
 
@@ -45,7 +45,7 @@ protected:
 
     void resizeEvent(QResizeEvent* event) override;
 
-public:
+  public:
     void sendMsgToUser(neb::CJsonObject json, QString msgText);
 
     void sendMsgToGroup(neb::CJsonObject json, QString msgText);
@@ -57,7 +57,7 @@ public:
 
     void dealMsgTime();
 
-public:
+  public:
     // QHBoxLayout* m_hLayout;
     // more按钮按下时候会显示这个窗口
     QGroupInfoWnd* m_groupInfoWnd;

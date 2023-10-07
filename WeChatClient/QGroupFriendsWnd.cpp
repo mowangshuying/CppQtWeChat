@@ -28,7 +28,8 @@ void QGroupFriendsWnd::addItem(QGroupFriendsItemWnd* itemWnd)
 {
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd);
     pListItem->setSizeHint(QSize(250, 50));
-   // itemWnd->setFixedSize(250, 40);
-    LogDebug << "list item size:" << pListItem->sizeHint() << ", item wnd:" << itemWnd->size();
+    // itemWnd->setFixedSize(250, 40);
+    LogDebug << "list item size:" << pListItem->sizeHint()
+             << ", item wnd:" << itemWnd->size();
     m_listWnd->setItemWidget(pListItem, itemWnd);
 }

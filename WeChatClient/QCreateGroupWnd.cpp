@@ -128,25 +128,38 @@ void QCreateGroupWnd::mouseReleaseEvent(QMouseEvent* event)
     m_bPress = false;
 }
 
-void QCreateGroupWnd::addListWnd1Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename)
+void QCreateGroupWnd::addListWnd1Item(const char* headUrl,
+                                      int64_t friendid,
+                                      const char* nickname,
+                                      const char* rolename)
 {
-    QCreateGroupListItemWithSelBtnWnd* pListwnd1Item = new QCreateGroupListItemWithSelBtnWnd(m_listWnd1, headUrl, friendid, nickname, rolename);
+    QCreateGroupListItemWithSelBtnWnd* pListwnd1Item =
+        new QCreateGroupListItemWithSelBtnWnd(
+            m_listWnd1, headUrl, friendid, nickname, rolename);
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd1);
     pListItem->setSizeHint(QSize(275, 35));
     m_listWnd1->setItemWidget(pListItem, pListwnd1Item);
 
-    connect(pListwnd1Item, SIGNAL(signalSelRBtnClick(QMap<QString, QString>)), this, SLOT(slotSelRBtnClick(QMap<QString, QString>)));
+    connect(pListwnd1Item,
+            SIGNAL(signalSelRBtnClick(QMap<QString, QString>)),
+            this,
+            SLOT(slotSelRBtnClick(QMap<QString, QString>)));
 }
 
-void QCreateGroupWnd::addListWnd2Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename)
+void QCreateGroupWnd::addListWnd2Item(const char* headUrl,
+                                      int64_t friendid,
+                                      const char* nickname,
+                                      const char* rolename)
 {
-    QCreateGroupListItemWnd* pListwnd2Item = new QCreateGroupListItemWnd(m_listWnd2, headUrl, friendid, nickname, rolename);
+    QCreateGroupListItemWnd* pListwnd2Item = new QCreateGroupListItemWnd(
+        m_listWnd2, headUrl, friendid, nickname, rolename);
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd2);
     pListItem->setSizeHint(QSize(275, 35));
     m_listWnd2->setItemWidget(pListItem, pListwnd2Item);
 }
 
-bool QCreateGroupWnd::hasThisWndByRolename(QString rolename, QListWidget* listWnd)
+bool QCreateGroupWnd::hasThisWndByRolename(QString rolename,
+                                           QListWidget* listWnd)
 {
     bool bHas = false;
     if (listWnd == nullptr)
@@ -159,7 +172,9 @@ bool QCreateGroupWnd::hasThisWndByRolename(QString rolename, QListWidget* listWn
         QListWidgetItem* item = listWnd->item(i);
         if (listWnd == m_listWnd1)
         {
-            QCreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(listWnd->itemWidget(item));
+            QCreateGroupListItemWithSelBtnWnd* wnd =
+                dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(
+                    listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 bHas = true;
@@ -169,7 +184,9 @@ bool QCreateGroupWnd::hasThisWndByRolename(QString rolename, QListWidget* listWn
 
         if (listWnd == m_listWnd2)
         {
-            QCreateGroupListItemWnd* wnd = dynamic_cast<QCreateGroupListItemWnd*>(listWnd->itemWidget(item));
+            QCreateGroupListItemWnd* wnd =
+                dynamic_cast<QCreateGroupListItemWnd*>(
+                    listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 bHas = true;
@@ -180,14 +197,17 @@ bool QCreateGroupWnd::hasThisWndByRolename(QString rolename, QListWidget* listWn
     return bHas;
 }
 
-void QCreateGroupWnd::delThisWndByRolename(QString rolename, QListWidget* listWnd)
+void QCreateGroupWnd::delThisWndByRolename(QString rolename,
+                                           QListWidget* listWnd)
 {
     for (int i = 0; i < listWnd->count(); i++)
     {
         QListWidgetItem* item = listWnd->item(i);
         if (listWnd == m_listWnd1)
         {
-            QCreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(listWnd->itemWidget(item));
+            QCreateGroupListItemWithSelBtnWnd* wnd =
+                dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(
+                    listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 listWnd->takeItem(i);
@@ -197,7 +217,9 @@ void QCreateGroupWnd::delThisWndByRolename(QString rolename, QListWidget* listWn
 
         if (listWnd == m_listWnd2)
         {
-            QCreateGroupListItemWnd* wnd = dynamic_cast<QCreateGroupListItemWnd*>(listWnd->itemWidget(item));
+            QCreateGroupListItemWnd* wnd =
+                dynamic_cast<QCreateGroupListItemWnd*>(
+                    listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 // listWnd->removeItemWidget(item);
@@ -217,7 +239,10 @@ void QCreateGroupWnd::updateData()
     {
         if (hasThisWndByRolename(itMap->second, m_listWnd1) == false)
         {
-            addListWnd1Item("./img/head2.png", itMap->first, QString::number(itMap->first).toStdString().c_str(), itMap->second.toStdString().c_str());
+            addListWnd1Item("./img/head2.png",
+                            itMap->first,
+                            QString::number(itMap->first).toStdString().c_str(),
+                            itMap->second.toStdString().c_str());
         }
     }
 
@@ -232,7 +257,9 @@ void QCreateGroupWnd::updateData()
                 continue;
             }
 
-            QCreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(m_listWnd1->itemWidget(item));
+            QCreateGroupListItemWithSelBtnWnd* wnd =
+                dynamic_cast<QCreateGroupListItemWithSelBtnWnd*>(
+                    m_listWnd1->itemWidget(item));
             if (wnd == nullptr)
             {
                 continue;
@@ -319,7 +346,8 @@ void QCreateGroupWnd::slotComfirmBtnClick()
             continue;
         }
 
-        QCreateGroupListItemWnd* wnd = dynamic_cast<QCreateGroupListItemWnd*>(m_listWnd2->itemWidget(item));
+        QCreateGroupListItemWnd* wnd = dynamic_cast<QCreateGroupListItemWnd*>(
+            m_listWnd2->itemWidget(item));
         if (wnd == NULL)
         {
             continue;
@@ -337,16 +365,20 @@ void QCreateGroupWnd::slotComfirmBtnClick()
         json["groupfriends"].Add(groupfriendIdVct[i]);
     }
     //向远端服务器发送请求
-    QWSClientMgr::getMgr()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
-        LogDebug << "msg:" << msg.ToString().c_str();
-        //现在服务端仅仅返回 createid，groupname,groupid,groupfriends
-        int groupid = -1;
-        if (!msg["data"].Get("groupid", groupid))
-        {
-            LogDebug << "msg[\"data\"] can not find groupid!";
-            return;
-        }
-        //接收到创建群组成功的时候，向列表中嵌入一条数据
-        QMainWnd::getMainWnd()->m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.toStdString().c_str(), groupid);
-    });
+    QWSClientMgr::getMgr()->request(
+        "cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
+            LogDebug << "msg:" << msg.ToString().c_str();
+            //现在服务端仅仅返回 createid，groupname,groupid,groupfriends
+            int groupid = -1;
+            if (!msg["data"].Get("groupid", groupid))
+            {
+                LogDebug << "msg[\"data\"] can not find groupid!";
+                return;
+            }
+            //接收到创建群组成功的时候，向列表中嵌入一条数据
+            QMainWnd::getMainWnd()->m_commGroupsListWnd->addGroupItem(
+                "./img/groupHead.png",
+                groupname.toStdString().c_str(),
+                groupid);
+        });
 }

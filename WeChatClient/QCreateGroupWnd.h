@@ -15,15 +15,21 @@
 class QCreateGroupWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QCreateGroupWnd(QWidget* p = nullptr);
 
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
-    void addListWnd1Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename);
-    void addListWnd2Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename);
+    void addListWnd1Item(const char* headUrl,
+                         int64_t friendid,
+                         const char* nickname,
+                         const char* rolename);
+    void addListWnd2Item(const char* headUrl,
+                         int64_t friendid,
+                         const char* nickname,
+                         const char* rolename);
 
     //通过rolename判断listwnd2中是否已经添加此窗口
     bool hasThisWndByRolename(QString rolename, QListWidget* listWnd);
@@ -32,7 +38,7 @@ public:
 
     //主要是读取当前有几个好友并显示
     void updateData();
-public slots:
+  public slots:
     void closeWnd();
     void minWnd();
 
@@ -41,7 +47,7 @@ public slots:
     //点击确认按钮的响应
     void slotComfirmBtnClick();
 
-public:
+  public:
     QWidget* m_centerWnd;
 
     QVBoxLayout* m_vLayout;

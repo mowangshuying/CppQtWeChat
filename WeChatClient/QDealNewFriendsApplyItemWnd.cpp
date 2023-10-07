@@ -3,15 +3,20 @@
 #include <QMessageBox>
 #include "QDataManager.h"
 
-QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(QWidget* p /*= nullptr*/,
-                                                         const char* headurl /*= ""*/,
-                                                         const char* name /*= ""*/,
-                                                         const char* msg /*= ""*/,
-                                                         int state /*= 0*/,
-                                                         int id /* = 0*/,
-                                                         bool isApplyer /* = false*/,
-                                                         int userid /*=0*/)
-    : QWidget(p), m_state(state), m_id(id), m_userid(userid), m_isApplyer(isApplyer)
+QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(
+    QWidget* p /*= nullptr*/,
+    const char* headurl /*= ""*/,
+    const char* name /*= ""*/,
+    const char* msg /*= ""*/,
+    int state /*= 0*/,
+    int id /* = 0*/,
+    bool isApplyer /* = false*/,
+    int userid /*=0*/)
+    : QWidget(p),
+      m_state(state),
+      m_id(id),
+      m_userid(userid),
+      m_isApplyer(isApplyer)
 
 {
     LogFunc;
@@ -112,11 +117,13 @@ void QDealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 1);
-    QWSClientMgr::getMgr()->request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
-        m_AgreeBtn->setText("已同意");
-        m_AgreeBtn->setEnabled(false);
-        m_refuseBtn->hide();
-    });
+    QWSClientMgr::getMgr()->request("cs_msg_do_apply_add_user",
+                                    json,
+                                    [this](neb::CJsonObject& msg) {
+                                        m_AgreeBtn->setText("已同意");
+                                        m_AgreeBtn->setEnabled(false);
+                                        m_refuseBtn->hide();
+                                    });
 }
 
 void QDealNewFriendsApplyItemWnd::slotOnRefuseBtnClick()
@@ -125,9 +132,11 @@ void QDealNewFriendsApplyItemWnd::slotOnRefuseBtnClick()
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 2);
-    QWSClientMgr::getMgr()->request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
-        m_AgreeBtn->setText("已拒绝");
-        m_AgreeBtn->setEnabled(false);
-        m_refuseBtn->hide();
-    });
+    QWSClientMgr::getMgr()->request("cs_msg_do_apply_add_user",
+                                    json,
+                                    [this](neb::CJsonObject& msg) {
+                                        m_AgreeBtn->setText("已拒绝");
+                                        m_AgreeBtn->setEnabled(false);
+                                        m_refuseBtn->hide();
+                                    });
 }

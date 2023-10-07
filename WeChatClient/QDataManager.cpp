@@ -7,7 +7,8 @@ QDataManager::QDataManager()
 {
     LogFunc;
     QFile emoijFile("./emoij/emoij.txt");
-    if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (emoijFile.exists() &&
+        emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QString str = emoijFile.readAll();
         m_emoijStrList = str.split('|', QString::SkipEmptyParts);

@@ -11,15 +11,19 @@
 class QCreateGroupListItemWithSelBtnWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QCreateGroupListItemWithSelBtnWnd(QWidget* p = nullptr);
-    QCreateGroupListItemWithSelBtnWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
-signals:
+    QCreateGroupListItemWithSelBtnWnd(QWidget* p,
+                                      const char* headimg,
+                                      int64_t friendid,
+                                      const char* nickname,
+                                      const char* rolename);
+  signals:
     void signalSelRBtnClick(QMap<QString, QString> map);
-public slots:
+  public slots:
     void slotClickedSelBtn(bool isSel = false);
 
-public:
+  public:
     QHBoxLayout* m_hLayout;
     QLabel* m_headImage;
     QLabel* m_nickName;

@@ -140,7 +140,7 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setMouseTracking(true);
 }
 
- QCommContactInfoWnd::~QCommContactInfoWnd()
+QCommContactInfoWnd::~QCommContactInfoWnd()
 {
 }
 

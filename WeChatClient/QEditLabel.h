@@ -12,7 +12,7 @@ class QEditLabel : public QWidget
     Q_OBJECT
 
     Q_PROPERTY(bool showLabel READ getShowLabel WRITE setShowLabel)
-public:
+  public:
     QEditLabel(QWidget* parent = nullptr);
 
     void setText(const char* text);
@@ -27,13 +27,13 @@ public:
     {
         m_bShowLable = bShowLable;
     }
-signals:
+  signals:
     void saveText();
 
-protected:
+  protected:
     bool eventFilter(QObject* obj, QEvent* e);
 
-private:
+  private:
     QStackedLayout* m_StackLayout;
     QLabel* m_label;
     QLineEdit* m_lineEdit;

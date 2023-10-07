@@ -8,7 +8,8 @@
 #include "./json/CJsonObject.hpp"
 #include "QStyleSheetMgr.h"
 
-QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/) : QWidget(p)
+QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/)
+    : QWidget(p)
 {
     LogFunc;
     setObjectName("QDealNewFriendsApplyWnd");
@@ -83,9 +84,16 @@ void QDealNewFriendsApplyWnd::resizeEvent(QResizeEvent* event)
     }
 }
 
-void QDealNewFriendsApplyWnd::addListItem(const char* headurl, const char* name, const char* msg, int state, int id, bool isApplyer, int userid)
+void QDealNewFriendsApplyWnd::addListItem(const char* headurl,
+                                          const char* name,
+                                          const char* msg,
+                                          int state,
+                                          int id,
+                                          bool isApplyer,
+                                          int userid)
 {
-    QDealNewFriendsApplyItemWnd* pMsgItem = new QDealNewFriendsApplyItemWnd(m_listWnd1, headurl, name, msg, state, id, isApplyer, userid);
+    QDealNewFriendsApplyItemWnd* pMsgItem = new QDealNewFriendsApplyItemWnd(
+        m_listWnd1, headurl, name, msg, state, id, isApplyer, userid);
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd1);
 
     pMsgItem->setFixedWidth(this->width() - 50);
@@ -98,97 +106,110 @@ void QDealNewFriendsApplyWnd::setFriendApplyList()
     //
     neb::CJsonObject json;
     json.Add("ownerid", QMainWnd::getMainWnd()->m_userid);
-    QWSClientMgr::getMgr()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
-        LogDebug << msg.ToString().c_str();
-        for (int i = 0; i < msg["data"].GetArraySize(); i++)
-        {
-            neb::CJsonObject tempJsonObj;
-            if (!msg["data"].Get(i, tempJsonObj))
+    QWSClientMgr::getMgr()->request(
+        "cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
+            LogDebug << msg.ToString().c_str();
+            for (int i = 0; i < msg["data"].GetArraySize(); i++)
             {
-                continue;
+                neb::CJsonObject tempJsonObj;
+                if (!msg["data"].Get(i, tempJsonObj))
+                {
+                    continue;
+                }
+
+                //
+                int64_t ownerid;
+                if (!tempJsonObj.Get("ownerid", ownerid))
+                {
+                    continue;
+                }
+
+                int64_t friendid;
+                if (!tempJsonObj.Get("friendid", friendid))
+                {
+                    continue;
+                }
+
+                if (ownerid == QMainWnd::getMainWnd()->m_userid)
+                {
+                    std::string username;
+                    if (!tempJsonObj.Get("friendusername", username))
+                    {
+                        continue;
+                    }
+
+                    std::string applymsg;
+                    if (!tempJsonObj.Get("applymsg", applymsg))
+                    {
+                        continue;
+                    }
+
+                    int applystate = -1;
+                    if (!tempJsonObj.Get("applystate", applystate))
+                    {
+                        continue;
+                    }
+
+                    int id = -1;
+                    if (!tempJsonObj.Get("id", id))
+                    {
+                        continue;
+                    }
+
+                    if (hasThisFriendApplyById(id))
+                    {
+                        continue;
+                    }
+
+                    addListItem("./img/head2.png",
+                                username.c_str(),
+                                applymsg.c_str(),
+                                applystate,
+                                id,
+                                true,
+                                friendid);
+                }
+                else
+                {
+                    std::string username;
+                    if (!tempJsonObj.Get("ownerusername", username))
+                    {
+                        continue;
+                    }
+
+                    std::string applymsg;
+                    if (!tempJsonObj.Get("applymsg", applymsg))
+                    {
+                        continue;
+                    }
+
+                    int applystate = -1;
+                    if (!tempJsonObj.Get("applystate", applystate))
+                    {
+                        continue;
+                    }
+
+                    int id = -1;
+                    if (!tempJsonObj.Get("id", id))
+                    {
+                        continue;
+                    }
+
+                    if (hasThisFriendApplyById(id))
+                    {
+                        continue;
+                    }
+
+                    addListItem("./img/head2.png",
+                                username.c_str(),
+                                applymsg.c_str(),
+                                applystate,
+                                id,
+                                false,
+                                ownerid);
+                }
             }
-
-            //
-            int64_t ownerid;
-            if (!tempJsonObj.Get("ownerid", ownerid))
-            {
-                continue;
-            }
-
-            int64_t friendid;
-            if (!tempJsonObj.Get("friendid", friendid))
-            {
-                continue;
-            }
-
-            if (ownerid == QMainWnd::getMainWnd()->m_userid)
-            {
-                std::string username;
-                if (!tempJsonObj.Get("friendusername", username))
-                {
-                    continue;
-                }
-
-                std::string applymsg;
-                if (!tempJsonObj.Get("applymsg", applymsg))
-                {
-                    continue;
-                }
-
-                int applystate = -1;
-                if (!tempJsonObj.Get("applystate", applystate))
-                {
-                    continue;
-                }
-
-                int id = -1;
-                if (!tempJsonObj.Get("id", id))
-                {
-                    continue;
-                }
-
-                if (hasThisFriendApplyById(id))
-                {
-                    continue;
-                }
-
-                addListItem("./img/head2.png", username.c_str(), applymsg.c_str(), applystate, id, true, friendid);
-            }
-            else
-            {
-                std::string username;
-                if (!tempJsonObj.Get("ownerusername", username))
-                {
-                    continue;
-                }
-
-                std::string applymsg;
-                if (!tempJsonObj.Get("applymsg", applymsg))
-                {
-                    continue;
-                }
-
-                int applystate = -1;
-                if (!tempJsonObj.Get("applystate", applystate))
-                {
-                    continue;
-                }
-
-                int id = -1;
-                if (!tempJsonObj.Get("id", id))
-                {
-                    continue;
-                }
-
-                if (hasThisFriendApplyById(id))
-                {
-                    continue;
-                }
-
-                addListItem("./img/head2.png", username.c_str(), applymsg.c_str(), applystate, id, false, ownerid);
-            }
-        }
-    });
+        });
 }
 
 bool QDealNewFriendsApplyWnd::hasThisFriendApplyById(int id)
@@ -197,7 +218,9 @@ bool QDealNewFriendsApplyWnd::hasThisFriendApplyById(int id)
     for (int i = 0; i < m_listWnd1->count(); i++)
     {
         QListWidgetItem* pitem = m_listWnd1->item(i);
-        QDealNewFriendsApplyItemWnd* pApplyItemWnd = dynamic_cast<QDealNewFriendsApplyItemWnd*>(m_listWnd1->itemWidget(pitem));
+        QDealNewFriendsApplyItemWnd* pApplyItemWnd =
+            dynamic_cast<QDealNewFriendsApplyItemWnd*>(
+                m_listWnd1->itemWidget(pitem));
         if (pApplyItemWnd->m_id == id)
         {
             bHas = true;

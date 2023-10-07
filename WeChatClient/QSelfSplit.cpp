@@ -1,6 +1,7 @@
 #include "QSelfSplit.h"
 
-QSelfSplit::QSelfSplit(QWidget* p /*= nullptr*/, QSimpleSplitDirection direct /* Direction_H */)
+QSelfSplit::QSelfSplit(QWidget* p /*= nullptr*/,
+                       QSimpleSplitDirection direct /* Direction_H */)
 {
     setObjectName("QSimpleSplit");
     setAttribute(Qt::WA_StyledBackground);

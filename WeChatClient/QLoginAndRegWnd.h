@@ -15,7 +15,7 @@
 class QLoginAndRegWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QLoginAndRegWnd(QWidget* p = nullptr);
     ~QLoginAndRegWnd()
     {
@@ -25,7 +25,7 @@ public:
 
     void regSignalSlot();
 
-public slots:
+  public slots:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
@@ -35,7 +35,7 @@ public slots:
     void slotRegOrLoginSel(bool isSel = false);
     void slotRegOrLoginBtn();
 
-public:
+  public:
     QWidget* m_centerWnd;
 
     QVBoxLayout* m_vLayout;

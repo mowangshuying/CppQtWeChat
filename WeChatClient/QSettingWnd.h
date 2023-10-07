@@ -12,21 +12,21 @@
 class QSettingWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QSettingWnd(QWidget* p = nullptr);
 
-protected:
+  protected:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
     void paintEvent(QPaintEvent* event);
 
-public slots:
+  public slots:
     void slotClickedCloseBtn();
     void slotClickedMinBtn();
 
-public:
+  public:
     bool m_leftBtnPressed = false;
     QPoint m_LeftBtnPressPoint;
 

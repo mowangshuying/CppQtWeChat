@@ -6,7 +6,8 @@
 
 #include "QStyleSheetMgr.h"
 
-QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget(p)
+QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p)
+    : QWidget(p)
 {
     LogFunc;
     m_centerWnd = new QWidget(this);
@@ -36,7 +37,8 @@ QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidg
     // }*/
     m_vLayout->addWidget(m_createGroupBtn);
 
-    //  setFixedHeight(m_createGroupBtn->height() + m_addContactsOrGroupBtn->height());
+    //  setFixedHeight(m_createGroupBtn->height() +
+    //  m_addContactsOrGroupBtn->height());
     m_centerWnd->setLayout(m_vLayout);
 
     m_findFriendOrGroupWnd = new QFindFriendOrGroupWnd();
@@ -45,7 +47,10 @@ QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p) : QWidg
     m_crateGroupWnd = new QCreateGroupWnd();
     m_crateGroupWnd->hide();
 
-    connect(m_addContactsOrGroupBtn, SIGNAL(clicked()), this, SLOT(slotAddContactsOrGroupBtnClick()));
+    connect(m_addContactsOrGroupBtn,
+            SIGNAL(clicked()),
+            this,
+            SLOT(slotAddContactsOrGroupBtnClick()));
     connect(m_createGroupBtn, SIGNAL(clicked()), this, SLOT(slotCreateGroup()));
 }
 

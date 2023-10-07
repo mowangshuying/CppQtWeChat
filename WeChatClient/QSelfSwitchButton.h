@@ -15,25 +15,25 @@ https://blog.csdn.net/weixin_39572794/article/details/110516773
 class QSelfSwitchButton : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QSelfSwitchButton(QWidget *parent = nullptr);
     ~QSelfSwitchButton();
 
-protected:
+  protected:
     void paintEvent(QPaintEvent *e);
     void resizeEvent(QResizeEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
 
-public:
+  public:
     void drawBg(QPainter &painter);         //绘制背景
     void drawSlidBlock(QPainter &painter);  //绘制滑块
     void drawText(QPainter &painter);       //绘制文字
-signals:
+  signals:
     void stateChange(bool state);
 
-public:
+  public:
     QColor m_bgColorOn;   //开状态时的背景颜色
     QColor m_bgColorOff;  //关状态时的背景颜色
     QColor m_sliderColor;

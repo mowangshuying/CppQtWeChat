@@ -1,7 +1,10 @@
 #include "QDataManager.h"
 #include "QChatFileOuterWnd.h"
 
-QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /* = -1*/, int64_t recvid /* = -1*/) : QWidget(p)
+QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/,
+                                     int64_t sendid /* = -1*/,
+                                     int64_t recvid /* = -1*/)
+    : QWidget(p)
 {
     LogFunc;
     setObjectName("QChatFileOuterWnd");
@@ -121,7 +124,10 @@ void QChatFileOuterWnd::setServerFileName(QString serverFileName)
     m_innerWnd->m_serveFilePath = serverFileName;
 }
 
-void QChatFileOuterWnd::setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath)
+void QChatFileOuterWnd::setFileUploadData(QString fileName,
+                                          QString fileSize,
+                                          QString fileDir,
+                                          QString filePath)
 {
     setFileName(fileName);
     setFileSize(fileSize);
@@ -130,7 +136,10 @@ void QChatFileOuterWnd::setFileUploadData(QString fileName, QString fileSize, QS
     setSendFileShow();
 }
 
-void QChatFileOuterWnd::setFileDownLoadData(QString fileName, QString fileSize, QString fileState, QString serverFileName)
+void QChatFileOuterWnd::setFileDownLoadData(QString fileName,
+                                            QString fileSize,
+                                            QString fileState,
+                                            QString serverFileName)
 {
     setFileName(fileName);
     setFileSize(fileSize);

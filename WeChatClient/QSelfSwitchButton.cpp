@@ -30,7 +30,9 @@ void QSelfSwitchButton::mousePressEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton)
     {
-        if ((e->pos().x() - m_centerPoint.x()) * (e->pos().y() - m_centerPoint.y()) <= ((rect().height() / 2) * (rect().height() / 2)))
+        if ((e->pos().x() - m_centerPoint.x()) *
+                (e->pos().y() - m_centerPoint.y()) <=
+            ((rect().height() / 2) * (rect().height() / 2)))
         {
             m_bPress = true;
             m_mouseX = e->pos().x();
@@ -44,7 +46,8 @@ void QSelfSwitchButton::mouseMoveEvent(QMouseEvent *e)
 {
     if (m_bPress)
     {
-        if ((e->pos().x() >= m_startPoint.x()) && (e->pos().x() <= m_endPoint.x()))
+        if ((e->pos().x() >= m_startPoint.x()) &&
+            (e->pos().x() <= m_endPoint.x()))
         {
             int tempX = e->pos().x();
             m_centerPoint.setX(tempX - m_mouseX + m_centerPoint.x());
@@ -81,7 +84,8 @@ void QSelfSwitchButton::resizeEvent(QResizeEvent *e)
 {
     m_startPoint = QPoint(rect().height() / 2, rect().height() / 2);
     m_centerPoint = m_startPoint;
-    m_endPoint = QPoint((rect().right() - rect().height() / 2), rect().height() / 2);
+    m_endPoint =
+        QPoint((rect().right() - rect().height() / 2), rect().height() / 2);
 }
 
 void QSelfSwitchButton::paintEvent(QPaintEvent *e)
@@ -112,9 +116,17 @@ void QSelfSwitchButton::drawBg(QPainter &painter)
     int startX = rect().height() / 2;
     int startY = rect().top();
     path.moveTo(startX, startY);
-    path.arcTo(QRect(rect().left(), rect().top(), rect().height(), rect().height()), 90, 180);
+    path.arcTo(
+        QRect(rect().left(), rect().top(), rect().height(), rect().height()),
+        90,
+        180);
     path.lineTo((rect().right() - startX), rect().height());
-    path.arcTo(QRect((rect().right() - rect().height()), rect().top(), rect().height(), rect().height()), 270, 180);
+    path.arcTo(QRect((rect().right() - rect().height()),
+                     rect().top(),
+                     rect().height(),
+                     rect().height()),
+               270,
+               180);
     path.lineTo(startX, startY);
     painter.drawPath(path);
     painter.restore();
@@ -150,6 +162,7 @@ void QSelfSwitchButton::drawText(QPainter &painter)
         y = rect().top();
         m_strText = "";
     }
-    painter.drawText(x, y, rect().height(), rect().height(), Qt::AlignCenter, m_strText);
+    painter.drawText(
+        x, y, rect().height(), rect().height(), Qt::AlignCenter, m_strText);
     painter.restore();
 }

@@ -18,7 +18,7 @@ class QCommListWnd : public QWidget
     //添加消息映射支持
     Q_OBJECT
 
-public:
+  public:
     enum QCommListWndEnum
     {
         MsgItemWndTpye = 0,
@@ -27,23 +27,31 @@ public:
         SearchItemWndType = 3
     };
 
-    QCommListWnd(QWidget* p = nullptr, QCommListWndEnum wndType = MsgItemWndTpye);
+    QCommListWnd(QWidget* p = nullptr,
+                 QCommListWndEnum wndType = MsgItemWndTpye);
 
-signals:
+  signals:
     void signalCommListChanged(int num);
     void signalContactInfoChange(QMap<QString, QString> infoMap);
     void signalSearchText(QString searchText);
-public slots:
+  public slots:
     void slotOnCurrentItemClicked(QListWidgetItem* item);
     //如果点击那个按钮的话
     void slotOnStartGroupBtnClicked();
 
-protected:
+  protected:
     bool eventFilter(QObject* target, QEvent* event);
 
-public:
-    void addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg);
-    void addContactsItem(const char* headUrl, const char* name, bool isNewFriend = false, int friendid = -1);
+  public:
+    void addMsgItem(const char* name,
+                    const char* msg,
+                    qint64 sesid,
+                    int64_t userid,
+                    bool isGroupMsg);
+    void addContactsItem(const char* headUrl,
+                         const char* name,
+                         bool isNewFriend = false,
+                         int friendid = -1);
     void addGroupItem(const char* headUrl, const char* name, int groupid);
 
     bool hasMsgItemBySesId(int64_t sesid);

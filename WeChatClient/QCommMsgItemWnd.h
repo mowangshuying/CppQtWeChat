@@ -15,18 +15,23 @@
 class QCommMsgItemWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QCommMsgItemWnd(QWidget* p);
-    QCommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg);
+    QCommMsgItemWnd(QWidget* p,
+                    const char* name,
+                    const char* msg,
+                    int64_t sesid,
+                    int64_t userid,
+                    bool isGroppMsg);
     ~QCommMsgItemWnd();
 
     void requestHeadImg(int id, bool isGroupMsg);
     void loadUserHeadPixmap(QNetworkReply* reply);
     void loadGroupHeadPixmap(QNetworkReply* reply);
-public slots:
+  public slots:
     void slotReplyFinished(QNetworkReply* reply);
 
-public:
+  public:
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout;
     QLabel* m_headurl;

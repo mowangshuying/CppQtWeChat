@@ -5,7 +5,8 @@
 #include <QNetworkAccessManager>
 #include "QDataManager.h"
 
-QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
+QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/)
+    : QWidget(p)
 {
     LogFunc;
     setObjectName("QGroupFriendsItemWnd");
@@ -33,8 +34,12 @@ QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p
 void QGroupFriendsItemWnd::requestHeadImg()
 {
     //向远端请求头像的信息
-    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(m_friendId);
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
+    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png")
+                         .arg(m_friendId);
+    connect(m_networkMgr,
+            SIGNAL(finished(QNetworkReply*)),
+            this,
+            SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 }
 

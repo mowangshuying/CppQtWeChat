@@ -21,11 +21,11 @@
 class QWSClientMgr : public QObject
 {
     Q_OBJECT
-private:
+  private:
     QWSClientMgr();
     ~QWSClientMgr();
 
-public:
+  public:
     static void initMgr();
     static void exitMgr();
     static QWSClientMgr* getMgr();
@@ -47,18 +47,20 @@ public:
     void transfer(neb::CJsonObject& msg);
 
     void request(const std::string& cmd, neb::CJsonObject& json);
-    void request(const std::string& cmd, neb::CJsonObject& json, NetEventCall call);
+    void request(const std::string& cmd,
+                 neb::CJsonObject& json,
+                 NetEventCall call);
 
     void onNetMsgDo(int64 msgId, neb::CJsonObject& msgJson);
     void onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson);
 
-public slots:
+  public slots:
     void slotConnected();
     void slotDisconnected();
     void slotRecvMsg(const QString& message);
     void slotTimer();
 
-public:
+  public:
     static QWSClientMgr* m_WsClientMgr;
 
     QWebSocket* m_webSock;

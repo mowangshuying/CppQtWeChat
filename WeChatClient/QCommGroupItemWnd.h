@@ -11,16 +11,19 @@
 class QCommGroupItemWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QCommGroupItemWnd(QWidget* p);
 
-    QCommGroupItemWnd(QWidget* p, const char* headUrl, const char* name, int groupId = -1);
+    QCommGroupItemWnd(QWidget* p,
+                      const char* headUrl,
+                      const char* name,
+                      int groupId = -1);
 
     ~QCommGroupItemWnd();
-public slots:
+  public slots:
     void slotReplyFinished(QNetworkReply* reply);
 
-public:
+  public:
     QHBoxLayout* m_hLayout;
     //联系人头像
     QLabel* m_groupImgUrl;

@@ -2,7 +2,8 @@
 #include "QDataManager.h"
 #include "QCreateGroupListItemWnd.h"
 
-QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
+QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p /*= nullptr*/)
+    : QWidget(p)
 {
     LogFunc;
     setObjectName("QCreateGroupListItemWnd");
@@ -21,7 +22,11 @@ QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p /*= nullptr*/) : QWi
     m_hLayout->addWidget(m_roleName);
 }
 
-QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename)
+QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p,
+                                                 const char* headimg,
+                                                 int64_t friendid,
+                                                 const char* nickname,
+                                                 const char* rolename)
     : QWidget(p), m_friendid(friendid)
 {
     LogFunc;
@@ -43,7 +48,8 @@ QCreateGroupListItemWnd::QCreateGroupListItemWnd(QWidget* p, const char* headimg
 
     m_headImgStr = headimg;
     QPixmap pixmap1 = QPixmap(headimg);
-    QPixmap pixmap2 = pixmap1.scaled(25, 25, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap pixmap2 =
+        pixmap1.scaled(25, 25, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     m_headImage->setPixmap(QPixmap(headimg));
     m_headImage->setFixedSize(25, 25);
 

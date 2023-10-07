@@ -9,7 +9,7 @@
 class QChatMsgWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     //消息类型
     enum ChatMsgTypeEnum
     {
@@ -19,22 +19,28 @@ public:
         ChatMsg_OtherMsgText,  // 其他人发送的消息
     };
 
-public:
+  public:
     //构造函数
-    QChatMsgWnd(QWidget* p = nullptr, int64_t sendid = 0, QString userName = "", int64_t recvid = 0);
+    QChatMsgWnd(QWidget* p = nullptr,
+                int64_t sendid = 0,
+                QString userName = "",
+                int64_t recvid = 0);
 
     //根据str调整各个框的大小
     QSize fontRect(QString str);
 
     QSize getRealStringSize(QString str);
 
-    void setText(QString text, QString time, QSize allSize, QChatMsgWnd::ChatMsgTypeEnum chatMsgType);
+    void setText(QString text,
+                 QString time,
+                 QSize allSize,
+                 QChatMsgWnd::ChatMsgTypeEnum chatMsgType);
 
-protected:
+  protected:
     //绘制
     void paintEvent(QPaintEvent* event);
 
-public:
+  public:
     int64_t m_sendid;
     int64_t m_recvid;
 

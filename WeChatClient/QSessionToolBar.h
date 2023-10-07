@@ -10,12 +10,13 @@
 class QSessionToolBar : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QSessionToolBar(QWidget* p = nullptr);
-public slots:
+  public slots:
     void slotEmojiBtnClick();
     void slotScreenshotBtnClick();
-public:
+
+  public:
     QHBoxLayout* m_hLayout;
     QEmoijWnd* m_emoijWnd;
     QPushButton* m_emojiBtn;

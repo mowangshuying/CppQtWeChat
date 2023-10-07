@@ -10,7 +10,11 @@ QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p) : QWidget(p)
     setObjectName("QCommGroupItemWnd");
 }
 
-QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p, const char* headUrl, const char* name, int groupId) : QWidget(p), m_groupId(groupId)
+QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p,
+                                     const char* headUrl,
+                                     const char* name,
+                                     int groupId)
+    : QWidget(p), m_groupId(groupId)
 {
     LogFunc;
     setObjectName("QCommGroupItemWnd");
@@ -29,22 +33,26 @@ QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p, const char* headUrl, const char
     m_hLayout->addWidget(m_groupName);
 
     //关于请求图片信息
-    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(groupId);
+    QString imgurl =
+        QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(groupId);
     m_networkMgr = new QNetworkAccessManager(this);
-    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
+    connect(m_networkMgr,
+            SIGNAL(finished(QNetworkReply*)),
+            this,
+            SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 
     setFixedHeight(65);
 }
 
- QCommGroupItemWnd::~QCommGroupItemWnd()
+QCommGroupItemWnd::~QCommGroupItemWnd()
 {
-     if (m_networkMgr)
+    if (m_networkMgr)
     {
-         m_networkMgr = nullptr;
+        m_networkMgr = nullptr;
         delete m_networkMgr;
     }
- }
+}
 
 void QCommGroupItemWnd::slotReplyFinished(QNetworkReply* reply)
 {

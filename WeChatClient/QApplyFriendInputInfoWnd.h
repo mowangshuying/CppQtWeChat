@@ -15,10 +15,10 @@
 class QApplyFriendInputInfoWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QApplyFriendInputInfoWnd(QWidget* p = nullptr);
 
-public:
+  public:
     QWidget* m_centerWnd;
     //主要布局
     QHBoxLayout* m_hLayout;

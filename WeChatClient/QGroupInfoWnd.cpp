@@ -26,7 +26,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_scrollAreaWnd = new QWidget(m_centerWnd);
 
     m_scrollAreaWnd->setObjectName("QGroupInfoCenterWnd");
-    object.m_qssFileName = "./stylesheet/" + m_scrollAreaWnd->objectName() + ".qss";
+    object.m_qssFileName =
+        "./stylesheet/" + m_scrollAreaWnd->objectName() + ".qss";
     object.m_widget = m_scrollAreaWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
@@ -46,7 +47,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_simpleGroupInfoWnd = new QWidget(this);
     m_simpleGroupInfoWnd->setObjectName("QSimpleGroupInfoWnd");
 
-    object.m_qssFileName = "./stylesheet/" + m_simpleGroupInfoWnd->objectName() + ".qss";
+    object.m_qssFileName =
+        "./stylesheet/" + m_simpleGroupInfoWnd->objectName() + ".qss";
     object.m_widget = m_simpleGroupInfoWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
@@ -105,7 +107,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_simpleGroupSettingWnd = new QWidget(this);
     m_simpleGroupSettingWnd->setObjectName("QSimpleGroupSettingWnd");
-    object.m_qssFileName = "./stylesheet/" + m_simpleGroupSettingWnd->objectName() + ".qss";
+    object.m_qssFileName =
+        "./stylesheet/" + m_simpleGroupSettingWnd->objectName() + ".qss";
     object.m_widget = m_simpleGroupSettingWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
@@ -160,7 +163,8 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_delexitWnd = new QWidget(this);
     m_delexitWnd->setObjectName("QGroupInfoExitWnd");
-    object.m_qssFileName = "./stylesheet/" + m_delexitWnd->objectName() + ".qss";
+    object.m_qssFileName =
+        "./stylesheet/" + m_delexitWnd->objectName() + ".qss";
     object.m_widget = m_delexitWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
@@ -197,7 +201,8 @@ void QGroupInfoWnd::addGroupFriendItem(int64_t ownerId, QString nickName)
             continue;
         }
 
-        QGroupFriendsItemWnd* wnd = dynamic_cast<QGroupFriendsItemWnd*>(listWidget->itemWidget(item));
+        QGroupFriendsItemWnd* wnd =
+            dynamic_cast<QGroupFriendsItemWnd*>(listWidget->itemWidget(item));
         if (wnd == nullptr)
         {
             continue;
@@ -231,11 +236,13 @@ void QGroupInfoWnd::slotSetGroupName()
     json.Add("groupId", m_groupId);
     QString groupName = m_groupName2->getText();
     json.Add("groupName", groupName.toStdString());
-    QWSClientMgr::getMgr()->request("cs_msg_set_group_name", json, [this, groupName](neb::CJsonObject& msg) {
-        LogDebug << msg.ToString().c_str();
-        // 更新会话窗口中的标题
-        emit signalUpdateGroupName(groupName);
-    });
+    QWSClientMgr::getMgr()->request("cs_msg_set_group_name",
+                                    json,
+                                    [this, groupName](neb::CJsonObject& msg) {
+                                        LogDebug << msg.ToString().c_str();
+                                        // 更新会话窗口中的标题
+                                        emit signalUpdateGroupName(groupName);
+                                    });
 }
 
 bool QGroupInfoWnd::event(QEvent* event)

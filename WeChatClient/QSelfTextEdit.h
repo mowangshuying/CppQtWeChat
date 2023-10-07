@@ -4,7 +4,7 @@
 
 class QSelfTextEdit : public QTextEdit
 {
-public:
+  public:
     QSelfTextEdit(QWidget *parent = nullptr);
 
     void insertFromMimeData(const QMimeData *source);

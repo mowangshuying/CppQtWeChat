@@ -10,7 +10,9 @@
 #include "QMainWnd.h"
 #include "QStyleSheetMgr.h"
 
-QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString username /*= ""*/)
+QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/,
+                                         int64_t friendid /*= -1*/,
+                                         QString username /*= ""*/)
     : QWidget(p), m_friendid(friendid), m_username(username)
 {
     LogFunc;
@@ -116,16 +118,20 @@ void QApplyFriendNextWnd::slotPushBtnClick()
 
         //获取验证的消息
         auto pApplyWnd1 = dynamic_cast<QApplyFriendInputInfoWnd*>(m_wnd1);
-        json.Add("applymsg", pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
+        json.Add(
+            "applymsg",
+            pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
 
-        QWSClientMgr::getMgr()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
-            int state = 0;
-            if (!msg.Get("state", state))
-            {
-                return;
-            }
-            LogDebug << "recv apply add user";
-        });
+        QWSClientMgr::getMgr()->request("cs_msg_apply_add_user",
+                                        json,
+                                        [](neb::CJsonObject& msg) {
+                                            int state = 0;
+                                            if (!msg.Get("state", state))
+                                            {
+                                                return;
+                                            }
+                                            LogDebug << "recv apply add user";
+                                        });
 
         return;
     }

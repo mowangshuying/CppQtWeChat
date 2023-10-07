@@ -1,6 +1,7 @@
 #include "QApplyFriendWaitInfoWnd.h"
 
-QApplyFriendWaitInfoWnd::QApplyFriendWaitInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
+QApplyFriendWaitInfoWnd::QApplyFriendWaitInfoWnd(QWidget* p /*= nullptr*/)
+    : QWidget(p)
 {
     LogFunc;
     setContentsMargins(0, 0, 0, 0);

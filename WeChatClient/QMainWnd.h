@@ -27,11 +27,11 @@ class QMainWnd : public QWidget
 {
     //添加消息映射支持
     Q_OBJECT
-private:
+  private:
     //会话窗口
     QMainWnd(QWidget* p = nullptr);
 
-public:
+  public:
     ~QMainWnd();
 
     enum BorderArea
@@ -47,7 +47,7 @@ public:
         BorderAreaBottomRight,
     };
 
-public:
+  public:
     static QMainWnd* getMainWnd();
 
     //接收到别人发送的消息
@@ -89,7 +89,7 @@ public:
         requestGroupList();
     }
 
-public slots:
+  public slots:
     void closeWnd();
     void minWnd();
     void maxWnd();
@@ -111,7 +111,7 @@ public slots:
     void slotOnSettingBtnClick();
     void slotSearchText(QString searchText);
 
-public:
+  public:
     QWidget* m_centerWnd;
 
     QHBoxLayout* m_hLayout;

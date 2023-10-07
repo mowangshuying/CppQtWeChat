@@ -12,13 +12,13 @@
 class QFindFriendItemWnd : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     QFindFriendItemWnd(QWidget* p);
     QFindFriendItemWnd(QWidget* p, const char* headUrl, const char* name);
-public slots:
+  public slots:
     void slotAddFriendBtnClick();
 
-public:
+  public:
     QHBoxLayout* m_hLayout;
     //联系人头像
     QLabel* m_headUrl;
