@@ -19,7 +19,7 @@ QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p
     m_hLayout->addWidget(m_headImg);
 
     m_name = new QLabel();
-    m_name->setText("群友昵称");
+    m_name->setText("缇ゅ弸鏄电О");
     m_hLayout->addWidget(m_name);
     m_friendId = -1;
 
@@ -32,7 +32,7 @@ QGroupFriendsItemWnd::QGroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p
 
 void QGroupFriendsItemWnd::requestHeadImg()
 {
-    //向远端请求头像的信息
+    //鍚戣繙绔姹傚ご鍍忕殑淇℃伅
     QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(m_friendId);
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
