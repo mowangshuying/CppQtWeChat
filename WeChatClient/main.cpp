@@ -50,11 +50,10 @@ int main(int argc, char** argv)
     LogDebug << "start";
     QSelfLog::initLog();
     QStyleSheetMgr::initMgr();
-    //´´½¨ÍøÂçÍ¨ÐÅµÄ¹ÜÀí
     QWSClientMgr::initMgr();
     QDataManager::initMgr();
 
-    //¼ÓÔØ±¾µØµÄÑùÊ½±í
+    //åŠ è½½æœ¬åœ°çš„æ ·å¼è¡¨
     QFile qss("./stylesheet/wechat.qss");
     if (qss.open(QFile::ReadOnly))
     {
@@ -62,12 +61,13 @@ int main(int argc, char** argv)
         qss.close();
     }
 
-    //µÇÂ¼´°¿Ú
+    //ç™»å½•çª—å£
     QLoginAndRegWnd lgw;
     lgw.show();
 
     app.exec();
 
+    // æœ€åŽé€€å‡ºæ—¥å¿—
     QDataManager::exitMgr();
     QWSClientMgr::exitMgr();
     QStyleSheetMgr::exitMgr();

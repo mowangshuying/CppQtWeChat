@@ -57,25 +57,25 @@ class QSelfLog
              << "." << __FUNCTION__ << "." << __LINE__ << "]"
 
 #define LogInfo                                                              \
-    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]"   \
+    qDebug() << "[" << getLogTimeStr << "]"   \
              << "["                                                          \
              << "info"                                                       \
              << "]"                                                          \
-             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() \
+             << "[" << getLogFileStr \
              << "." << __FUNCTION__ << "." << __LINE__ << "]"
 
 #define LogWarn                                                              \
-    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]"   \
+    qDebug() << "[" << getLogTimeStr << "]"   \
              << "["                                                          \
              << "warn"                                                       \
              << "]"                                                          \
-             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() \
+             << "[" << getLogFileStr \
              << "." << __FUNCTION__ << "." << __LINE__ << "]"
 
 #define LogErr                                                               \
-    qDebug() << "[" << QSelfLog::getTimeStr().toStdString().c_str() << "]"   \
+    qDebug() << "[" << getLogTimeStr << "]"   \
              << "["                                                          \
              << "err"                                                        \
              << "]"                                                          \
-             << "[" << QSelfLog::getFileName(__FILE__).toStdString().c_str() \
+             << "[" << getLogFileStr \
              << "." << __FUNCTION__ << "." << __LINE__ << "]"
