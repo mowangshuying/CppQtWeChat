@@ -61,12 +61,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="QtSettings">
     <QtInstall>msvc2017</QtInstall>
-    <QtModules>core;gui;widgets;websockets;</QtModules>
+    <QtModules>core;gui;multimedia;widgets;websockets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="QtSettings">
     <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>network;gui;multimedia;widgets;websockets;multimediawidgets;</QtModules>
+    <QtModules>core;network;gui;multimedia;widgets;websockets;multimediawidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
