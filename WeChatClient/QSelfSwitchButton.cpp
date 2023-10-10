@@ -7,8 +7,8 @@ QSelfSwitchButton::QSelfSwitchButton(QWidget *parent) : QWidget(parent)
     LogFunc;
     setObjectName("QSwitchButton");
     m_bSwitch = false;
-    m_bgColorOff = QColor(192, 192, 192);  // ¹Ø±Õ°´Å¥Ê±ºò±³¾°Îª»ÒÉ«
-    m_bgColorOn = QColor(50, 205, 50);     // ¿ªÆô×´Ì¬Îª°×É«
+    m_bgColorOff = QColor(192, 192, 192);  // å…³é—­æŒ‰é’®æ—¶å€™èƒŒæ™¯ä¸ºç°è‰²
+    m_bgColorOn = QColor(50, 205, 50);     // å¼€å¯çŠ¶æ€ä¸ºç™½è‰²
     m_sliderColorOff = QColor(255, 255, 255);
     m_sliderColorOn = QColor(255, 255, 255);  //
 
@@ -97,7 +97,7 @@ void QSelfSwitchButton::paintEvent(QPaintEvent *e)
     drawText(painter);
 }
 
-// »æÖÆ±³¾°
+// ç»˜åˆ¶èƒŒæ™¯
 void QSelfSwitchButton::drawBg(QPainter &painter)
 {
     painter.save();
@@ -111,7 +111,7 @@ void QSelfSwitchButton::drawBg(QPainter &painter)
         painter.setBrush(QBrush(m_bgColorOff));
     }
 
-    // »æÖÆ°´Å¥Íâ±ß¿ò
+    // ç»˜åˆ¶æŒ‰é’®å¤–è¾¹æ¡†
     QPainterPath path;
     int startX = rect().height() / 2;
     int startY = rect().top();
@@ -132,7 +132,7 @@ void QSelfSwitchButton::drawBg(QPainter &painter)
     painter.restore();
 }
 
-// »æÖÆ»¬¿é
+// ç»˜åˆ¶æ»‘å—
 void QSelfSwitchButton::drawSlidBlock(QPainter &painter)
 {
     painter.save();

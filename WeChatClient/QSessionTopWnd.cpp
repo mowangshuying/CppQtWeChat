@@ -44,7 +44,7 @@ QSessionTopWnd::QSessionTopWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_titleLabel = new QLabel(this);
     m_titleLabel->setFixedHeight(40);
     m_titleLabel->setFixedWidth(300);
-    m_titleLabel->setText("苏果超市便民服务(234)");
+    m_titleLabel->setText("鑻忔灉瓒呭競渚挎皯鏈嶅姟(234)");
     m_titleLabel->setAlignment(Qt::AlignLeft);
 
     QFont font;

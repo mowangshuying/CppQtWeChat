@@ -23,7 +23,7 @@ QChatFileOuterWnd::QChatFileOuterWnd(QWidget* p /*= nullptr*/,
     {
         m_hLayout->setSpacing(0);
         m_hLayout->addSpacing(10);
-        //ÉèÖÃÍæ¼ÒµÄÍ·Ïñ
+        //è®¾ç½®ç©å®¶çš„å¤´åƒ
         m_hLayout->addLayout(m_vLayout);
         m_hLayout->addSpacing(5);
         m_hLayout->addWidget(m_innerWnd);

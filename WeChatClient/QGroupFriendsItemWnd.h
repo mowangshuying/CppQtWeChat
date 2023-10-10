@@ -13,15 +13,15 @@ class QGroupFriendsItemWnd : public QWidget
     Q_OBJECT
   public:
     QGroupFriendsItemWnd(QWidget* p = nullptr);
-    //ÏòÔ¶¶ËÇëÇóÍ¼Æ¬ĞÅÏ¢
+    //å‘è¿œç«¯è¯·æ±‚å›¾ç‰‡ä¿¡æ¯
     void requestHeadImg();
   public slots:
     void slotReplyFinished(QNetworkReply* reply);
 
   public:
     QHBoxLayout* m_hLayout;  //
-    QLabel* m_headImg;       //Í·Ïñ
-    QLabel* m_name;          //Ãû³Æ
-    int64_t m_friendId;      //ºÃÓÑid
+    QLabel* m_headImg;       //å¤´åƒ
+    QLabel* m_name;          //åç§°
+    int64_t m_friendId;      //å¥½å‹id
     QNetworkAccessManager* m_networkMgr;
 };

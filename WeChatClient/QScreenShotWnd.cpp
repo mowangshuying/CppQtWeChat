@@ -38,14 +38,14 @@ QScreenShotWnd::QScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_begPos = QPoint(-1, -1);
     m_endPos = QPoint(-1, -1);
     m_leftBtnPress = false;
-    //¿ªÆôÊó±êÊµÊ±×·×Ù£¬ÊµÊ±µÄÏÔÊ¾Êó±êµÄÎ»ÖÃ
+    //å¼€å¯é¼ æ ‡å®æ—¶è¿½è¸ªï¼Œå®æ—¶çš„æ˜¾ç¤ºé¼ æ ‡çš„ä½ç½®
     setMouseTracking(true);
 
     m_screenShotRect = QRect(0, 0, size.width(), size.height());
     m_RightBtnMenu = new QMenu(this);
-    m_RightBtnMenu->addAction("¸´ÖÆ(CTRL+C)", this, SLOT(slotCopyScreenShot()));
-    m_RightBtnMenu->addAction("±£´æ(Ctrl+S)", this, SLOT(slotSaveScreenShot()));
-    m_RightBtnMenu->addAction("ÍË³ö(ESC)", this, SLOT(slotExitSccreenShot()));
+    m_RightBtnMenu->addAction("å¤åˆ¶(CTRL+C)", this, SLOT(slotCopyScreenShot()));
+    m_RightBtnMenu->addAction("ä¿å­˜(Ctrl+S)", this, SLOT(slotSaveScreenShot()));
+    m_RightBtnMenu->addAction("é€€å‡º(ESC)", this, SLOT(slotExitSccreenShot()));
     m_isPainting = false;
     m_patingSuc = false;
 
@@ -85,10 +85,10 @@ void QScreenShotWnd::slotCopyScreenShot()
 void QScreenShotWnd::slotSaveScreenShot()
 {
     QString defaultFileName =
-        QString("½ØÍ¼%1.png")
+        QString("æˆªå›¾%1.png")
             .arg(QDateTime::currentDateTime().toString("yyyyhhmmsszzz"));
     QString fileName = QFileDialog::getSaveFileName(
-        this, "½ØÍ¼Áí´æÎª", defaultFileName, "Image (*.jpg *.png *.bmp)");
+        this, "æˆªå›¾å¦å­˜ä¸º", defaultFileName, "Image (*.jpg *.png *.bmp)");
     if (fileName.length() > 0)
     {
         m_fullScreenPixmap.copy(m_screenShotRect).save(fileName, "png");
@@ -196,17 +196,17 @@ void QScreenShotWnd::paintEvent(QPaintEvent* event)
     }
 
     m_isPainting = true;
-    QPainter painter(this);  //½«µ±Ç°´°Ìå¶ÔÏóÉèÖÃÎª»­²¼
+    QPainter painter(this);  //å°†å½“å‰çª—ä½“å¯¹è±¡è®¾ç½®ä¸ºç”»å¸ƒ
     QPen pen;
-    pen.setColor(qRgba(26, 173, 25, 1.0));  //ÉèÖÃ±ÊÉ«
-    pen.setWidth(2);                        //»­±ÊÏßÌõ¿í¶È
-    painter.setPen(pen);                    //ÉèÖÃ»­±Ê
+    pen.setColor(qRgba(26, 173, 25, 1.0));  //è®¾ç½®ç¬”è‰²
+    pen.setWidth(2);                        //ç”»ç¬”çº¿æ¡å®½åº¦
+    painter.setPen(pen);                    //è®¾ç½®ç”»ç¬”
 
     LogDebug << "screen rect: x = " << m_screenShotRect.x()
              << ", y = " << m_screenShotRect.y()
              << ", w = " << m_screenShotRect.width()
              << ",h = " << m_screenShotRect.height();
-    //·ÀÖ¹µÚÒ»´Î¾ÍÖØ»æ ²¢ÇÒ¿í¸ß´óÓÚ0Ê±²Å½øĞĞ½ØÍ¼²Ù×÷
+    //é˜²æ­¢ç¬¬ä¸€æ¬¡å°±é‡ç»˜ å¹¶ä¸”å®½é«˜å¤§äº0æ—¶æ‰è¿›è¡Œæˆªå›¾æ“ä½œ
     if (m_screenShotRect.width() > 0 && m_screenShotRect.height() > 0)
     {
         LogDebug << "paint it!";
@@ -224,21 +224,21 @@ void QScreenShotWnd::contextMenuEvent(QContextMenuEvent*)
 
 void QScreenShotWnd::keyPressEvent(QKeyEvent* e)
 {
-    /// Esc ¼üÍË³ö½ØÍ¼;
+    /// Esc é”®é€€å‡ºæˆªå›¾;
     if (e->key() == Qt::Key_Escape)
     {
         hide();
-    }  /// CTRL+C ¸´ÖÆ
+    }  /// CTRL+C å¤åˆ¶
     else if (e->key() == Qt::Key_C && e->modifiers() == Qt::ControlModifier)
     {
         slotCopyScreenShot();
-    }  ///½ØÍ¼Áí´æÎª(Ctrl+S)
+    }  ///æˆªå›¾å¦å­˜ä¸º(Ctrl+S)
     else if (e->key() == Qt::Key_S && e->modifiers() == Qt::ControlModifier)
     {
         slotSaveScreenShot();
     }
     else
     {
-        e->ignore();  //ºöÂÔ
+        e->ignore();  //å¿½ç•¥
     }
 }

@@ -47,7 +47,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
 
-    // ◊Û±ﬂLayout
+    // Â∑¶ËæπLayout
     m_sMiddleLayout = new QStackedLayout(m_centerWnd);
     m_sMiddleLayout->addWidget(m_commMsgListWnd);
     m_sMiddleLayout->addWidget(m_commContactsListWnd);
@@ -60,7 +60,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_sRightLayout = new QStackedLayout(m_centerWnd);
     m_sRightLayout->setContentsMargins(0, 0, 0, 0);
 
-    // ¡™œµ»À–≈œ¢¥∞ø⁄
+    // ËÅîÁ≥ª‰∫∫‰ø°ÊÅØÁ™óÂè£
     m_commContactInfo = new QCommContactInfoWnd(m_centerWnd);
     m_sRightLayout->addWidget(m_commContactInfo);
     connect(m_commContactInfo->m_closeBtn,
@@ -76,7 +76,7 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
             this,
             SLOT(minWnd()));
 
-    // –¬µƒ≈Û”—
+    // Êñ∞ÁöÑÊúãÂèã
     m_dealNewFriendsApplyWnd = new QDealNewFriendsApplyWnd(m_centerWnd);
     connect(m_dealNewFriendsApplyWnd->m_closeBtn,
             SIGNAL(clicked()),
@@ -91,13 +91,13 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
             this,
             SLOT(minWnd()));
     m_sRightLayout->addWidget(m_dealNewFriendsApplyWnd);
-    m_commContactsListWnd->addContactsItem("./img/head2.png", "–¬µƒ≈Û”—", true);
+    m_commContactsListWnd->addContactsItem("./img/head2.png", "Êñ∞ÁöÑÊúãÂèã", true);
 
     m_hLayout->addWidget(m_toolWnd);
     m_hLayout->addLayout(m_sMiddleLayout, 0);
 
     {
-        /*ÃÌº”∑÷∏Óœﬂµƒ æ¿˝¥˙¬Î*/
+        /*Ê∑ªÂä†ÂàÜÂâ≤Á∫øÁöÑÁ§∫‰æã‰ª£Á†Å*/
         QSelfSplit* sp = new QSelfSplit(m_centerWnd, QSelfSplit::Direction_V);
         m_hLayout->addWidget(sp);
     }
@@ -180,19 +180,19 @@ QMainWnd::QMainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
             this,
             SLOT(slotReplyFinished(QNetworkReply*)));
 
-    // œµÕ≥Õ–≈Ãπ¶ƒ‹
+    // Á≥ªÁªüÊâòÁõòÂäüËÉΩ
     m_systemTrayIcon = new QSystemTrayIcon(this);
     m_systemTrayIcon->setIcon(QIcon("./img/wechat.ico"));
-    m_systemTrayIcon->setToolTip("QT∞ÊŒ¢–≈v2.0.0");
+    m_systemTrayIcon->setToolTip("QTÁâàÂæÆ‰ø°v2.0.0");
     m_systemTrayIcon->show();
 
     m_systemTrayIconMenu = new QMenu(this);
     m_systemTrayIconShowMainWndAction = new QAction(this);
-    m_systemTrayIconShowMainWndAction->setText("¥Úø™÷˜√Ê∞Â");
+    m_systemTrayIconShowMainWndAction->setText("ÊâìÂºÄ‰∏ªÈù¢Êùø");
     m_systemTrayIconMenu->addAction(m_systemTrayIconShowMainWndAction);
 
     m_systemTrayIconExitAction = new QAction(this);
-    m_systemTrayIconExitAction->setText("ÕÀ≥ˆ");
+    m_systemTrayIconExitAction->setText("ÈÄÄÂá∫");
     m_systemTrayIconMenu->addAction(m_systemTrayIconExitAction);
     m_systemTrayIcon->setContextMenu(m_systemTrayIconMenu);
 
@@ -245,7 +245,7 @@ QMainWnd::~QMainWnd()
 void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 {
     // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
-    // ◊œ»ªÒ»°∂‘”¶µƒª·ª∞id£ª
+    //È¶ñÂÖàËé∑ÂèñÂØπÂ∫îÁöÑ‰ºöËØùidÔºõ
     int sesid = -1;
     if (!msg["data"].Get("sesid", sesid))
     {
@@ -276,7 +276,7 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         return;
     }
 
-    //≤È’“∂‘”¶µƒª·ª∞
+    //Êü•ÊâæÂØπÂ∫îÁöÑ‰ºöËØù
     QSessionWnd* ses = nullptr;
     int count = m_sRightLayout->count();
     for (int i = 0; i < count; i++)
@@ -301,12 +301,12 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         return;
     }
 
-    // ∑¢ÀÕœ˚œ¢
+    // ÂèëÈÄÅÊ∂àÊÅØ
     if (msgtype == 0)
     {
         ses->dealMsgTime();
 
-        //œÚª·ª∞÷–«∂»Î“ªÃı ˝æ›£ª
+        //Âêë‰ºöËØù‰∏≠ÂµåÂÖ•‰∏ÄÊù°Êï∞ÊçÆÔºõ
         QString time = QString::number(QDateTime::currentDateTime().toTime_t());
         QChatMsgWnd* msgWnd =
             new QChatMsgWnd(ses->m_MsgWndList,
@@ -318,17 +318,17 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 
         QSize msgSize = msgWnd->fontRect(msgtext.c_str());
         msgWndItem->setSizeHint(msgSize);
-        //ª·…Ë÷√œ˚œ¢≤¢µ˜”√œ‡”¶µƒ
+        //‰ºöËÆæÁΩÆÊ∂àÊÅØÂπ∂Ë∞ÉÁî®Áõ∏Â∫îÁöÑ
         msgWnd->setText(msgtext.c_str(),
                         time,
                         msgSize,
                         QChatMsgWnd::ChatMsg_OtherMsgText);
-        //πÿ¡™œÓ”Î¥∞ø⁄
+        //ÂÖ≥ËÅîÈ°π‰∏éÁ™óÂè£
         ses->m_MsgWndList->setItemWidget(msgWndItem, msgWnd);
         return;
     }
 
-    // ∑¢ÀÕŒƒº˛
+    // ÂèëÈÄÅÊñá‰ª∂
     if (msgtype == 1)
     {
         ses->dealMsgTime();
@@ -358,12 +358,12 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
             return;
         }
 
-        ////Ω” ’∂À «“ª∏ˆŒƒº˛
+        ////Êé•Êî∂Á´ØÊòØ‰∏Ä‰∏™Êñá‰ª∂
         QChatFileOuterWnd* fileWnd =
             new QChatFileOuterWnd(nullptr, sendid, recvid);
         fileWnd->m_innerWnd->m_fileName->setText(filename_client.c_str());
         fileWnd->m_innerWnd->m_fileSize->setText(filesize.c_str());
-        fileWnd->m_innerWnd->m_sendState->setText("µ»¥˝œ¬‘ÿ");
+        fileWnd->m_innerWnd->m_sendState->setText("Á≠âÂæÖ‰∏ãËΩΩ");
         fileWnd->m_innerWnd->m_serveFilePath = filename_server.c_str();
         fileWnd->m_innerWnd->recvFileShow();
         fileWnd->setFixedWidth(ses->m_MsgWndList->width());
@@ -378,7 +378,7 @@ void QMainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 
 void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
 {
-    // ◊œ»ªÒ»°∂‘”¶µƒª·ª∞id£ª
+    //È¶ñÂÖàËé∑ÂèñÂØπÂ∫îÁöÑ‰ºöËØùidÔºõ
     int sesid = -1;
     if (!msg["data"].Get("sesid", sesid))
     {
@@ -415,7 +415,7 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
         return;
     }
 
-    //≤È’“∂‘”¶µƒª·ª∞
+    //Êü•ÊâæÂØπÂ∫îÁöÑ‰ºöËØù
     QSessionWnd* ses = nullptr;
     int count = m_sRightLayout->count();
     for (int i = 0; i < count; i++)
@@ -438,7 +438,7 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
     {
         if (msgtype == 0)
         {
-            //œÚª·ª∞÷–«∂»Î“ªÃı ˝æ›£ª
+            //Âêë‰ºöËØù‰∏≠ÂµåÂÖ•‰∏ÄÊù°Êï∞ÊçÆÔºõ
             QString time =
                 QString::number(QDateTime::currentDateTime().toTime_t());
             QChatMsgWnd* msgWnd = new QChatMsgWnd(ses->m_MsgWndList,
@@ -452,12 +452,12 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
             //
 
             msgItem->setSizeHint(msgSize);
-            //ª·…Ë÷√œ˚œ¢≤¢µ˜”√œ‡”¶µƒ
+            //‰ºöËÆæÁΩÆÊ∂àÊÅØÂπ∂Ë∞ÉÁî®Áõ∏Â∫îÁöÑ
             msgWnd->setText(msgtext.c_str(),
                             time,
                             msgSize,
                             QChatMsgWnd::ChatMsg_OtherMsgText);
-            //πÿ¡™œÓ”Î¥∞ø⁄
+            //ÂÖ≥ËÅîÈ°π‰∏éÁ™óÂè£
             ses->m_MsgWndList->setItemWidget(msgItem, msgWnd);
         }
 
@@ -488,12 +488,12 @@ void QMainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
                 return;
             }
 
-            ////Ω” ’∂À «“ª∏ˆŒƒº˛
+            ////Êé•Êî∂Á´ØÊòØ‰∏Ä‰∏™Êñá‰ª∂
             QChatFileOuterWnd* fileWnd =
                 new QChatFileOuterWnd(nullptr, sendid, recvid);
             fileWnd->setFileDownLoadData(filename_client.c_str(),
                                          filesize.c_str(),
-                                         "µ»¥˝œ¬‘ÿ",
+                                         "Á≠âÂæÖ‰∏ãËΩΩ",
                                          filename_server.c_str());
             fileWnd->setFixedWidth(ses->m_MsgWndList->width());
             QListWidgetItem* fileItem = new QListWidgetItem(ses->m_MsgWndList);
@@ -570,7 +570,7 @@ void QMainWnd::requestFriendList()
 
 void QMainWnd::requestSessionList()
 {
-    //œÚ‘∂∂À«Î«Ûª·ª∞¡–±Ì
+    //ÂêëËøúÁ´ØËØ∑Ê±Ç‰ºöËØùÂàóË°®
     neb::CJsonObject json;
     json.Add("ownerid", QMainWnd::getMainWnd()->getMainWnd()->m_userid);
     QWSClientMgr::getMgr()->request(
@@ -578,7 +578,7 @@ void QMainWnd::requestSessionList()
             // QMessageBox::information(nullptr, "info",
             // msg.ToString().c_str());
             LogDebug << "msg:" << msg.ToString().c_str();
-            //œÚª·ª∞¡–±Ì÷–ÃÌº”“ª–© ˝æ›
+            //Âêë‰ºöËØùÂàóË°®‰∏≠Ê∑ªÂä†‰∏Ä‰∫õÊï∞ÊçÆ
             if (!msg["data"].IsArray())
             {
                 return;
@@ -650,7 +650,7 @@ void QMainWnd::requestSessionList()
                     sesWnd->m_recvId = recvid;
                     sesWnd->m_isGroupSes = isgroupses;
 
-                    // ≤ª «»∫◊Èª·ª∞£¨”¶∏√“˛≤ÿmore∞¥≈•
+                    // ‰∏çÊòØÁæ§ÁªÑ‰ºöËØùÔºåÂ∫îËØ•ÈöêËóèmoreÊåâÈíÆ
                     if (!isgroupses)
                     {
                         sesWnd->m_sesTopWnd->m_moreBtn->hide();
@@ -709,7 +709,7 @@ void QMainWnd::requestGroupList()
     QWSClientMgr::getMgr()->request(
         "cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
             LogDebug << "requestGroupList:" << msg.ToString().c_str();
-            //œ»≈–∂œ¥´»Î «∑Ò «msg["data"] «∑Ò «array
+            //ÂÖàÂà§Êñ≠‰º†ÂÖ•ÊòØÂê¶ÊòØmsg["data"]ÊòØÂê¶ÊòØarray
             if (!msg["data"].IsArray())
             {
                 return;
@@ -724,7 +724,7 @@ void QMainWnd::requestGroupList()
                     continue;
                 }
 
-                //ªÒ»°groupname£¨ªÒ»°»∫◊Èµƒgroupid
+                //Ëé∑ÂèñgroupnameÔºåËé∑ÂèñÁæ§ÁªÑÁöÑgroupid
                 // groupname
                 std::string groupname = "";
                 if (!tempJson.Get("groupname", groupname))
@@ -732,7 +732,7 @@ void QMainWnd::requestGroupList()
                     continue;
                 }
 
-                //ªÒ»°µΩgroupid
+                //Ëé∑ÂèñÂà∞groupid
                 int groupid = -1;
                 if (!tempJson.Get("groupid", groupid))
                 {
@@ -746,7 +746,7 @@ void QMainWnd::requestGroupList()
         });
 }
 
-// ≤Œøº◊ ¡œ£∫https://blog.csdn.net/tormi21c/article/details/124237553?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168042672816800215064844%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168042672816800215064844&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-3-124237553-null-null.142^v80^pc_new_rank,201^v4^add_ask,239^v2^insert_chatgpt&utm_term=qt%20%E9%BC%A0%E6%A0%87%E6%8B%96%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%94%BE%E5%A4%A7%E7%BC%A9%E5%B0%8F&spm=1018.2226.3001.4187
+// ÂèÇËÄÉËµÑÊñôÔºöhttps://blog.csdn.net/tormi21c/article/details/124237553?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168042672816800215064844%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168042672816800215064844&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-3-124237553-null-null.142^v80^pc_new_rank,201^v4^add_ask,239^v2^insert_chatgpt&utm_term=qt%20%E9%BC%A0%E6%A0%87%E6%8B%96%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%94%BE%E5%A4%A7%E7%BC%A9%E5%B0%8F&spm=1018.2226.3001.4187
 void QMainWnd::UpdateBorderArea(QPoint pos)
 {
     m_borderArea = BorderArea::BorderAreaNone;
@@ -910,7 +910,7 @@ void QMainWnd::mouseMoveEvent(QMouseEvent* event)
         return;
     }
 
-    //  Û±Í“∆∂Øµƒµ˜ ‘–≈œ¢
+    // Èº†Ê†áÁßªÂä®ÁöÑË∞ÉËØï‰ø°ÊÅØ
     //   LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x()
     //   << "y:" << event->pos().y(); LogDebug << "[mouseMoveEvent and
     //   m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" <<
@@ -959,7 +959,7 @@ void QMainWnd::adjustWndSizeByMouseMove(QMouseEvent* event)
                  << "distance.x() = " << distancePoint.x()
                  << "width = " << width() << "height = " << height();
 
-        // –°”⁄◊Ó–°øÌ∂»≤ª‘ –ÌºÃ–¯Àı∑≈
+        // Â∞è‰∫éÊúÄÂ∞èÂÆΩÂ∫¶‰∏çÂÖÅËÆ∏ÁªßÁª≠Áº©Êîæ
         if (wndW < 950)
         {
             return;
@@ -1010,7 +1010,7 @@ void QMainWnd::mousePressEvent(QMouseEvent* event)
         return;
     }
 
-    //  Û±Í◊Ûº¸∞¥œ¬
+    // Èº†Ê†áÂ∑¶ÈîÆÊåâ‰∏ã
     m_bLeftBtnPress = true;
     m_leftBtnPressPoint = event->pos();
     UpdateBorderArea(event->pos());
@@ -1091,18 +1091,18 @@ void QMainWnd::slotToolWndPageChanged(int page)
     {
         requestSessionList();
         if (m_lastSesId != -1)
-        {  //…œ¥Œµƒª·ª∞¥∞ø⁄
+        {  //‰∏äÊ¨°ÁöÑ‰ºöËØùÁ™óÂè£
             slotSesIdToIndex(m_lastSesId);
         }
         else
         {
-            //…Ë÷√±≥æ∞Õº∆¨¥Úø™
+            //ËÆæÁΩÆËÉåÊôØÂõæÁâáÊâìÂºÄ
             m_commContactInfo->showBgPng();
         }
     }
 
     if (page == 1)
-    {  //«Î«Û∫√”—–≈œ¢
+    {  //ËØ∑Ê±ÇÂ•ΩÂèã‰ø°ÊÅØ
         requestFriendList();
         m_commContactInfo->showBgPng();
         slotSesIdToIndex(0);
@@ -1110,7 +1110,7 @@ void QMainWnd::slotToolWndPageChanged(int page)
 
     if (page == 2)
     {
-        //‘§¡ÙŒª÷√
+        //È¢ÑÁïô‰ΩçÁΩÆ
     }
 }
 
@@ -1141,7 +1141,7 @@ void QMainWnd::slotOnSystemTrayIconClick(
 
         case QSystemTrayIcon::Context:
         {
-            // ”“º¸≤Àµ•
+            // Âè≥ÈîÆËèúÂçï
             LogDebug << "context";
         }
         break;
@@ -1152,7 +1152,7 @@ void QMainWnd::slotOnSystemTrayIconClick(
         break;
         case QSystemTrayIcon::Trigger:
         {
-            // ◊Ó–°ªØ÷ÿ–¬œ‘ æ¥∞ø⁄
+            // ÊúÄÂ∞èÂåñÈáçÊñ∞ÊòæÁ§∫Á™óÂè£
             if (windowState() == Qt::WindowMinimized)
             {
                 showNormal();
@@ -1180,7 +1180,7 @@ void QMainWnd::slotSearchText(QString searchText)
 {
     LogDebug << " searchText = " << searchText;
     m_sMiddleLayout->setCurrentIndex(3);
-    // «Âø’¡–±ÌœÓ
+    // Ê∏ÖÁ©∫ÂàóË°®È°π
     int count = m_commSearchListWnd->m_listWidget->count();
     for (int i = 0; i < count; i++)
     {
@@ -1195,9 +1195,9 @@ void QMainWnd::slotSearchText(QString searchText)
     }
     m_commSearchListWnd->m_listWidget->clear();
 
-    //// «∂»Î»∫◊È”ÎÀ—À˜±æµÿ»∫◊È
+    //// ÂµåÂÖ•Áæ§ÁªÑ‰∏éÊêúÁ¥¢Êú¨Âú∞Áæ§ÁªÑ
     //{
-    //    QWidget* tmpLabel = new QLabel("»∫◊È");
+    //    QWidget* tmpLabel = new QLabel("Áæ§ÁªÑ");
     //    QListWidgetItem* pListItem = new
     //    QCustomListWidgetItem(m_commSearchListWnd->m_listWidget);
     //    tmpLabel->setFixedWidth(m_commSearchListWnd->m_listWidget->width() -
@@ -1215,7 +1215,7 @@ void QMainWnd::slotSearchText(QString searchText)
     //        dynamic_cast<QCommGroupItemWnd*>(m_commGroupsListWnd->m_listWidget->itemWidget(pitem));
     //        if (pWnd->m_groupName->text().contains(searchText))
     //        {
-    //            // ¥¥Ω®item≤¢ÃÌº”µΩ
+    //            // ÂàõÂª∫itemÂπ∂Ê∑ªÂä†Âà∞
     //            m_commSearchListWnd->addGroupItem("",
     //            pWnd->m_groupName->text().toStdString().c_str(),
     //            pWnd->m_groupId);
@@ -1224,8 +1224,8 @@ void QMainWnd::slotSearchText(QString searchText)
     //}
 
     //{
-    // «∂»Î¡™œµ»À±Í«©”ÎÀ—À˜¡™œµ»À
-    //  QWidget* tmpLabel = new QLabel("œ˚œ¢");
+    // ÂµåÂÖ•ËÅîÁ≥ª‰∫∫Ê†áÁ≠æ‰∏éÊêúÁ¥¢ËÅîÁ≥ª‰∫∫
+    //  QWidget* tmpLabel = new QLabel("Ê∂àÊÅØ");
     // QListWidgetItem* pListItem = new
     // QCustomListWidgetItem(m_commSearchListWnd->m_listWidget);
     // tmpLabel->setFixedWidth(m_commSearchListWnd->m_listWidget->width() - 5);
@@ -1233,7 +1233,7 @@ void QMainWnd::slotSearchText(QString searchText)
     // 5, 25)); m_commSearchListWnd->m_listWidget->setItemWidget(pListItem,
     // tmpLabel);
 
-    // ±È¿˙ ’“µΩ∞¸∫¨À—À˜µƒ◊÷∂Œ£¨ÃÌº”µΩ¡–±Ì÷–
+    // ÈÅçÂéÜ ÊâæÂà∞ÂåÖÂê´ÊêúÁ¥¢ÁöÑÂ≠óÊÆµÔºåÊ∑ªÂä†Âà∞ÂàóË°®‰∏≠
     count = m_commMsgListWnd->m_listWidget->count();
     for (int i = 0; i < count; i++)
     {
@@ -1242,7 +1242,7 @@ void QMainWnd::slotSearchText(QString searchText)
             m_commMsgListWnd->m_listWidget->itemWidget(pitem));
         if (pWnd->m_name->text().contains(searchText))
         {
-            // ¥¥Ω®item≤¢ÃÌº”µΩ
+            // ÂàõÂª∫itemÂπ∂Ê∑ªÂä†Âà∞
             m_commSearchListWnd->addMsgItem(
                 pWnd->m_name->text().toStdString().c_str(),
                 pWnd->m_msg->text().toStdString().c_str(),

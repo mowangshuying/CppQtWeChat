@@ -31,7 +31,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     setMinimumSize(640, 600);
-    setWindowTitle("»á»°´°¿Ú");
+    setWindowTitle("ä¼šè¯çª—å£");
     setAcceptDrops(true);
     setMouseTracking(true);
 
@@ -40,7 +40,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->setSpacing(0);
     setLayout(m_vLayout);
 
-    // Ã¿¸ö»á»°¶¼±£´æ×ÅÒ»¸ögroupInfoWnd
+    // æ¯ä¸ªä¼šè¯éƒ½ä¿å­˜ç€ä¸€ä¸ªgroupInfoWnd
     m_groupInfoWnd = new QGroupInfoWnd();
     // if (m_isGroupSes)
     //{
@@ -48,32 +48,32 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     //}
     m_groupInfoWnd->hide();
 
-    // »á»°´°¿ÚµÄtop
+    // ä¼šè¯çª—å£çš„top
     m_sesTopWnd = new QSessionTopWnd(this);
 
-    // ÏûÏ¢´°¿Ú
+    // æ¶ˆæ¯çª—å£
     m_MsgWndList = new QListWidget(this);
     m_MsgWndList->setAcceptDrops(false);
     m_MsgWndList->setMinimumWidth(this->width());
 
-    // ·¢ËÍÏûÏ¢´°¿Ú
+    // å‘é€æ¶ˆæ¯çª—å£
     m_sendTextEdit = new QSelfTextEdit(this);
     // m_sendTextEdit->setStyleSheet("border:0px;");
     m_sendTextEdit->setAcceptDrops(false);
     m_sendTextEdit->setAcceptRichText(true);
 
-    // »á»°´°¿ÚµÄ¹¤¾ßÀ¸²¿·Ö
+    // ä¼šè¯çª—å£çš„å·¥å…·æ éƒ¨åˆ†
     m_sesToolBar = new QSessionToolBar();
 
-    // ·¢ËÍ°´Å¥
+    // å‘é€æŒ‰é’®
     m_sendTextBtn = new QPushButton(this);
     m_sendTextBtn->setFixedSize(70, 30);
-    m_sendTextBtn->setText("·¢ËÍ(S)");
+    m_sendTextBtn->setText("å‘é€(S)");
 
     m_vLayout->addWidget(m_sesTopWnd);
 
     {
-        /*Ìí¼Ó·Ö¸îÏßµÄÊ¾Àı´úÂë*/
+        /*æ·»åŠ åˆ†å‰²çº¿çš„ç¤ºä¾‹ä»£ç */
         QSelfSplit* sp = new QSelfSplit(this);
         m_vLayout->addWidget(sp);
     }
@@ -81,7 +81,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addWidget(m_MsgWndList, 2);
 
     {
-        /*Ìí¼Ó·Ö¸îÏßµÄÊ¾Àı´úÂë*/
+        /*æ·»åŠ åˆ†å‰²çº¿çš„ç¤ºä¾‹ä»£ç */
         QSelfSplit* sp = new QSelfSplit(this);
         m_vLayout->addWidget(sp);
     }
@@ -102,7 +102,7 @@ QSessionWnd::QSessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_MsgWndList->setAcceptDrops(true);
     m_MsgWndList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    //°´Å¥µã»÷Ê±ºò·¢ËÍÏûÏ¢
+    //æŒ‰é’®ç‚¹å‡»æ—¶å€™å‘é€æ¶ˆæ¯
     connect(m_sendTextBtn,
             SIGNAL(clicked()),
             this,
@@ -142,7 +142,7 @@ QSessionWnd::~QSessionWnd()
 void QSessionWnd::slotSendTextBtnClick()
 {
     QString msgText = m_sendTextEdit->toPlainText();
-    //Èç¹û²»º¬ÈÎºÎÄÚÈİ²»ÔÊĞí·¢ËÍ
+    //å¦‚æœä¸å«ä»»ä½•å†…å®¹ä¸å…è®¸å‘é€
     if (msgText == "")
     {
         LogErr << "msgText is empty!";
@@ -158,14 +158,14 @@ void QSessionWnd::slotSendTextBtnClick()
     json.Add("msgtext", msgText.toStdString().c_str());
     json.Add("msgtype", 0);
 
-    //Èç¹û²»ÊÇ·¢ËÍÈºÏûÏ¢
+    //å¦‚æœä¸æ˜¯å‘é€ç¾¤æ¶ˆæ¯
     if (m_isGroupSes == false)
     {
         sendMsgToUser(json, msgText);
         return;
     }
 
-    //·¢ËÍµÄÊÇÈºÏûÏ¢
+    //å‘é€çš„æ˜¯ç¾¤æ¶ˆæ¯
     if (m_isGroupSes == true)
     {
         sendMsgToGroup(json, msgText);
@@ -182,7 +182,7 @@ void QSessionWnd::slotEmoijClicked(QString str)
 
 void QSessionWnd::slotMoreBtnClick()
 {
-    //ÉèÖÃÏàÓ¦µÄÎ»ÖÃ
+    //è®¾ç½®ç›¸åº”çš„ä½ç½®
     QRect rect = m_sesTopWnd->geometry();
     QPoint gPoint = m_sesTopWnd->mapToGlobal(QPoint(0, 0));
     QRect swRect = m_sesTopWnd->geometry();
@@ -190,15 +190,15 @@ void QSessionWnd::slotMoreBtnClick()
     swRect.setY(gPoint.y() + m_sesTopWnd->height());
     m_groupInfoWnd->setGeometry(swRect);
 
-    // ÏòÔ¶¶ËÇëÇó¸ÃÈºÁÄĞÅÏ¢×¼±¸ÉèÖÃ
-    //ÏòÔ¶¶Ë·şÎñÆ÷·¢ËÍÇëÇó
+    // å‘è¿œç«¯è¯·æ±‚è¯¥ç¾¤èŠä¿¡æ¯å‡†å¤‡è®¾ç½®
+    //å‘è¿œç«¯æœåŠ¡å™¨å‘é€è¯·æ±‚
     neb::CJsonObject json;
     json.Add("groupId", m_recvId);
     QWSClientMgr::getMgr()->request(
         "cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
             LogDebug << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
 
-            // ÏòÈººÃÓÑÁĞ±íÖĞÇ¶ÈëÊı¾İ
+            // å‘ç¾¤å¥½å‹åˆ—è¡¨ä¸­åµŒå…¥æ•°æ®
             neb::CJsonObject datajson;
             if (!msg.Get("data", datajson))
             {
@@ -235,7 +235,7 @@ void QSessionWnd::slotMoreBtnClick()
             }
         });
 
-    //ÏÔÊ¾Èº×éµÄĞÅÏ¢µÈ
+    //æ˜¾ç¤ºç¾¤ç»„çš„ä¿¡æ¯ç­‰
     m_groupInfoWnd->show();
 }
 
@@ -271,12 +271,12 @@ void QSessionWnd::dragEnterEvent(QDragEnterEvent* event)
 void QSessionWnd::dropEvent(QDropEvent* event)
 {
     LogDebug << "dropEvent";
-    //ÍÏ×§³É¹¦»ñÈ¡ÎÄ¼şĞÅÏ¢
+    //æ‹–æ‹½æˆåŠŸè·å–æ–‡ä»¶ä¿¡æ¯
     const QMimeData* qm = event->mimeData();
     QString strFileName = qm->urls()[0].toLocalFile();
     LogDebug << "strFileName:" << strFileName;
 
-    //ÅĞ¶ÏÊÇ·ñÊÇÖ§³ÖµÄÎÄ¼ş
+    //åˆ¤æ–­æ˜¯å¦æ˜¯æ”¯æŒçš„æ–‡ä»¶
     QFileInfo fileInfo = QFileInfo(strFileName);
     if (fileInfo.isDir())
     {
@@ -284,15 +284,15 @@ void QSessionWnd::dropEvent(QDropEvent* event)
         return;
     }
 
-    //»ñÈ¡ÎÄ¼şÃû
+    //è·å–æ–‡ä»¶å
     QString filename = fileInfo.fileName();
     QString filepath = fileInfo.filePath();
-    //»ñÈ¡ÎÄ¼şºó×ºÃû
+    //è·å–æ–‡ä»¶åç¼€å
     QString suffix = fileInfo.suffix();
-    //»ñÈ¡ÎÄ¼ş´óĞ¡
+    //è·å–æ–‡ä»¶å¤§å°
     QString fileSize = getFileSize(fileInfo);
 
-    // ÎÄ¼şĞÅÏ¢´°¿Ú
+    // æ–‡ä»¶ä¿¡æ¯çª—å£
     QChatFileOuterWnd* fileWnd =
         new QChatFileOuterWnd(nullptr,
                               QMainWnd::getMainWnd()->m_userid,
@@ -320,7 +320,7 @@ void QSessionWnd::dropEvent(QDropEvent* event)
                            .arg(currentDate)
                            .arg(filename);
 
-    // ÎÄ¼şÃû
+    // æ–‡ä»¶å
     QFile* file = new QFile(strFileName);
     file->open(QFile::ReadOnly);
 
@@ -353,11 +353,11 @@ void QSessionWnd::dropEvent(QDropEvent* event)
             this,
             [this, fileWnd, fileName, fileSize, filename, &file](
                 QNetworkReply* reply) {
-                // »ñÈ¡ÏìÓ¦ĞÅÏ¢
+                // è·å–å“åº”ä¿¡æ¯
                 QByteArray bytes = reply->readAll();
                 std::string str = bytes.toStdString();
                 int i = 0;
-                fileWnd->m_innerWnd->m_sendState->setText("ÒÑ·¢ËÍ");
+                fileWnd->m_innerWnd->m_sendState->setText("å·²å‘é€");
 
                 neb::CJsonObject json;
                 json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
@@ -370,10 +370,10 @@ void QSessionWnd::dropEvent(QDropEvent* event)
                 filejson.Add("filesize", fileSize.toStdString());
                 json.Add("msgtext", filejson.ToString());
 
-                // ÊÍ·Åreply
+                // é‡Šæ”¾reply
                 reply->deleteLater();
 
-                //ÊÍ·ÅÎÄ¼şÄÚ´æ
+                //é‡Šæ”¾æ–‡ä»¶å†…å­˜
                 file->close();
                 delete file;
                 file = nullptr;
@@ -412,7 +412,7 @@ void QSessionWnd::resizeEvent(QResizeEvent* event)
         m_groupInfoWnd->m_scrollArea->setFixedHeight(nTempHeight);
     }
 
-    // ÖØĞÂÉèÖÃmsgItemµÄ´óĞ¡
+    // é‡æ–°è®¾ç½®msgItemçš„å¤§å°
     if (m_MsgWndList != nullptr)
     {
         int count = m_MsgWndList->count();
@@ -436,7 +436,7 @@ void QSessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
     QWSClientMgr::getMgr()->request(
         "cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
             dealMsgTime();
-            //ÏòÔ¶¶Ë·¢ËÍÏûÏ¢
+            //å‘è¿œç«¯å‘é€æ¶ˆæ¯
             QString time =
                 QString::number(QDateTime::currentDateTime().toTime_t());
             QChatMsgWnd* msgWnd =
@@ -449,14 +449,14 @@ void QSessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 
             QSize msgSize = msgWnd->fontRect(msgText);
             msgItem->setSizeHint(msgSize);
-            //»áÉèÖÃÏûÏ¢²¢µ÷ÓÃÏàÓ¦µÄ
+            //ä¼šè®¾ç½®æ¶ˆæ¯å¹¶è°ƒç”¨ç›¸åº”çš„
             msgWnd->setText(msgText,
                             time,
                             msgSize,
                             QChatMsgWnd::ChatMsg_OwnerMsgText);
-            //¹ØÁªÏîÓë´°¿Ú
+            //å…³è”é¡¹ä¸çª—å£
             m_MsgWndList->setItemWidget(msgItem, msgWnd);
-            //ÓÅ»¯Âß¼­»¬¶¯µ½µ×²¿
+            //ä¼˜åŒ–é€»è¾‘æ»‘åŠ¨åˆ°åº•éƒ¨
             m_MsgWndList->scrollToBottom();
         });
 }
@@ -468,7 +468,7 @@ void QSessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
             dealMsgTime();
 
             LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
-            //ÏòÔ¶¶Ë·¢ËÍÏûÏ¢
+            //å‘è¿œç«¯å‘é€æ¶ˆæ¯
             QString time =
                 QString::number(QDateTime::currentDateTime().toTime_t());
             QChatMsgWnd* msgWnd =
@@ -480,14 +480,14 @@ void QSessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
             msgWnd->setFixedWidth(this->width());
             QSize msgSize = msgWnd->fontRect(msgText);
             msgItem->setSizeHint(msgSize);
-            //»áÉèÖÃÏûÏ¢²¢µ÷ÓÃÏàÓ¦µÄ
+            //ä¼šè®¾ç½®æ¶ˆæ¯å¹¶è°ƒç”¨ç›¸åº”çš„
             msgWnd->setText(msgText,
                             time,
                             msgSize,
                             QChatMsgWnd::ChatMsg_OwnerMsgText);
-            //¹ØÁªÏîÓë´°¿Ú
+            //å…³è”é¡¹ä¸çª—å£
             m_MsgWndList->setItemWidget(msgItem, msgWnd);
-            //ÓÅ»¯Âß¼­»¬¶¯µ½µ×²¿
+            //ä¼˜åŒ–é€»è¾‘æ»‘åŠ¨åˆ°åº•éƒ¨
             m_MsgWndList->scrollToBottom();
         });
 }

@@ -30,7 +30,7 @@ class QDataManager
     QUserId2HeadImgMap m_UserId2HeadImgMap;
     QFriendId2NameMap m_FriendId2NameMap;
     QGroupId2HeadImgMap m_GroupId2ImgMap;
-    //±¾µØÎÄ¼ş±£´æµÄÄ¿Â¼
+    //æœ¬åœ°æ–‡ä»¶ä¿å­˜çš„ç›®å½•
     QString m_localRecvFileDir = "./recvFile/";
     QStringList m_emoijStrList;
     int64_t m_userid = -1;

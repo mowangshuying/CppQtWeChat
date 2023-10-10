@@ -21,14 +21,14 @@
 #include "QSettingWnd.h"
 
 /*
- * Ö÷´°¿Ú´°¿ÚÖ»ÄÜÓĞÒ»¸ö£¬½«Ö÷´°¿ÚÉèÖÃÎªµ¥Àı¶ÔÏó
+ * ä¸»çª—å£çª—å£åªèƒ½æœ‰ä¸€ä¸ªï¼Œå°†ä¸»çª—å£è®¾ç½®ä¸ºå•ä¾‹å¯¹è±¡
  */
 class QMainWnd : public QWidget
 {
-    //Ìí¼ÓÏûÏ¢Ó³ÉäÖ§³Ö
+    //æ·»åŠ æ¶ˆæ¯æ˜ å°„æ”¯æŒ
     Q_OBJECT
   private:
-    //»á»°´°¿Ú
+    //ä¼šè¯çª—å£
     QMainWnd(QWidget* p = nullptr);
 
   public:
@@ -50,15 +50,15 @@ class QMainWnd : public QWidget
   public:
     static QMainWnd* getMainWnd();
 
-    //½ÓÊÕµ½±ğÈË·¢ËÍµÄÏûÏ¢
+    //æ¥æ”¶åˆ°åˆ«äººå‘é€çš„æ¶ˆæ¯
     void cs_msg_sendmsg(neb::CJsonObject& json);
-    //½ÓÊÕµ½Èº×éÖĞ·¢ËÍµÄÏûÏ¢
+    //æ¥æ”¶åˆ°ç¾¤ç»„ä¸­å‘é€çš„æ¶ˆæ¯
     void cs_msg_sendgroupmsg(neb::CJsonObject& msg);
-    //½ÓÊÕµ½¸üĞÂ»á»°µÄÏûÏ¢
+    //æ¥æ”¶åˆ°æ›´æ–°ä¼šè¯çš„æ¶ˆæ¯
     void cs_msg_update_sessionlist(neb::CJsonObject& msg);
-    //½ÓÊÕµ½¸üĞÂÈºÁÄÁĞ±íÏûÏ¢
+    //æ¥æ”¶åˆ°æ›´æ–°ç¾¤èŠåˆ—è¡¨æ¶ˆæ¯
     void cs_msg_update_grouplist(neb::CJsonObject& msg);
-    //½ÓÊÕµ½¸üĞÂÁªÏµÈËµÄÏûÏ¢
+    //æ¥æ”¶åˆ°æ›´æ–°è”ç³»äººçš„æ¶ˆæ¯
     void cs_msg_update_friendlist(neb::CJsonObject& msg);
 
     void requestHeadImg();
@@ -67,7 +67,7 @@ class QMainWnd : public QWidget
 
     bool hasSessionWndBySessionId(int sesid);
 
-    //ÇëÇóÈº×éÏûÏ¢
+    //è¯·æ±‚ç¾¤ç»„æ¶ˆæ¯
     void requestGroupList();
 
     //
@@ -140,15 +140,15 @@ class QMainWnd : public QWidget
 
     static QMainWnd* m_mainWnd;
 
-    //ÓÃ»§Ãû
+    //ç”¨æˆ·å
     QString m_username;
-    //ÓÃ»§id
+    //ç”¨æˆ·id
     int64_t m_userid;
     QNetworkAccessManager* m_networkMgr;
 
     BorderArea m_borderArea;
 
-    // ÏµÍ³ÍĞÅÌ¹¦ÄÜ
+    // ç³»ç»Ÿæ‰˜ç›˜åŠŸèƒ½
     QSystemTrayIcon* m_systemTrayIcon;
     QMenu* m_systemTrayIconMenu;
     QAction* m_systemTrayIconExitAction;

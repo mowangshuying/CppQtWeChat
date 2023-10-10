@@ -40,7 +40,7 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/,
     m_minBtn = new QPushButton();
     m_closeBtn = new QPushButton();
 
-    m_titleLabel->setText("Ìí¼ÓºÃÓÑ");
+    m_titleLabel->setText("æ·»åŠ å¥½å‹");
 
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
@@ -70,7 +70,7 @@ QApplyFriendNextWnd::QApplyFriendNextWnd(QWidget* p /*= nullptr*/,
 
     m_hLayout2 = new QHBoxLayout(m_centerWnd);
     m_pushBtn = new QPushButton();
-    m_pushBtn->setText("ÏÂÒ»²½");
+    m_pushBtn->setText("ä¸‹ä¸€æ­¥");
 
     m_hLayout2->addStretch();
     m_hLayout2->addWidget(m_pushBtn);
@@ -105,18 +105,18 @@ void QApplyFriendNextWnd::slotPushBtnClick()
 {
     if (m_state == PushBtnState::PBS_Next)
     {
-        //ÉèÖÃm_sLayoutÎªµÚ2¸ö´°¿Ú
+        //è®¾ç½®m_sLayoutä¸ºç¬¬2ä¸ªçª—å£
         m_sLayout->setCurrentIndex(1);
-        //ÉèÖÃ°´Å¥×ÖÌåÎª¹Ø±Õ
-        m_pushBtn->setText("¹Ø±Õ");
+        //è®¾ç½®æŒ‰é’®å­—ä½“ä¸ºå…³é—­
+        m_pushBtn->setText("å…³é—­");
         m_state = PushBtnState::PBS_Close;
 
-        //ÏòÔ¶¶Ë·şÎñÆ÷·¢ËÍÌí¼ÓºÃÓÑÉêÇë
+        //å‘è¿œç«¯æœåŠ¡å™¨å‘é€æ·»åŠ å¥½å‹ç”³è¯·
         neb::CJsonObject json;
         json.Add("ownerid", QMainWnd::getMainWnd()->m_userid);
         json.Add("friendid", m_friendid);
 
-        //»ñÈ¡ÑéÖ¤µÄÏûÏ¢
+        //è·å–éªŒè¯çš„æ¶ˆæ¯
         auto pApplyWnd1 = dynamic_cast<QApplyFriendInputInfoWnd*>(m_wnd1);
         json.Add(
             "applymsg",

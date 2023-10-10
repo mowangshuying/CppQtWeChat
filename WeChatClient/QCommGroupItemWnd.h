@@ -25,12 +25,12 @@ class QCommGroupItemWnd : public QWidget
 
   public:
     QHBoxLayout* m_hLayout;
-    //ÁªÏµÈËÍ·Ïñ
+    //è”ç³»äººå¤´åƒ
     QLabel* m_groupImgUrl;
-    //ÁªÏµÈËÃû×Ö
+    //è”ç³»äººåå­—
     QLabel* m_groupName;
-    //±êÊ¶ÁªÏµÈËµÄid
+    //æ ‡è¯†è”ç³»äººçš„id
     int m_groupId = -1;
-    //ÓÃÓÚÇëÇóÍ·ÏñĞÅÏ¢
+    //ç”¨äºè¯·æ±‚å¤´åƒä¿¡æ¯
     QNetworkAccessManager* m_networkMgr;
 };

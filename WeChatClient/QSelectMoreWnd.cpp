@@ -13,7 +13,7 @@ QSelectMoreWnd::QSelectMoreWnd(QWidget* p) : QWidget(p)
     setLayout(m_vLayout);
     setStyleSheet("background-color:#2e2e2e;");
 
-    m_settingBtn = new QPushButton("ÉèÖÃ");
+    m_settingBtn = new QPushButton("Ã‰Ã¨Ã–Ãƒ");
     m_vLayout->addWidget(m_settingBtn);
     m_settingBtn->setStyleSheet(
         "background-color:#2e2e2e;color:white;border:0px;");

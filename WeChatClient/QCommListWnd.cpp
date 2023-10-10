@@ -48,7 +48,7 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/,
     m_vLayout->addSpacing(15);
 
     {
-        /*Ìí¼Ó·Ö¸îÏßµÄÊ¾Àı´úÂë*/
+        /*æ·»åŠ åˆ†å‰²çº¿çš„ç¤ºä¾‹ä»£ç */
         QSelfSplit* sp = new QSelfSplit(this);
         m_vLayout->addWidget(sp);
     }
@@ -85,13 +85,13 @@ QCommListWnd::QCommListWnd(QWidget* p /*= nullptr*/,
 
 void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
 {
-    // ×Ô¶¨ÒåÁĞ±í
-    // °üº¬ÈçÏÂÁĞ±íĞÅÏ¢£ºÁªÏµÈËÁĞ±í¡¢ÏûÏ¢ÁĞ±í¡¢ÈºÁÄÁĞ±í
+    // è‡ªå®šä¹‰åˆ—è¡¨
+    // åŒ…å«å¦‚ä¸‹åˆ—è¡¨ä¿¡æ¯ï¼šè”ç³»äººåˆ—è¡¨ã€æ¶ˆæ¯åˆ—è¡¨ã€ç¾¤èŠåˆ—è¡¨
     QCustomListWidgetItem* pCustItem =
         dynamic_cast<QCustomListWidgetItem*>(item);
     LogDebug << "sesid:" << pCustItem->sesId();
 
-    //µ±Ç°µã»÷µÄÊÇÁªÏµÈËÁĞ±íÖĞµÄÄ³Ò»ÏîÄ¿
+    //å½“å‰ç‚¹å‡»çš„æ˜¯è”ç³»äººåˆ—è¡¨ä¸­çš„æŸä¸€é¡¹ç›®
     if (m_WndType == QCommListWndEnum::ContactItemWndType)
     {
         QCommContactItemWnd* wnd = dynamic_cast<QCommContactItemWnd*>(
@@ -100,28 +100,28 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
         {
             QMainWnd::getMainWnd()
                 ->m_dealNewFriendsApplyWnd->setFriendApplyList();
-            //ÇĞ»»´°¿Úµ½ĞÂµÄÅóÓÑ´°¿Ú
-            // m_sLayout2ÖĞÎ»ÖÃÎª1µÄ´°¿ÚÎªĞÂµÄÅóÓÑµÄ´°¿Ú
+            //åˆ‡æ¢çª—å£åˆ°æ–°çš„æœ‹å‹çª—å£
+            // m_sLayout2ä¸­ä½ç½®ä¸º1çš„çª—å£ä¸ºæ–°çš„æœ‹å‹çš„çª—å£
             QMainWnd::getMainWnd()->m_sRightLayout->setCurrentIndex(1);
         }
         else
         {
-            // ÉèÖÃĞÅÏ¢
-            // ¸ÃÁªÏµÈËµÄÃû×ÖºÍ¸ÃÁªÏµÈËµÄidĞÅÏ¢
+            // è®¾ç½®ä¿¡æ¯
+            // è¯¥è”ç³»äººçš„åå­—å’Œè¯¥è”ç³»äººçš„idä¿¡æ¯
             QMap<QString, QString> infoMap;
             infoMap["name"] = wnd->getContactItemName();
             infoMap["friendid"] = QString::number(wnd->getFriendId(), 10);
 
-            //ÇĞ»»µ½Õ¹Ê¾ÁªÏµÈËĞÅÏ¢µÄÒ³Ãæ
+            //åˆ‡æ¢åˆ°å±•ç¤ºè”ç³»äººä¿¡æ¯çš„é¡µé¢
             QMainWnd::getMainWnd()->m_sRightLayout->setCurrentIndex(0);
 
-            //ÁªÏµÈËµÄĞÅÏ¢¸Ä±ä
+            //è”ç³»äººçš„ä¿¡æ¯æ”¹å˜
             emit signalContactInfoChange(infoMap);
         }
         return;
     }
 
-    //µ±Ç°µã»÷µÄÊÇÏûÏ¢ÁĞ±íÖĞµÄÄ³Ò»Ïî
+    //å½“å‰ç‚¹å‡»çš„æ˜¯æ¶ˆæ¯åˆ—è¡¨ä¸­çš„æŸä¸€é¡¹
     if (m_WndType == QCommListWndEnum::MsgItemWndTpye ||
         m_WndType == QCommListWndEnum::SearchItemWndType)
     {
@@ -132,17 +132,17 @@ void QCommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
         return;
     }
 
-    //µ±Ç°µã»÷µÄÎÒÊÇÈºÁĞ±íÖĞµÄÄ³Ò»Ïî
+    //å½“å‰ç‚¹å‡»çš„æˆ‘æ˜¯ç¾¤åˆ—è¡¨ä¸­çš„æŸä¸€é¡¹
     if (m_WndType == QCommListWndEnum::GroupItemWndType)
     {
-        //ÅĞ¶Ïµ±Ç°µã»÷ÊÇÄÇÒ»Ïî
+        //åˆ¤æ–­å½“å‰ç‚¹å‡»æ˜¯é‚£ä¸€é¡¹
         QCommGroupItemWnd* wnd = dynamic_cast<QCommGroupItemWnd*>(
             m_listWidget->itemWidget(pCustItem));
-        //»ñÈ¡µ½ÈºµÄid
+        //è·å–åˆ°ç¾¤çš„id
         int groupid = wnd->m_groupId;
-        //ÓÒ±ß¹¤¾ßÀ¸ĞèÒªÌø×ªµ½msgÄÇÒ»À¸
+        //å³è¾¹å·¥å…·æ éœ€è¦è·³è½¬åˆ°msgé‚£ä¸€æ 
         QMainWnd::getMainWnd()->m_toolWnd->m_msgBtn->click();
-        //ÏÈÕÒµ½ÏûÏ¢ÁĞ±íÖĞËùÔÚµÄÎ»ÖÃ
+        //å…ˆæ‰¾åˆ°æ¶ˆæ¯åˆ—è¡¨ä¸­æ‰€åœ¨çš„ä½ç½®
         auto msgListWidget =
             QMainWnd::getMainWnd()->m_commMsgListWnd->m_listWidget;
 
@@ -170,7 +170,7 @@ void QCommListWnd::slotOnStartGroupBtnClicked()
     LogDebug << " the pos of startGroupBtn: " << m_startGroupBtn->pos();
     QPoint gPoint = m_startGroupBtn->mapToGlobal(QPoint(0, 0));
 
-    /*Ñ¡ÔñµÄ´°¿ÚÖ»ÄÜÔÊĞí³öÏÖÒ»¸ö*/
+    /*é€‰æ‹©çš„çª—å£åªèƒ½å…è®¸å‡ºç°ä¸€ä¸ª*/
     QRect swRect = m_selectWnd->geometry();
     swRect.setX(gPoint.x() - m_selectWnd->width() + m_startGroupBtn->width());
     swRect.setY(gPoint.y() + m_startGroupBtn->height() + 5);
@@ -272,7 +272,7 @@ bool QCommListWnd::hasMsgItemBySesId(int64_t sesid)
 
 bool QCommListWnd::hasGroupItemByGroupId(int64_t groupid)
 {
-    //ÅĞ¶ÏÈºÁÄÁĞ±íÖĞÊÇ·ñº¬ÓĞ´ËÈºÁÄ
+    //åˆ¤æ–­ç¾¤èŠåˆ—è¡¨ä¸­æ˜¯å¦å«æœ‰æ­¤ç¾¤èŠ
     int count = m_listWidget->count();
     bool bHas = false;
     for (int i = 0; i < count; i++)

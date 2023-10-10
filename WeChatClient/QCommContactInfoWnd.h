@@ -31,7 +31,7 @@ class QCommContactInfoWnd : public QWidget
     QWidget* m_contentWnd;
     QVBoxLayout* m_vLayout1;
 
-    QHBoxLayout* m_hLayout0;  // ¶¥²¿µÄ×î´ó»¯£¬×îĞ¡»¯°´Å¥µÈ
+    QHBoxLayout* m_hLayout0;  // é¡¶éƒ¨çš„æœ€å¤§åŒ–ï¼Œæœ€å°åŒ–æŒ‰é’®ç­‰
     QHBoxLayout* m_hLayout1;
     QHBoxLayout* m_hLayout2;
     QHBoxLayout* m_hLayout3;
@@ -46,13 +46,13 @@ class QCommContactInfoWnd : public QWidget
     QLabel* m_headimgLabel;
 
     QLabel* m_markNameLabel;
-    QLabel* m_rolenameLabel;  // ½ÇÉ«Ãû
+    QLabel* m_rolenameLabel;  // è§’è‰²å
     QLabel* m_channelLabel;
 
     QLabel* m_markNameFillLabel;
     QLabel* m_rolenameFillLabel;
     QLabel* m_channelFillLabel;
 
-    //·¢ËÍÏûÏ¢´°¿Ú
+    //å‘é€æ¶ˆæ¯çª—å£
     QPushButton* m_sendMsgBtn;
 };

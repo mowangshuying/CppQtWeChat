@@ -33,7 +33,7 @@ QCommContactItemWnd::QCommContactItemWnd(QWidget* p,
     m_hLayout->addSpacing(15);
     m_hLayout->addWidget(m_name);
 
-    //向远端请求头像的信息
+    //鍚戣繙绔姹傚ご鍍忕殑淇℃伅
     QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png")
                          .arg(friendid);
     m_networkMgr = new QNetworkAccessManager();

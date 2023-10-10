@@ -19,7 +19,7 @@ class QEmoijWnd : public QWidget
   signals:
     void signalEmoijClicked(QString m_emoijString);
   public slots:
-    //ÅĞ¶ÏÄÄ¸öµ¥Ôª¸ñ×Ó±»µã»÷
+    //åˆ¤æ–­å“ªä¸ªå•å…ƒæ ¼å­è¢«ç‚¹å‡»
     void slotCellClicked(int x, int y);
 
   public:

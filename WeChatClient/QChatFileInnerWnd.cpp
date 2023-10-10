@@ -23,7 +23,7 @@ QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);
 
-    //用于存放文件的icon
+    //鐢ㄤ簬瀛樻斁鏂囦欢鐨刬con
     m_fileIcon = new QLabel();
     m_fileIcon->setFixedSize(40, 40);
     m_fileIcon->setPixmap(QPixmap("./img/fileicon.png"));
@@ -50,11 +50,11 @@ QChatFileInnerWnd::QChatFileInnerWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addWidget(m_progressBar);
 
     m_hLayout2 = new QHBoxLayout();
-    m_sendState = new QLabel("发送中");
-    m_openFile = new QPushButton("打开文件");
-    m_copyFile = new QPushButton("复制文件");
-    m_openFileDir = new QPushButton("打开目录");
-    m_downLoad = new QPushButton("下载文件");
+    m_sendState = new QLabel("鍙戦�佷腑");
+    m_openFile = new QPushButton("鎵撳紑鏂囦欢");
+    m_copyFile = new QPushButton("澶嶅埗鏂囦欢");
+    m_openFileDir = new QPushButton("鎵撳紑鐩綍");
+    m_downLoad = new QPushButton("涓嬭浇鏂囦欢");
 
     m_hLayout2->addWidget(m_sendState);
     m_hLayout2->addStretch();
@@ -106,7 +106,7 @@ void QChatFileInnerWnd::slotDownloadFileBtnClick()
 {
     if (m_serveFilePath != "")
     {
-        //下载远程文件并显示进度条
+        //涓嬭浇杩滅▼鏂囦欢骞舵樉绀鸿繘搴︽潯
         m_pNetManager = new QNetworkAccessManager(this);
         QString downLoadFileUrl = m_serveFilePath;
         QNetworkReply* reply =
@@ -115,14 +115,14 @@ void QChatFileInnerWnd::slotDownloadFileBtnClick()
                 &QNetworkReply::downloadProgress,
                 this,
                 [this, reply](qint64 x, qint64 y) {
-                    //显示下载进度
+                    //鏄剧ず涓嬭浇杩涘害
                     m_progressBar->setMinimum(0);
                     m_progressBar->setMaximum(y);
                     m_progressBar->setValue(x);
                 });
 
         connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-            m_sendState->setText("下载完成");
+            m_sendState->setText("涓嬭浇瀹屾垚");
             sendFileShow();
             QString currpath =
                 QDataManager::getMgr()->m_localRecvFileDir + m_fileName->text();
@@ -136,7 +136,7 @@ void QChatFileInnerWnd::slotDownloadFileBtnClick()
                 m_fileFullDir = fileinfo.absolutePath();
             }
 
-            // 释放内容
+            // 閲婃斁鍐呭
             reply->deleteLater();
             delete m_pNetManager;
             m_pNetManager = nullptr;

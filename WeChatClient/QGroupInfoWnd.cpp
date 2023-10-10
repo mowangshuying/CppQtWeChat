@@ -21,7 +21,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setFixedWidth(265);
     setMinimumHeight(535);
 
-    // ¹ö¶¯ÇøÓò
+    // æ»šåŠ¨åŒºåŸŸ
     m_scrollArea = new QScrollArea(m_centerWnd);
     m_scrollAreaWnd = new QWidget(m_centerWnd);
 
@@ -38,7 +38,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vLayout->setContentsMargins(0, 0, 0, 0);
 
-    //¿ªÊ¼×é×°
+    //å¼€å§‹ç»„è£…
     m_groupfriendsWnd = new QGroupFriendsWnd(this);
     m_groupfriendsWnd->setObjectName("QGroupFriendsWnd");
     m_groupfriendsWnd->setFixedHeight(249);
@@ -57,50 +57,50 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addWidget(m_simpleGroupInfoWnd);
 
     m_groupName1 = new QLabel();
-    m_groupName1->setText("ÈºÁÄÃû³Æ");
+    m_groupName1->setText("ç¾¤èŠåç§°");
     m_vLayout1->addWidget(m_groupName1);
 
     m_groupName2 = new QEditLabel(m_centerWnd);
     m_groupName2->setFixedSize(200, 25);
-    m_groupName2->setText("ÇëÔÚ´Ë´¦Ìí¼ÓÈºÁÄÃû³Æ...");
+    m_groupName2->setText("è¯·åœ¨æ­¤å¤„æ·»åŠ ç¾¤èŠåç§°...");
     m_vLayout1->addWidget(m_groupName2);
 
     m_groupNotice1 = new QLabel();
-    m_groupNotice1->setText("Èº¹«¸æ");
+    m_groupNotice1->setText("ç¾¤å…¬å‘Š");
     m_vLayout1->addWidget(m_groupNotice1);
 
     m_groupNotice2 = new QEditLabel(m_centerWnd);
-    m_groupNotice2->setText("ÇëÔÚ´Ë´¦ÉèÖÃÈº¹«¸æ...");
+    m_groupNotice2->setText("è¯·åœ¨æ­¤å¤„è®¾ç½®ç¾¤å…¬å‘Š...");
     m_groupNotice2->setFixedSize(200, 25);
     m_vLayout1->addWidget(m_groupNotice2);
 
-    // Ìá¹©·Ö¸îÏß
+    // æä¾›åˆ†å‰²çº¿
     m_vLayout1->addSpacing(5);
 
     m_groupRemarks1 = new QLabel();
-    m_groupRemarks1->setText("±¸×¢");
+    m_groupRemarks1->setText("å¤‡æ³¨");
     m_vLayout1->addWidget(m_groupRemarks1);
 
-    // Ìá¹©·Ö¸îÏß
+    // æä¾›åˆ†å‰²çº¿
     m_vLayout1->addSpacing(5);
 
     m_groupRemarks2 = new QEditLabel(m_centerWnd);
-    m_groupRemarks2->setText("ÇëÔÚ´Ë´¦ÉèÖÃÈº±¸×¢...");
+    m_groupRemarks2->setText("è¯·åœ¨æ­¤å¤„è®¾ç½®ç¾¤å¤‡æ³¨...");
     m_groupRemarks2->setFixedSize(200, 25);
     m_vLayout1->addWidget(m_groupRemarks2);
 
-    // Ìá¹©·Ö¸îÏß
+    // æä¾›åˆ†å‰²çº¿
     m_vLayout1->addSpacing(5);
 
     m_groupRoleName1 = new QLabel();
-    m_groupRoleName1->setText("ÎÒÔÚ±¾ÈºµÄêÇ³Æ");
+    m_groupRoleName1->setText("æˆ‘åœ¨æœ¬ç¾¤çš„æ˜µç§°");
     m_vLayout1->addWidget(m_groupRoleName1);
 
-    // Ìá¹©·Ö¸îÏß
+    // æä¾›åˆ†å‰²çº¿
     m_vLayout1->addSpacing(5);
 
     m_groupRoleName2 = new QEditLabel(m_centerWnd);
-    m_groupRoleName2->setText("ÇëÔÚ´Ë´¦ÉèÖÃ±¸×¢...");
+    m_groupRoleName2->setText("è¯·åœ¨æ­¤å¤„è®¾ç½®å¤‡æ³¨...");
     m_groupRoleName2->setFixedSize(200, 25);
     ;
     m_vLayout1->addWidget(m_groupRoleName2);
@@ -121,7 +121,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout2->addLayout(m_hLayout21);
 
     m_showGroupFriendsRoleNameLabel = new QLabel();
-    m_showGroupFriendsRoleNameLabel->setText("ÏÔÊ¾Èº³ÉÔ±êÇ³Æ");
+    m_showGroupFriendsRoleNameLabel->setText("æ˜¾ç¤ºç¾¤æˆå‘˜æ˜µç§°");
     m_hLayout21->addWidget(m_showGroupFriendsRoleNameLabel);
 
     m_showGroupFriendsRoleNameBtn = new QSelfSwitchButton();
@@ -132,7 +132,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout22 = new QHBoxLayout();
     m_vLayout2->addLayout(m_hLayout22);
     m_MsgFreeLabel = new QLabel();
-    m_MsgFreeLabel->setText("ÏûÏ¢Ãâ´òÈÅ");
+    m_MsgFreeLabel->setText("æ¶ˆæ¯å…æ‰“æ‰°");
     m_hLayout22->addWidget(m_MsgFreeLabel);
 
     m_MsgFreeBtn = new QSelfSwitchButton();
@@ -143,7 +143,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout23 = new QHBoxLayout();
     m_vLayout2->addLayout(m_hLayout23);
     m_topWndLabel = new QLabel();
-    m_topWndLabel->setText("ÖÃ¶¥ÁÄÌì");
+    m_topWndLabel->setText("ç½®é¡¶èŠå¤©");
     m_hLayout23->addWidget(m_topWndLabel);
 
     m_topWndBtn = new QSelfSwitchButton();
@@ -154,7 +154,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout2->addLayout(m_hLayout24);
 
     m_save2AddrBookLabel = new QLabel();
-    m_save2AddrBookLabel->setText("±£´æµ½Í¨Ñ¶Â¼");
+    m_save2AddrBookLabel->setText("ä¿å­˜åˆ°é€šè®¯å½•");
     m_hLayout24->addWidget(m_save2AddrBookLabel);
 
     m_save2AddrBookBtn = new QSelfSwitchButton();
@@ -173,14 +173,14 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_delexitWnd->setLayout(m_vLayout3);
 
     m_delexitBtn = new QPushButton();
-    m_delexitBtn->setText("É¾³ý²¢ÍË³ö");
+    m_delexitBtn->setText("åˆ é™¤å¹¶é€€å‡º");
 
     m_delexitBtn->setFixedSize(220, 30);
     m_vLayout3->addWidget(m_delexitBtn);
 
     m_vLayout->addStretch();
 
-    //ÉèÖÃÎÞ±ß¿ò
+    //è®¾ç½®æ— è¾¹æ¡†
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
     m_scrollArea->setWidget(m_scrollAreaWnd);
@@ -190,7 +190,7 @@ QGroupInfoWnd::QGroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
 void QGroupInfoWnd::addGroupFriendItem(int64_t ownerId, QString nickName)
 {
-    // ²é¿´ÁÐ±íÖÐÊÇ·ñ´æÔÚ¸ÃÓÃ»§£¬Èç¹û´æÔÚÓ¦¸Ã²»ÔÚÌí¼ÓÓÃ»§ÐÅÏ¢
+    // æŸ¥çœ‹åˆ—è¡¨ä¸­æ˜¯å¦å­˜åœ¨è¯¥ç”¨æˆ·ï¼Œå¦‚æžœå­˜åœ¨åº”è¯¥ä¸åœ¨æ·»åŠ ç”¨æˆ·ä¿¡æ¯
     bool ishas = false;
     QListWidget* listWidget = m_groupfriendsWnd->m_listWnd;
     for (int i = 0; i < listWidget->count(); i++)
@@ -240,7 +240,7 @@ void QGroupInfoWnd::slotSetGroupName()
                                     json,
                                     [this, groupName](neb::CJsonObject& msg) {
                                         LogDebug << msg.ToString().c_str();
-                                        // ¸üÐÂ»á»°´°¿ÚÖÐµÄ±êÌâ
+                                        // æ›´æ–°ä¼šè¯çª—å£ä¸­çš„æ ‡é¢˜
                                         emit signalUpdateGroupName(groupName);
                                     });
 }

@@ -4,11 +4,11 @@
 
 #include <QLabel>
 
-// ×Ô¶¨ÒåLabel¿Ø¼ş£¬Label±»µã»÷Ê±ºò·¢³öĞÅºÅ
+// è‡ªå®šä¹‰Labelæ§ä»¶ï¼ŒLabelè¢«ç‚¹å‡»æ—¶å€™å‘å‡ºä¿¡å·
 class QSelfLabel : public QLabel
 {
     Q_OBJECT
-    // ¹¹Ôìº¯ÊıÓëÎö¹¹º¯Êı
+    // æ„é€ å‡½æ•°ä¸ææ„å‡½æ•°
   public:
     explicit QSelfLabel(QWidget* parent = nullptr,
                         Qt::WindowFlags wndFlags = Qt::WindowFlags());

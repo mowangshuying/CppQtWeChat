@@ -11,7 +11,7 @@
 #include <QCheckBox>
 #include "QMainWnd.h"
 
-//µÇÂ¼ºÍ×¢²á´°¿Ú
+//ç™»å½•å’Œæ³¨å†Œçª—å£
 class QLoginAndRegWnd : public QWidget
 {
     Q_OBJECT
@@ -62,7 +62,7 @@ class QLoginAndRegWnd : public QWidget
 
     QMainWnd* m_mainWnd = nullptr;
 
-    //ÓÃÓÚ¿ØÖÆ´°¿ÚµÄÒÆ¶¯
+    //ç”¨äºæ§åˆ¶çª—å£çš„ç§»åŠ¨
     bool m_bPress = false;
     QPoint m_poPress;
 

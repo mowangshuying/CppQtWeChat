@@ -24,7 +24,7 @@ class QSelectAddGroupOrAddFriendWnd : public QWidget
     void slotCreateGroup();
 
   public:
-    //½«Íæ¼ÒµÄÊı¾İÉèÖÃµ½QListWidgetÖĞ
+    //å°†ç©å®¶çš„æ•°æ®è®¾ç½®åˆ°QListWidgetä¸­
     // void updateData();
   public:
     QWidget* m_centerWnd;

@@ -10,7 +10,7 @@
 #include <QNetworkAccessManager>
 
 /*
- * 消息具体内容类：消息，头像，联系人名字等
+ * 娑堟伅鍏蜂綋鍐呭绫伙細娑堟伅锛屽ご鍍忥紝鑱旂郴浜哄悕瀛楃瓑
  */
 class QCommMsgItemWnd : public QWidget
 {

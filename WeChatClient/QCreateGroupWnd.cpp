@@ -38,7 +38,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_minBtn = new QPushButton(m_centerWnd);
     m_closeBtn = new QPushButton(m_centerWnd);
 
-    m_titleLabel->setText("´´½¨ÈºÁÄ");
+    m_titleLabel->setText("åˆ›å»ºç¾¤èŠ");
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
@@ -49,7 +49,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_closeBtn->setFixedSize(20, 20);
     //   m_closeBtn->setStyleSheet("border:0px");
 
-    // ±êÌâÀ¸
+    // æ ‡é¢˜æ 
     m_hLayout1 = new QHBoxLayout();
     m_hLayout1->addWidget(m_titleLabel);
     m_hLayout1->addStretch();
@@ -67,7 +67,7 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_listWnd1->setFixedHeight(300);
 
     m_serchEdit->setFixedWidth(280);
-    m_serchEdit->setPlaceholderText("ÊäÈë²éÕÒ¹Ø¼ü×Ö:");
+    m_serchEdit->setPlaceholderText("è¾“å…¥æŸ¥æ‰¾å…³é”®å­—:");
 
     m_vLayout1->addWidget(m_serchEdit);
     m_vLayout1->addWidget(m_listWnd1);
@@ -81,15 +81,15 @@ QCreateGroupWnd::QCreateGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_listWnd2 = new QListWidget();
     m_groupNameEdit = new QLineEdit();
 
-    m_hasSelLabel->setText("ÒÑÑ¡ÁªÏµÈË:0");
+    m_hasSelLabel->setText("å·²é€‰è”ç³»äºº:0");
     m_listWnd2->setFixedHeight(280);
 
-    m_groupNameEdit->setPlaceholderText("ÇëÊäÈëÈºÃû³Æ:");
+    m_groupNameEdit->setPlaceholderText("è¯·è¾“å…¥ç¾¤åç§°:");
 
     m_hLayout3 = new QHBoxLayout();
     m_comfirmBtn = new QPushButton();
 
-    m_comfirmBtn->setText("È·ÈÏ");
+    m_comfirmBtn->setText("ç¡®è®¤");
 
     m_hLayout3->addStretch();
     m_hLayout3->addWidget(m_comfirmBtn);
@@ -232,7 +232,7 @@ void QCreateGroupWnd::delThisWndByRolename(QString rolename,
 
 void QCreateGroupWnd::updateData()
 {
-    //ÏòÓÒ²à½çÃæÖÐÌí¼ÓÏàÓ¦Êý¾Ý
+    //å‘å³ä¾§ç•Œé¢ä¸­æ·»åŠ ç›¸åº”æ•°æ®
     auto itMap = QDataManager::getMgr()->m_FriendId2NameMap.begin();
     auto itMapEnd = QDataManager::getMgr()->m_FriendId2NameMap.end();
     for (; itMap != itMapEnd; itMap++)
@@ -246,7 +246,7 @@ void QCreateGroupWnd::updateData()
         }
     }
 
-    //ÓÒ²à½çÃæÇå³ýÑ¡ÖÐµÄ×´Ì¬
+    //å³ä¾§ç•Œé¢æ¸…é™¤é€‰ä¸­çš„çŠ¶æ€
     {
         int count = m_listWnd1->count();
         for (int index = 0; index < count; index++)
@@ -265,12 +265,12 @@ void QCreateGroupWnd::updateData()
                 continue;
             }
 
-            //Çå³ýÑ¡ÖÐµÄ×´Ì¬
+            //æ¸…é™¤é€‰ä¸­çš„çŠ¶æ€
             wnd->m_selRBtn->setChecked(false);
         }
     }
 
-    //ÒÆ³ý×ó²à½çÃæÖÐµÄÄÚÈÝ
+    //ç§»é™¤å·¦ä¾§ç•Œé¢ä¸­çš„å†…å®¹
     {
         QListWidgetItem* item;
         int count = m_listWnd2->count();
@@ -281,9 +281,9 @@ void QCreateGroupWnd::updateData()
         }
     }
 
-    m_hasSelLabel->setText("ÒÑÑ¡ÁªÏµÈË:0");
-    m_serchEdit->setPlaceholderText("ÊäÈë²éÕÒ¹Ø¼ü×Ö`-`");
-    m_groupNameEdit->setPlaceholderText("ÇëÊäÈëÈºÃû³Æ`-`");
+    m_hasSelLabel->setText("å·²é€‰è”ç³»äºº:0");
+    m_serchEdit->setPlaceholderText("è¾“å…¥æŸ¥æ‰¾å…³é”®å­—`-`");
+    m_groupNameEdit->setPlaceholderText("è¯·è¾“å…¥ç¾¤åç§°`-`");
     m_serchEdit->setText("");
     m_groupNameEdit->setText("");
 }
@@ -316,27 +316,27 @@ void QCreateGroupWnd::slotSelRBtnClick(QMap<QString, QString> map)
         delThisWndByRolename(map["rolename"], m_listWnd2);
     }
 
-    //»ñÈ¡m_listwnd2ÖÐº¬ÓÐµÄÏîÄ¿ÊýÁ¿£¬ÐÞ¸ÄlableÖÐµÄÄÚÈÝ
-    QString str = QString("ÒÑÑ¡ÁªÏµÈË:%1").arg(m_listWnd2->count());
+    //èŽ·å–m_listwnd2ä¸­å«æœ‰çš„é¡¹ç›®æ•°é‡ï¼Œä¿®æ”¹lableä¸­çš„å†…å®¹
+    QString str = QString("å·²é€‰è”ç³»äºº:%1").arg(m_listWnd2->count());
     m_hasSelLabel->setText(str);
 }
 
 void QCreateGroupWnd::slotComfirmBtnClick()
 {
-    //ÏÈÖ±½ÓÒþ²Ø´´½¨ÈºÁÄµÄ¶Ô»°¿ò
+    //å…ˆç›´æŽ¥éšè—åˆ›å»ºç¾¤èŠçš„å¯¹è¯æ¡†
     hide();
 
-    //»ñÈ¡µ±Ç°Íæ¼Òid£¬»ñÈ¡ÈºµÄÃû³Æ
+    //èŽ·å–å½“å‰çŽ©å®¶idï¼ŒèŽ·å–ç¾¤çš„åç§°
     int ownerid = QDataManager::getMgr()->m_userid;
     QString groupname = m_groupNameEdit->text();
     // LogDebug << "ownerid:" << ownerid << "groupname:" << groupname;
     if (groupname == "")
     {
         // LogDebug << "groupname is empty()";
-        QMessageBox::information(nullptr, "info", "ÇëÊäÈëÕýÈ·µÄÈº×éÃû³Æ");
+        QMessageBox::information(nullptr, "info", "è¯·è¾“å…¥æ­£ç¡®çš„ç¾¤ç»„åç§°");
         return;
     }
-    //»ñÈ¡ÈºµÄ³ÉÔ±ÐÅÏ¢
+    //èŽ·å–ç¾¤çš„æˆå‘˜ä¿¡æ¯
     std::vector<int64_t> groupfriendIdVct;
     for (int i = 0; i < m_listWnd2->count(); i++)
     {
@@ -355,7 +355,7 @@ void QCreateGroupWnd::slotComfirmBtnClick()
         LogDebug << "groupfrindIdVct add " << wnd->m_friendid;
         groupfriendIdVct.push_back(wnd->m_friendid);
     }
-    //Ìî³äÊý¾Ý
+    //å¡«å……æ•°æ®
     neb::CJsonObject json;
     json.Add("createid", ownerid);
     json.Add("groupname", groupname.toStdString());
@@ -364,18 +364,18 @@ void QCreateGroupWnd::slotComfirmBtnClick()
     {
         json["groupfriends"].Add(groupfriendIdVct[i]);
     }
-    //ÏòÔ¶¶Ë·þÎñÆ÷·¢ËÍÇëÇó
+    //å‘è¿œç«¯æœåŠ¡å™¨å‘é€è¯·æ±‚
     QWSClientMgr::getMgr()->request(
         "cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
             LogDebug << "msg:" << msg.ToString().c_str();
-            //ÏÖÔÚ·þÎñ¶Ë½ö½ö·µ»Ø createid£¬groupname,groupid,groupfriends
+            //çŽ°åœ¨æœåŠ¡ç«¯ä»…ä»…è¿”å›ž createidï¼Œgroupname,groupid,groupfriends
             int groupid = -1;
             if (!msg["data"].Get("groupid", groupid))
             {
                 LogDebug << "msg[\"data\"] can not find groupid!";
                 return;
             }
-            //½ÓÊÕµ½´´½¨Èº×é³É¹¦µÄÊ±ºò£¬ÏòÁÐ±íÖÐÇ¶ÈëÒ»ÌõÊý¾Ý
+            //æŽ¥æ”¶åˆ°åˆ›å»ºç¾¤ç»„æˆåŠŸçš„æ—¶å€™ï¼Œå‘åˆ—è¡¨ä¸­åµŒå…¥ä¸€æ¡æ•°æ®
             QMainWnd::getMainWnd()->m_commGroupsListWnd->addGroupItem(
                 "./img/groupHead.png",
                 groupname.toStdString().c_str(),

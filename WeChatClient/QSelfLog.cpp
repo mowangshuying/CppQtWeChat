@@ -32,7 +32,7 @@ void QSelfLog::initLog()
         gFileLog = nullptr;
         return;
     }
-    //初始化自定义日志处理函数myMessageOutput
+    //鍒濆鍖栬嚜瀹氫箟鏃ュ織澶勭悊鍑芥暟myMessageOutput
     gDefaultHandler = qInstallMessageHandler(myMessageOutput);
 }
 

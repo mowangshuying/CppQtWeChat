@@ -9,7 +9,7 @@
 class QStyleSheetObject
 {
   public:
-    QWidget* m_widget;  // 窗口
+    QWidget* m_widget;  // 绐楀彛
     QString m_qssFileName;
 };
 
@@ -30,7 +30,7 @@ class QStyleSheetMgr : public QObject
     ~QStyleSheetMgr();
     static QStyleSheetMgr* m_mgr;
 
-  public:  // 成员函数
+  public:  // 鎴愬憳鍑芥暟
     void reg(QString wndObjectName, QStyleSheetObject object);
 
     void reg(QString wndObjectName, QString qssFileName, QWidget* wnd);

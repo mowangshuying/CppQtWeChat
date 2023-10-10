@@ -22,7 +22,7 @@ QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
     setFixedSize(560, 480);
-    // ÉèÖÃÎªÎÞ±ß¿ò¼°±³¾°Í¸Ã÷
+    // è®¾ç½®ä¸ºæ— è¾¹æ¡†åŠèƒŒæ™¯é€æ˜Ž
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
@@ -30,19 +30,19 @@ QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_centerWnd->setLayout(m_vLayout);
 
     m_hTitleLayout = new QHBoxLayout(m_centerWnd);
-    // ×îÐ¡»¯°´Å¥
+    // æœ€å°åŒ–æŒ‰é’®
     m_minBtn = new QPushButton();
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
 
-    // ¹Ø±Õ°´Å¥
+    // å…³é—­æŒ‰é’®
     m_closeBtn = new QPushButton();
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
 
-    // Ìí¼Óµ¯»É
+    // æ·»åŠ å¼¹ç°§
     m_hTitleLayout->addStretch();
     m_hTitleLayout->addWidget(m_minBtn);
     m_hTitleLayout->addWidget(m_closeBtn);
@@ -50,7 +50,7 @@ QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addLayout(m_hTitleLayout);
 
     m_hVerLayout = new QHBoxLayout(m_centerWnd);
-    m_keyVerLabel = new QLabel("°æ±¾ÐÅÏ¢:");
+    m_keyVerLabel = new QLabel("ç‰ˆæœ¬ä¿¡æ¯:");
     m_valueVerLabel = new QLabel();
     m_valueVerLabel->setText(WECHAT_VERSION);
     m_hVerLayout->addSpacing(25);
@@ -61,10 +61,10 @@ QSettingWnd::QSettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_themeLayout = new QHBoxLayout(m_centerWnd);
     m_keyThemeLabel = new QLabel();
-    m_keyThemeLabel->setText("Ö÷ÌâÉèÖÃ:  ");
+    m_keyThemeLabel->setText("ä¸»é¢˜è®¾ç½®:  ");
     m_valueThemeComboBox = new QComboBox(m_centerWnd);
-    m_valueThemeComboBox->addItem("Ç³É«Ö÷Ìâ");
-    m_valueThemeComboBox->addItem("ÉîÉ«Ö÷Ìâ");
+    m_valueThemeComboBox->addItem("æµ…è‰²ä¸»é¢˜");
+    m_valueThemeComboBox->addItem("æ·±è‰²ä¸»é¢˜");
 
     m_themeLayout->addSpacing(25);
     m_themeLayout->addWidget(m_keyThemeLabel);

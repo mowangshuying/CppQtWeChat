@@ -10,11 +10,11 @@ class QChatFileOuterWnd : public QWidget
 {
     Q_OBJECT
   public:
-    // ÎÄ¼şÀàĞÍ
+    // æ–‡ä»¶ç±»å‹
     enum class ChatFileTypeEnum
     {
-        ChatFile_Owner = 0,  // ½ÓÊÕµ½×Ô¼ºµÄÎÄ¼ş
-        ChatFile_Other,      // ½ÓÊÕµ½ËûÈËµÄÎÄ¼ş
+        ChatFile_Owner = 0,  // æ¥æ”¶åˆ°è‡ªå·±çš„æ–‡ä»¶
+        ChatFile_Other,      // æ¥æ”¶åˆ°ä»–äººçš„æ–‡ä»¶
     };
 
     QChatFileOuterWnd(QWidget* p = nullptr,
@@ -52,8 +52,8 @@ class QChatFileOuterWnd : public QWidget
     void setProgressBarValue(int value);
 
   public:
-    QLabel* m_headUrl;              // Í·ÏñĞÅÏ¢
-    QChatFileInnerWnd* m_innerWnd;  // ÎÄ¼ş¿ò
+    QLabel* m_headUrl;              // å¤´åƒä¿¡æ¯
+    QChatFileInnerWnd* m_innerWnd;  // æ–‡ä»¶æ¡†
     QHBoxLayout* m_hLayout;
     QVBoxLayout* m_vLayout;
 };

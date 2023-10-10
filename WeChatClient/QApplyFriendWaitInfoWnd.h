@@ -16,9 +16,9 @@ class QApplyFriendWaitInfoWnd : public QWidget
     QApplyFriendWaitInfoWnd(QWidget* p = nullptr);
 
   public:
-    //窗口主要布局
+    //绐楀彛涓昏甯冨眬
     QVBoxLayout* m_vLayout;
 
-    // 文本显示
+    // 鏂囨湰鏄剧ず
     QLabel* m_infoLabel;
 };

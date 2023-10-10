@@ -19,12 +19,12 @@ class QVoiceTelphoneWnd : public QWidget
   public:
     enum class VoiceTelphoneState
     {
-        VTS_none = 0,    // ³õÊ¼×´Ì¬
-        VTS_call,        // ´òµç»°
-        VTS_waitAccept,  // µÈ´ı½ÓÌı
-        VTS_accept,      // ½ÓÌıµç»°
-        VTS_phoning,     //Í¨»°ÖĞ
-        VTS_close,       // ¹Ò¶Ïµç»°
+        VTS_none = 0,    // åˆå§‹çŠ¶æ€
+        VTS_call,        // æ‰“ç”µè¯
+        VTS_waitAccept,  // ç­‰å¾…æ¥å¬
+        VTS_accept,      // æ¥å¬ç”µè¯
+        VTS_phoning,     //é€šè¯ä¸­
+        VTS_close,       // æŒ‚æ–­ç”µè¯
     };
 
   public:
@@ -38,7 +38,7 @@ class QVoiceTelphoneWnd : public QWidget
 
     void playAudioFormByteArrayVct();
 
-    // ²É¼¯ÓïÒô²¢·¢ËÍµ½·şÎñÆ÷£¬·şÎñÆ÷ÔÙ½øĞĞ×ª·¢
+    // é‡‡é›†è¯­éŸ³å¹¶å‘é€åˆ°æœåŠ¡å™¨ï¼ŒæœåŠ¡å™¨å†è¿›è¡Œè½¬å‘
     void requestSendVoiceDataToServer(QByteArray& inputByteArray);
 
     //
@@ -48,17 +48,17 @@ class QVoiceTelphoneWnd : public QWidget
 
     void requestSendClosePhoneToServer();
 
-    //½ÓÊÕµ½±ğÈË·¢ËÍµÄÏûÏ¢
+    //æ¥æ”¶åˆ°åˆ«äººå‘é€çš„æ¶ˆæ¯
     void cs_msg_sendvoicemsg(neb::CJsonObject& json);
 
-    // ÉèÖÃ recvId ºÍ sesId;
+    // è®¾ç½® recvId å’Œ sesId;
     void setRecvIdAndSesId(int64_t recvId, int64_t sesId);
 
-    // ²¦´òµç»°
+    // æ‹¨æ‰“ç”µè¯
     void callPhone();
-    // ¹Ò¶Ïµç»°
+    // æŒ‚æ–­ç”µè¯
     void closePhone();
-    // ½ÓÌıµç»°
+    // æ¥å¬ç”µè¯
     void acceptPhone();
     // cs_msg_phonemsg
 
@@ -86,18 +86,18 @@ class QVoiceTelphoneWnd : public QWidget
     QIODevice* m_inputDevice;
 
     QAudioOutput* m_output;
-    QIODevice* m_outputDevice;  //¿ªÊ¼²¥·Å
+    QIODevice* m_outputDevice;  //å¼€å§‹æ’­æ”¾
     QVector<QByteArray> m_ByteArrayVct;
 
     QSound* m_bells;
 
     int64_t m_recvId = -1;
     int64_t m_sesId = -1;
-    // ´òµç»°Ê±¼ä£¬µÈ´ı¶Ô·½½ÓÌıµç»°
+    // æ‰“ç”µè¯æ—¶é—´ï¼Œç­‰å¾…å¯¹æ–¹æ¥å¬ç”µè¯
     int64_t m_calltimeCount = 0;
-    // ÔÚÍ¨»°µÄÊ±¼ä£¬ÏÔÊ¾µ±Ç°ÒÑ¾­Í¨»°µÄÊ±¼ä
+    // åœ¨é€šè¯çš„æ—¶é—´ï¼Œæ˜¾ç¤ºå½“å‰å·²ç»é€šè¯çš„æ—¶é—´
     int64_t m_phoningTimeCount = 0;
 
-    // ÊÇ·ñÔÚÍ¨»°ÖĞ
+    // æ˜¯å¦åœ¨é€šè¯ä¸­
     VoiceTelphoneState m_state = VoiceTelphoneState::VTS_none;
 };

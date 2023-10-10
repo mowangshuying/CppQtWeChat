@@ -9,7 +9,7 @@ QWSClientMgr::QWSClientMgr()
     m_bConn = false;
     m_webSock = new QWebSocket();
 
-    //´´½¨Ò»¸ö¶¨Ê±Æ÷
+    //åˆ›å»ºä¸€ä¸ªå®šæ—¶å™¨
     m_timer = new QTimer();
     m_timer->start(1000);
 
@@ -27,7 +27,7 @@ QWSClientMgr::QWSClientMgr()
             this,
             &QWSClientMgr::slotRecvMsg);
 
-    //Á¬½ÓÔ¶¶Ë·şÎñÆ÷
+    //è¿æ¥è¿œç«¯æœåŠ¡å™¨
     m_webSock->open(QUrl(CHAT_SERVER_ADDR));
     // m_webSock->open(QUrl("ws://127.0.0.1:5000"));
     LogDebug << "threadId:" << QThread::currentThread()->currentThreadId();
@@ -91,7 +91,7 @@ void QWSClientMgr::request(const std::string& cmd, neb::CJsonObject& data)
     msg.Add("type", msg_type_req);
     msg.Add("msgId", ++m_MsgId);
 
-    //ÕâÀïÊ±¼äÊÇ²»×¼È·µÄ£¬ĞèÒªºÍ·şÎñÍ¬²½
+    //è¿™é‡Œæ—¶é—´æ˜¯ä¸å‡†ç¡®çš„ï¼Œéœ€è¦å’ŒæœåŠ¡åŒæ­¥
     int time = QTime::currentTime().msec();
 
     msg.Add("time", time);
@@ -143,7 +143,7 @@ void QWSClientMgr::slotConnected()
 {
     LogDebug << "slot_connected()...";
     // LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
-    //ÏòÔ¶¶Ë·şÎñÆ÷·¢ËÍÒ»¸ö×¢²áÏûÏ¢
+    //å‘è¿œç«¯æœåŠ¡å™¨å‘é€ä¸€ä¸ªæ³¨å†Œæ¶ˆæ¯
     neb::CJsonObject json;
     json.Add("type", "Client");
     json.Add("cckey", "ccmm00@123456");
@@ -208,7 +208,7 @@ void QWSClientMgr::slotTimer()
     m_time++;
     if (m_time % 5 == 0)
     {
-        // 5ÃëÏòÍø¹Ø·şÎñÆ÷·¢ËÍĞÄÌø
+        // 5ç§’å‘ç½‘å…³æœåŠ¡å™¨å‘é€å¿ƒè·³
         neb::CJsonObject json;
         request("cs_msg_heart", json);
     }

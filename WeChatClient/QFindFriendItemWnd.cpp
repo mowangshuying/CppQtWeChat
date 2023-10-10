@@ -37,7 +37,7 @@ QFindFriendItemWnd::QFindFriendItemWnd(QWidget* p,
 
     m_hLayout->addStretch();
     m_addFriendBtn = new QPushButton();
-    m_addFriendBtn->setText("Ìí¼ÓºÃÓÑ");
+    m_addFriendBtn->setText("ÃŒÃ­Â¼Ã“ÂºÃƒÃ“Ã‘");
     // m_addFriendBtn->setFixedSize(60, 30);
     m_hLayout->addWidget(m_addFriendBtn);
     m_hLayout->addSpacing(80);

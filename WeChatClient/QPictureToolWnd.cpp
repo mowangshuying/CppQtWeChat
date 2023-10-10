@@ -39,17 +39,17 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_minBtn = new QPushButton(this);
     m_closeBtn = new QPushButton(this);
 
-    // ×îÐ¡»¯°´Å¥
+    // æœ€å°åŒ–æŒ‰é’®
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png"));
     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
 
-    // ¹Ø±Õ°´Å¥
+    // å…³é—­æŒ‰é’®
     m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png"));
     m_closeBtn->setIconSize(QSize(20, 20));
     m_closeBtn->setFixedSize(20, 20);
 
-    // Ìí¼Óµ¯»É
+    // æ·»åŠ å¼¹ç°§
     m_hLayout1->addStretch();
     m_hLayout1->addWidget(m_minBtn);
     m_hLayout1->addWidget(m_closeBtn);
@@ -58,9 +58,9 @@ QPictureToolWnd::QPictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_cancelBtn = new QPushButton();
     m_uploadBtn = new QPushButton();
 
-    m_determineBtn->setText("È·¶¨");
-    m_cancelBtn->setText("È¡Ïû");
-    m_uploadBtn->setText("ÉÏ´«");
+    m_determineBtn->setText("ç¡®å®š");
+    m_cancelBtn->setText("å–æ¶ˆ");
+    m_uploadBtn->setText("ä¸Šä¼ ");
 
     m_hLayout2 = new QHBoxLayout();
     m_hLayout2->addWidget(m_uploadBtn);
@@ -106,7 +106,7 @@ void QPictureToolWnd::mouseReleaseEvent(QMouseEvent* event)
 void QPictureToolWnd::slotUploadBtnClicked()
 {
     QString filepath =
-        QFileDialog::getOpenFileName(nullptr, "Ñ¡ÔñÍ¼Æ¬", ".", "*.png");
+        QFileDialog::getOpenFileName(nullptr, "é€‰æ‹©å›¾ç‰‡", ".", "*.png");
     if (filepath.trimmed().isEmpty())
     {
         LogErr << "file path is Empty!";
@@ -167,7 +167,7 @@ void QPictureToolWnd::slotDetermineBtnClicked()
         neb::CJsonObject json2;
         json2.Add("headimg", headimgstr);
         json2.Add("userid", QMainWnd::getMainWnd()->m_userid);
-        //¸æËßÔ¶¶Ë·þÎñÆ÷¸ÃÍæ¼ÒµÄÍ·ÏñÊý¾Ý
+        //å‘Šè¯‰è¿œç«¯æœåŠ¡å™¨è¯¥çŽ©å®¶çš„å¤´åƒæ•°æ®
         QWSClientMgr::getMgr()->request(
             "cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
                 LogDebug << msg.ToString().c_str() << endl;

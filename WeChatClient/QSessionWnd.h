@@ -6,7 +6,7 @@
 #include <QVBoxLayout>
 #include <QTextEdit>
 #include <QPushButton>
-#include <QListWidget>  //´°¿ÚÁĞ±í
+#include <QListWidget>  //çª—å£åˆ—è¡¨
 
 #include "QSessionTopWnd.h"
 #include "QSessionToolBar.h"
@@ -14,20 +14,20 @@
 #include <QListWidget>
 #include <QFileInfo>
 
-// Ö§³Öğ¤ÌùÍ¼Æ¬µÄÎÄ±¾¿ò
+// æ”¯æŒé»è´´å›¾ç‰‡çš„æ–‡æœ¬æ¡†
 #include "QSelfTextEdit.h"
 
 /*
- * »á»°µÄ´°¿Ú sesId×÷ÓÃ,ÓÒ±ßĞÅÏ¢À¸µÄĞ¡´°¿ÚÑ¡ÏîÒ²ÓĞÒ»¸öid£¬Í¨¹ıid¹ØÁª±Ë´ËĞÅÏ¢
- * À´ĞŞ¸Ä¶ÔÓ¦µÄ´°¿ÚĞÅÏ¢
+ * ä¼šè¯çš„çª—å£ sesIdä½œç”¨,å³è¾¹ä¿¡æ¯æ çš„å°çª—å£é€‰é¡¹ä¹Ÿæœ‰ä¸€ä¸ªidï¼Œé€šè¿‡idå…³è”å½¼æ­¤ä¿¡æ¯
+ * æ¥ä¿®æ”¹å¯¹åº”çš„çª—å£ä¿¡æ¯
  */
 
 class QSessionWnd : public QWidget
 {
-    //Ìí¼ÓÏûÏ¢Ó³ÉäÖ§³Ö
+    //æ·»åŠ æ¶ˆæ¯æ˜ å°„æ”¯æŒ
     Q_OBJECT
   public:
-    //»á»°´°¿Ú
+    //ä¼šè¯çª—å£
     QSessionWnd(QWidget* p = nullptr);
     ~QSessionWnd();
   public slots:
@@ -59,36 +59,36 @@ class QSessionWnd : public QWidget
 
   public:
     // QHBoxLayout* m_hLayout;
-    // more°´Å¥°´ÏÂÊ±ºò»áÏÔÊ¾Õâ¸ö´°¿Ú
+    // moreæŒ‰é’®æŒ‰ä¸‹æ—¶å€™ä¼šæ˜¾ç¤ºè¿™ä¸ªçª—å£
     QGroupInfoWnd* m_groupInfoWnd;
-    //´°¿Ú²¼¾Ö¹ÜÀí
+    //çª—å£å¸ƒå±€ç®¡ç†
     QVBoxLayout* m_vLayout;
-    //»á»°µÄÉÏ·Å´°¿Ú
+    //ä¼šè¯çš„ä¸Šæ”¾çª—å£
     QSessionTopWnd* m_sesTopWnd;
-    //´°¿ÚÁĞ±íĞÅÏ¢
+    //çª—å£åˆ—è¡¨ä¿¡æ¯
 
     QListWidget* m_MsgWndList;
 
-    //ÏûÏ¢»á»°ÖĞToolBar
+    //æ¶ˆæ¯ä¼šè¯ä¸­ToolBar
     QSessionToolBar* m_sesToolBar;
-    //ĞèÒª·¢ËÍµÄÎÄ×Ö
+    //éœ€è¦å‘é€çš„æ–‡å­—
     QSelfTextEdit* m_sendTextEdit;
-    //ÓÃÓÚ·¢ËÍÎÄ×ÖµÄ°´Å¥
+    //ç”¨äºå‘é€æ–‡å­—çš„æŒ‰é’®
     QPushButton* m_sendTextBtn;
-    //ÓÃÓÚ¿ØÖÆ
+    //ç”¨äºæ§åˆ¶
     QHBoxLayout* m_hLayout1;
 
-    //»á»°id
+    //ä¼šè¯id
     qint64 m_sesId;
-    //»á»°Ãû×Ö
+    //ä¼šè¯åå­—
     QString m_name;
-    //ÏòºÎÈË·¢ËÍ
+    //å‘ä½•äººå‘é€
     int64_t m_recvId;
 
-    // ÉÏ´ÎÏÔÊ¾Ê±¼äÈÕÆÚµÄÊ±¼ä
+    // ä¸Šæ¬¡æ˜¾ç¤ºæ—¶é—´æ—¥æœŸçš„æ—¶é—´
     QDateTime m_lastMsgDateTime;
 
-    //ÊÇ·ñÊÇÈº»á»°
+    //æ˜¯å¦æ˜¯ç¾¤ä¼šè¯
     bool m_isGroupSes = false;
     bool m_isClicked = false;
 };

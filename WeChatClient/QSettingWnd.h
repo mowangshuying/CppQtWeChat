@@ -45,7 +45,7 @@ class QSettingWnd : public QWidget
     QLabel* m_keyVerLabel;
     QLabel* m_valueVerLabel;
 
-    // ÷˜Ã‚…Ë÷√
+    // √ñ√∑√å√¢√â√®√ñ√É
     QHBoxLayout* m_themeLayout;
     QLabel* m_keyThemeLabel;
     QComboBox* m_valueThemeComboBox;

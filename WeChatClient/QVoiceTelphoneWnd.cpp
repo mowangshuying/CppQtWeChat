@@ -21,7 +21,7 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
                                 m_headImgLabel->height());
 
     m_userNameLabel = new QLabel(this);
-    m_userNameLabel->setText("ÃÀÀöµÄÌì¿Õ");
+    m_userNameLabel->setText("ç¾ä¸½çš„å¤©ç©º ");
     m_userNameLabel->setStyleSheet("color:white");
     m_userNameLabel->setAlignment(Qt::AlignCenter);
     m_userNameLabel->setGeometry(width() / 2 - m_userNameLabel->width() / 2,
@@ -31,7 +31,7 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
                                  m_userNameLabel->height());
 
     m_statusLabel = new QLabel(this);
-    m_statusLabel->setText("µ±Ç°ÄãµÄÍøÂçÍ¨»°²»¼Ñ");
+    m_statusLabel->setText("å½“å‰ä½ çš„ç½‘ç»œé€šè¯ä¸ä½³ ");
     m_statusLabel->setStyleSheet("color:white");
     m_statusLabel->setGeometry(width() / 2 - m_statusLabel->width() / 2,
                                m_userNameLabel->y() +
@@ -40,7 +40,7 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
                                m_statusLabel->height());
     m_statusLabel->hide();
 
-    // Í¨»°Ê±³¤
+    // é€šè¯æ—¶é•¿
     m_timeLabel = new QLabel(this);
     m_timeLabel->setText("00:00");
     m_timeLabel->setAlignment(Qt::AlignCenter);
@@ -50,38 +50,38 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
                              m_timeLabel->width(),
                              m_timeLabel->height());
 
-    // ½ÓÌıµç»°
+    // æ¥å¬ç”µè¯
     m_acceptBtn = new QPushButton(this);
     m_acceptBtn->setIconSize(QSize(42, 42));
     m_acceptBtn->setIcon(QIcon("./img/voiceTelphoneAccept.png"));
     m_acceptBtn->setStyleSheet("border:0px");
     m_acceptBtn->setGeometry(width() / 2 - 21, 500, 42, 42);
 
-    // ¾Ü¾ø½ÓÌıµç»°
+    // æ‹’ç»æ¥å¬ç”µè¯
     m_refuseBtn = new QPushButton(this);
     m_refuseBtn->setIconSize(QSize(42, 42));
     m_refuseBtn->setIcon(QIcon("./img/voiceTelphoneRefuse.png"));
     m_refuseBtn->setStyleSheet("border:0px");
     m_refuseBtn->setGeometry(width() / 2 - 21, 500, 42, 42);
 
-    // Ã½ÌåÏà¹Ø
-    m_format.setSampleRate(16000);  //ÉèÖÃ²ÉÑùÂÊ
+    // åª’ä½“ç›¸å…³
+    m_format.setSampleRate(16000);  //è®¾ç½®é‡‡æ ·ç‡
     m_format.setChannelCount(
-        1);  //Éè¶¨ÉùµÀÊıÄ¿£¬mono(Æ½ÉùµÀ)µÄÉùµÀÊıÄ¿ÊÇ1£»stero(Á¢ÌåÉù)µÄÉùµÀÊıÄ¿ÊÇ2
-    m_format.setSampleSize(16);      //ÉèÖÃ²ÉÑù´óĞ¡
-    m_format.setCodec("audio/pcm");  //ÉèÖÃ±àÂëÆ÷£¬"audio/pcm"ÔÚËùÓĞµÄÆ½Ì¨¶¼Ö§³Ö
-    m_format.setSampleType(QAudioFormat::SignedInt);  //ÉèÖÃ²ÉÑùÀàĞÍ
+        1);  //è®¾å®šå£°é“æ•°ç›®ï¼Œmono(å¹³å£°é“)çš„å£°é“æ•°ç›®æ˜¯1ï¼›stero(ç«‹ä½“å£°)çš„å£°é“æ•°ç›®æ˜¯2
+    m_format.setSampleSize(16);  //è®¾ç½®é‡‡æ ·å¤§å°
+    m_format.setCodec("audio/pcm");  //è®¾ç½®ç¼–ç å™¨ï¼Œ"audio/pcm"åœ¨æ‰€æœ‰çš„å¹³å°éƒ½æ”¯æŒ
+    m_format.setSampleType(QAudioFormat::SignedInt);  //è®¾ç½®é‡‡æ ·ç±»å‹
     m_format.setByteOrder(
         QAudioFormat::
-            LittleEndian);  //Éè¶¨¸ßµÍÎ»µÄ£¬LittleEndian£¨µÍÎ»ÓÅÏÈ£©/LargeEndian(¸ßÎ»ÓÅÏÈ)
+            LittleEndian);  //è®¾å®šé«˜ä½ä½çš„ï¼ŒLittleEndianï¼ˆä½ä½ä¼˜å…ˆï¼‰/LargeEndian(é«˜ä½ä¼˜å…ˆ)
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
-    if (!info.isFormatSupported(m_format))  //¸ñÊ½ÊÇ·ñÖ§³Ö;
+    if (!info.isFormatSupported(m_format))  //æ ¼å¼æ˜¯å¦æ”¯æŒ;
     {
         m_format = info.nearestFormat(m_format);
     }
 
-    m_output = new QAudioOutput(m_format, this);  //Êä³öÒôÆµ
-    m_input = new QAudioInput(m_format, this);    //ÊäÈëÒôÆµ
+    m_output = new QAudioOutput(m_format, this);  //è¾“å‡ºéŸ³é¢‘
+    m_input = new QAudioInput(m_format, this);    //è¾“å…¥éŸ³é¢‘
 
     m_outputDevice = m_output->start();
     m_inputDevice = m_input->start();
@@ -89,12 +89,12 @@ QVoiceTelphoneWnd::QVoiceTelphoneWnd(QWidget* p) : QWidget(p)
     m_bells = new QSound("./music/callPhone.wav");
     m_bells->setLoops(10);
 
-    // ×¢²áĞÅºÅºÍ²Û
+    // æ³¨å†Œä¿¡å·å’Œæ§½
     regSignalSlot();
-    // ×¢²áÍøÂçÏûÏ¢
+    // æ³¨å†Œç½‘ç»œæ¶ˆæ¯
     regNetMsg();
 
-    // ¶¨Ê±Æ÷Ò»Ö±´ò¿ª
+    // å®šæ—¶å™¨ä¸€ç›´æ‰“å¼€
     m_timerId = startTimer(30);
     m_calltimeCount = 0;
     m_phoningTimeCount = 0;
@@ -143,23 +143,23 @@ void QVoiceTelphoneWnd::timerEvent(QTimerEvent* event)
 {
     if (VoiceTelphoneState::VTS_phoning == m_state)
     {
-        // ¶ÁÈ¡ËùÓĞÓïÒôÊı¾İ²¢·¢ËÍµ½·şÎñÆ÷
+        // è¯»å–æ‰€æœ‰è¯­éŸ³æ•°æ®å¹¶å‘é€åˆ°æœåŠ¡å™¨
         QByteArray inputByteArray = m_inputDevice->readAll();
         requestSendVoiceDataToServer(inputByteArray);
 
-        // ²¥·ÅÒôÆµ
+        // æ’­æ”¾éŸ³é¢‘
         playAudioFormByteArrayVct();
 
         m_phoningTimeCount += 30;
-        // Í¨»°ÏÔÊ¾¼¸·Ö¼¸ÃëÖĞ
+        // é€šè¯æ˜¾ç¤ºå‡ åˆ†å‡ ç§’ä¸­
         int nMin = m_phoningTimeCount / (60 * 1000);
         int nSec = (m_phoningTimeCount % (60 * 1000)) / 1000;
         char timeStr[24] = {0};
-        sprintf(timeStr, "Í¨»°ÖĞ:%02d:%02d", nMin, nSec);
+        sprintf(timeStr, "é€šè¯ä¸­:%02d:%02d", nMin, nSec);
         m_timeLabel->setText(timeStr);
     }
 
-    // ´¦ÓÚ15ÃëÎ´½Óµç»°×´Ì¬µÄ»°£¬Ö±½Ó¹Òµôµç»°
+    // å¤„äº15ç§’æœªæ¥ç”µè¯çŠ¶æ€çš„è¯ï¼Œç›´æ¥æŒ‚æ‰ç”µè¯
     if (VoiceTelphoneState::VTS_waitAccept == m_state)
     {
         m_calltimeCount += 30;
@@ -179,7 +179,7 @@ void QVoiceTelphoneWnd::playAudioFormByteArrayVct()
         return;
     }
 
-    // ²¥·Åm_ByteArrayVctµÄÊı¾İ
+    // æ’­æ”¾m_ByteArrayVctçš„æ•°æ®
     if (m_ByteArrayVct.isEmpty())
     {
         // LogDebug << "m_ByteArrayVct is empty!";
@@ -193,7 +193,7 @@ void QVoiceTelphoneWnd::playAudioFormByteArrayVct()
 
 void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
 {
-    // Ö»ÓĞÔÚ´òµç»°Ê±ºò²Å·¢ËÍ²É¼¯µ½µÄÏûÏ¢¸ø·şÎñÆ÷
+    // åªæœ‰åœ¨æ‰“ç”µè¯æ—¶å€™æ‰å‘é€é‡‡é›†åˆ°çš„æ¶ˆæ¯ç»™æœåŠ¡å™¨
     if (VoiceTelphoneState::VTS_phoning != m_state)
     {
         return;
@@ -209,11 +209,11 @@ void QVoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
     // LogDebug << "intputByteArray:" << inputByteArray.length() << "msgtext:"
     // << msgText.length() << "json:" << json.ToString().length();
 
-    // ²»ÇëÇóÏûÏ¢
+    // ä¸è¯·æ±‚æ¶ˆæ¯
     QWSClientMgr::getMgr()->request("cs_msg_phonemsg",
                                     json,
                                     [](neb::CJsonObject& msg) {
-                                        //ÏòÔ¶¶Ë·¢ËÍÏûÏ¢
+                                        //å‘è¿œç«¯å‘é€æ¶ˆæ¯
                                         // LogDebug << "send msg suc!";
                                     });
 }
@@ -224,7 +224,7 @@ void QVoiceTelphoneWnd::requestSendCallPhoneToServer()
     json.Add("sendid", QMainWnd::getMainWnd()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
-    // ½«²¦´òµç»°µÄÇëÇóÍÆËÍµ½·şÎñÆ÷£¬Èç¹ûÍÆËÍ³É¹¦£¬ÉèÖÃµ±Ç°×´Ì¬ÎªµÈ´ı½ÓÌıµç»°
+    // å°†æ‹¨æ‰“ç”µè¯çš„è¯·æ±‚æ¨é€åˆ°æœåŠ¡å™¨ï¼Œå¦‚æœæ¨é€æˆåŠŸï¼Œè®¾ç½®å½“å‰çŠ¶æ€ä¸ºç­‰å¾…æ¥å¬ç”µè¯
     QWSClientMgr::getMgr()->request("cs_msg_call_phone",
                                     json,
                                     [=](neb::CJsonObject& msg) {
@@ -247,7 +247,7 @@ void QVoiceTelphoneWnd::requestSendAcceptPhoneToServer()
                                     json,
                                     [=](neb::CJsonObject& msg) {
                                         LogDebug << "accept phone";
-                                        m_bells->stop();  // Í£Ö¹ÕñÁå
+                                        m_bells->stop();  // åœæ­¢æŒ¯é“ƒ
                                         m_state =
                                             VoiceTelphoneState::VTS_phoning;
                                         m_timeLabel->show();
@@ -289,22 +289,22 @@ void QVoiceTelphoneWnd::callPhone()
 void QVoiceTelphoneWnd::closePhone()
 {
     // cs_close_phone
-    // ÏòÔ¶¶Ë·şÎñÆ÷ÇëÇó¹Ø±Õµç»°
-    // Ô¶¶Ë·µ»Øºó£¬Òş²Ø´°¿Ú
+    // å‘è¿œç«¯æœåŠ¡å™¨è¯·æ±‚å…³é—­ç”µè¯
+    // è¿œç«¯è¿”å›åï¼Œéšè—çª—å£
     LogDebug << "called";
     // killTimer(m_timerId);
     m_bells->stop();
     hide();
     m_state = VoiceTelphoneState::VTS_close;
-    // Çå¿Õ²É¼¯µ½µÄÏûÏ¢£¬²»ÔÚÏòÔ¶¶Ë·şÎñÆ÷ÍÆËÍ
+    // æ¸…ç©ºé‡‡é›†åˆ°çš„æ¶ˆæ¯ï¼Œä¸åœ¨å‘è¿œç«¯æœåŠ¡å™¨æ¨é€
     m_ByteArrayVct.clear();
 }
 
 void QVoiceTelphoneWnd::acceptPhone()
 {
     // cs_accept_phone
-    // ÏòÔ¶¶Ë·¢ËÍÇëÇó£¬ÇëÇó½ÓÌıµç»°
-    // Ô¶¶Ë·µ»Øºó£¬¹Ø±ÕÕñÁå
+    // å‘è¿œç«¯å‘é€è¯·æ±‚ï¼Œè¯·æ±‚æ¥å¬ç”µè¯
+    // è¿œç«¯è¿”å›åï¼Œå…³é—­æŒ¯é“ƒ
     requestSendAcceptPhoneToServer();
 }
 
@@ -344,7 +344,7 @@ void QVoiceTelphoneWnd::cs_msg_call_phone(neb::CJsonObject& msg)
 void QVoiceTelphoneWnd::cs_msg_accept_phone(neb::CJsonObject& msg)
 {
     LogDebug << "called";
-    // ¹Ø±ÕÁåÉù
+    // å…³é—­é“ƒå£°
     int sesid = -1;
     if (!msg["data"].Get("sesid", sesid))
     {
@@ -374,7 +374,7 @@ void QVoiceTelphoneWnd::cs_msg_accept_phone(neb::CJsonObject& msg)
 
 void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
 {
-    // ½ÓÊÕµ½Ô¶¶ËµÄÏûÏ¢ºó£¬½«ÏûÏ¢´æÈëm_ByteArrayVct
+    // æ¥æ”¶åˆ°è¿œç«¯çš„æ¶ˆæ¯åï¼Œå°†æ¶ˆæ¯å­˜å…¥m_ByteArrayVct
     int sesid = -1;
     if (!msg["data"].Get("sesid", sesid))
     {
@@ -399,7 +399,7 @@ void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
         return;
     }
 
-    // ÊÕµ½ÓïÒôÍ¨»°ÏûÏ¢£¬´æÈëm_phoneWnd
+    // æ”¶åˆ°è¯­éŸ³é€šè¯æ¶ˆæ¯ï¼Œå­˜å…¥m_phoneWnd
     QString qMsgText = msgtext.c_str();
     QByteArray byteArray = QByteArray::fromBase64(qMsgText.toUtf8());
     m_ByteArrayVct.push_back(byteArray);
@@ -407,7 +407,7 @@ void QVoiceTelphoneWnd::cs_msg_phonemsg(neb::CJsonObject& msg)
 
 void QVoiceTelphoneWnd::cs_msg_close_phone(neb::CJsonObject& msg)
 {
-    // ¹Ò¶Ïµç»°
+    // æŒ‚æ–­ç”µè¯
     closePhone();
 }
 
@@ -419,7 +419,7 @@ void QVoiceTelphoneWnd::slotOnAcceptBtnClick()
 
 void QVoiceTelphoneWnd::slotOnRefuseBtnClick()
 {
-    // ¸æËß·şÎñÆ÷£¬ÎÒµã»÷ÁË¹Òµç»°µÄ°´Å¥
-    // ·şÎñÆ÷»á½«¹Òµç»°µÄĞÅÏ¢ÍÆËÍµ½¶Ô·½
+    // å‘Šè¯‰æœåŠ¡å™¨ï¼Œæˆ‘ç‚¹å‡»äº†æŒ‚ç”µè¯çš„æŒ‰é’®
+    // æœåŠ¡å™¨ä¼šå°†æŒ‚ç”µè¯çš„ä¿¡æ¯æ¨é€åˆ°å¯¹æ–¹
     requestSendClosePhoneToServer();
 }

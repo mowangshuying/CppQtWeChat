@@ -33,8 +33,8 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(
 
     m_name->setText(name);
     m_msg->setText(msg);
-    m_AgreeBtn->setText("Í¬Òâ");
-    m_refuseBtn->setText("¾Ü¾ø");
+    m_AgreeBtn->setText("åŒæ„");
+    m_refuseBtn->setText("æ‹’ç»");
 
     m_vLayout->addSpacing(10);
     m_vLayout->addWidget(m_name);
@@ -64,15 +64,15 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(
     {
         if (state == 0)
         {
-            m_AgreeBtn->setText("µÈ´ıÍ¬Òâ");
+            m_AgreeBtn->setText("ç­‰å¾…åŒæ„");
         }
         else if (state == 1)
         {
-            m_AgreeBtn->setText("ÒÑÍ¬Òâ");
+            m_AgreeBtn->setText("å·²åŒæ„");
         }
         else
         {
-            m_AgreeBtn->setText("ÒÑ¾Ü¾ø");
+            m_AgreeBtn->setText("å·²æ‹’ç»");
         }
 
         m_AgreeBtn->setEnabled(false);
@@ -86,13 +86,13 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(
         }
         else if (state == 1)
         {
-            m_AgreeBtn->setText("ÒÑÍ¬Òâ");
+            m_AgreeBtn->setText("å·²åŒæ„");
             m_AgreeBtn->setEnabled(false);
             m_refuseBtn->hide();
         }
         else
         {
-            m_AgreeBtn->setText("ÒÑ¾Ü¾ø");
+            m_AgreeBtn->setText("å·²æ‹’ç»");
             m_AgreeBtn->setEnabled(false);
             m_refuseBtn->hide();
         }
@@ -113,14 +113,14 @@ QDealNewFriendsApplyItemWnd::QDealNewFriendsApplyItemWnd(
 
 void QDealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
 {
-    // ÏòÔ¶¶Ë·¢ËÍÍ¬ÒâºÃÓÑÉêÇë
+    // å‘è¿œç«¯å‘é€åŒæ„å¥½å‹ç”³è¯·
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 1);
     QWSClientMgr::getMgr()->request("cs_msg_do_apply_add_user",
                                     json,
                                     [this](neb::CJsonObject& msg) {
-                                        m_AgreeBtn->setText("ÒÑÍ¬Òâ");
+                                        m_AgreeBtn->setText("å·²åŒæ„");
                                         m_AgreeBtn->setEnabled(false);
                                         m_refuseBtn->hide();
                                     });
@@ -128,14 +128,14 @@ void QDealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
 
 void QDealNewFriendsApplyItemWnd::slotOnRefuseBtnClick()
 {
-    // ÏòÔ¶¶Ë·¢ËÍ¾Ü¾øºÃÓÑÉêÇë
+    // å‘è¿œç«¯å‘é€æ‹’ç»å¥½å‹ç”³è¯·
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 2);
     QWSClientMgr::getMgr()->request("cs_msg_do_apply_add_user",
                                     json,
                                     [this](neb::CJsonObject& msg) {
-                                        m_AgreeBtn->setText("ÒÑ¾Ü¾ø");
+                                        m_AgreeBtn->setText("å·²æ‹’ç»");
                                         m_AgreeBtn->setEnabled(false);
                                         m_refuseBtn->hide();
                                     });

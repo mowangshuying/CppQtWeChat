@@ -16,14 +16,14 @@
 #include "QSelectMoreWnd.h"
 
 /*
- * ×îÓÒ±ß¹¤¾ßÀ¸´°¿Ú
+ * æœ€å³è¾¹å·¥å…·æ çª—å£
  */
 class QToolWnd : public QWidget
 {
-    //Ìí¼ÓÏûÏ¢Ó³ÉäÖ§³Ö
+    //æ·»åŠ æ¶ˆæ¯æ˜ å°„æ”¯æŒ
     Q_OBJECT
   public:
-    //¹¤¾ßÀ¸´°¿Ú
+    //å·¥å…·æ çª—å£
     QToolWnd(QWidget* p = nullptr);
   signals:
     void signalToolWndPageChanged(int num);

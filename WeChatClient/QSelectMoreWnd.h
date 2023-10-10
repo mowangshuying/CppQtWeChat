@@ -17,6 +17,6 @@ class QSelectMoreWnd : public QWidget
 
   public:
     QVBoxLayout* m_vLayout;
-    //���ڰ�ť
+    //¹ØÓÚ°´Å¥
     QPushButton* m_settingBtn;
 };

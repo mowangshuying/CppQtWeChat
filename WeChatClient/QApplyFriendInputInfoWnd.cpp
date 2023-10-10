@@ -15,7 +15,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
     setContentsMargins(0, 0, 0, 0);
     setFixedSize(460, 280);
 
-    // ´°¿ÚÖ÷Òª²¼¾ÖÎªË®Æ½²¼¾Ö
+    // çª—å£ä¸»è¦å¸ƒå±€ä¸ºæ°´å¹³å¸ƒå±€
     m_hLayout = new QHBoxLayout();
     setLayout(m_hLayout);
 
@@ -26,16 +26,16 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
     m_userName = new QLabel();
     m_moreInfo = new QLabel();
 
-    // ÉèÖÃÍ·Ïñ
+    // è®¾ç½®å¤´åƒ
     m_headUrl->setFixedSize(80, 80);
     QPixmap headImg = QPixmap("./img/head2.png");
     headImg =
         headImg.scaled(80, 80, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     m_headUrl->setPixmap(headImg);
 
-    // ÓÃ»§Ãû
-    m_userName->setText("Íæ¼ÒµÄ±àºÅ");
-    m_moreInfo->setText("¸ü¶àµÄÐÅÏ¢...");
+    // ç”¨æˆ·å
+    m_userName->setText("çŽ©å®¶çš„ç¼–å· ");
+    m_moreInfo->setText("æ›´å¤šçš„ä¿¡æ¯... ");
 
     m_vUserInfoLayout->addWidget(m_headUrl);
     m_vUserInfoLayout->addSpacing(20);
@@ -50,7 +50,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
     // m_userInfoWnd->setStyleSheet("background-color:#aaa;border:0px;");
     m_hLayout->addWidget(m_userInfoWnd);
 
-    // Ìí¼ÓÒ»¸ö·Ö¸îÌõ
+    // æ·»åŠ ä¸€ä¸ªåˆ†å‰²æ¡
     m_split = new QSelfSplit(nullptr, QSelfSplit::Direction_V);
     m_hLayout->addWidget(m_split);
 
@@ -58,7 +58,7 @@ QApplyFriendInputInfoWnd::QApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
     m_inputMsgLabel = new QLabel();
     m_inputMsgEdit = new QTextEdit();
 
-    m_inputMsgLabel->setText("ÇëÊäÈëÑéÖ¤ÐÅÏ¢:");
+    m_inputMsgLabel->setText("è¯·è¾“å…¥éªŒè¯ä¿¡æ¯:");
     m_inputMsgEdit->setFixedWidth(280);
     m_inputMsgEdit->setFixedHeight(150);
 

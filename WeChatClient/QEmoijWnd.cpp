@@ -11,7 +11,7 @@ QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     LogFunc;
     setObjectName("QEmoijWnd");
     setFixedSize(335, 225);
-    //…Ë÷√Œﬁ±ﬂøÚ Ù–‘
+    //ËÆæÁΩÆÊó†ËæπÊ°ÜÂ±ûÊÄß
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
@@ -26,12 +26,12 @@ QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // m_centerWnd->setItem(1, 0, new QTableWidgetItem("Feb"));
     // m_centerWnd->setItem(2, 0, new QTableWidgetItem("Mar"));
 
-    m_centerWnd->verticalHeader()->setVisible(false);    //“˛≤ÿ¡–±ÌÕ∑
-    m_centerWnd->horizontalHeader()->setVisible(false);  //“˛≤ÿ––±ÌÕ∑
+    m_centerWnd->verticalHeader()->setVisible(false);    //ÈöêËóèÂàóË°®Â§¥
+    m_centerWnd->horizontalHeader()->setVisible(false);  //ÈöêËóèË°åË°®Â§¥
 
-    // …Ë÷√ŒﬁΩπµ„
+    // ËÆæÁΩÆÊó†ÁÑ¶ÁÇπ
     m_centerWnd->setFocusPolicy(Qt::NoFocus);
-    // …Ë÷√≤ªø…±‡º≠
+    // ËÆæÁΩÆ‰∏çÂèØÁºñËæë
     m_centerWnd->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // m_centerWnd->verticalHeader()->setFixedWidth(30);
@@ -49,7 +49,7 @@ QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setLayout(m_vLayout);
     setContentsMargins(5, 5, 5, 15);
     setAttribute(Qt::WA_StyledBackground);
-    ///∂¡»°Œƒº˛
+    ///ËØªÂèñÊñá‰ª∂
     QFile emoijFile("./emoij/emoij.txt");
     if (emoijFile.exists() &&
         emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -64,7 +64,7 @@ QEmoijWnd::QEmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
                                  row,
                                  new QTableWidgetItem(m_emoijStrList[i]));
         }
-        //πÿ±’Œƒº˛
+        //ÂÖ≥Èó≠Êñá‰ª∂
         emoijFile.close();
     }
 
@@ -110,7 +110,7 @@ void QEmoijWnd::paintEvent(QPaintEvent* paintEvent)
 void QEmoijWnd::slotCellClicked(int x, int y)
 {
     LogDebug << "slotCellClicked:" << x << "," << y;
-    //µ„ª˜ÕÍ≥…∫Û“˛≤ÿ¥∞ø⁄
+    //ÁÇπÂáªÂÆåÊàêÂêéÈöêËóèÁ™óÂè£
     if (x * 10 + y >= 0 && x * 10 + y < m_emoijStrList.size())
     {
         LogDebug << m_emoijStrList[x * 10 + y] << endl;

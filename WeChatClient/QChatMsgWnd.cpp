@@ -16,7 +16,7 @@ QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/,
 {
     LogFunc;
     setObjectName("QChatMsgWnd");
-    //ÉèÖÃ´°ÌåµÄ×ÖÌå´óĞ¡
+    //è®¾ç½®çª—ä½“çš„å­—ä½“å¤§å°
     QFont font = this->font();
     font.setFamily("MicrosoftYaHei");
     font.setPointSize(10);
@@ -29,15 +29,15 @@ QChatMsgWnd::QChatMsgWnd(QWidget* p /*= nullptr*/,
     // m_loadingLable = new QLabel(this);
     // m_loadingLable->setMovie(m_loadingMovie);
     // m_loadingLable->resize(16, 16);
-    ////ÉèÖÃ´°¿Ú±³¾°£ºÍ¸Ã÷
+    ////è®¾ç½®çª—å£èƒŒæ™¯ï¼šé€æ˜
     // m_loadingLable->setAttribute(Qt::WA_TranslucentBackground, true);
-    ////¹Ø±Õ×Ô¶¯Ìî³ä´°¿Ú±³¾°
+    ////å…³é—­è‡ªåŠ¨å¡«å……çª—å£èƒŒæ™¯
     // m_loadingLable->setAutoFillBackground(false);
 
     // setFixedWidth(640);
     setAttribute(Qt::WA_StyledBackground);
 
-    // µ÷ÊÔ´úÂë
+    // è°ƒè¯•ä»£ç 
     ///*  m_tmp++;
     //  if (m_tmp % 2 == 1)
     //  {
@@ -53,9 +53,9 @@ QSize QChatMsgWnd::fontRect(QString str)
 {
     m_msg = str;
 
-    int minH = 30;        // ÏûÏ¢µÄ×îĞ¡¸ß¶ÈÎª30
-    int iconWH = 30;      // Í·ÏñµÄ´óĞ¡
-    int iconSpaceW = 20;  // Í·Ïñ¾àÀë±ß¿ò´óĞ¡
+    int minH = 30;        // æ¶ˆæ¯çš„æœ€å°é«˜åº¦ä¸º30
+    int iconWH = 30;      // å¤´åƒçš„å¤§å°
+    int iconSpaceW = 20;  // å¤´åƒè·ç¦»è¾¹æ¡†å¤§å°
     int iconRectW = 5;
     int iconTMPH = 10;
     int triangleW = 6;
@@ -65,35 +65,35 @@ QSize QChatMsgWnd::fontRect(QString str)
     m_outerFrameWidth =
         this->width() - outerFrameW - 2 * (iconWH + iconTMPH + iconSpaceW);
 
-    // ÎÄ×ÖÇøÓòµÄ¿í¶È = ÏûÏ¢Íâ¿ò - 2 * textSpaceRect
-    // »ñÈ¡ÎÄ×ÖµÄ×î´ó¿í¶È
+    // æ–‡å­—åŒºåŸŸçš„å®½åº¦ = æ¶ˆæ¯å¤–æ¡† - 2 * textSpaceRect
+    // è·å–æ–‡å­—çš„æœ€å¤§å®½åº¦
     m_textWidth = m_outerFrameWidth - 2 * textSpaceRect;
 
     // m_spaceWidth = this->width() - textSpaceRect;
 
-    // ×ó±ßÍ·Ïñ¿ò£º
-    // x:Í·Ïñ¾àÀë×ó±ß¿ò iconSpaceW; y: iconTMPH£¨Í·Ïñµ½´°¿ÚÉÏ±ß¿ò¾àÀë£©
-    // ¿í¶È¼°¸ß¶È¶¼Îª30
+    // å·¦è¾¹å¤´åƒæ¡†ï¼š
+    // x:å¤´åƒè·ç¦»å·¦è¾¹æ¡† iconSpaceW; y: iconTMPHï¼ˆå¤´åƒåˆ°çª—å£ä¸Šè¾¹æ¡†è·ç¦»ï¼‰
+    // å®½åº¦åŠé«˜åº¦éƒ½ä¸º30
     m_iconLeftRect = QRect(iconSpaceW, iconTMPH, iconWH, iconWH);
 
-    // ÓÒ±ßÍ·Ïñ¿ò
-    // x: ´°¿Ú¿í¶È(this->width()) - Í·ÏñÓë´°¿ÚÓĞ±ß¿ò¾àÀë(iconSpaceW) -
-    // Í·Ïñ¿í¶È(iconWH) ; y: iconTMPH£¨¾àÀë´°¿ÚÉÏ±ß¾àÀë£©
+    // å³è¾¹å¤´åƒæ¡†
+    // x: çª—å£å®½åº¦(this->width()) - å¤´åƒä¸çª—å£æœ‰è¾¹æ¡†è·ç¦»(iconSpaceW) -
+    // å¤´åƒå®½åº¦(iconWH) ; y: iconTMPHï¼ˆè·ç¦»çª—å£ä¸Šè¾¹è·ç¦»ï¼‰
     m_iconRightRect =
         QRect(this->width() - iconSpaceW - iconWH, iconTMPH, iconWH, iconWH);
 
-    // »ñÈ¡ÏûÏ¢ËùĞèµÄ
+    // è·å–æ¶ˆæ¯æ‰€éœ€çš„
     QSize msgSize = getRealStringSize(str);
     LogDebug << "get Real string size = " << msgSize;
 
-    // ÏûÏ¢¿òµÄ¸ß¶È£¬ÏûÏ¢¿òµÄ¸ß¶È×îĞ¡ºÍÍ·ÏñµÈ¸ß
+    // æ¶ˆæ¯æ¡†çš„é«˜åº¦ï¼Œæ¶ˆæ¯æ¡†çš„é«˜åº¦æœ€å°å’Œå¤´åƒç­‰é«˜
     int height = msgSize.height() > minH ? msgSize.height() : minH;
     LogDebug << "msg height = " << height;
 
-    // ¼ÆËãÈı½ÇĞÎ
-    // Èı½ÇĞÎËùÔÚRect
-    // x£ºÍ·Ïñ¾àÀë´°¿Ú×ó²à±ß¿ò¾àÀë£¨iconSpaceW) + Í·Ïñ¿í¶È£¨30£©+
-    // Èı½Çµ½Í·ÏñµÄ¾àÀë y£ºĞĞµÄ¸ß¶È/2 w: 6 h: 5
+    // è®¡ç®—ä¸‰è§’å½¢
+    // ä¸‰è§’å½¢æ‰€åœ¨Rect
+    // xï¼šå¤´åƒè·ç¦»çª—å£å·¦ä¾§è¾¹æ¡†è·ç¦»ï¼ˆiconSpaceW) + å¤´åƒå®½åº¦ï¼ˆ30ï¼‰+
+    // ä¸‰è§’åˆ°å¤´åƒçš„è·ç¦» yï¼šè¡Œçš„é«˜åº¦/2 w: 6 h: 5
     m_triangleLeftRect =
         QRect(iconSpaceW + iconWH + iconRectW, m_lineHeight / 2, triangleW, 5);
     m_triangleRightRect =
@@ -143,7 +143,7 @@ QSize QChatMsgWnd::fontRect(QString str)
                            m_outerFrameRightRect.y() + iconTMPH,
                            m_outerFrameRightRect.width() - 2 * textSpaceRect,
                            m_outerFrameRightRect.height() - 2 * iconTMPH + 2);
-    // ÊÇ·ñÕ¹Ê¾êÇ³Æ
+    // æ˜¯å¦å±•ç¤ºæ˜µç§°
     if (m_bShowName)
     {
         // m_iconLeftRect.setRect(m_iconLeftRect.x(), m_iconLeftRect.y() +
@@ -180,7 +180,7 @@ QSize QChatMsgWnd::fontRect(QString str)
                                       m_outerFrameRightRect.width(),
                                       m_outerFrameRightRect.height());
 
-        // ¼ÆËãÓÃ»§Ãû³¤¶È
+        // è®¡ç®—ç”¨æˆ·åé•¿åº¦
         QFontMetricsF fm(this->font());
         int nAllTextLen = fm.width(m_userName);
         m_leftUserNameRect.setRect(m_outerFrameLeftRect.x(),
@@ -211,9 +211,9 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
     int nLineNum = 0;
     int nMaxWidth = 0;
 
-    // »ñÈ¡ÏûÏ¢×Ü¿í¶È
+    // è·å–æ¶ˆæ¯æ€»å®½åº¦
     int nAllTextLen = fm.width(str) + 1;
-    // Èç¹ûÏûÏ¢ÖĞÃ»ÓĞ»»ĞĞ·û£º
+    // å¦‚æœæ¶ˆæ¯ä¸­æ²¡æœ‰æ¢è¡Œç¬¦ï¼š
     if (nCount == 0)
     {
         nMaxWidth = nAllTextLen;
@@ -230,7 +230,7 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
         }
         else
         {
-            //Èç¹ûÒ»ĞĞ¿ÉÒÔ·ÅÏÂ
+            //å¦‚æœä¸€è¡Œå¯ä»¥æ”¾ä¸‹
             nLineNum += 1;
         }
     }
@@ -248,7 +248,7 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
             if (nMaxWidth > m_textWidth)
             {
                 nMaxWidth = m_textWidth;
-                //»ñÈ¡Ã¿ĞĞµÄ×î´ó´æ·Å×Ö·ûÊıÁ¿£¬¼ÆËãº¬ÓĞ¼¸ĞĞ
+                //è·å–æ¯è¡Œçš„æœ€å¤§å­˜æ”¾å­—ç¬¦æ•°é‡ï¼Œè®¡ç®—å«æœ‰å‡ è¡Œ
                 int num = nAllTextLen / m_textWidth;
                 nLineNum = num;
                 if (nAllTextLen % m_textWidth != 0)
@@ -263,7 +263,7 @@ QSize QChatMsgWnd::getRealStringSize(QString str)
         }
     }
 
-    // Ô­±¾×ÖÌå¸ß¶È + 2 * m_lineHeight
+    // åŸæœ¬å­—ä½“é«˜åº¦ + 2 * m_lineHeight
     return QSize(nMaxWidth /* + m_spaceWidth*/, (nLineNum + 2) * m_lineHeight);
 }
 
@@ -299,17 +299,17 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
 
     if (m_chatMsgType == ChatMsgTypeEnum::ChatMsg_OtherMsgText)
     {
-        // Í·Ïñ
+        // å¤´åƒ
         m_leftPixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[m_recvid];
         m_leftPixmap = m_leftPixmap.scaled(30, 30);
         painter.drawPixmap(m_iconLeftRect, m_leftPixmap);
 
-        // »æÖÆÍâ²¿±ß¿ò
+        // ç»˜åˆ¶å¤–éƒ¨è¾¹æ¡†
         QColor color = QColor(158, 234, 106);
         painter.setBrush(color);
         painter.drawRoundedRect(m_outerFrameLeftRect, 4, 4);
 
-        // »æÖÆÈı½ÇĞÎ
+        // ç»˜åˆ¶ä¸‰è§’å½¢
         QPointF points[3] = {
             QPointF(m_triangleLeftRect.x(), 25 + 10),
             QPointF(m_triangleLeftRect.x() + m_triangleLeftRect.width(),
@@ -318,7 +318,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
                     30 + 10)};
         painter.drawPolygon(points, 3);
 
-        // »æÖÆÎÄ×Ö
+        // ç»˜åˆ¶æ–‡å­—
         QPen penText;
         penText.setColor(QColor(51, 51, 51));
         painter.setPen(penText);
@@ -343,15 +343,15 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
         m_rightPixmap = QMainWnd::getMainWnd()->m_toolWnd->m_headImg;
         m_rightPixmap = m_rightPixmap.scaled(30, 30);
 
-        //»æÖÆÍæ¼ÒÍ·Ïñ
+        //ç»˜åˆ¶ç©å®¶å¤´åƒ
         painter.drawPixmap(m_iconRightRect, m_rightPixmap);
 
-        //»æÖÆÍâ²¿±ß¿ò
+        //ç»˜åˆ¶å¤–éƒ¨è¾¹æ¡†
         QColor color = QColor(158, 234, 106);
         painter.setBrush(color);
         painter.drawRoundedRect(m_outerFrameRightRect, 4, 4);
 
-        // »æÖÆÈı½ÇĞÎ
+        // ç»˜åˆ¶ä¸‰è§’å½¢
         QPointF points[3] = {QPointF(m_triangleRightRect.x() +
                                          m_triangleRightRect.width(),
                                      25 + 10),
@@ -359,7 +359,7 @@ void QChatMsgWnd::paintEvent(QPaintEvent* event)
                              QPointF(m_triangleRightRect.x(), 30 + 10)};
         painter.drawPolygon(points, 3);
 
-        // »æÖÆÎÄ×Ö
+        // ç»˜åˆ¶æ–‡å­—
         QPen penText;
         penText.setColor(QColor(51, 51, 51));
         painter.setPen(penText);

@@ -32,23 +32,23 @@ class QChatFileInnerWnd : public QWidget
     QVBoxLayout* m_vLayout1;
     QHBoxLayout* m_hLayout2;
 
-    // ½ø¶ÈÌõ£¬ÓÃÓÚÏÔÊ¾ÎÄ¼ş´«½ø¶È
+    // è¿›åº¦æ¡ï¼Œç”¨äºæ˜¾ç¤ºæ–‡ä»¶ä¼ è¿›åº¦
     QProgressBar* m_progressBar;
 
-    QLabel* m_fileIcon;  // ÎÄ¼şÍ¼±ê
-    QLabel* m_fileName;  // ÎÄ¼şÃû
-    QLabel* m_fileSize;  // ÎÄ¼ş´óĞ¡
+    QLabel* m_fileIcon;  // æ–‡ä»¶å›¾æ ‡
+    QLabel* m_fileName;  // æ–‡ä»¶å
+    QLabel* m_fileSize;  // æ–‡ä»¶å¤§å°
 
-    QLabel* m_sendState;         // ·¢ËÍ×´Ì¬
-    QPushButton* m_openFile;     // ´ò¿ªÎÄ¼ş
-    QPushButton* m_copyFile;     // ¿½±´
-    QPushButton* m_openFileDir;  // ´ò¿ªËùÔÚÄ¿Â¼
-    QPushButton* m_downLoad;     // ÏÂÔØÎÄ¼ş
+    QLabel* m_sendState;         // å‘é€çŠ¶æ€
+    QPushButton* m_openFile;     // æ‰“å¼€æ–‡ä»¶
+    QPushButton* m_copyFile;     // æ‹·è´
+    QPushButton* m_openFileDir;  // æ‰“å¼€æ‰€åœ¨ç›®å½•
+    QPushButton* m_downLoad;     // ä¸‹è½½æ–‡ä»¶
 
-    QString m_fileFullpath = "";   // ÎÄ¼şÈ«Â·¾¶
-    QString m_fileFullDir = "";    // ÎÄ¼şËùÔÚÄ¿Â¼
-    QString m_serveFilePath = "";  //Ô¶³ÌµÄÎÄ¼şµØÖ·
+    QString m_fileFullpath = "";   // æ–‡ä»¶å…¨è·¯å¾„
+    QString m_fileFullDir = "";    // æ–‡ä»¶æ‰€åœ¨ç›®å½•
+    QString m_serveFilePath = "";  //è¿œç¨‹çš„æ–‡ä»¶åœ°å€
 
-    // ÏÂÔØÔ¶³ÌÎÄ¼ş
+    // ä¸‹è½½è¿œç¨‹æ–‡ä»¶
     QNetworkAccessManager* m_pNetManager;
 };

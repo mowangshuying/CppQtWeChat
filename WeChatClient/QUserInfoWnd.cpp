@@ -17,7 +17,7 @@ QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     object.m_widget = m_centerWnd;
     QStyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 
-    // 设置为无边框及背景透明
+    // 璁剧疆涓烘棤杈规鍙婅儗鏅�忔槑
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
@@ -44,7 +44,7 @@ QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_userIdLabel->setFont(ft);
 
     m_usernameLabel->setText("xxxxxx");
-    m_userIdLabel->setText("用户id:xxxxxx");
+    m_userIdLabel->setText("鐢ㄦ埛id:xxxxxx");
 
     m_vLayout1->addWidget(m_usernameLabel);
     m_vLayout1->addWidget(m_userIdLabel);
@@ -58,7 +58,7 @@ QUserInfoWnd::QUserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_headLabel->setPixmap(QPixmap("./img/head2.png"));
 
     m_changeHeadImgBtn = new QPushButton();
-    m_changeHeadImgBtn->setText("修改头像");
+    m_changeHeadImgBtn->setText("淇敼澶村儚");
     // m_changeHeadImgBtn->setFixedWidth(50);
     // m_changeHeadImgBtn->setFixedHeight(20);
 

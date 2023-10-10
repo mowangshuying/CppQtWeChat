@@ -36,16 +36,16 @@ class QFindFriendOrGroupWnd : public QWidget
     // QHBoxLayout* m_hLayout2;
     QHBoxLayout* m_hLayout2;
 
-    //µÚ1ÐÐ
+    //ç¬¬1è¡Œ
     QLabel* m_titleLabel;
     QPushButton* m_minBtn;
     QPushButton* m_closeBtn;
 
-    //µÚ2ÐÐ
+    //ç¬¬2è¡Œ
     QCheckBox* m_findPersonChx;
     QCheckBox* m_findGroupChx;
 
-    //µÚ3ÐÐ
+    //ç¬¬3è¡Œ
     QLineEdit* m_searchEdit;
     QPushButton* m_searchBtn;
 

@@ -30,10 +30,10 @@ class QDealNewFriendsApplyWnd : public QWidget
                      bool isApplyer,
                      int userid);
 
-    //设置申请列表信息，向远端服务器请求申请列表并添加
+    //璁剧疆鐢宠鍒楄〃淇℃伅锛屽悜杩滅鏈嶅姟鍣ㄨ姹傜敵璇峰垪琛ㄥ苟娣诲姞
     void setFriendApplyList();
 
-    //遍历item,判断是否已经向列表中嵌入这个id
+    //閬嶅巻item,鍒ゆ柇鏄惁宸茬粡鍚戝垪琛ㄤ腑宓屽叆杩欎釜id
     bool hasThisFriendApplyById(int id);
   public slots:
 

@@ -15,11 +15,11 @@ class QScreenShotWnd : public QWidget
     QScreenShotWnd(QWidget* p = nullptr);
     ~QScreenShotWnd();
   public slots:
-    //¸´ÖÆ½ØÍ¼
+    //å¤åˆ¶æˆªå›¾
     void slotCopyScreenShot();
-    //±£´æ½ØÍ¼
+    //ä¿å­˜æˆªå›¾
     void slotSaveScreenShot();
-    //ÍË³ö½ØÍ¼
+    //é€€å‡ºæˆªå›¾
     void slotExitSccreenShot();
 
   protected:
@@ -29,28 +29,28 @@ class QScreenShotWnd : public QWidget
     void mouseReleaseEvent(QMouseEvent* event) override;
     void paintEvent(QPaintEvent* event) override;
 
-    void contextMenuEvent(QContextMenuEvent*) override;  //--ÓÒ¼ü²Ëµ¥ÊÂ¼ş
-    void keyPressEvent(QKeyEvent* e) override;           //--°´¼üÊÂ¼ş
+    void contextMenuEvent(QContextMenuEvent*) override;  //--å³é”®èœå•äº‹ä»¶
+    void keyPressEvent(QKeyEvent* e) override;           //--æŒ‰é”®äº‹ä»¶
   public:
     QPixmap m_fullScreenPixmap;
 
   private:
-    //Êó±ê¿ªÊ¼Î»ÖÃ
+    //é¼ æ ‡å¼€å§‹ä½ç½®
     QPoint m_begPos;
-    //Êó±ê½áÊøÎ»ÖÃ
+    //é¼ æ ‡ç»“æŸä½ç½®
     QPoint m_endPos;
 
-    // Êó±ê¿ªÊ¼È«¾ÖÎ»ÖÃ
+    // é¼ æ ‡å¼€å§‹å…¨å±€ä½ç½®
     QPoint m_globalBegPos;
-    // Êó±ê½áÊøÈ«¾ÖÎ»ÖÃ
+    // é¼ æ ‡ç»“æŸå…¨å±€ä½ç½®
     QPoint m_globalEndPos;
 
-    //¾ØĞÎ½ØÍ¼ÇøÓò
+    //çŸ©å½¢æˆªå›¾åŒºåŸŸ
     QRect m_screenShotRect;
-    //×ó¼üÊÇ·ñ°´ÏÂ
+    //å·¦é”®æ˜¯å¦æŒ‰ä¸‹
     bool m_leftBtnPress;
 
-    //ÓÒ¼ü²Ëµ¥
+    //å³é”®èœå•
     QMenu* m_RightBtnMenu;
 
     QScreen* m_screen;

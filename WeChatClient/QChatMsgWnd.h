@@ -10,23 +10,23 @@ class QChatMsgWnd : public QWidget
 {
     Q_OBJECT
   public:
-    //ÏûÏ¢ÀàĞÍ
+    //æ¶ˆæ¯ç±»å‹
     enum ChatMsgTypeEnum
     {
         ChatMsg_System = 10,
-        ChatMsg_Time,          // Ê±¼äÏûÏ¢ - (Ò»°ãÓÉ×Ô¼º²úÉú°É)
-        ChatMsg_OwnerMsgText,  // ×Ô¼ºµÄÏûÏ¢
-        ChatMsg_OtherMsgText,  // ÆäËûÈË·¢ËÍµÄÏûÏ¢
+        ChatMsg_Time,          // æ—¶é—´æ¶ˆæ¯ - (ä¸€èˆ¬ç”±è‡ªå·±äº§ç”Ÿå§)
+        ChatMsg_OwnerMsgText,  // è‡ªå·±çš„æ¶ˆæ¯
+        ChatMsg_OtherMsgText,  // å…¶ä»–äººå‘é€çš„æ¶ˆæ¯
     };
 
   public:
-    //¹¹Ôìº¯Êı
+    //æ„é€ å‡½æ•°
     QChatMsgWnd(QWidget* p = nullptr,
                 int64_t sendid = 0,
                 QString userName = "",
                 int64_t recvid = 0);
 
-    //¸ù¾İstrµ÷Õû¸÷¸ö¿òµÄ´óĞ¡
+    //æ ¹æ®strè°ƒæ•´å„ä¸ªæ¡†çš„å¤§å°
     QSize fontRect(QString str);
 
     QSize getRealStringSize(QString str);
@@ -37,7 +37,7 @@ class QChatMsgWnd : public QWidget
                  QChatMsgWnd::ChatMsgTypeEnum chatMsgType);
 
   protected:
-    //»æÖÆ
+    //ç»˜åˆ¶
     void paintEvent(QPaintEvent* event);
 
   public:
@@ -69,7 +69,7 @@ class QChatMsgWnd : public QWidget
     QRect m_leftUserNameRect;
     QRect m_rightUserNameRect;
 
-    // ÎÄ×ÖÎÄ±¾¿ò
+    // æ–‡å­—æ–‡æœ¬æ¡†
     QRect m_textLeftRect;
     QRect m_textRigtRect;
 
@@ -79,7 +79,7 @@ class QChatMsgWnd : public QWidget
     QLabel* m_loadingLable = nullptr;
     QMovie* m_loadingMovie = nullptr;
 
-    //ÊÇ·ñÔÚ·¢ËÍÖĞ
+    //æ˜¯å¦åœ¨å‘é€ä¸­
     bool m_bSending = false;
 
     static int m_tmp;

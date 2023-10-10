@@ -27,8 +27,8 @@ QSelectAddGroupOrAddFriendWnd::QSelectAddGroupOrAddFriendWnd(QWidget* p)
     m_vLayout->setContentsMargins(10, 10, 10, 10);
     m_vLayout->setSpacing(0);
 
-    m_addContactsOrGroupBtn = new QPushButton("添加好友或群");
-    m_createGroupBtn = new QPushButton("创建群聊");
+    m_addContactsOrGroupBtn = new QPushButton("娣诲姞濂藉弸鎴栫兢");
+    m_createGroupBtn = new QPushButton("鍒涘缓缇よ亰");
 
     m_vLayout->addWidget(m_addContactsOrGroupBtn);
     ///* {

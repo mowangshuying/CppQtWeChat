@@ -54,9 +54,9 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/)
     m_hLayout2 = new QHBoxLayout();
     m_searchEdit = new QLineEdit();
     m_findPersonChx = new QCheckBox();
-    m_findPersonChx->setText("ÕÒÈË");
+    m_findPersonChx->setText("æ‰¾äºº");
     m_findGroupChx = new QCheckBox();
-    m_findGroupChx->setText("ÕÒÈº");
+    m_findGroupChx->setText("æ‰¾ç¾¤");
     m_searchBtn = new QPushButton();
 
     // m_searchEdit->setFixedSize(350, 30);
@@ -71,7 +71,7 @@ QFindFriendOrGroupWnd::QFindFriendOrGroupWnd(QWidget* p /*= nullptr*/)
 
     m_hLayout2->addStretch();
 
-    m_searchBtn->setText("²éÕÒ");
+    m_searchBtn->setText("æŸ¥æ‰¾");
     m_searchBtn->setFixedSize(100, 30);
     // m_searchBtn->setStyleSheet("background-color:#1aad19;border-style:
     // none;");
@@ -120,7 +120,7 @@ void QFindFriendOrGroupWnd::addFriendItem(const char* headUrl,
                                           const char* name,
                                           int64_t userid)
 {
-    //Ìí¼ÓºÃÓÑ
+    //æ·»åŠ å¥½å‹
     QFindFriendItemWnd* pMsgItem =
         new QFindFriendItemWnd(m_listWidget, headUrl, name);
     pMsgItem->m_friendid = userid;
@@ -143,15 +143,15 @@ void QFindFriendOrGroupWnd::slotMinWnd()
 
 void QFindFriendOrGroupWnd::slotOnSearchBtnClicked()
 {
-    //µã»÷ÁË²éÕÒ°´Å¥ÏòÔ¶¶Ë·şÎñÆ÷·¢ËÍ²éÕÒÇëÇó
+    //ç‚¹å‡»äº†æŸ¥æ‰¾æŒ‰é’®å‘è¿œç«¯æœåŠ¡å™¨å‘é€æŸ¥æ‰¾è¯·æ±‚
     if (m_findPersonChx->isChecked())
     {
-        //Èç¹ûÑ¡Ôñ²éÕÒºÃÓÑ£»
+        //å¦‚æœé€‰æ‹©æŸ¥æ‰¾å¥½å‹ï¼›
         std::string findstr = m_searchEdit->text().toStdString();
         neb::CJsonObject json;
         json.Add("findstr", findstr);
 
-        //Çå¿ÕlistwidgetÄÚÈİ
+        //æ¸…ç©ºlistwidgetå†…å®¹
         while (m_listWidget->count() > 0)
         {
             QListWidgetItem* pitem = m_listWidget->takeItem(0);
@@ -166,7 +166,7 @@ void QFindFriendOrGroupWnd::slotOnSearchBtnClicked()
                     return;
                 }
 
-                ////½âÎö×¢²áÏûÏ¢Êı×é£»
+                ////è§£ææ³¨å†Œæ¶ˆæ¯æ•°ç»„ï¼›
                 auto data = msg["data"];
                 if (!data.IsArray())
                 {

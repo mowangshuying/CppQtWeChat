@@ -45,13 +45,13 @@ class QCommContactItemWnd : public QWidget
 
   public:
     QHBoxLayout* m_hLayout;
-    //ÁªÏµÈËÍ·Ïñ
+    //è”ç³»äººå¤´åƒ
     QLabel* m_headUrl;
-    //ÁªÏµÈËÃû×Ö
+    //è”ç³»äººåå­—
     QLabel* m_name;
-    //ÊÇ·ñÊÇĞÂµÄÅóÓÑÄÇÒ»À¸ÏûÏ¢
+    //æ˜¯å¦æ˜¯æ–°çš„æœ‹å‹é‚£ä¸€æ æ¶ˆæ¯
     bool m_bNewFriend = false;
-    //±êÊ¶ÁªÏµÈËµÄid
+    //æ ‡è¯†è”ç³»äººçš„id
     int64_t m_friendId = -1;
     QNetworkAccessManager* m_networkMgr;
 };

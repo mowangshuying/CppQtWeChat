@@ -31,20 +31,20 @@ class QCreateGroupWnd : public QWidget
                          const char* nickname,
                          const char* rolename);
 
-    //Í¨¹ırolenameÅĞ¶Ïlistwnd2ÖĞÊÇ·ñÒÑ¾­Ìí¼Ó´Ë´°¿Ú
+    //é€šè¿‡rolenameåˆ¤æ–­listwnd2ä¸­æ˜¯å¦å·²ç»æ·»åŠ æ­¤çª—å£
     bool hasThisWndByRolename(QString rolename, QListWidget* listWnd);
-    //Í¨¹ırolenameÒÆ³ılistwnd2ÖĞÖĞ´Ë´°¿Ú
+    //é€šè¿‡rolenameç§»é™¤listwnd2ä¸­ä¸­æ­¤çª—å£
     void delThisWndByRolename(QString rolename, QListWidget* listWnd);
 
-    //Ö÷ÒªÊÇ¶ÁÈ¡µ±Ç°ÓĞ¼¸¸öºÃÓÑ²¢ÏÔÊ¾
+    //ä¸»è¦æ˜¯è¯»å–å½“å‰æœ‰å‡ ä¸ªå¥½å‹å¹¶æ˜¾ç¤º
     void updateData();
   public slots:
     void closeWnd();
     void minWnd();
 
-    //½ÓÊÕµ½À´×Ôµ¥Ñ¡µÄ°´Å¥µÄÑ¡ÔñÊ±ºò
+    //æ¥æ”¶åˆ°æ¥è‡ªå•é€‰çš„æŒ‰é’®çš„é€‰æ‹©æ—¶å€™
     void slotSelRBtnClick(QMap<QString, QString> map);
-    //µã»÷È·ÈÏ°´Å¥µÄÏìÓ¦
+    //ç‚¹å‡»ç¡®è®¤æŒ‰é’®çš„å“åº”
     void slotComfirmBtnClick();
 
   public:
@@ -54,7 +54,7 @@ class QCreateGroupWnd : public QWidget
 
     QHBoxLayout* m_hLayout1;
 
-    //Ìá¹©¶¥²¿Ö§³Ö£¬title,¹Ø±ÕºÍËõĞ¡°´Å¥
+    //æä¾›é¡¶éƒ¨æ”¯æŒï¼Œtitle,å…³é—­å’Œç¼©å°æŒ‰é’®
     QHBoxLayout* m_hLayout2;
     QLabel* m_titleLabel;
     QPushButton* m_minBtn;

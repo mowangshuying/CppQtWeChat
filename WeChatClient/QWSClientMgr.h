@@ -3,7 +3,7 @@
 #include "QPch.h"
 
 /*
- * Ìá¹©¼òµ¥µÄ»ùÓÚwebsocketµÄÍ¨ĞÅÄÜÁ¦
+ * æä¾›ç®€å•çš„åŸºäºwebsocketçš„é€šä¿¡èƒ½åŠ›
  */
 
 #include <QWebSocket>
@@ -64,13 +64,13 @@ class QWSClientMgr : public QObject
     static QWSClientMgr* m_WsClientMgr;
 
     QWebSocket* m_webSock;
-    //½ÓÊÕÔ¶¶ËÏûÏ¢
+    //æ¥æ”¶è¿œç«¯æ¶ˆæ¯
     Msg2CallbackMap m_Msg2CallbackMap;
-    //ÇëÇóºó»Øµ÷´Ëº¯Êı
+    //è¯·æ±‚åå›è°ƒæ­¤å‡½æ•°
     RequestMsg2CallbackMap m_RequestMsg2CallbackMap;
     int64 m_MsgId = 0;
     QTimer* m_timer;
-    // ÊÇ·ñÁ¬½ÓÉÏÔ¶¶ËµÄ·şÎñÆ÷
+    // æ˜¯å¦è¿æ¥ä¸Šè¿œç«¯çš„æœåŠ¡å™¨
     bool m_bConn;
     int m_time = 0;
 };

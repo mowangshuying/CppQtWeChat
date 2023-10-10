@@ -10,7 +10,7 @@ class QSelfSplit : public QWidget
   public:
     enum QSimpleSplitDirection
     {
-        Direction_V = 0,  //水平方向
+        Direction_V = 0,  //姘村钩鏂瑰悜
         Direction_H,
     };
 

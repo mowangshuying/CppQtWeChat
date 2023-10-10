@@ -37,7 +37,7 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_topWnd = new QWidget(m_centerWnd);
     m_topWnd->setContentsMargins(0, 0, 0, 0);
 
-    //¶¥²¿µÄ´°¿ÚµÄ²¼¾Ö
+    //é¡¶éƒ¨çš„çª—å£çš„å¸ƒå±€
     m_vTopLayout = new QVBoxLayout(m_centerWnd);
     m_vTopLayout->setContentsMargins(0, 0, 0, 0);
     m_hTopLayout = new QHBoxLayout(m_centerWnd);
@@ -83,8 +83,8 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_pwdEdit = new QLineEdit(m_centerWnd);
     m_pwdEdit->setFixedSize(240, 40);
 
-    m_accuntEdit->setPlaceholderText("ÇëÊäÈëÕËºÅ");
-    m_pwdEdit->setPlaceholderText("ÇëÊäÈëÃÜÂë");
+    m_accuntEdit->setPlaceholderText("è¯·è¾“å…¥è´¦å·");
+    m_pwdEdit->setPlaceholderText("è¯·è¾“å…¥å¯†ç ");
 
     m_accuntEdit->setText("myfirstAccount");
     m_pwdEdit->setText("mypassword");
@@ -92,14 +92,14 @@ QLoginAndRegWnd::QLoginAndRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_regOrLoginBtn = new QPushButton();
     m_regOrLoginBtn->setFixedSize(240, 40);
 
-    m_regOrLoginBtn->setText("µÇÂ¼");
+    m_regOrLoginBtn->setText("ç™»å½•");
 
     m_hBottomLayout2 = new QHBoxLayout(m_centerWnd);
     m_regOrLoginChx = new QCheckBox(m_centerWnd);
     m_remmerPwdChx = new QCheckBox(m_centerWnd);
 
-    m_regOrLoginChx->setText("×¢²á");
-    m_remmerPwdChx->setText("ÕÒ»ØÃÜÂë");
+    m_regOrLoginChx->setText("æ³¨å†Œ");
+    m_remmerPwdChx->setText("æ‰¾å›å¯†ç ");
 
     m_hBottomLayout2->addWidget(m_regOrLoginChx);
     m_hBottomLayout2->addWidget(m_remmerPwdChx);
@@ -171,12 +171,12 @@ void QLoginAndRegWnd::slotRegOrLoginSel(bool isSel /*= false*/)
     if (isSel)
     {
         m_bReg = true;
-        m_regOrLoginBtn->setText("×¢²á");
+        m_regOrLoginBtn->setText("æ³¨å†Œ");
     }
     else
     {
         m_bReg = false;
-        m_regOrLoginBtn->setText("µÇÂ¼");
+        m_regOrLoginBtn->setText("ç™»å½•");
     }
 }
 
@@ -184,16 +184,16 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
 {
     if (m_bReg)
     {
-        //Ìá¹©×¢²á¹¦ÄÜ£¬µã»÷×¢²á°´Å¥ÏòÔ¶¶Ë·şÎñ·¢ËÍÏûÏ¢
+        //æä¾›æ³¨å†ŒåŠŸèƒ½ï¼Œç‚¹å‡»æ³¨å†ŒæŒ‰é’®å‘è¿œç«¯æœåŠ¡å‘é€æ¶ˆæ¯
         neb::CJsonObject json;
 
         std::string username =
-            m_accuntEdit->text().toStdString().c_str();  //ÓÃ»§Ãû
-        std::string password = m_pwdEdit->text().toStdString().c_str();  //ÃÜÂë
+            m_accuntEdit->text().toStdString().c_str();  //ç”¨æˆ·å
+        std::string password = m_pwdEdit->text().toStdString().c_str();  //å¯†ç 
         std::string nickname =
-            m_accuntEdit->text().toStdString().c_str();  //½ÇÉ«Ãû
+            m_accuntEdit->text().toStdString().c_str();  //è§’è‰²å
 
-        //ĞÔ±ğ±êÊ¶
+        //æ€§åˆ«æ ‡è¯†
         int sex = 0;
         json.Add("username", username);
         json.Add("password", password);
@@ -208,10 +208,10 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
                     return;
                 }
 
-                std::string infoStr = "×¢²áÊ§°Ü:" + msg["data"].ToString();
+                std::string infoStr = "æ³¨å†Œå¤±è´¥:" + msg["data"].ToString();
                 if (state == 0)
                 {
-                    infoStr = "×¢²á³É¹¦";
+                    infoStr = "æ³¨å†ŒæˆåŠŸ";
 
                     int userId = -1;
                     if (!msg["data"].Get("userId", userId))
@@ -241,7 +241,7 @@ void QLoginAndRegWnd::slotRegOrLoginBtn()
                     QNetworkReply* reply = pManager->post(request, multiPart);
                 }
 
-                //×¢²á³É¹¦ºó£¬µ¯³ö´°¿Ú
+                //æ³¨å†ŒæˆåŠŸåï¼Œå¼¹å‡ºçª—å£
                 QMessageBox::information(nullptr, "info", infoStr.c_str());
             });
         return;

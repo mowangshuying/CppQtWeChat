@@ -61,7 +61,7 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout1->addSpacing(100);
 
     m_hLayout1 = new QHBoxLayout();
-    m_nickNameLabel = new QLabel("***êÇ³Æ***");
+    m_nickNameLabel = new QLabel("***æ˜µç§°***");
     m_nickNameLabel->setFont(fp15);
 
     m_headimgLabel = new QLabel();
@@ -74,8 +74,8 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout1->addSpacing(50);
 
     m_hLayout2 = new QHBoxLayout();
-    m_markNameLabel = new QLabel("±¸  ×¢:");
-    m_markNameFillLabel = new QLabel("***±¸×¢***");
+    m_markNameLabel = new QLabel("å¤‡  æ³¨:");
+    m_markNameFillLabel = new QLabel("***å¤‡æ³¨***");
 
     m_markNameLabel->setFont(fp12);
     m_markNameFillLabel->setFont(fp12);
@@ -89,8 +89,8 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout1->addSpacing(25);
 
     m_hLayout3 = new QHBoxLayout();
-    m_rolenameLabel = new QLabel("Î¢ĞÅºÅ:");
-    m_rolenameFillLabel = new QLabel("***Î¢ĞÅºÅ***");
+    m_rolenameLabel = new QLabel("å¾®ä¿¡å·:");
+    m_rolenameFillLabel = new QLabel("***å¾®ä¿¡å·***");
 
     m_rolenameLabel->setFont(fp12);
     m_rolenameFillLabel->setFont(fp12);
@@ -105,8 +105,8 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout1->addSpacing(25);
 
     m_hLayout4 = new QHBoxLayout();
-    m_channelLabel = new QLabel("Çş  µÀ:");
-    m_channelFillLabel = new QLabel("***ÇşµÀ***");
+    m_channelLabel = new QLabel("æ¸   é“:");
+    m_channelFillLabel = new QLabel("***æ¸ é“***");
 
     m_channelLabel->setFont(fp12);
     m_channelFillLabel->setFont(fp12);
@@ -121,7 +121,7 @@ QCommContactInfoWnd::QCommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout1->addSpacing(25);
 
     m_hLayout5 = new QHBoxLayout();
-    m_sendMsgBtn = new QPushButton("·¢ËÍÏûÏ¢");
+    m_sendMsgBtn = new QPushButton("å‘é€æ¶ˆæ¯ ");
     m_sendMsgBtn->setFixedSize(140, 35);
 
     m_hLayout5->addSpacing(155);
@@ -147,9 +147,9 @@ QCommContactInfoWnd::~QCommContactInfoWnd()
 void QCommContactInfoWnd::slotContactInfoChange(QMap<QString, QString> map)
 {
     LogDebug << "contactInfoChange map = " << map;
-    //¸ù¾İmapÖĞname×Ö¶ÎĞŞ¸ÄêÇ³Æ×Ö¶Î
+    //æ ¹æ®mapä¸­nameå­—æ®µä¿®æ”¹æ˜µç§°å­—æ®µ
     m_nickNameLabel->setText(map["name"]);
-    //¼ÓÔØQDataManagerÖĞÍæ¼ÒÍ·ÏñÊı¾İ
+    //åŠ è½½QDataManagerä¸­ç©å®¶å¤´åƒæ•°æ®
     int friendid = atoi(map["friendid"].toStdString().c_str());
     QPixmap pixmap = QDataManager::getMgr()->m_UserId2HeadImgMap[friendid];
     pixmap = pixmap.scaled(60, 60);
@@ -159,33 +159,33 @@ void QCommContactInfoWnd::slotContactInfoChange(QMap<QString, QString> map)
 
 void QCommContactInfoWnd::slotSendMsgBtnClick()
 {
-    //µã»÷·¢ËÍ°´Å¥£¬´´½¨Ò»¸ö»á»°£¬²¢ÇĞ»»¹ıÈ¥
+    //ç‚¹å‡»å‘é€æŒ‰é’®ï¼Œåˆ›å»ºä¸€ä¸ªä¼šè¯ï¼Œå¹¶åˆ‡æ¢è¿‡å»
     QMap<QString, QString> map;
     map["name"] = m_nickNameLabel->text();
     emit signalSendMsgBtnClick(map);
 }
 
-//ÏÔÊ¾¿Õ°×±³¾°Í¼Æ¬
+//æ˜¾ç¤ºç©ºç™½èƒŒæ™¯å›¾ç‰‡
 void QCommContactInfoWnd::showBgPng()
 {
     m_nickNameLabel->hide();
     m_markNameLabel->hide();
-    m_rolenameLabel->hide();  //½ÇÉ«Ãû
+    m_rolenameLabel->hide();  //è§’è‰²å
     m_channelLabel->hide();
     m_markNameFillLabel->hide();
     m_rolenameFillLabel->hide();
     m_channelFillLabel->hide();
     m_headimgLabel->hide();
-    //·¢ËÍÏûÏ¢´°¿Ú
+    //å‘é€æ¶ˆæ¯çª—å£
     m_sendMsgBtn->hide();
 }
 
-//Òş²Ø¿Õ°×±³¾°Í¼Æ¬
+//éšè—ç©ºç™½èƒŒæ™¯å›¾ç‰‡
 void QCommContactInfoWnd::hideBgPng()
 {
     m_nickNameLabel->show();
     m_markNameLabel->show();
-    m_rolenameLabel->show();  //½ÇÉ«Ãû
+    m_rolenameLabel->show();  //è§’è‰²å
     m_channelLabel->show();
     m_markNameFillLabel->show();
     m_rolenameFillLabel->show();

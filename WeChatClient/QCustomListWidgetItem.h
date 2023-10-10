@@ -14,7 +14,7 @@ class QCustomListWidgetItem : public QListWidgetItem
     void setSesId(int sesid);
 
   private:
-    //Ìí¼ÓÒ»Ğ©¶îÍâµÄÊı¾İ£¬Èç»á»°id£»
-    //ÉèÖÃÄ¬ÈÏÖµÎª-1
+    //æ·»åŠ ä¸€äº›é¢å¤–çš„æ•°æ®ï¼Œå¦‚ä¼šè¯idï¼›
+    //è®¾ç½®é»˜è®¤å€¼ä¸º-1
     int m_sesId = -1;
 };

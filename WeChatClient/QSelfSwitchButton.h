@@ -1,10 +1,10 @@
 #pragma once
 
 /*
-* ¹ØÓÚ²Î¿¼£¬Ô­ÎÄµØÖ·£¬´úÂë´Ó´Ë´¦Ñİ»¯£º
+* å…³äºå‚è€ƒï¼ŒåŸæ–‡åœ°å€ï¼Œä»£ç ä»æ­¤å¤„æ¼”åŒ–ï¼š
 https://blog.csdn.net/weixin_39572794/article/details/110516773
-* ÓÉÓÚ²©¿ÍÄÚÔ´Âë±È½ÏÂÒ£¬ÖØĞÂÕûÀí£¬ÎªÁËÊÊÓ¦±¾ÏîÄ¿£¬×Ô¼º¶Ô´Ë´úÂë×ö³öÏàÓ¦µÄĞŞ¸Ä£¬
-* ÌØ´Ë±ê×¢£ºÌØ´Ë¸ĞĞ»´Ë²©ÎÄ×÷ÕßµÄ¹±Ï×
+* ç”±äºåšå®¢å†…æºç æ¯”è¾ƒä¹±ï¼Œé‡æ–°æ•´ç†ï¼Œä¸ºäº†é€‚åº”æœ¬é¡¹ç›®ï¼Œè‡ªå·±å¯¹æ­¤ä»£ç åšå‡ºç›¸åº”çš„ä¿®æ”¹ï¼Œ
+* ç‰¹æ­¤æ ‡æ³¨ï¼šç‰¹æ­¤æ„Ÿè°¢æ­¤åšæ–‡ä½œè€…çš„è´¡çŒ®
 */
 
 #include "QPch.h"
@@ -27,29 +27,29 @@ class QSelfSwitchButton : public QWidget
     void mouseReleaseEvent(QMouseEvent *e);
 
   public:
-    void drawBg(QPainter &painter);         //»æÖÆ±³¾°
-    void drawSlidBlock(QPainter &painter);  //»æÖÆ»¬¿é
-    void drawText(QPainter &painter);       //»æÖÆÎÄ×Ö
+    void drawBg(QPainter &painter);         //ç»˜åˆ¶èƒŒæ™¯
+    void drawSlidBlock(QPainter &painter);  //ç»˜åˆ¶æ»‘å—
+    void drawText(QPainter &painter);       //ç»˜åˆ¶æ–‡å­—
   signals:
     void stateChange(bool state);
 
   public:
-    QColor m_bgColorOn;   //¿ª×´Ì¬Ê±µÄ±³¾°ÑÕÉ«
-    QColor m_bgColorOff;  //¹Ø×´Ì¬Ê±µÄ±³¾°ÑÕÉ«
+    QColor m_bgColorOn;   //å¼€çŠ¶æ€æ—¶çš„èƒŒæ™¯é¢œè‰²
+    QColor m_bgColorOff;  //å…³çŠ¶æ€æ—¶çš„èƒŒæ™¯é¢œè‰²
     QColor m_sliderColor;
-    QColor m_sliderColorOn;   //¿ª×´Ì¬Ê±»¬¿éµÄ±³¾°ÑÕÉ«
-    QColor m_sliderColorOff;  //¹Ø×´Ì¬Ê±»¬¿éµÄ±³¾°ÑÕÉ«
-    QColor m_textColorOn;     //¿ª×´Ì¬Ê±ÎÄ×ÖÑÕÉ«
-    QColor m_textColorOff;    //¹Ø×´Ì¬Ê±ÎÄ×ÖÑÕÉ«
+    QColor m_sliderColorOn;   //å¼€çŠ¶æ€æ—¶æ»‘å—çš„èƒŒæ™¯é¢œè‰²
+    QColor m_sliderColorOff;  //å…³çŠ¶æ€æ—¶æ»‘å—çš„èƒŒæ™¯é¢œè‰²
+    QColor m_textColorOn;     //å¼€çŠ¶æ€æ—¶æ–‡å­—é¢œè‰²
+    QColor m_textColorOff;    //å…³çŠ¶æ€æ—¶æ–‡å­—é¢œè‰²
 
-    QPoint m_startPoint;   //»¬¿éÒÆ¶¯µÄÆğÊ¼µã
-    QPoint m_endPoint;     //»¬¿éÒÆ¶¯µÄÖÕµã
-    QPoint m_centerPoint;  //»¬¿éÒÆ¶¯µÄÖĞ¼äÄ³µã
+    QPoint m_startPoint;   //æ»‘å—ç§»åŠ¨çš„èµ·å§‹ç‚¹
+    QPoint m_endPoint;     //æ»‘å—ç§»åŠ¨çš„ç»ˆç‚¹
+    QPoint m_centerPoint;  //æ»‘å—ç§»åŠ¨çš„ä¸­é—´æŸç‚¹
 
-    QString m_strText;  //ÎÄ×ÖÄÚÈİ
+    QString m_strText;  //æ–‡å­—å†…å®¹
 
     int m_mouseX;
 
-    bool m_bPress;   //×ó¼üÊÇ·ñ°´ÏÂ
-    bool m_bSwitch;  //¿ª¹Ø×´Ì¬:¿ªtrue£¬¹Øfalse
+    bool m_bPress;   //å·¦é”®æ˜¯å¦æŒ‰ä¸‹
+    bool m_bSwitch;  //å¼€å…³çŠ¶æ€:å¼€trueï¼Œå…³false
 };

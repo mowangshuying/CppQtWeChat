@@ -30,15 +30,15 @@ class QDealNewFriendsApplyItemWnd : public QWidget
     QLabel* m_headurl;
     QLabel* m_name;
     QLabel* m_msg;
-    //Í¬ÒâµÄÄÇ¸ö°´Å¥
+    //åŒæ„çš„é‚£ä¸ªæŒ‰é’®
     QPushButton* m_AgreeBtn;
     QPushButton* m_refuseBtn;
-    //×´Ì¬
+    //çŠ¶æ€
     int m_state;
-    //ËùÔÚµÄid
+    //æ‰€åœ¨çš„id
     int m_id;
     //
     int m_userid;
-    //ÊÇ·ñÊÇÉêÇëÕß
+    //æ˜¯å¦æ˜¯ç”³è¯·è€…
     bool m_isApplyer;
 };

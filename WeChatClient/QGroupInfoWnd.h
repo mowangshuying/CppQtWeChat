@@ -47,37 +47,37 @@ class QGroupInfoWnd : public QWidget
 
   public:
     QWidget* m_centerWnd;
-    //¹ö¶¯Ìõ
+    //æ»šåŠ¨æ¡
     QScrollArea* m_scrollArea;
 
-    // ÖĞ¼ä´°¿Ú
+    // ä¸­é—´çª—å£
     QWidget* m_scrollAreaWnd;
-    //ÔİÊ±ÓÃÓÚ²âÊÔ
+    //æš‚æ—¶ç”¨äºæµ‹è¯•
     // QLabel* m_label;
     QVBoxLayout* m_vLayout;
 
     //
     QGroupFriendsWnd* m_groupfriendsWnd;
-    //´Ë´°¿ÚÖĞĞÅÏ¢´ı¶¨,ÔİÊ±²»Óè´¦Àí
+    //æ­¤çª—å£ä¸­ä¿¡æ¯å¾…å®š,æš‚æ—¶ä¸äºˆå¤„ç†
 
-    //¼òµ¥µÄÈºĞÅÏ¢´°¿Ú
+    //ç®€å•çš„ç¾¤ä¿¡æ¯çª—å£
     QWidget* m_simpleGroupInfoWnd;
     QVBoxLayout* m_vLayout1;
-    //ÈºÃû
+    //ç¾¤å
     QLabel* m_groupName1;
     QEditLabel* m_groupName2;
 
-    //Èº¹«¸æ
+    //ç¾¤å…¬å‘Š
     QLabel* m_groupNotice1;
     QEditLabel* m_groupNotice2;
-    //±¸×¢
+    //å¤‡æ³¨
     QLabel* m_groupRemarks1;
     QEditLabel* m_groupRemarks2;
-    //ÎÒÔÚ±¾ÈºµÄêÇ³Æ
+    //æˆ‘åœ¨æœ¬ç¾¤çš„æ˜µç§°
     QLabel* m_groupRoleName1;
     QEditLabel* m_groupRoleName2;
 
-    //¼òµ¥ÈºµÄÉèÖÃ´°¿Ú
+    //ç®€å•ç¾¤çš„è®¾ç½®çª—å£
     QWidget* m_simpleGroupSettingWnd;
     QVBoxLayout* m_vLayout2;
 
@@ -85,22 +85,22 @@ class QGroupInfoWnd : public QWidget
     QLabel* m_showGroupFriendsRoleNameLabel;
     QSelfSwitchButton* m_showGroupFriendsRoleNameBtn;
 
-    //ÏûÏ¢Ãâ´òÈÅ
+    //æ¶ˆæ¯å…æ‰“æ‰°
     QHBoxLayout* m_hLayout22;
     QLabel* m_MsgFreeLabel;
     QSelfSwitchButton* m_MsgFreeBtn;
 
-    //ÖÃ¶¥ÁÄÌì
+    //ç½®é¡¶èŠå¤©
     QHBoxLayout* m_hLayout23;
     QLabel* m_topWndLabel;
     QSelfSwitchButton* m_topWndBtn;
 
-    //±£´æµ½Í¨Ñ¶Â¼
+    //ä¿å­˜åˆ°é€šè®¯å½•
     QHBoxLayout* m_hLayout24;
     QLabel* m_save2AddrBookLabel;
     QSelfSwitchButton* m_save2AddrBookBtn;
 
-    //É¾³ı²¢ÍË³ö´°¿Ú
+    //åˆ é™¤å¹¶é€€å‡ºçª—å£
     QWidget* m_delexitWnd;
     QVBoxLayout* m_vLayout3;
     QPushButton* m_delexitBtn;

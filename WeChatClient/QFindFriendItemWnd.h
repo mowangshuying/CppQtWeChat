@@ -20,15 +20,15 @@ class QFindFriendItemWnd : public QWidget
 
   public:
     QHBoxLayout* m_hLayout;
-    //ÁªÏµÈËÍ·Ïñ
+    //è”ç³»äººå¤´åƒ
     QLabel* m_headUrl;
-    //ÁªÏµÈËÃû×Ö
+    //è”ç³»äººåå­—
     QLabel* m_name;
-    //Ìí¼ÓÅóÓÑ°´Å¥
+    //æ·»åŠ æœ‹å‹æŒ‰é’®
     QPushButton* m_addFriendBtn;
-    //Ìí¼ÓºÃÓÑµÄÓÃ»§id
+    //æ·»åŠ å¥½å‹çš„ç”¨æˆ·id
     int64_t m_friendid;
-    //Ìí¼ÓºÃÓÑÓÃ»§Ãû
+    //æ·»åŠ å¥½å‹ç”¨æˆ·å
     QString m_username;
 
     QApplyFriendNextWnd* m_nextWnd;

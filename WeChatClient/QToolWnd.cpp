@@ -17,35 +17,35 @@ QToolWnd::QToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         "QWidget#QToolWnd{border-top-left-radius:4px;border-bottom-left-radius:"
         "4px; background-color:#2E2E2E;border:none;}");
 
-    //ÍÑÀë¸¸´°¿ÚµÄÑùÊ½¿ØÖÆ
+    //è„±ç¦»çˆ¶çª—å£çš„æ ·å¼æ§åˆ¶
     setAttribute(Qt::WA_StyledBackground);
 
     m_vBoxLayout = new QVBoxLayout(this);
-    m_headUrlLabel = new QSelfLabel("Í·Ïñ");
+    m_headUrlLabel = new QSelfLabel("å¤´åƒ");
     m_headUrlLabel->setFixedSize(40, 40);
 
     m_msgBtn = new QPushButton(this);
     m_msgBtn->setFixedSize(30, 30);
     m_msgBtn->setIconSize(QSize(30, 30));
-    m_msgBtn->setToolTip("ÁÄÌì");
+    m_msgBtn->setToolTip("èŠå¤©");
     m_msgBtn->setIcon(QPixmap("./img/msgBtnNormal.png"));
 
     m_contactsBtn = new QPushButton(this);
     m_contactsBtn->setFixedSize(30, 30);
     m_contactsBtn->setIconSize(QSize(30, 30));
-    m_contactsBtn->setToolTip("ÁªÏµÈË");
+    m_contactsBtn->setToolTip("è”ç³»äºº");
     m_contactsBtn->setIcon(QPixmap("./img/contactsBtnNomal.png"));
 
     m_groupsBtn = new QPushButton(this);
     m_groupsBtn->setFixedSize(30, 30);
     m_groupsBtn->setIconSize(QSize(30, 30));
-    m_groupsBtn->setToolTip("Èº×é");
+    m_groupsBtn->setToolTip("ç¾¤ç»„");
     m_groupsBtn->setIcon(QPixmap("./img/groupBtnNomal.png"));
 
     m_moreBtn = new QPushButton(this);
     m_moreBtn->setFixedSize(30, 30);
     m_moreBtn->setIconSize(QSize(30, 30));
-    m_moreBtn->setToolTip("¸ü¶à");
+    m_moreBtn->setToolTip("æ›´å¤š");
     m_moreBtn->setIcon(QPixmap("./img/tmore.png"));
 
     m_vBoxLayout->setAlignment(Qt::AlignCenter);
@@ -99,7 +99,7 @@ void QToolWnd::slotOnClickMsgBtn()
     m_msgBtn->setIcon(QPixmap("./img/msgBtnClicked.png"));
     m_contactsBtn->setIcon(QPixmap("./img/contactsBtnNomal.png"));
     m_groupsBtn->setIcon(QPixmap("./img/groupBtnNomal.png"));
-    //·¢³öĞÅºÅ
+    //å‘å‡ºä¿¡å·
     signalToolWndPageChanged(0);
 }
 
@@ -127,7 +127,7 @@ void QToolWnd::slotOnClickHeadUrlLabel()
         m_userInfoWnd->m_usernameLabel->setText(
             QDataManager::getMgr()->m_username);
         m_userInfoWnd->m_userIdLabel->setText(
-            "ÓÃ»§id:" + QString::number(QDataManager::getMgr()->m_userid));
+            "ç”¨æˆ·id:" + QString::number(QDataManager::getMgr()->m_userid));
         m_userInfoWnd->setGeometry(swRect);
         m_userInfoWnd->show();
     }
@@ -144,7 +144,7 @@ void QToolWnd::slotOnClickGroupsBtn()
     m_msgBtn->setIcon(QPixmap("./img/msgBtnNormal.png"));
     m_contactsBtn->setIcon(QPixmap("./img/contactsBtnNomal.png"));
     m_groupsBtn->setIcon(QPixmap("./img/groupBtnClicked.png"));
-    signalToolWndPageChanged(2);  //ÔİÊ±ÏÈ×¢ÊÍ£¬´ı»á·Å³öÀ´
+    signalToolWndPageChanged(2);  //æš‚æ—¶å…ˆæ³¨é‡Šï¼Œå¾…ä¼šæ”¾å‡ºæ¥
 }
 
 void QToolWnd::slotOnClickMoreBtn()

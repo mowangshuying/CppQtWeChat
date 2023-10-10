@@ -32,7 +32,7 @@ QCommGroupItemWnd::QCommGroupItemWnd(QWidget* p,
     m_hLayout->addSpacing(15);
     m_hLayout->addWidget(m_groupName);
 
-    //关于请求图片信息
+    //鍏充簬璇锋眰鍥剧墖淇℃伅
     QString imgurl =
         QString("http://49.232.169.205:80/UploadDemo/img/g%1.png").arg(groupId);
     m_networkMgr = new QNetworkAccessManager(this);

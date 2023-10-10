@@ -15,7 +15,7 @@
 
 class QCommListWnd : public QWidget
 {
-    //Ìí¼ÓÏûÏ¢Ó³ÉäÖ§³Ö
+    //æ·»åŠ æ¶ˆæ¯æ˜ å°„æ”¯æŒ
     Q_OBJECT
 
   public:
@@ -36,7 +36,7 @@ class QCommListWnd : public QWidget
     void signalSearchText(QString searchText);
   public slots:
     void slotOnCurrentItemClicked(QListWidgetItem* item);
-    //Èç¹ûµã»÷ÄÇ¸ö°´Å¥µÄ»°
+    //å¦‚æœç‚¹å‡»é‚£ä¸ªæŒ‰é’®çš„è¯
     void slotOnStartGroupBtnClicked();
 
   protected:
@@ -64,16 +64,16 @@ class QCommListWnd : public QWidget
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout;
 
-    //ËÑË÷¿ò
+    //æœç´¢æ¡†
     QLineEdit* m_searchEdit;
 
-    //¿ªÊ¼µÄÄÇ¸ö°´Å¥
+    //å¼€å§‹çš„é‚£ä¸ªæŒ‰é’®
     QPushButton* m_startGroupBtn;
 
     QSelectAddGroupOrAddFriendWnd* m_selectWnd;
 
     QListWidget* m_listWidget;
 
-    //´°¿ÚÀàĞÍ
+    //çª—å£ç±»å‹
     QCommListWndEnum m_WndType;
 };

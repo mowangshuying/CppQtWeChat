@@ -5,7 +5,7 @@ QSelfSplit::QSelfSplit(QWidget* p /*= nullptr*/,
 {
     setObjectName("QSimpleSplit");
     setAttribute(Qt::WA_StyledBackground);
-    //ÉèÖÃÒ»Ğ©ÑùÊ½, ÎŞ½¹µã, ÎŞ±ß¿ò
+    //è®¾ç½®ä¸€äº›æ ·å¼, æ— ç„¦ç‚¹, æ— è¾¹æ¡†
     setFocusPolicy(Qt::NoFocus);
     setWindowFlags(Qt::FramelessWindowHint);
 
@@ -18,10 +18,10 @@ QSelfSplit::QSelfSplit(QWidget* p /*= nullptr*/,
         setFixedWidth(1);
     }
 
-    //ÉèÖÃ·Ö¸îÏßµÄÑÕÉ«
-    // »ÒÉ«µÄ·Ö¸îÏß
+    //è®¾ç½®åˆ†å‰²çº¿çš„é¢œè‰²
+    // ç°è‰²çš„åˆ†å‰²çº¿
     // setStyleSheet("background-color:#E7E7E;border:none");
 
-    // ºìÉ«µÄ·Ö¸îÏß
+    // çº¢è‰²çš„åˆ†å‰²çº¿
     setStyleSheet("background-color:#828790;border:0px");
 }

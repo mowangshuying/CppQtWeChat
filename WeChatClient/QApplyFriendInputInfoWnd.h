@@ -11,7 +11,7 @@
 
 #include "QSelfSplit.h"
 
-// Ìí¼ÓºÃÓÑÊ±ºò£¬×îÏÈÕ¹Ê¾µÄ´°¿Ú£¬ÌîĞ´Ò»Ğ©ÑéÖ¤ÏûÏ¢
+// æ·»åŠ å¥½å‹æ—¶å€™ï¼Œæœ€å…ˆå±•ç¤ºçš„çª—å£ï¼Œå¡«å†™ä¸€äº›éªŒè¯æ¶ˆæ¯
 class QApplyFriendInputInfoWnd : public QWidget
 {
     Q_OBJECT
@@ -20,26 +20,26 @@ class QApplyFriendInputInfoWnd : public QWidget
 
   public:
     QWidget* m_centerWnd;
-    //Ö÷Òª²¼¾Ö
+    //ä¸»è¦å¸ƒå±€
     QHBoxLayout* m_hLayout;
     QVBoxLayout* m_vLayout;
 
-    //ÁªÏµÈËÍ·Ïñ
+    //è”ç³»äººå¤´åƒ
     QLabel* m_headUrl;
 
-    //½ÇÉ«Ãû
+    //è§’è‰²å
     QLabel* m_userName;
-    //ÆäËûĞÅÏ¢
+    //å…¶ä»–ä¿¡æ¯
     QLabel* m_moreInfo;
-    //ÓÃ»§ĞÅÏ¢´°¿Ú
+    //ç”¨æˆ·ä¿¡æ¯çª—å£
     QWidget* m_userInfoWnd;
     QVBoxLayout* m_vUserInfoLayout;
 
-    // ×ó²¿´°¿ÚÓëÓÒ²¿´®¿ÚµÄ·Ö¸îÌõ
+    // å·¦éƒ¨çª—å£ä¸å³éƒ¨ä¸²å£çš„åˆ†å‰²æ¡
     QSelfSplit* m_split;
 
-    // ÊäÈëÑéÖ¤ÏûÏ¢µÄ±êÇ©
+    // è¾“å…¥éªŒè¯æ¶ˆæ¯çš„æ ‡ç­¾
     QLabel* m_inputMsgLabel;
-    // ÊäÈëÑéÖ¤ÏûÏ¢µÄÎÄ±¾¿ò
+    // è¾“å…¥éªŒè¯æ¶ˆæ¯çš„æ–‡æœ¬æ¡†
     QTextEdit* m_inputMsgEdit;
 };

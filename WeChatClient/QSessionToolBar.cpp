@@ -60,7 +60,7 @@ void QSessionToolBar::slotEmojiBtnClick()
 {
     QPoint gPoint = m_emojiBtn->mapToGlobal(QPoint(0, 0));
 
-    /*Ñ¡ÔñµÄ´°¿ÚÖ»ÄÜÔÊĞí³öÏÖÒ»¸ö*/
+    /*é€‰æ‹©çš„çª—å£åªèƒ½å…è®¸å‡ºç°ä¸€ä¸ª*/
     // QWidget *qw = new QSelectWnd1(nullptr);
     QRect swRect = m_emoijWnd->geometry();
     swRect.setX(gPoint.x() - m_emoijWnd->width() / 2 + m_emojiBtn->width() / 2);
@@ -69,7 +69,7 @@ void QSessionToolBar::slotEmojiBtnClick()
     m_emoijWnd->show();
 }
 
-// ²Î¿¼×ÊÁÏ£ºhttps://www.cnblogs.com/syh6324/p/9502307.html
+// å‚è€ƒèµ„æ–™ï¼šhttps://www.cnblogs.com/syh6324/p/9502307.html
 void QSessionToolBar::slotScreenshotBtnClick()
 {
     LogDebug << "desktop winId:" << QApplication::desktop()->winId();
@@ -78,7 +78,7 @@ void QSessionToolBar::slotScreenshotBtnClick()
     LogDebug << "desktop width:" << QApplication::desktop()->width()
              << " height:" << QApplication::desktop()->height();
 
-    // »ñÈ¡µ±Ç°Êó±êÎ»ÖÃ
+    // è·å–å½“å‰é¼ æ ‡ä½ç½®
     QPoint mousePoint = QCursor().pos();
     LogDebug << __FUNCTION__ << "mouse point x:" << mousePoint.x()
              << " y:" << mousePoint.y();
@@ -98,7 +98,7 @@ void QSessionToolBar::slotScreenshotBtnClick()
 
     LogDebug << __FUNCTION__ << " nCurScreenIndex:" << nCurScreenIndex;
 
-    // Èç¹ûÔ­À´º¬ÓĞ½ØÍ¼´°¿Ú£¬ÊÍ·ÅÔ­À´µÄ½ØÍ¼´°¿ÚÄÚ´æ£¬ÖØĞÂ·ÖÅäÄÚ´æ
+    // å¦‚æœåŸæ¥å«æœ‰æˆªå›¾çª—å£ï¼Œé‡Šæ”¾åŸæ¥çš„æˆªå›¾çª—å£å†…å­˜ï¼Œé‡æ–°åˆ†é…å†…å­˜
     if (m_screenShotWnd != nullptr)
     {
         delete m_screenShotWnd;

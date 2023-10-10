@@ -50,8 +50,8 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/)
     m_listWnd2 = new QListWidget();
 
     m_tabWnd = new QTabWidget();
-    m_tabWnd->addTab(m_listWnd1, "ºÃÓÑÑéÖ¤");
-    m_tabWnd->addTab(m_listWnd2, "ÈºÏµÍ³ÏûÏ¢");
+    m_tabWnd->addTab(m_listWnd1, "å¥½å‹éªŒè¯");
+    m_tabWnd->addTab(m_listWnd2, "ç¾¤ç³»ç»Ÿæ¶ˆæ¯");
 
     m_tabWnd->setStyleSheet("QTabBar::tab{height:40;width:100}");
 
@@ -68,7 +68,7 @@ QDealNewFriendsApplyWnd::QDealNewFriendsApplyWnd(QWidget* p /*= nullptr*/)
 
 void QDealNewFriendsApplyWnd::resizeEvent(QResizeEvent* event)
 {
-    // ´°¿Ú¸Ä±ä´óĞ¡Ê±ºò£¬µ÷ÕûitemµÄ´óĞ¡
+    // çª—å£æ”¹å˜å¤§å°æ—¶å€™ï¼Œè°ƒæ•´itemçš„å¤§å°
     Q_UNUSED(event);
 
     int count = m_listWnd1->count();
