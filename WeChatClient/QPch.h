@@ -1,7 +1,7 @@
 #pragma once
 
 #pragma execution_character_set("utf-8")
-#include "QSelfLog.h"
+#include "Log.h"
 #include <QDebug>
 
 #define WECHAT_VERSION "Ver2.0.1"

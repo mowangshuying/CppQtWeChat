@@ -1,0 +1,17 @@
+#include "ApplyFriendWaitInfoWnd.h"
+
+ApplyFriendWaitInfoWnd::ApplyFriendWaitInfoWnd(QWidget* p /*= nullptr*/)
+    : QWidget(p)
+{
+    LogFunc;
+    setContentsMargins(0, 0, 0, 0);
+    setFixedSize(460, 280);
+    // setStyleSheet("background-color:red;");
+
+    m_vLayout = new QVBoxLayout();
+    setLayout(m_vLayout);
+    m_infoLabel = new QLabel();
+    m_infoLabel->setText("你的好友添加请求已经发送成功，正在等待对方确认");
+    m_vLayout->addWidget(m_infoLabel);
+    m_vLayout->addStretch();
+}

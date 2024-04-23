@@ -22,7 +22,7 @@
     <ProjectGuid>{EFD21C0C-725B-44B2-A892-039151F20F08}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">10.0.19041.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">10.0.19041.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)'=='Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
@@ -31,19 +31,19 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
@@ -55,7 +55,7 @@
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
-    <QtInstall>msvc2017_64</QtInstall>
+    <QtInstall>5.12.0_msvc2017_64</QtInstall>
     <QtModules>core;network;gui;multimedia;widgets;websockets;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -169,134 +169,134 @@
   <ItemGroup>
     <ClCompile Include="json\cJSON.c" />
     <ClCompile Include="json\CJsonObject.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="QChatFileInnerWnd.cpp" />
-    <ClCompile Include="QChatFileOuterWnd.cpp" />
-    <ClCompile Include="QCommGroupItemWnd.cpp" />
-    <ClCompile Include="QDataManager.cpp" />
-    <ClCompile Include="QEditLabel.cpp" />
-    <ClCompile Include="QEmoijWnd.cpp" />
-    <ClCompile Include="QGroupFriendsItemWnd.cpp" />
-    <ClCompile Include="QGroupFriendsWnd.cpp" />
-    <ClCompile Include="QGroupInfoWnd.cpp" />
-    <ClCompile Include="QScreenShotToolBarWnd.cpp" />
-    <ClCompile Include="QPictureToolWnd.cpp" />
-    <ClCompile Include="QApplyFriendInputInfoWnd.cpp" />
-    <ClCompile Include="QApplyFriendWaitInfoWnd.cpp" />
-    <ClCompile Include="QChatMsgWnd.cpp" />
-    <ClCompile Include="QCommContactInfoWnd.cpp" />
-    <ClCompile Include="QCommContactItemWnd.cpp" />
-    <ClCompile Include="QCommListWnd.cpp" />
-    <ClCompile Include="QCommMsgItemWnd.cpp" />
-    <ClCompile Include="QCreateGroupListItemWithSelBtnWnd.cpp" />
-    <ClCompile Include="QCreateGroupListItemWnd.cpp" />
-    <ClCompile Include="QCreateGroupWnd.cpp" />
-    <ClCompile Include="QCustomListWidgetItem.cpp" />
-    <ClCompile Include="QDealNewFriendsApplyItemWnd.cpp" />
-    <ClCompile Include="QDealNewFriendsApplyWnd.cpp" />
-    <ClCompile Include="QFindFriendItemWnd.cpp" />
-    <ClCompile Include="QFindFriendOrGroupWnd.cpp" />
-    <ClCompile Include="QLoginAndRegWnd.cpp" />
-    <ClCompile Include="QMainWnd.cpp" />
-    <ClCompile Include="QApplyFriendNextWnd.cpp" />
-    <ClCompile Include="QScreenShotWnd.cpp" />
-    <ClCompile Include="QSelectAddGroupOrAddFriendWnd.cpp" />
-    <ClCompile Include="QSelectMoreWnd.cpp" />
-    <ClCompile Include="QSelfLog.cpp" />
-    <ClCompile Include="QSelfTextEdit.cpp" />
-    <ClCompile Include="QSessionToolBar.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="ChatFileInnerWnd.cpp" />
+    <ClCompile Include="ChatFileOuterWnd.cpp" />
+    <ClCompile Include="CommGroupItemWnd.cpp" />
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="EditLabel.cpp" />
+    <ClCompile Include="EmoijWnd.cpp" />
+    <ClCompile Include="GroupFriendsItemWnd.cpp" />
+    <ClCompile Include="GroupFriendsWnd.cpp" />
+    <ClCompile Include="GroupInfoWnd.cpp" />
+    <ClCompile Include="ScreenShotToolBarWnd.cpp" />
+    <ClCompile Include="PictureToolWnd.cpp" />
+    <ClCompile Include="ApplyFriendInputInfoWnd.cpp" />
+    <ClCompile Include="ApplyFriendWaitInfoWnd.cpp" />
+    <ClCompile Include="ChatMsgWnd.cpp" />
+    <ClCompile Include="CommContactInfoWnd.cpp" />
+    <ClCompile Include="CommContactItemWnd.cpp" />
+    <ClCompile Include="CommListWnd.cpp" />
+    <ClCompile Include="CommMsgItemWnd.cpp" />
+    <ClCompile Include="CreateGroupListItemWithSelBtnWnd.cpp" />
+    <ClCompile Include="CreateGroupListItemWnd.cpp" />
+    <ClCompile Include="CreateGroupWnd.cpp" />
+    <ClCompile Include="CustomListWidgetItem.cpp" />
+    <ClCompile Include="DealNewFriendsApplyItemWnd.cpp" />
+    <ClCompile Include="DealNewFriendsApplyWnd.cpp" />
+    <ClCompile Include="FindFriendItemWnd.cpp" />
+    <ClCompile Include="FindFriendOrGroupWnd.cpp" />
+    <ClCompile Include="LoginRegWnd.cpp" />
+    <ClCompile Include="MainWnd.cpp" />
+    <ClCompile Include="ApplyFriendNextWnd.cpp" />
+    <ClCompile Include="ScreenShotWnd.cpp" />
+    <ClCompile Include="SelectAddGroupOrAddFriendWnd.cpp" />
+    <ClCompile Include="SelectMoreWnd.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="SelfTextEdit.cpp" />
+    <ClCompile Include="SessionToolBar.cpp" />
     <ClCompile Include="QSessionTopWnd.cpp" />
-    <ClCompile Include="QSessionWnd.cpp" />
-    <ClCompile Include="QSettingWnd.cpp" />
-    <ClCompile Include="QSelfLabel.cpp" />
-    <ClCompile Include="QSelfSplit.cpp" />
-    <ClCompile Include="QStyleSheetMgr.cpp" />
-    <ClCompile Include="QSelfSwitchButton.cpp" />
-    <ClCompile Include="QToolWnd.cpp" />
-    <ClCompile Include="QUserInfoWnd.cpp" />
-    <ClCompile Include="QVoiceTelphoneWnd.cpp" />
-    <ClCompile Include="QWSClientMgr.cpp" />
+    <ClCompile Include="SessionWnd.cpp" />
+    <ClCompile Include="SettingWnd.cpp" />
+    <ClCompile Include="SelfLabel.cpp" />
+    <ClCompile Include="SelfSplit.cpp" />
+    <ClCompile Include="StyleSheetMgr.cpp" />
+    <ClCompile Include="SelfSwitchButton.cpp" />
+    <ClCompile Include="ToolWnd.cpp" />
+    <ClCompile Include="UserInfoWnd.cpp" />
+    <ClCompile Include="VoiceTelphoneWnd.cpp" />
+    <ClCompile Include="WSClientMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QWSClientMgr.h" />
+    <QtMoc Include="WSClientMgr.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QLoginAndRegWnd.h" />
+    <QtMoc Include="LoginRegWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCreateGroupWnd.h" />
+    <QtMoc Include="CreateGroupWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCreateGroupListItemWnd.h" />
+    <QtMoc Include="CreateGroupListItemWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCreateGroupListItemWithSelBtnWnd.h" />
+    <QtMoc Include="CreateGroupListItemWithSelBtnWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QSelectAddGroupOrAddFriendWnd.h" />
+    <QtMoc Include="SelectAddGroupOrAddFriendWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QApplyFriendWaitInfoWnd.h" />
+    <QtMoc Include="ApplyFriendWaitInfoWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QApplyFriendInputInfoWnd.h" />
+    <QtMoc Include="ApplyFriendInputInfoWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QApplyFriendNextWnd.h" />
+    <QtMoc Include="ApplyFriendNextWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QFindFriendItemWnd.h" />
+    <QtMoc Include="FindFriendItemWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QFindFriendOrGroupWnd.h" />
+    <QtMoc Include="FindFriendOrGroupWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCommListWnd.h" />
+    <QtMoc Include="CommListWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QCommContactInfoWnd.h" />
+    <QtMoc Include="CommContactInfoWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QMainWnd.h" />
+    <QtMoc Include="MainWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QToolWnd.h" />
+    <QtMoc Include="ToolWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="json\CJsonObject.hpp" />
     <ClInclude Include="QPch.h" />
-    <ClInclude Include="QSelfLog.h" />
-    <ClInclude Include="QSelfTextEdit.h" />
-    <QtMoc Include="QSettingWnd.h" />
-    <QtMoc Include="QStyleSheetMgr.h" />
-    <QtMoc Include="QVoiceTelphoneWnd.h" />
-    <QtMoc Include="QScreenShotToolBarWnd.h" />
-    <QtMoc Include="QSelectMoreWnd.h" />
-    <QtMoc Include="QEditLabel.h" />
-    <QtMoc Include="QGroupFriendsWnd.h" />
-    <QtMoc Include="QSelfSwitchButton.h" />
-    <QtMoc Include="QGroupFriendsItemWnd.h" />
-    <QtMoc Include="QGroupInfoWnd.h" />
-    <QtMoc Include="QChatFileInnerWnd.h" />
-    <QtMoc Include="QChatFileOuterWnd.h" />
-    <QtMoc Include="QCommGroupItemWnd.h" />
-    <ClInclude Include="QDataManager.h" />
-    <QtMoc Include="QScreenShotWnd.h" />
-    <QtMoc Include="QEmoijWnd.h" />
-    <QtMoc Include="QSessionToolBar.h" />
-    <QtMoc Include="QSelfLabel.h" />
-    <QtMoc Include="QDealNewFriendsApplyItemWnd.h" />
-    <QtMoc Include="QUserInfoWnd.h" />
-    <QtMoc Include="QDealNewFriendsApplyWnd.h" />
-    <QtMoc Include="QChatMsgWnd.h" />
-    <QtMoc Include="QPictureToolWnd.h" />
-    <QtMoc Include="QCommContactItemWnd.h" />
-    <QtMoc Include="QCommMsgItemWnd.h" />
-    <ClInclude Include="QCustomListWidgetItem.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="SelfTextEdit.h" />
+    <QtMoc Include="SettingWnd.h" />
+    <QtMoc Include="StyleSheetMgr.h" />
+    <QtMoc Include="VoiceTelphoneWnd.h" />
+    <QtMoc Include="ScreenShotToolBarWnd.h" />
+    <QtMoc Include="SelectMoreWnd.h" />
+    <QtMoc Include="EditLabel.h" />
+    <QtMoc Include="GroupFriendsWnd.h" />
+    <QtMoc Include="SelfSwitchButton.h" />
+    <QtMoc Include="GroupFriendsItemWnd.h" />
+    <QtMoc Include="GroupInfoWnd.h" />
+    <QtMoc Include="ChatFileInnerWnd.h" />
+    <QtMoc Include="ChatFileOuterWnd.h" />
+    <QtMoc Include="CommGroupItemWnd.h" />
+    <ClInclude Include="DataManager.h" />
+    <QtMoc Include="ScreenShotWnd.h" />
+    <QtMoc Include="EmoijWnd.h" />
+    <QtMoc Include="SessionToolBar.h" />
+    <QtMoc Include="SelfLabel.h" />
+    <QtMoc Include="DealNewFriendsApplyItemWnd.h" />
+    <QtMoc Include="UserInfoWnd.h" />
+    <QtMoc Include="DealNewFriendsApplyWnd.h" />
+    <QtMoc Include="ChatMsgWnd.h" />
+    <QtMoc Include="PictureToolWnd.h" />
+    <QtMoc Include="CommContactItemWnd.h" />
+    <QtMoc Include="CommMsgItemWnd.h" />
+    <ClInclude Include="CustomListWidgetItem.h" />
     <QtMoc Include="QSessionTopWnd.h" />
-    <QtMoc Include="QSelfSplit.h" />
-    <QtMoc Include="QSessionWnd.h" />
+    <QtMoc Include="SelfSplit.h" />
+    <QtMoc Include="SessionWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WeChatClient.rc" />

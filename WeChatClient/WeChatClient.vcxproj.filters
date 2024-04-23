@@ -20,73 +20,73 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QLoginAndRegWnd.cpp">
+    <ClCompile Include="LoginRegWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QWSClientMgr.cpp">
+    <ClCompile Include="WSClientMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QApplyFriendNextWnd.cpp">
+    <ClCompile Include="ApplyFriendNextWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QToolWnd.cpp">
+    <ClCompile Include="ToolWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QFindFriendItemWnd.cpp">
+    <ClCompile Include="FindFriendItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCreateGroupWnd.cpp">
+    <ClCompile Include="CreateGroupWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QApplyFriendWaitInfoWnd.cpp">
+    <ClCompile Include="ApplyFriendWaitInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCreateGroupListItemWnd.cpp">
+    <ClCompile Include="CreateGroupListItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCreateGroupListItemWithSelBtnWnd.cpp">
+    <ClCompile Include="CreateGroupListItemWithSelBtnWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelectAddGroupOrAddFriendWnd.cpp">
+    <ClCompile Include="SelectAddGroupOrAddFriendWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QApplyFriendInputInfoWnd.cpp">
+    <ClCompile Include="ApplyFriendInputInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QFindFriendOrGroupWnd.cpp">
+    <ClCompile Include="FindFriendOrGroupWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCommListWnd.cpp">
+    <ClCompile Include="CommListWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QMainWnd.cpp">
+    <ClCompile Include="MainWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCommContactInfoWnd.cpp">
+    <ClCompile Include="CommContactInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSessionWnd.cpp">
+    <ClCompile Include="SessionWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCommMsgItemWnd.cpp">
+    <ClCompile Include="CommMsgItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelfSplit.cpp">
+    <ClCompile Include="SelfSplit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCustomListWidgetItem.cpp">
+    <ClCompile Include="CustomListWidgetItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QSessionTopWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QChatMsgWnd.cpp">
+    <ClCompile Include="ChatMsgWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCommContactItemWnd.cpp">
+    <ClCompile Include="CommContactItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="json\CJsonObject.cpp">
@@ -95,209 +95,209 @@
     <ClCompile Include="json\cJSON.c">
       <Filter>Source Files\json</Filter>
     </ClCompile>
-    <ClCompile Include="QDealNewFriendsApplyWnd.cpp">
+    <ClCompile Include="DealNewFriendsApplyWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QDealNewFriendsApplyItemWnd.cpp">
+    <ClCompile Include="DealNewFriendsApplyItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QUserInfoWnd.cpp">
+    <ClCompile Include="UserInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelfLabel.cpp">
+    <ClCompile Include="SelfLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QPictureToolWnd.cpp">
+    <ClCompile Include="PictureToolWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QDataManager.cpp">
+    <ClCompile Include="DataManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSessionToolBar.cpp">
+    <ClCompile Include="SessionToolBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QEmoijWnd.cpp">
+    <ClCompile Include="EmoijWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QScreenShotWnd.cpp">
+    <ClCompile Include="ScreenShotWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QChatFileInnerWnd.cpp">
+    <ClCompile Include="ChatFileInnerWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QChatFileOuterWnd.cpp">
+    <ClCompile Include="ChatFileOuterWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QGroupInfoWnd.cpp">
+    <ClCompile Include="GroupInfoWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QCommGroupItemWnd.cpp">
+    <ClCompile Include="CommGroupItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QGroupFriendsItemWnd.cpp">
+    <ClCompile Include="GroupFriendsItemWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelfSwitchButton.cpp">
+    <ClCompile Include="SelfSwitchButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QGroupFriendsWnd.cpp">
+    <ClCompile Include="GroupFriendsWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QEditLabel.cpp">
+    <ClCompile Include="EditLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelectMoreWnd.cpp">
+    <ClCompile Include="SelectMoreWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QScreenShotToolBarWnd.cpp">
+    <ClCompile Include="ScreenShotToolBarWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QVoiceTelphoneWnd.cpp">
+    <ClCompile Include="VoiceTelphoneWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelfLog.cpp">
+    <ClCompile Include="Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSelfTextEdit.cpp">
+    <ClCompile Include="SelfTextEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QStyleSheetMgr.cpp">
+    <ClCompile Include="StyleSheetMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSettingWnd.cpp">
+    <ClCompile Include="SettingWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QWSClientMgr.h">
+    <QtMoc Include="WSClientMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QLoginAndRegWnd.h">
+    <QtMoc Include="LoginRegWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCreateGroupWnd.h">
+    <QtMoc Include="CreateGroupWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCreateGroupListItemWnd.h">
+    <QtMoc Include="CreateGroupListItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCreateGroupListItemWithSelBtnWnd.h">
+    <QtMoc Include="CreateGroupListItemWithSelBtnWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSelectAddGroupOrAddFriendWnd.h">
+    <QtMoc Include="SelectAddGroupOrAddFriendWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QApplyFriendWaitInfoWnd.h">
+    <QtMoc Include="ApplyFriendWaitInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QApplyFriendInputInfoWnd.h">
+    <QtMoc Include="ApplyFriendInputInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QApplyFriendNextWnd.h">
+    <QtMoc Include="ApplyFriendNextWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QFindFriendItemWnd.h">
+    <QtMoc Include="FindFriendItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QFindFriendOrGroupWnd.h">
+    <QtMoc Include="FindFriendOrGroupWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCommListWnd.h">
+    <QtMoc Include="CommListWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCommContactInfoWnd.h">
+    <QtMoc Include="CommContactInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QMainWnd.h">
+    <QtMoc Include="MainWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QToolWnd.h">
+    <QtMoc Include="ToolWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSessionWnd.h">
+    <QtMoc Include="SessionWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSelfSplit.h">
+    <QtMoc Include="SelfSplit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="QSessionTopWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QChatMsgWnd.h">
+    <QtMoc Include="ChatMsgWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QDealNewFriendsApplyWnd.h">
+    <QtMoc Include="DealNewFriendsApplyWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QDealNewFriendsApplyItemWnd.h">
+    <QtMoc Include="DealNewFriendsApplyItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QUserInfoWnd.h">
+    <QtMoc Include="UserInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSelfLabel.h">
+    <QtMoc Include="SelfLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QPictureToolWnd.h">
+    <QtMoc Include="PictureToolWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCommContactItemWnd.h">
+    <QtMoc Include="CommContactItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCommMsgItemWnd.h">
+    <QtMoc Include="CommMsgItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QEmoijWnd.h">
+    <QtMoc Include="EmoijWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSessionToolBar.h">
+    <QtMoc Include="SessionToolBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QScreenShotWnd.h">
+    <QtMoc Include="ScreenShotWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QChatFileInnerWnd.h">
+    <QtMoc Include="ChatFileInnerWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QChatFileOuterWnd.h">
+    <QtMoc Include="ChatFileOuterWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QGroupInfoWnd.h">
+    <QtMoc Include="GroupInfoWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QCommGroupItemWnd.h">
+    <QtMoc Include="CommGroupItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QGroupFriendsItemWnd.h">
+    <QtMoc Include="GroupFriendsItemWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSelfSwitchButton.h">
+    <QtMoc Include="SelfSwitchButton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QGroupFriendsWnd.h">
+    <QtMoc Include="GroupFriendsWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QEditLabel.h">
+    <QtMoc Include="EditLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSelectMoreWnd.h">
+    <QtMoc Include="SelectMoreWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QScreenShotToolBarWnd.h">
+    <QtMoc Include="ScreenShotToolBarWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QVoiceTelphoneWnd.h">
+    <QtMoc Include="VoiceTelphoneWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QStyleSheetMgr.h">
+    <QtMoc Include="StyleSheetMgr.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="QSettingWnd.h">
+    <QtMoc Include="SettingWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="QCustomListWidgetItem.h">
+    <ClInclude Include="CustomListWidgetItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="json\cJSON.h">
@@ -306,16 +306,16 @@
     <ClInclude Include="json\CJsonObject.hpp">
       <Filter>Header Files\json</Filter>
     </ClInclude>
-    <ClInclude Include="QDataManager.h">
+    <ClInclude Include="DataManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QPch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QSelfLog.h">
+    <ClInclude Include="Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QSelfTextEdit.h">
+    <ClInclude Include="SelfTextEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
