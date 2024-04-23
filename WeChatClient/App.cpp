@@ -1,5 +1,3 @@
-// #include <vld.h>
-
 #include <QApplication>
 #include <QMessageBox>
 #include <QTextCodec>

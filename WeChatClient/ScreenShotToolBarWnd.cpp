@@ -1,4 +1,4 @@
-#include "QPch.h"
+#include "def.h"
 #include "ScreenShotToolBarWnd.h"
 
 ScreenShotToolBarWnd::ScreenShotToolBarWnd(QWidget* p /*= nullptr*/)

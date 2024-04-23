@@ -1,4 +1,4 @@
-#include "QPch.h"
+#include "def.h"
 #include "SelfTextEdit.h"
 #include <QApplication>
 #include <QClipboard>

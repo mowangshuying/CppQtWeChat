@@ -7,7 +7,7 @@ https://blog.csdn.net/weixin_39572794/article/details/110516773
 * 特此标注：特此感谢此博文作者的贡献
 */
 
-#include "QPch.h"
+#include "def.h"
 
 #include <QWidget>
 #include <QMouseEvent>

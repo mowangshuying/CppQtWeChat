@@ -1,4 +1,4 @@
-#include "QPch.h"
+#include "def.h"
 #include "CustomListWidgetItem.h"
 
 CustomListWidgetItem::CustomListWidgetItem(QListWidget* view /*= nullptr*/, int type /*= Type*/) : QListWidgetItem(view, type)

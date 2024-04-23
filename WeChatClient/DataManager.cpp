@@ -1,5 +1,5 @@
 #include "DataManager.h"
-#include "QPch.h"
+#include "def.h"
 
 DataManager* DataManager::m_dataManager = nullptr;
 

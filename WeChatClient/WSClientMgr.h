@@ -1,6 +1,6 @@
 #pragma once
 
-#include "QPch.h"
+#include "def.h"
 
 /*
  * 提供简单的基于websocket的通信能力

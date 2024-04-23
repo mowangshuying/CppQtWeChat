@@ -1,5 +1,5 @@
 #pragma once
-#include "QPch.h"
+#include "def.h"
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QVBoxLayout>

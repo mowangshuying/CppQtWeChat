@@ -1,6 +1,6 @@
 #pragma once
 
-#include "QPch.h"
+#include "def.h"
 #include <QDebug>
 #include <QTime>
 #include <QFile>

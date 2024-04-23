@@ -50,7 +50,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
-    <QtInstall>msvc2017</QtInstall>
+    <QtInstall>5.12.0_msvc2017</QtInstall>
     <QtModules>core;network;gui;multimedia;widgets;websockets;multimediawidgets;webenginewidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -265,7 +265,7 @@
   <ItemGroup>
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="json\CJsonObject.hpp" />
-    <ClInclude Include="QPch.h" />
+    <ClInclude Include="def.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="SelfTextEdit.h" />
     <QtMoc Include="SettingWnd.h" />
