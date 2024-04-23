@@ -9,25 +9,16 @@ WSClientMgr::WSClientMgr()
     m_bConn = false;
     m_webSock = new QWebSocket();
 
-    //创建一个定时器
+    // 创建一个定时器
     m_timer = new QTimer();
     m_timer->start(1000);
 
     connect(m_timer, &QTimer::timeout, this, &WSClientMgr::slotTimer);
-    connect(m_webSock,
-            &QWebSocket::connected,
-            this,
-            &WSClientMgr::slotConnected);
-    connect(m_webSock,
-            &QWebSocket::disconnected,
-            this,
-            &WSClientMgr::slotDisconnected);
-    connect(m_webSock,
-            &QWebSocket::textMessageReceived,
-            this,
-            &WSClientMgr::slotRecvMsg);
+    connect(m_webSock, &QWebSocket::connected, this, &WSClientMgr::slotConnected);
+    connect(m_webSock, &QWebSocket::disconnected, this, &WSClientMgr::slotDisconnected);
+    connect(m_webSock, &QWebSocket::textMessageReceived, this, &WSClientMgr::slotRecvMsg);
 
-    //连接远端服务器
+    // 连接远端服务器
     m_webSock->open(QUrl(CHAT_SERVER_ADDR));
     // m_webSock->open(QUrl("ws://127.0.0.1:5000"));
     LogDebug << "threadId:" << QThread::currentThread()->currentThreadId();
@@ -91,7 +82,7 @@ void WSClientMgr::request(const std::string& cmd, neb::CJsonObject& data)
     msg.Add("type", msg_type_req);
     msg.Add("msgId", ++m_MsgId);
 
-    //这里时间是不准确的，需要和服务同步
+    // 这里时间是不准确的，需要和服务同步
     int time = QTime::currentTime().msec();
 
     msg.Add("time", time);
@@ -100,9 +91,7 @@ void WSClientMgr::request(const std::string& cmd, neb::CJsonObject& data)
     transfer(msg);
 }
 
-void WSClientMgr::request(const std::string& cmd,
-                           neb::CJsonObject& json,
-                           NetEventCall call)
+void WSClientMgr::request(const std::string& cmd, neb::CJsonObject& json, NetEventCall call)
 {
     request(cmd, json);
     if (call != nullptr)
@@ -143,7 +132,7 @@ void WSClientMgr::slotConnected()
 {
     LogDebug << "slot_connected()...";
     // LogDebug << "threadId = " << QThread::currentThread()->currentThreadId();
-    //向远端服务器发送一个注册消息
+    // 向远端服务器发送一个注册消息
     neb::CJsonObject json;
     json.Add("type", "Client");
     json.Add("cckey", "ccmm00@123456");

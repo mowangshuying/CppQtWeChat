@@ -2,8 +2,7 @@
 #include "SelfLabel.h"
 #include "StyleSheetMgr.h"
 
-ApplyFriendInputInfoWnd::ApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
-    : QWidget(p)
+ApplyFriendInputInfoWnd::ApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     LogFunc;
     setObjectName("QApplyFriendInputInfoWnd");
@@ -29,8 +28,7 @@ ApplyFriendInputInfoWnd::ApplyFriendInputInfoWnd(QWidget* p /*= nullptr*/)
     // 设置头像
     m_headUrl->setFixedSize(80, 80);
     QPixmap headImg = QPixmap("./img/head2.png");
-    headImg =
-        headImg.scaled(80, 80, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    headImg = headImg.scaled(80, 80, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     m_headUrl->setPixmap(headImg);
 
     // 用户名

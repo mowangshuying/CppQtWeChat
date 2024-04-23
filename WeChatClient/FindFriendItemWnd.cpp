@@ -7,10 +7,7 @@ FindFriendItemWnd::FindFriendItemWnd(QWidget* p) : QWidget(p)
     setObjectName("QFindFriendItemWnd");
 }
 
-FindFriendItemWnd::FindFriendItemWnd(QWidget* p,
-                                       const char* headUrl,
-                                       const char* name)
-    : QWidget(p), m_username(name)
+FindFriendItemWnd::FindFriendItemWnd(QWidget* p, const char* headUrl, const char* name) : QWidget(p), m_username(name)
 {
     LogFunc;
     setObjectName("QFindFriendItemWnd");
@@ -49,10 +46,7 @@ FindFriendItemWnd::FindFriendItemWnd(QWidget* p,
     //  setObjectName("QCommContactItemWnd");
     //  setStyleSheet("#QCommContactItemWnd{border-bottom:1px solid red;}");
 
-    connect(m_addFriendBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotAddFriendBtnClick()));
+    connect(m_addFriendBtn, SIGNAL(clicked()), this, SLOT(slotAddFriendBtnClick()));
 }
 
 void FindFriendItemWnd::slotAddFriendBtnClick()

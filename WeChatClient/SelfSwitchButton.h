@@ -27,29 +27,29 @@ class SelfSwitchButton : public QWidget
     void mouseReleaseEvent(QMouseEvent *e);
 
   public:
-    void drawBg(QPainter &painter);         //绘制背景
-    void drawSlidBlock(QPainter &painter);  //绘制滑块
-    void drawText(QPainter &painter);       //绘制文字
+    void drawBg(QPainter &painter);         // 绘制背景
+    void drawSlidBlock(QPainter &painter);  // 绘制滑块
+    void drawText(QPainter &painter);       // 绘制文字
   signals:
     void stateChange(bool state);
 
   public:
-    QColor m_bgColorOn;   //开状态时的背景颜色
-    QColor m_bgColorOff;  //关状态时的背景颜色
+    QColor m_bgColorOn;   // 开状态时的背景颜色
+    QColor m_bgColorOff;  // 关状态时的背景颜色
     QColor m_sliderColor;
-    QColor m_sliderColorOn;   //开状态时滑块的背景颜色
-    QColor m_sliderColorOff;  //关状态时滑块的背景颜色
-    QColor m_textColorOn;     //开状态时文字颜色
-    QColor m_textColorOff;    //关状态时文字颜色
+    QColor m_sliderColorOn;   // 开状态时滑块的背景颜色
+    QColor m_sliderColorOff;  // 关状态时滑块的背景颜色
+    QColor m_textColorOn;     // 开状态时文字颜色
+    QColor m_textColorOff;    // 关状态时文字颜色
 
-    QPoint m_startPoint;   //滑块移动的起始点
-    QPoint m_endPoint;     //滑块移动的终点
-    QPoint m_centerPoint;  //滑块移动的中间某点
+    QPoint m_startPoint;   // 滑块移动的起始点
+    QPoint m_endPoint;     // 滑块移动的终点
+    QPoint m_centerPoint;  // 滑块移动的中间某点
 
-    QString m_strText;  //文字内容
+    QString m_strText;  // 文字内容
 
     int m_mouseX;
 
-    bool m_bPress;   //左键是否按下
-    bool m_bSwitch;  //开关状态:开true，关false
+    bool m_bPress;   // 左键是否按下
+    bool m_bSwitch;  // 开关状态:开true，关false
 };

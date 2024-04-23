@@ -20,15 +20,15 @@ class FindFriendItemWnd : public QWidget
 
   public:
     QHBoxLayout* m_hLayout;
-    //联系人头像
+    // 联系人头像
     QLabel* m_headUrl;
-    //联系人名字
+    // 联系人名字
     QLabel* m_name;
-    //添加朋友按钮
+    // 添加朋友按钮
     QPushButton* m_addFriendBtn;
-    //添加好友的用户id
+    // 添加好友的用户id
     int64_t m_friendid;
-    //添加好友用户名
+    // 添加好友用户名
     QString m_username;
 
     ApplyFriendNextWnd* m_nextWnd;

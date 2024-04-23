@@ -11,10 +11,10 @@
 
 class QSessionTopWnd : public QWidget
 {
-    //添加消息映射支持
+    // 添加消息映射支持
     Q_OBJECT
   public:
-    //会话窗口
+    // 会话窗口
     QSessionTopWnd(QWidget* p = nullptr);
 
   public:

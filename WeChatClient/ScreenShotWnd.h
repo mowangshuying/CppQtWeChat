@@ -15,11 +15,11 @@ class ScreenShotWnd : public QWidget
     ScreenShotWnd(QWidget* p = nullptr);
     ~ScreenShotWnd();
   public slots:
-    //复制截图
+    // 复制截图
     void slotCopyScreenShot();
-    //保存截图
+    // 保存截图
     void slotSaveScreenShot();
-    //退出截图
+    // 退出截图
     void slotExitSccreenShot();
 
   protected:
@@ -35,9 +35,9 @@ class ScreenShotWnd : public QWidget
     QPixmap m_fullScreenPixmap;
 
   private:
-    //鼠标开始位置
+    // 鼠标开始位置
     QPoint m_begPos;
-    //鼠标结束位置
+    // 鼠标结束位置
     QPoint m_endPos;
 
     // 鼠标开始全局位置
@@ -45,12 +45,12 @@ class ScreenShotWnd : public QWidget
     // 鼠标结束全局位置
     QPoint m_globalEndPos;
 
-    //矩形截图区域
+    // 矩形截图区域
     QRect m_screenShotRect;
-    //左键是否按下
+    // 左键是否按下
     bool m_leftBtnPress;
 
-    //右键菜单
+    // 右键菜单
     QMenu* m_RightBtnMenu;
 
     QScreen* m_screen;

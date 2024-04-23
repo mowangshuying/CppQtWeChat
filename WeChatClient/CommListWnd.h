@@ -15,7 +15,7 @@
 
 class CommListWnd : public QWidget
 {
-    //添加消息映射支持
+    // 添加消息映射支持
     Q_OBJECT
 
   public:
@@ -27,8 +27,7 @@ class CommListWnd : public QWidget
         SearchItemWndType = 3
     };
 
-    CommListWnd(QWidget* p = nullptr,
-                 QCommListWndEnum wndType = MsgItemWndTpye);
+    CommListWnd(QWidget* p = nullptr, QCommListWndEnum wndType = MsgItemWndTpye);
 
   signals:
     void signalCommListChanged(int num);
@@ -36,22 +35,15 @@ class CommListWnd : public QWidget
     void signalSearchText(QString searchText);
   public slots:
     void slotOnCurrentItemClicked(QListWidgetItem* item);
-    //如果点击那个按钮的话
+    // 如果点击那个按钮的话
     void slotOnStartGroupBtnClicked();
 
   protected:
     bool eventFilter(QObject* target, QEvent* event);
 
   public:
-    void addMsgItem(const char* name,
-                    const char* msg,
-                    qint64 sesid,
-                    int64_t userid,
-                    bool isGroupMsg);
-    void addContactsItem(const char* headUrl,
-                         const char* name,
-                         bool isNewFriend = false,
-                         int friendid = -1);
+    void addMsgItem(const char* name, const char* msg, qint64 sesid, int64_t userid, bool isGroupMsg);
+    void addContactsItem(const char* headUrl, const char* name, bool isNewFriend = false, int friendid = -1);
     void addGroupItem(const char* headUrl, const char* name, int groupid);
 
     bool hasMsgItemBySesId(int64_t sesid);
@@ -64,16 +56,16 @@ class CommListWnd : public QWidget
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout;
 
-    //搜索框
+    // 搜索框
     QLineEdit* m_searchEdit;
 
-    //开始的那个按钮
+    // 开始的那个按钮
     QPushButton* m_startGroupBtn;
 
     SelectAddGroupOrAddFriendWnd* m_selectWnd;
 
     QListWidget* m_listWidget;
 
-    //窗口类型
+    // 窗口类型
     QCommListWndEnum m_WndType;
 };

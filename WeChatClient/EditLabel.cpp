@@ -63,8 +63,7 @@ bool EditLabel::eventFilter(QObject* obj, QEvent* e)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(e);
             LogDebug << "key:" << keyEvent->key();
-            if (keyEvent->key() == Qt::Key_Enter ||
-                keyEvent->key() == Qt::Key_Return)
+            if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
             {
                 m_label->setText(m_lineEdit->text());
                 m_StackLayout->setCurrentWidget(m_label);

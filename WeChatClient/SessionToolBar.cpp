@@ -50,10 +50,7 @@ SessionToolBar::SessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout->addSpacing(15);
 
     connect(m_emojiBtn, SIGNAL(clicked()), this, SLOT(slotEmojiBtnClick()));
-    connect(m_screenshotBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotScreenshotBtnClick()));
+    connect(m_screenshotBtn, SIGNAL(clicked()), this, SLOT(slotScreenshotBtnClick()));
 }
 
 void SessionToolBar::slotEmojiBtnClick()
@@ -73,23 +70,19 @@ void SessionToolBar::slotEmojiBtnClick()
 void SessionToolBar::slotScreenshotBtnClick()
 {
     LogDebug << "desktop winId:" << QApplication::desktop()->winId();
-    LogDebug << "desktop sceen count:"
-             << QApplication::desktop()->screenCount();
-    LogDebug << "desktop width:" << QApplication::desktop()->width()
-             << " height:" << QApplication::desktop()->height();
+    LogDebug << "desktop sceen count:" << QApplication::desktop()->screenCount();
+    LogDebug << "desktop width:" << QApplication::desktop()->width() << " height:" << QApplication::desktop()->height();
 
     // 获取当前鼠标位置
     QPoint mousePoint = QCursor().pos();
-    LogDebug << __FUNCTION__ << "mouse point x:" << mousePoint.x()
-             << " y:" << mousePoint.y();
+    LogDebug << __FUNCTION__ << "mouse point x:" << mousePoint.x() << " y:" << mousePoint.y();
     int nSceenCount = QApplication::desktop()->screenCount();
     int nSceenWidth = QApplication::desktop()->width();
     int nEverySceenWidth = nSceenWidth / nSceenCount;
     int nCurScreenIndex = -1;
     for (int i = 0; i < nSceenCount; i++)
     {
-        if (mousePoint.x() >= nEverySceenWidth * i &&
-            mousePoint.x() <= nEverySceenWidth * (i + 1))
+        if (mousePoint.x() >= nEverySceenWidth * i && mousePoint.x() <= nEverySceenWidth * (i + 1))
         {
             nCurScreenIndex = i;
             break;

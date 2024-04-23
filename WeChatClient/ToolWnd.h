@@ -20,10 +20,10 @@
  */
 class ToolWnd : public QWidget
 {
-    //添加消息映射支持
+    // 添加消息映射支持
     Q_OBJECT
   public:
-    //工具栏窗口
+    // 工具栏窗口
     ToolWnd(QWidget* p = nullptr);
   signals:
     void signalToolWndPageChanged(int num);

@@ -10,12 +10,7 @@ CommContactItemWnd::CommContactItemWnd(QWidget* p) : QWidget(p)
     setObjectName("QCommContactItemWnd");
 }
 
-CommContactItemWnd::CommContactItemWnd(QWidget* p,
-                                         const char* headUrl,
-                                         const char* name,
-                                         bool bNewFriend /* = false*/,
-                                         int friendid /* = -1*/)
-    : QWidget(p), m_bNewFriend(bNewFriend), m_friendId(friendid)
+CommContactItemWnd::CommContactItemWnd(QWidget* p, const char* headUrl, const char* name, bool bNewFriend /* = false*/, int friendid /* = -1*/) : QWidget(p), m_bNewFriend(bNewFriend), m_friendId(friendid)
 {
     LogFunc;
     setObjectName("QCommContactItemWnd");
@@ -33,14 +28,10 @@ CommContactItemWnd::CommContactItemWnd(QWidget* p,
     m_hLayout->addSpacing(15);
     m_hLayout->addWidget(m_name);
 
-    //向远端请求头像的信息
-    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png")
-                         .arg(friendid);
+    // 向远端请求头像的信息
+    QString imgurl = QString("http://49.232.169.205:80/UploadDemo/img/u%1.png").arg(friendid);
     m_networkMgr = new QNetworkAccessManager();
-    connect(m_networkMgr,
-            SIGNAL(finished(QNetworkReply*)),
-            this,
-            SLOT(slotReplyFinished(QNetworkReply*)));
+    connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
     m_networkMgr->get(QNetworkRequest(QUrl(imgurl)));
 
     if (name != NULL && !bNewFriend)

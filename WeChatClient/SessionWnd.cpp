@@ -102,32 +102,16 @@ SessionWnd::SessionWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_MsgWndList->setAcceptDrops(true);
     m_MsgWndList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    //按钮点击时候发送消息
-    connect(m_sendTextBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotSendTextBtnClick()));
-    m_sendTextBtn->setStyleSheet(
-        "background-color:#1aad19;border-style: none;");
+    // 按钮点击时候发送消息
+    connect(m_sendTextBtn, SIGNAL(clicked()), this, SLOT(slotSendTextBtnClick()));
+    m_sendTextBtn->setStyleSheet("background-color:#1aad19;border-style: none;");
 
     setAttribute(Qt::WA_StyledBackground);
 
-    connect(m_sesToolBar->m_emoijWnd,
-            SIGNAL(signalEmoijClicked(QString)),
-            this,
-            SLOT(slotEmoijClicked(QString)));
-    connect(m_sesTopWnd->m_moreBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotMoreBtnClick()));
-    connect(m_sesToolBar->m_voiceTelphoneBtn,
-            &QPushButton::clicked,
-            this,
-            &SessionWnd::slotVoiceTelPhoneBtnClick);
-    connect(m_groupInfoWnd,
-            SIGNAL(signalUpdateGroupName(QString)),
-            this,
-            SLOT(slotUpdateGroupName(QString)));
+    connect(m_sesToolBar->m_emoijWnd, SIGNAL(signalEmoijClicked(QString)), this, SLOT(slotEmoijClicked(QString)));
+    connect(m_sesTopWnd->m_moreBtn, SIGNAL(clicked()), this, SLOT(slotMoreBtnClick()));
+    connect(m_sesToolBar->m_voiceTelphoneBtn, &QPushButton::clicked, this, &SessionWnd::slotVoiceTelPhoneBtnClick);
+    connect(m_groupInfoWnd, SIGNAL(signalUpdateGroupName(QString)), this, SLOT(slotUpdateGroupName(QString)));
 }
 
 SessionWnd::~SessionWnd()
@@ -142,7 +126,7 @@ SessionWnd::~SessionWnd()
 void SessionWnd::slotSendTextBtnClick()
 {
     QString msgText = m_sendTextEdit->toPlainText();
-    //如果不含任何内容不允许发送
+    // 如果不含任何内容不允许发送
     if (msgText == "")
     {
         LogErr << "msgText is empty!";
@@ -158,14 +142,14 @@ void SessionWnd::slotSendTextBtnClick()
     json.Add("msgtext", msgText.toStdString().c_str());
     json.Add("msgtype", 0);
 
-    //如果不是发送群消息
+    // 如果不是发送群消息
     if (m_isGroupSes == false)
     {
         sendMsgToUser(json, msgText);
         return;
     }
 
-    //发送的是群消息
+    // 发送的是群消息
     if (m_isGroupSes == true)
     {
         sendMsgToGroup(json, msgText);
@@ -182,7 +166,7 @@ void SessionWnd::slotEmoijClicked(QString str)
 
 void SessionWnd::slotMoreBtnClick()
 {
-    //设置相应的位置
+    // 设置相应的位置
     QRect rect = m_sesTopWnd->geometry();
     QPoint gPoint = m_sesTopWnd->mapToGlobal(QPoint(0, 0));
     QRect swRect = m_sesTopWnd->geometry();
@@ -191,51 +175,50 @@ void SessionWnd::slotMoreBtnClick()
     m_groupInfoWnd->setGeometry(swRect);
 
     // 向远端请求该群聊信息准备设置
-    //向远端服务器发送请求
+    // 向远端服务器发送请求
     neb::CJsonObject json;
     json.Add("groupId", m_recvId);
-    WSClientMgr::getMgr()->request(
-        "cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
-            LogDebug << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
+    WSClientMgr::getMgr()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
+        LogDebug << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
 
-            // 向群好友列表中嵌入数据
-            neb::CJsonObject datajson;
-            if (!msg.Get("data", datajson))
+        // 向群好友列表中嵌入数据
+        neb::CJsonObject datajson;
+        if (!msg.Get("data", datajson))
+        {
+            return;
+        }
+
+        neb::CJsonObject friendsJson;
+        if (!datajson.Get("friends", friendsJson))
+        {
+            return;
+        }
+
+        for (int i = 0; i < friendsJson.GetArraySize(); i++)
+        {
+            neb::CJsonObject friendJson;
+            if (!friendsJson.Get(i, friendJson))
             {
-                return;
+                continue;
             }
 
-            neb::CJsonObject friendsJson;
-            if (!datajson.Get("friends", friendsJson))
+            int64_t ownerid = -1;
+            if (!friendJson.Get("ownerid", ownerid))
             {
-                return;
+                continue;
             }
 
-            for (int i = 0; i < friendsJson.GetArraySize(); i++)
+            std::string nickname;
+            if (!friendJson.Get("nickname", nickname))
             {
-                neb::CJsonObject friendJson;
-                if (!friendsJson.Get(i, friendJson))
-                {
-                    continue;
-                }
-
-                int64_t ownerid = -1;
-                if (!friendJson.Get("ownerid", ownerid))
-                {
-                    continue;
-                }
-
-                std::string nickname;
-                if (!friendJson.Get("nickname", nickname))
-                {
-                    continue;
-                }
-
-                m_groupInfoWnd->addGroupFriendItem(ownerid, nickname.c_str());
+                continue;
             }
-        });
 
-    //显示群组的信息等
+            m_groupInfoWnd->addGroupFriendItem(ownerid, nickname.c_str());
+        }
+    });
+
+    // 显示群组的信息等
     m_groupInfoWnd->show();
 }
 
@@ -271,12 +254,12 @@ void SessionWnd::dragEnterEvent(QDragEnterEvent* event)
 void SessionWnd::dropEvent(QDropEvent* event)
 {
     LogDebug << "dropEvent";
-    //拖拽成功获取文件信息
+    // 拖拽成功获取文件信息
     const QMimeData* qm = event->mimeData();
     QString strFileName = qm->urls()[0].toLocalFile();
     LogDebug << "strFileName:" << strFileName;
 
-    //判断是否是支持的文件
+    // 判断是否是支持的文件
     QFileInfo fileInfo = QFileInfo(strFileName);
     if (fileInfo.isDir())
     {
@@ -284,23 +267,17 @@ void SessionWnd::dropEvent(QDropEvent* event)
         return;
     }
 
-    //获取文件名
+    // 获取文件名
     QString filename = fileInfo.fileName();
     QString filepath = fileInfo.filePath();
-    //获取文件后缀名
+    // 获取文件后缀名
     QString suffix = fileInfo.suffix();
-    //获取文件大小
+    // 获取文件大小
     QString fileSize = getFileSize(fileInfo);
 
     // 文件信息窗口
-    ChatFileOuterWnd* fileWnd =
-        new ChatFileOuterWnd(nullptr,
-                              MainWnd::getMainWnd()->m_userid,
-                              m_recvId);
-    fileWnd->setFileUploadData(filename,
-                               fileSize,
-                               fileInfo.absolutePath(),
-                               fileInfo.absoluteFilePath());
+    ChatFileOuterWnd* fileWnd = new ChatFileOuterWnd(nullptr, MainWnd::getMainWnd()->m_userid, m_recvId);
+    fileWnd->setFileUploadData(filename, fileSize, fileInfo.absolutePath(), fileInfo.absoluteFilePath());
     fileWnd->setFixedWidth(m_MsgWndList->width());
 
     QListWidgetItem* fileItem = new QListWidgetItem(m_MsgWndList);
@@ -310,15 +287,8 @@ void SessionWnd::dropEvent(QDropEvent* event)
 
     QDateTime currentDateTime = QDateTime::currentDateTime();
     QString currentDate = currentDateTime.toString("yyyy_MM_dd_hh_mm_ss_zzz_");
-    QString httpHeader =
-        QString("form-data;name=\"file\";filename=\"%1_%2_%3\"")
-            .arg(MainWnd::getMainWnd()->m_userid)
-            .arg(currentDate)
-            .arg(filename);
-    QString fileName = QString("%1_%2_%3")
-                           .arg(MainWnd::getMainWnd()->m_userid)
-                           .arg(currentDate)
-                           .arg(filename);
+    QString httpHeader = QString("form-data;name=\"file\";filename=\"%1_%2_%3\"").arg(MainWnd::getMainWnd()->m_userid).arg(currentDate).arg(filename);
+    QString fileName = QString("%1_%2_%3").arg(MainWnd::getMainWnd()->m_userid).arg(currentDate).arg(filename);
 
     // 文件名
     QFile* file = new QFile(strFileName);
@@ -327,8 +297,7 @@ void SessionWnd::dropEvent(QDropEvent* event)
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
     request.setUrl(QUrl("HTTP_FILE_SERVER_ADDR"));
-    QHttpMultiPart* multiPart =
-        new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
+    QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
     QHttpPart part;
     part.setHeader(QNetworkRequest::ContentDispositionHeader, httpHeader);
     part.setBodyDevice(file);
@@ -336,53 +305,43 @@ void SessionWnd::dropEvent(QDropEvent* event)
     multiPart->append(part);
     QNetworkReply* reply = pManager->post(request, multiPart);
 
-    connect(reply,
-            &QNetworkReply::uploadProgress,
-            this,
-            [this, fileWnd, fileName, fileSize, filename](qint64 x, qint64 y) {
-                if (y == 0)
-                    return;
+    connect(reply, &QNetworkReply::uploadProgress, this, [this, fileWnd, fileName, fileSize, filename](qint64 x, qint64 y) {
+        if (y == 0)
+            return;
 
-                fileWnd->setProgressBarMin(0);
-                fileWnd->setProgressBarMax(y);
-                fileWnd->setProgressBarValue(x);
-            });
+        fileWnd->setProgressBarMin(0);
+        fileWnd->setProgressBarMax(y);
+        fileWnd->setProgressBarValue(x);
+    });
 
-    connect(pManager,
-            &QNetworkAccessManager::finished,
-            this,
-            [this, fileWnd, fileName, fileSize, filename, &file](
-                QNetworkReply* reply) {
-                // 获取响应信息
-                QByteArray bytes = reply->readAll();
-                std::string str = bytes.toStdString();
-                int i = 0;
-                fileWnd->m_innerWnd->m_sendState->setText("已发送");
+    connect(pManager, &QNetworkAccessManager::finished, this, [this, fileWnd, fileName, fileSize, filename, &file](QNetworkReply* reply) {
+        // 获取响应信息
+        QByteArray bytes = reply->readAll();
+        std::string str = bytes.toStdString();
+        int i = 0;
+        fileWnd->m_innerWnd->m_sendState->setText("已发送");
 
-                neb::CJsonObject json;
-                json.Add("sendid", MainWnd::getMainWnd()->m_userid);
-                json.Add("recvid", m_recvId);
-                json.Add("sesid", m_sesId);
-                json.Add("msgtype", 1);
-                neb::CJsonObject filejson;
-                filejson.Add("filename_server", str);
-                filejson.Add("filename_client", filename.toStdString());
-                filejson.Add("filesize", fileSize.toStdString());
-                json.Add("msgtext", filejson.ToString());
+        neb::CJsonObject json;
+        json.Add("sendid", MainWnd::getMainWnd()->m_userid);
+        json.Add("recvid", m_recvId);
+        json.Add("sesid", m_sesId);
+        json.Add("msgtype", 1);
+        neb::CJsonObject filejson;
+        filejson.Add("filename_server", str);
+        filejson.Add("filename_client", filename.toStdString());
+        filejson.Add("filesize", fileSize.toStdString());
+        json.Add("msgtext", filejson.ToString());
 
-                // 释放reply
-                reply->deleteLater();
+        // 释放reply
+        reply->deleteLater();
 
-                //释放文件内存
-                file->close();
-                delete file;
-                file = nullptr;
+        // 释放文件内存
+        file->close();
+        delete file;
+        file = nullptr;
 
-                WSClientMgr::getMgr()->request(
-                    "cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) {
-                        LogDebug << "after upload file recv msg from server!";
-                    });
-            });
+        WSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogDebug << "after upload file recv msg from server!"; });
+    });
 }
 
 QString SessionWnd::getFileSize(QFileInfo& fileInfo)
@@ -433,63 +392,45 @@ void SessionWnd::resizeEvent(QResizeEvent* event)
 void SessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 {
     // QString userName = QMainWnd::getMainWnd()->m_username;
-    WSClientMgr::getMgr()->request(
-        "cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
-            dealMsgTime();
-            //向远端发送消息
-            QString time =
-                QString::number(QDateTime::currentDateTime().toTime_t());
-            ChatMsgWnd* msgWnd =
-                new ChatMsgWnd(m_MsgWndList,
-                                MainWnd::getMainWnd()->m_userid,
-                                MainWnd::getMainWnd()->m_username,
-                                m_recvId);
-            QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
-            msgWnd->setFixedWidth(this->width());
+    WSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
+        dealMsgTime();
+        // 向远端发送消息
+        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+        ChatMsgWnd* msgWnd = new ChatMsgWnd(m_MsgWndList, MainWnd::getMainWnd()->m_userid, MainWnd::getMainWnd()->m_username, m_recvId);
+        QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
+        msgWnd->setFixedWidth(this->width());
 
-            QSize msgSize = msgWnd->fontRect(msgText);
-            msgItem->setSizeHint(msgSize);
-            //会设置消息并调用相应的
-            msgWnd->setText(msgText,
-                            time,
-                            msgSize,
-                            ChatMsgWnd::ChatMsg_OwnerMsgText);
-            //关联项与窗口
-            m_MsgWndList->setItemWidget(msgItem, msgWnd);
-            //优化逻辑滑动到底部
-            m_MsgWndList->scrollToBottom();
-        });
+        QSize msgSize = msgWnd->fontRect(msgText);
+        msgItem->setSizeHint(msgSize);
+        // 会设置消息并调用相应的
+        msgWnd->setText(msgText, time, msgSize, ChatMsgWnd::ChatMsg_OwnerMsgText);
+        // 关联项与窗口
+        m_MsgWndList->setItemWidget(msgItem, msgWnd);
+        // 优化逻辑滑动到底部
+        m_MsgWndList->scrollToBottom();
+    });
 }
 
 void SessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
 {
-    WSClientMgr::getMgr()->request(
-        "cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
-            dealMsgTime();
+    WSClientMgr::getMgr()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
+        dealMsgTime();
 
-            LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
-            //向远端发送消息
-            QString time =
-                QString::number(QDateTime::currentDateTime().toTime_t());
-            ChatMsgWnd* msgWnd =
-                new ChatMsgWnd(m_MsgWndList,
-                                MainWnd::getMainWnd()->m_userid,
-                                MainWnd::getMainWnd()->m_username,
-                                m_recvId);
-            QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
-            msgWnd->setFixedWidth(this->width());
-            QSize msgSize = msgWnd->fontRect(msgText);
-            msgItem->setSizeHint(msgSize);
-            //会设置消息并调用相应的
-            msgWnd->setText(msgText,
-                            time,
-                            msgSize,
-                            ChatMsgWnd::ChatMsg_OwnerMsgText);
-            //关联项与窗口
-            m_MsgWndList->setItemWidget(msgItem, msgWnd);
-            //优化逻辑滑动到底部
-            m_MsgWndList->scrollToBottom();
-        });
+        LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
+        // 向远端发送消息
+        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+        ChatMsgWnd* msgWnd = new ChatMsgWnd(m_MsgWndList, MainWnd::getMainWnd()->m_userid, MainWnd::getMainWnd()->m_username, m_recvId);
+        QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
+        msgWnd->setFixedWidth(this->width());
+        QSize msgSize = msgWnd->fontRect(msgText);
+        msgItem->setSizeHint(msgSize);
+        // 会设置消息并调用相应的
+        msgWnd->setText(msgText, time, msgSize, ChatMsgWnd::ChatMsg_OwnerMsgText);
+        // 关联项与窗口
+        m_MsgWndList->setItemWidget(msgItem, msgWnd);
+        // 优化逻辑滑动到底部
+        m_MsgWndList->scrollToBottom();
+    });
 }
 
 void SessionWnd::dealMsgTime()
@@ -523,10 +464,7 @@ void SessionWnd::dealMsgTime()
         timeListItem->setSizeHint(size);
 
         QString curTimeStr = m_lastMsgDateTime.toString("yyyy/MM/dd hh:mm");
-        timeMsgWnd->setText(curTimeStr,
-                            curTimeStr,
-                            size,
-                            ChatMsgWnd::ChatMsg_Time);
+        timeMsgWnd->setText(curTimeStr, curTimeStr, size, ChatMsgWnd::ChatMsg_Time);
         m_MsgWndList->setItemWidget(timeListItem, timeMsgWnd);
     }
 }

@@ -2,9 +2,7 @@
 #include "DataManager.h"
 #include "CreateGroupListItemWithSelBtnWnd.h"
 
-CreateGroupListItemWithSelBtnWnd::CreateGroupListItemWithSelBtnWnd(
-    QWidget* p /*= nullptr*/)
-    : QWidget(p)
+CreateGroupListItemWithSelBtnWnd::CreateGroupListItemWithSelBtnWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     LogFunc;
     setObjectName("QCreateGroupListItemWithSelBtnWnd");
@@ -26,13 +24,7 @@ CreateGroupListItemWithSelBtnWnd::CreateGroupListItemWithSelBtnWnd(
     m_hLayout->addWidget(m_selRBtn);
 }
 
-CreateGroupListItemWithSelBtnWnd::CreateGroupListItemWithSelBtnWnd(
-    QWidget* p,
-    const char* headimg,
-    int64_t friendid,
-    const char* nickname,
-    const char* rolename)
-    : QWidget(p), m_friendid(friendid)
+CreateGroupListItemWithSelBtnWnd::CreateGroupListItemWithSelBtnWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename) : QWidget(p), m_friendid(friendid)
 {
     LogFunc;
     setObjectName("QCreateGroupListItemWithSelBtnWnd");
@@ -54,8 +46,7 @@ CreateGroupListItemWithSelBtnWnd::CreateGroupListItemWithSelBtnWnd(
 
     m_headImgStr = headimg;
     QPixmap pixmap1 = QPixmap(headimg);
-    QPixmap pixmap2 =
-        pixmap1.scaled(25, 25, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap pixmap2 = pixmap1.scaled(25, 25, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     m_headImage->setPixmap(QPixmap(headimg));
     m_headImage->setFixedSize(25, 25);
 
@@ -69,14 +60,10 @@ CreateGroupListItemWithSelBtnWnd::CreateGroupListItemWithSelBtnWnd(
     m_hLayout->addStretch();
     m_hLayout->addWidget(m_selRBtn);
 
-    connect(m_selRBtn,
-            SIGNAL(clicked(bool)),
-            this,
-            SLOT(slotClickedSelBtn(bool)));
+    connect(m_selRBtn, SIGNAL(clicked(bool)), this, SLOT(slotClickedSelBtn(bool)));
 }
 
-void CreateGroupListItemWithSelBtnWnd::slotClickedSelBtn(
-    bool isSel /* = false*/)
+void CreateGroupListItemWithSelBtnWnd::slotClickedSelBtn(bool isSel /* = false*/)
 {
     LogDebug << "isSel" << isSel;
 

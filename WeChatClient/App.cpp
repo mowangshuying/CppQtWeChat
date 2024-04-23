@@ -1,4 +1,4 @@
-//#include <vld.h>
+// #include <vld.h>
 
 #include <QApplication>
 #include <QMessageBox>
@@ -20,12 +20,12 @@ int main(int argc, char** argv)
     app.setWindowIcon(QIcon("./img/wechat.ico"));
 
     LogDebug << "start";
-    Log::initLog();
+    Log::init();
     StyleSheetMgr::initMgr();
     WSClientMgr::initMgr();
     DataManager::initMgr();
 
-    //加载本地的样式表
+    // 加载本地的样式表
     QFile qss("./stylesheet/wechat.qss");
     if (qss.open(QFile::ReadOnly))
     {
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
         qss.close();
     }
 
-    //登录窗口
+    // 登录窗口
     LoginRegWnd lgw;
     lgw.show();
 
@@ -43,5 +43,5 @@ int main(int argc, char** argv)
     DataManager::exitMgr();
     WSClientMgr::exitMgr();
     StyleSheetMgr::exitMgr();
-    Log::exitLog();
+    Log::deinit();
 }

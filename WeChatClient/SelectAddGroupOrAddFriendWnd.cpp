@@ -6,8 +6,7 @@
 
 #include "StyleSheetMgr.h"
 
-SelectAddGroupOrAddFriendWnd::SelectAddGroupOrAddFriendWnd(QWidget* p)
-    : QWidget(p)
+SelectAddGroupOrAddFriendWnd::SelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget(p)
 {
     LogFunc;
     m_centerWnd = new QWidget(this);
@@ -47,10 +46,7 @@ SelectAddGroupOrAddFriendWnd::SelectAddGroupOrAddFriendWnd(QWidget* p)
     m_crateGroupWnd = new CreateGroupWnd();
     m_crateGroupWnd->hide();
 
-    connect(m_addContactsOrGroupBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotAddContactsOrGroupBtnClick()));
+    connect(m_addContactsOrGroupBtn, SIGNAL(clicked()), this, SLOT(slotAddContactsOrGroupBtnClick()));
     connect(m_createGroupBtn, SIGNAL(clicked()), this, SLOT(slotCreateGroup()));
 }
 

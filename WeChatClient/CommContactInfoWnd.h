@@ -53,6 +53,6 @@ class CommContactInfoWnd : public QWidget
     QLabel* m_rolenameFillLabel;
     QLabel* m_channelFillLabel;
 
-    //发送消息窗口
+    // 发送消息窗口
     QPushButton* m_sendMsgBtn;
 };

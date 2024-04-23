@@ -17,9 +17,7 @@ class ChatFileOuterWnd : public QWidget
         ChatFile_Other,      // 接收到他人的文件
     };
 
-    ChatFileOuterWnd(QWidget* p = nullptr,
-                      int64_t sendid = -1,
-                      int64_t recvid = -1);
+    ChatFileOuterWnd(QWidget* p = nullptr, int64_t sendid = -1, int64_t recvid = -1);
 
     void setFileName(QString fileName);
 
@@ -36,14 +34,8 @@ class ChatFileOuterWnd : public QWidget
 
     void setServerFileName(QString serverFileName);
 
-    void setFileUploadData(QString fileName,
-                           QString fileSize,
-                           QString fileDir,
-                           QString filePath);
-    void setFileDownLoadData(QString fileName,
-                             QString fileSize,
-                             QString fileState,
-                             QString serverFileName);
+    void setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath);
+    void setFileDownLoadData(QString fileName, QString fileSize, QString fileState, QString serverFileName);
 
     void setProgressBarMax(int max);
 
@@ -52,7 +44,7 @@ class ChatFileOuterWnd : public QWidget
     void setProgressBarValue(int value);
 
   public:
-    QLabel* m_headUrl;              // 头像信息
+    QLabel* m_headUrl;             // 头像信息
     ChatFileInnerWnd* m_innerWnd;  // 文件框
     QHBoxLayout* m_hLayout;
     QVBoxLayout* m_vLayout;

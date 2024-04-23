@@ -47,9 +47,7 @@ class WSClientMgr : public QObject
     void transfer(neb::CJsonObject& msg);
 
     void request(const std::string& cmd, neb::CJsonObject& json);
-    void request(const std::string& cmd,
-                 neb::CJsonObject& json,
-                 NetEventCall call);
+    void request(const std::string& cmd, neb::CJsonObject& json, NetEventCall call);
 
     void onNetMsgDo(int64 msgId, neb::CJsonObject& msgJson);
     void onNetMsgDo(std::string cmd, neb::CJsonObject& msgJson);
@@ -64,9 +62,9 @@ class WSClientMgr : public QObject
     static WSClientMgr* m_WsClientMgr;
 
     QWebSocket* m_webSock;
-    //接收远端消息
+    // 接收远端消息
     Msg2CallbackMap m_Msg2CallbackMap;
-    //请求后回调此函数
+    // 请求后回调此函数
     RequestMsg2CallbackMap m_RequestMsg2CallbackMap;
     int64 m_MsgId = 0;
     QTimer* m_timer;

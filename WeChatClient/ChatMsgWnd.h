@@ -10,7 +10,7 @@ class ChatMsgWnd : public QWidget
 {
     Q_OBJECT
   public:
-    //消息类型
+    // 消息类型
     enum ChatMsgTypeEnum
     {
         ChatMsg_System = 10,
@@ -20,24 +20,18 @@ class ChatMsgWnd : public QWidget
     };
 
   public:
-    //构造函数
-    ChatMsgWnd(QWidget* p = nullptr,
-                int64_t sendid = 0,
-                QString userName = "",
-                int64_t recvid = 0);
+    // 构造函数
+    ChatMsgWnd(QWidget* p = nullptr, int64_t sendid = 0, QString userName = "", int64_t recvid = 0);
 
-    //根据str调整各个框的大小
+    // 根据str调整各个框的大小
     QSize fontRect(QString str);
 
     QSize getRealStringSize(QString str);
 
-    void setText(QString text,
-                 QString time,
-                 QSize allSize,
-                 ChatMsgWnd::ChatMsgTypeEnum chatMsgType);
+    void setText(QString text, QString time, QSize allSize, ChatMsgWnd::ChatMsgTypeEnum chatMsgType);
 
   protected:
-    //绘制
+    // 绘制
     void paintEvent(QPaintEvent* event);
 
   public:
@@ -79,7 +73,7 @@ class ChatMsgWnd : public QWidget
     QLabel* m_loadingLable = nullptr;
     QMovie* m_loadingMovie = nullptr;
 
-    //是否在发送中
+    // 是否在发送中
     bool m_bSending = false;
 
     static int m_tmp;

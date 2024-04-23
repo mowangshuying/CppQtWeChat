@@ -10,10 +10,7 @@
 #include "MainWnd.h"
 #include "StyleSheetMgr.h"
 
-ApplyFriendNextWnd::ApplyFriendNextWnd(QWidget* p /*= nullptr*/,
-                                         int64_t friendid /*= -1*/,
-                                         QString username /*= ""*/)
-    : QWidget(p), m_friendid(friendid), m_username(username)
+ApplyFriendNextWnd::ApplyFriendNextWnd(QWidget* p /*= nullptr*/, int64_t friendid /*= -1*/, QString username /*= ""*/) : QWidget(p), m_friendid(friendid), m_username(username)
 {
     LogFunc;
     setFixedSize(460, 360);
@@ -105,33 +102,29 @@ void ApplyFriendNextWnd::slotPushBtnClick()
 {
     if (m_state == PushBtnState::PBS_Next)
     {
-        //设置m_sLayout为第2个窗口
+        // 设置m_sLayout为第2个窗口
         m_sLayout->setCurrentIndex(1);
-        //设置按钮字体为关闭
+        // 设置按钮字体为关闭
         m_pushBtn->setText("关闭");
         m_state = PushBtnState::PBS_Close;
 
-        //向远端服务器发送添加好友申请
+        // 向远端服务器发送添加好友申请
         neb::CJsonObject json;
         json.Add("ownerid", MainWnd::getMainWnd()->m_userid);
         json.Add("friendid", m_friendid);
 
-        //获取验证的消息
+        // 获取验证的消息
         auto pApplyWnd1 = dynamic_cast<ApplyFriendInputInfoWnd*>(m_wnd1);
-        json.Add(
-            "applymsg",
-            pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
+        json.Add("applymsg", pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
 
-        WSClientMgr::getMgr()->request("cs_msg_apply_add_user",
-                                        json,
-                                        [](neb::CJsonObject& msg) {
-                                            int state = 0;
-                                            if (!msg.Get("state", state))
-                                            {
-                                                return;
-                                            }
-                                            LogDebug << "recv apply add user";
-                                        });
+        WSClientMgr::getMgr()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
+            int state = 0;
+            if (!msg.Get("state", state))
+            {
+                return;
+            }
+            LogDebug << "recv apply add user";
+        });
 
         return;
     }

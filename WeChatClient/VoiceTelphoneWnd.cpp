@@ -15,29 +15,18 @@ VoiceTelphoneWnd::VoiceTelphoneWnd(QWidget* p) : QWidget(p)
     m_headImgLabel = new QLabel(this);
     m_headImgLabel->setFixedSize(90, 90);
     m_headImgLabel->setPixmap(QPixmap("./img/voiceTelphoneHeadImg.png"));
-    m_headImgLabel->setGeometry(width() / 2 - m_headImgLabel->width() / 2,
-                                50,
-                                m_headImgLabel->width(),
-                                m_headImgLabel->height());
+    m_headImgLabel->setGeometry(width() / 2 - m_headImgLabel->width() / 2, 50, m_headImgLabel->width(), m_headImgLabel->height());
 
     m_userNameLabel = new QLabel(this);
     m_userNameLabel->setText("美丽的天空 ");
     m_userNameLabel->setStyleSheet("color:white");
     m_userNameLabel->setAlignment(Qt::AlignCenter);
-    m_userNameLabel->setGeometry(width() / 2 - m_userNameLabel->width() / 2,
-                                 m_headImgLabel->y() +
-                                     m_headImgLabel->height() + 20,
-                                 m_userNameLabel->width(),
-                                 m_userNameLabel->height());
+    m_userNameLabel->setGeometry(width() / 2 - m_userNameLabel->width() / 2, m_headImgLabel->y() + m_headImgLabel->height() + 20, m_userNameLabel->width(), m_userNameLabel->height());
 
     m_statusLabel = new QLabel(this);
     m_statusLabel->setText("当前你的网络通话不佳 ");
     m_statusLabel->setStyleSheet("color:white");
-    m_statusLabel->setGeometry(width() / 2 - m_statusLabel->width() / 2,
-                               m_userNameLabel->y() +
-                                   m_userNameLabel->height() + 20,
-                               m_statusLabel->width(),
-                               m_statusLabel->height());
+    m_statusLabel->setGeometry(width() / 2 - m_statusLabel->width() / 2, m_userNameLabel->y() + m_userNameLabel->height() + 20, m_statusLabel->width(), m_statusLabel->height());
     m_statusLabel->hide();
 
     // 通话时长
@@ -45,10 +34,7 @@ VoiceTelphoneWnd::VoiceTelphoneWnd(QWidget* p) : QWidget(p)
     m_timeLabel->setText("00:00");
     m_timeLabel->setAlignment(Qt::AlignCenter);
     m_timeLabel->setStyleSheet("color:white");
-    m_timeLabel->setGeometry(width() / 2 - m_timeLabel->width() / 2,
-                             450,
-                             m_timeLabel->width(),
-                             m_timeLabel->height());
+    m_timeLabel->setGeometry(width() / 2 - m_timeLabel->width() / 2, 450, m_timeLabel->width(), m_timeLabel->height());
 
     // 接听电话
     m_acceptBtn = new QPushButton(this);
@@ -65,23 +51,20 @@ VoiceTelphoneWnd::VoiceTelphoneWnd(QWidget* p) : QWidget(p)
     m_refuseBtn->setGeometry(width() / 2 - 21, 500, 42, 42);
 
     // 媒体相关
-    m_format.setSampleRate(16000);  //设置采样率
-    m_format.setChannelCount(
-        1);  //设定声道数目，mono(平声道)的声道数目是1；stero(立体声)的声道数目是2
-    m_format.setSampleSize(16);  //设置采样大小
-    m_format.setCodec("audio/pcm");  //设置编码器，"audio/pcm"在所有的平台都支持
-    m_format.setSampleType(QAudioFormat::SignedInt);  //设置采样类型
-    m_format.setByteOrder(
-        QAudioFormat::
-            LittleEndian);  //设定高低位的，LittleEndian（低位优先）/LargeEndian(高位优先)
+    m_format.setSampleRate(16000);                      // 设置采样率
+    m_format.setChannelCount(1);                        // 设定声道数目，mono(平声道)的声道数目是1；stero(立体声)的声道数目是2
+    m_format.setSampleSize(16);                         // 设置采样大小
+    m_format.setCodec("audio/pcm");                     // 设置编码器，"audio/pcm"在所有的平台都支持
+    m_format.setSampleType(QAudioFormat::SignedInt);    // 设置采样类型
+    m_format.setByteOrder(QAudioFormat::LittleEndian);  // 设定高低位的，LittleEndian（低位优先）/LargeEndian(高位优先)
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
-    if (!info.isFormatSupported(m_format))  //格式是否支持;
+    if (!info.isFormatSupported(m_format))  // 格式是否支持;
     {
         m_format = info.nearestFormat(m_format);
     }
 
-    m_output = new QAudioOutput(m_format, this);  //输出音频
-    m_input = new QAudioInput(m_format, this);    //输入音频
+    m_output = new QAudioOutput(m_format, this);  // 输出音频
+    m_input = new QAudioInput(m_format, this);    // 输入音频
 
     m_outputDevice = m_output->start();
     m_inputDevice = m_input->start();
@@ -102,41 +85,19 @@ VoiceTelphoneWnd::VoiceTelphoneWnd(QWidget* p) : QWidget(p)
 
 void VoiceTelphoneWnd::regSignalSlot()
 {
-    connect(m_acceptBtn,
-            &QPushButton::clicked,
-            this,
-            &VoiceTelphoneWnd::slotOnAcceptBtnClick);
-    connect(m_refuseBtn,
-            &QPushButton::clicked,
-            this,
-            &VoiceTelphoneWnd::slotOnRefuseBtnClick);
+    connect(m_acceptBtn, &QPushButton::clicked, this, &VoiceTelphoneWnd::slotOnAcceptBtnClick);
+    connect(m_refuseBtn, &QPushButton::clicked, this, &VoiceTelphoneWnd::slotOnRefuseBtnClick);
 }
 
 void VoiceTelphoneWnd::regNetMsg()
 {
-    WSClientMgr::getMgr()->regMsgCall(
-        "cs_msg_call_phone",
-        std::bind(&VoiceTelphoneWnd::cs_msg_call_phone,
-                  this,
-                  std::placeholders::_1));
+    WSClientMgr::getMgr()->regMsgCall("cs_msg_call_phone", std::bind(&VoiceTelphoneWnd::cs_msg_call_phone, this, std::placeholders::_1));
     // cs_msg_accept_phone
-    WSClientMgr::getMgr()->regMsgCall(
-        "cs_msg_accept_phone",
-        std::bind(&VoiceTelphoneWnd::cs_msg_accept_phone,
-                  this,
-                  std::placeholders::_1));
+    WSClientMgr::getMgr()->regMsgCall("cs_msg_accept_phone", std::bind(&VoiceTelphoneWnd::cs_msg_accept_phone, this, std::placeholders::_1));
     // cs_msg_phonemsg
-    WSClientMgr::getMgr()->regMsgCall(
-        "cs_msg_phonemsg",
-        std::bind(&VoiceTelphoneWnd::cs_msg_phonemsg,
-                  this,
-                  std::placeholders::_1));
+    WSClientMgr::getMgr()->regMsgCall("cs_msg_phonemsg", std::bind(&VoiceTelphoneWnd::cs_msg_phonemsg, this, std::placeholders::_1));
     // cs_msg_close_phone
-    WSClientMgr::getMgr()->regMsgCall(
-        "cs_msg_close_phone",
-        std::bind(&VoiceTelphoneWnd::cs_msg_close_phone,
-                  this,
-                  std::placeholders::_1));
+    WSClientMgr::getMgr()->regMsgCall("cs_msg_close_phone", std::bind(&VoiceTelphoneWnd::cs_msg_close_phone, this, std::placeholders::_1));
 }
 
 void VoiceTelphoneWnd::timerEvent(QTimerEvent* event)
@@ -210,12 +171,10 @@ void VoiceTelphoneWnd::requestSendVoiceDataToServer(QByteArray& inputByteArray)
     // << msgText.length() << "json:" << json.ToString().length();
 
     // 不请求消息
-    WSClientMgr::getMgr()->request("cs_msg_phonemsg",
-                                    json,
-                                    [](neb::CJsonObject& msg) {
-                                        //向远端发送消息
-                                        // LogDebug << "send msg suc!";
-                                    });
+    WSClientMgr::getMgr()->request("cs_msg_phonemsg", json, [](neb::CJsonObject& msg) {
+        // 向远端发送消息
+        //  LogDebug << "send msg suc!";
+    });
 }
 
 void VoiceTelphoneWnd::requestSendCallPhoneToServer()
@@ -225,15 +184,12 @@ void VoiceTelphoneWnd::requestSendCallPhoneToServer()
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
     // 将拨打电话的请求推送到服务器，如果推送成功，设置当前状态为等待接听电话
-    WSClientMgr::getMgr()->request("cs_msg_call_phone",
-                                    json,
-                                    [=](neb::CJsonObject& msg) {
-                                        LogDebug << "recv cs_msg_call_phone";
-                                        m_state =
-                                            VoiceTelphoneState::VTS_waitAccept;
-                                        m_phoningTimeCount = 0;
-                                        m_timeLabel->hide();
-                                    });
+    WSClientMgr::getMgr()->request("cs_msg_call_phone", json, [=](neb::CJsonObject& msg) {
+        LogDebug << "recv cs_msg_call_phone";
+        m_state = VoiceTelphoneState::VTS_waitAccept;
+        m_phoningTimeCount = 0;
+        m_timeLabel->hide();
+    });
 }
 
 void VoiceTelphoneWnd::requestSendAcceptPhoneToServer()
@@ -243,18 +199,15 @@ void VoiceTelphoneWnd::requestSendAcceptPhoneToServer()
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
 
-    WSClientMgr::getMgr()->request("cs_msg_accept_phone",
-                                    json,
-                                    [=](neb::CJsonObject& msg) {
-                                        LogDebug << "accept phone";
-                                        m_bells->stop();  // 停止振铃
-                                        m_state =
-                                            VoiceTelphoneState::VTS_phoning;
-                                        m_timeLabel->show();
-                                        // m_timerId = startTimer(30);
-                                        m_acceptBtn->hide();
-                                        m_refuseBtn->show();
-                                    });
+    WSClientMgr::getMgr()->request("cs_msg_accept_phone", json, [=](neb::CJsonObject& msg) {
+        LogDebug << "accept phone";
+        m_bells->stop();  // 停止振铃
+        m_state = VoiceTelphoneState::VTS_phoning;
+        m_timeLabel->show();
+        // m_timerId = startTimer(30);
+        m_acceptBtn->hide();
+        m_refuseBtn->show();
+    });
 }
 
 void VoiceTelphoneWnd::requestSendClosePhoneToServer()
@@ -263,11 +216,9 @@ void VoiceTelphoneWnd::requestSendClosePhoneToServer()
     json.Add("sendid", MainWnd::getMainWnd()->m_userid);
     json.Add("recvid", m_recvId);
     json.Add("sesid", m_sesId);
-    WSClientMgr::getMgr()->request("cs_msg_close_phone",
-                                    json,
-                                    [=](neb::CJsonObject& msg) {
-                                        closePhone();  //
-                                    });
+    WSClientMgr::getMgr()->request("cs_msg_close_phone", json, [=](neb::CJsonObject& msg) {
+        closePhone();  //
+    });
 }
 
 void VoiceTelphoneWnd::setRecvIdAndSesId(int64_t recvId, int64_t sesId)

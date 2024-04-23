@@ -51,9 +51,8 @@ extern "C"
         struct cJSON *next, *prev; /* next/prev allow you to walk array/object
                                       chains. Alternatively, use
                                       GetArraySize/GetArrayItem/GetObjectItem */
-        struct cJSON*
-            child; /* An array or object item will have a child pointer pointing
-                      to a chain of the items in the array/object. */
+        struct cJSON* child;       /* An array or object item will have a child pointer pointing
+                                      to a chain of the items in the array/object. */
 
         int type; /* The type of the item, as above. */
 
@@ -119,19 +118,13 @@ extern "C"
 
     /* Append item to the specified array/object. */
     extern void cJSON_AddItemToArray(cJSON* array, cJSON* item);
-    extern void cJSON_AddItemToArrayHead(
-        cJSON* array,
-        cJSON* item); /* add by Bwar on 2015-01-28 */
-    extern void cJSON_AddItemToObject(cJSON* object,
-                                      const char* string,
-                                      cJSON* item);
+    extern void cJSON_AddItemToArrayHead(cJSON* array, cJSON* item); /* add by Bwar on 2015-01-28 */
+    extern void cJSON_AddItemToObject(cJSON* object, const char* string, cJSON* item);
     /* Append reference to item to the specified array/object. Use this when you
      * want to add an existing cJSON to a new cJSON, but don't want to corrupt
      * your existing cJSON. */
     extern void cJSON_AddItemReferenceToArray(cJSON* array, cJSON* item);
-    extern void cJSON_AddItemReferenceToObject(cJSON* object,
-                                               const char* string,
-                                               cJSON* item);
+    extern void cJSON_AddItemReferenceToObject(cJSON* object, const char* string, cJSON* item);
 
     /* Remove/Detatch items from Arrays/Objects. */
     extern cJSON* cJSON_DetachItemFromArray(cJSON* array, int which);
@@ -140,23 +133,14 @@ extern "C"
     extern void cJSON_DeleteItemFromObject(cJSON* object, const char* string);
 
     /* Update array items. */
-    extern void cJSON_ReplaceItemInArray(cJSON* array,
-                                         int which,
-                                         cJSON* newitem);
-    extern void cJSON_ReplaceItemInObject(cJSON* object,
-                                          const char* string,
-                                          cJSON* newitem);
+    extern void cJSON_ReplaceItemInArray(cJSON* array, int which, cJSON* newitem);
+    extern void cJSON_ReplaceItemInObject(cJSON* object, const char* string, cJSON* newitem);
 
-#define cJSON_AddNullToObject(object, name) \
-    cJSON_AddItemToObject(object, name, cJSON_CreateNull())
-#define cJSON_AddTrueToObject(object, name) \
-    cJSON_AddItemToObject(object, name, cJSON_CreateTrue())
-#define cJSON_AddFalseToObject(object, name) \
-    cJSON_AddItemToObject(object, name, cJSON_CreateFalse())
-#define cJSON_AddNumberToObject(object, name, n) \
-    cJSON_AddItemToObject(object, name, cJSON_CreateNumber(n))
-#define cJSON_AddStringToObject(object, name, s) \
-    cJSON_AddItemToObject(object, name, cJSON_CreateString(s))
+#define cJSON_AddNullToObject(object, name) cJSON_AddItemToObject(object, name, cJSON_CreateNull())
+#define cJSON_AddTrueToObject(object, name) cJSON_AddItemToObject(object, name, cJSON_CreateTrue())
+#define cJSON_AddFalseToObject(object, name) cJSON_AddItemToObject(object, name, cJSON_CreateFalse())
+#define cJSON_AddNumberToObject(object, name, n) cJSON_AddItemToObject(object, name, cJSON_CreateNumber(n))
+#define cJSON_AddStringToObject(object, name, s) cJSON_AddItemToObject(object, name, cJSON_CreateString(s))
 
 #ifdef __cplusplus
 }

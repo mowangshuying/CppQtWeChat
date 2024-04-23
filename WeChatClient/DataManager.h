@@ -30,7 +30,7 @@ class DataManager
     QUserId2HeadImgMap m_UserId2HeadImgMap;
     QFriendId2NameMap m_FriendId2NameMap;
     QGroupId2HeadImgMap m_GroupId2ImgMap;
-    //本地文件保存的目录
+    // 本地文件保存的目录
     QString m_localRecvFileDir = "./recvFile/";
     QStringList m_emoijStrList;
     int64_t m_userid = -1;

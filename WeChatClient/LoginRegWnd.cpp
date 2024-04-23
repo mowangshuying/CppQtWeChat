@@ -37,7 +37,7 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_topWnd = new QWidget(m_centerWnd);
     m_topWnd->setContentsMargins(0, 0, 0, 0);
 
-    //顶部的窗口的布局
+    // 顶部的窗口的布局
     m_vTopLayout = new QVBoxLayout(m_centerWnd);
     m_vTopLayout->setContentsMargins(0, 0, 0, 0);
     m_hTopLayout = new QHBoxLayout(m_centerWnd);
@@ -122,18 +122,9 @@ void LoginRegWnd::regSignalSlot()
 {
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotMinWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
-    connect(m_regOrLoginChx,
-            SIGNAL(clicked(bool)),
-            this,
-            SLOT(slotRegOrLoginSel(bool)));
-    connect(m_regOrLoginBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotRegOrLoginBtn()));
-    connect(m_pwdEdit,
-            SIGNAL(returnPressed()),
-            this,
-            SLOT(slotRegOrLoginBtn()));
+    connect(m_regOrLoginChx, SIGNAL(clicked(bool)), this, SLOT(slotRegOrLoginSel(bool)));
+    connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(slotRegOrLoginBtn()));
+    connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(slotRegOrLoginBtn()));
 }
 
 void LoginRegWnd::mouseMoveEvent(QMouseEvent* event)
@@ -184,66 +175,56 @@ void LoginRegWnd::slotRegOrLoginBtn()
 {
     if (m_bReg)
     {
-        //提供注册功能，点击注册按钮向远端服务发送消息
+        // 提供注册功能，点击注册按钮向远端服务发送消息
         neb::CJsonObject json;
 
-        std::string username =
-            m_accuntEdit->text().toStdString().c_str();  //用户名
-        std::string password = m_pwdEdit->text().toStdString().c_str();  //密码
-        std::string nickname =
-            m_accuntEdit->text().toStdString().c_str();  //角色名
+        std::string username = m_accuntEdit->text().toStdString().c_str();  // 用户名
+        std::string password = m_pwdEdit->text().toStdString().c_str();     // 密码
+        std::string nickname = m_accuntEdit->text().toStdString().c_str();  // 角色名
 
-        //性别标识
+        // 性别标识
         int sex = 0;
         json.Add("username", username);
         json.Add("password", password);
         json.Add("nickname", nickname);
         json.Add("sex", sex);
 
-        WSClientMgr::getMgr()->request(
-            "cs_msg_register", json, [this](neb::CJsonObject& msg) {
-                int state = 0;
-                if (!msg.Get("state", state))
+        WSClientMgr::getMgr()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
+            int state = 0;
+            if (!msg.Get("state", state))
+            {
+                return;
+            }
+
+            std::string infoStr = "注册失败:" + msg["data"].ToString();
+            if (state == 0)
+            {
+                infoStr = "注册成功";
+
+                int userId = -1;
+                if (!msg["data"].Get("userId", userId))
                 {
                     return;
                 }
 
-                std::string infoStr = "注册失败:" + msg["data"].ToString();
-                if (state == 0)
-                {
-                    infoStr = "注册成功";
+                QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
+                QNetworkRequest request;
+                request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
+                QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
+                QHttpPart part;
+                part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));
+                part.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
+                QFile* file = new QFile("./img/default.png");
+                file->open(QFile::ReadOnly);
+                part.setBodyDevice(file);
+                file->setParent(multiPart);
+                multiPart->append(part);
+                QNetworkReply* reply = pManager->post(request, multiPart);
+            }
 
-                    int userId = -1;
-                    if (!msg["data"].Get("userId", userId))
-                    {
-                        return;
-                    }
-
-                    QNetworkAccessManager* pManager =
-                        new QNetworkAccessManager(this);
-                    QNetworkRequest request;
-                    request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
-                    QHttpMultiPart* multiPart =
-                        new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
-                    QHttpPart part;
-                    part.setHeader(
-                        QNetworkRequest::ContentDispositionHeader,
-                        QString(
-                            "form-data;name=\"headimg\";filename=\"%1.png\"")
-                            .arg(userId));
-                    part.setHeader(QNetworkRequest::ContentTypeHeader,
-                                   "image/png");
-                    QFile* file = new QFile("./img/default.png");
-                    file->open(QFile::ReadOnly);
-                    part.setBodyDevice(file);
-                    file->setParent(multiPart);
-                    multiPart->append(part);
-                    QNetworkReply* reply = pManager->post(request, multiPart);
-                }
-
-                //注册成功后，弹出窗口
-                QMessageBox::information(nullptr, "info", infoStr.c_str());
-            });
+            // 注册成功后，弹出窗口
+            QMessageBox::information(nullptr, "info", infoStr.c_str());
+        });
         return;
     }
 
@@ -255,36 +236,34 @@ void LoginRegWnd::slotRegOrLoginBtn()
         json.Add("username", username);
         json.Add("password", password);
 
-        WSClientMgr::getMgr()->request(
-            "cs_msg_login", json, [this](neb::CJsonObject& msg) {
-                int state = 0;
-                if (!msg.Get("state", state))
-                    return;
+        WSClientMgr::getMgr()->request("cs_msg_login", json, [this](neb::CJsonObject& msg) {
+            int state = 0;
+            if (!msg.Get("state", state))
+                return;
 
-                int64 userid = 0;
-                if (!msg["data"].Get("userId", userid))
-                    return;
+            int64 userid = 0;
+            if (!msg["data"].Get("userId", userid))
+                return;
 
-                std::string token;
-                if (!msg["data"].Get("token", token))
-                    return;
+            std::string token;
+            if (!msg["data"].Get("token", token))
+                return;
 
-                std::string username;
-                if (!msg["data"].Get("username", username))
-                    return;
+            std::string username;
+            if (!msg["data"].Get("username", username))
+                return;
 
-                LogDebug << msg.ToString().c_str();
-                m_mainWnd = MainWnd::getMainWnd();
-                if (m_mainWnd == nullptr)
-                    return;
+            LogDebug << msg.ToString().c_str();
+            m_mainWnd = MainWnd::getMainWnd();
+            if (m_mainWnd == nullptr)
+                return;
 
-                m_mainWnd->setUserIdAndName(userid, username.c_str());
-                m_mainWnd->request();
-                m_mainWnd->show();
+            m_mainWnd->setUserIdAndName(userid, username.c_str());
+            m_mainWnd->request();
+            m_mainWnd->show();
 
-                DataManager::getMgr()->setUserIdAndName(userid,
-                                                         username.c_str());
-                this->hide();
-            });
+            DataManager::getMgr()->setUserIdAndName(userid, username.c_str());
+            this->hide();
+        });
     }
 }

@@ -47,7 +47,7 @@ class ChatFileInnerWnd : public QWidget
 
     QString m_fileFullpath = "";   // 文件全路径
     QString m_fileFullDir = "";    // 文件所在目录
-    QString m_serveFilePath = "";  //远程的文件地址
+    QString m_serveFilePath = "";  // 远程的文件地址
 
     // 下载远程文件
     QNetworkAccessManager* m_pNetManager;

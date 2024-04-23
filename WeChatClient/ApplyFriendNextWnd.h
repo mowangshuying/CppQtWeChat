@@ -13,9 +13,7 @@ class ApplyFriendNextWnd : public QWidget
 {
     Q_OBJECT
   public:
-    ApplyFriendNextWnd(QWidget* p = nullptr,
-                        int64_t friendid = -1,
-                        QString username = "");
+    ApplyFriendNextWnd(QWidget* p = nullptr, int64_t friendid = -1, QString username = "");
 
     enum class PushBtnState
     {

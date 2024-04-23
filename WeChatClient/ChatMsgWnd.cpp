@@ -8,15 +8,11 @@
 
 int ChatMsgWnd::m_tmp = 0;
 
-ChatMsgWnd::ChatMsgWnd(QWidget* p /*= nullptr*/,
-                         int64_t sendid,
-                         QString userName,
-                         int64_t recvid)
-    : QWidget(p), m_recvid(recvid), m_sendid(sendid), m_userName(userName)
+ChatMsgWnd::ChatMsgWnd(QWidget* p /*= nullptr*/, int64_t sendid, QString userName, int64_t recvid) : QWidget(p), m_recvid(recvid), m_sendid(sendid), m_userName(userName)
 {
     LogFunc;
     setObjectName("QChatMsgWnd");
-    //设置窗体的字体大小
+    // 设置窗体的字体大小
     QFont font = this->font();
     font.setFamily("MicrosoftYaHei");
     font.setPointSize(10);
@@ -62,8 +58,7 @@ QSize ChatMsgWnd::fontRect(QString str)
     int outerFrameW = 20;
     int textSpaceRect = 12;  //
 
-    m_outerFrameWidth =
-        this->width() - outerFrameW - 2 * (iconWH + iconTMPH + iconSpaceW);
+    m_outerFrameWidth = this->width() - outerFrameW - 2 * (iconWH + iconTMPH + iconSpaceW);
 
     // 文字区域的宽度 = 消息外框 - 2 * textSpaceRect
     // 获取文字的最大宽度
@@ -79,8 +74,7 @@ QSize ChatMsgWnd::fontRect(QString str)
     // 右边头像框
     // x: 窗口宽度(this->width()) - 头像与窗口有边框距离(iconSpaceW) -
     // 头像宽度(iconWH) ; y: iconTMPH（距离窗口上边距离）
-    m_iconRightRect =
-        QRect(this->width() - iconSpaceW - iconWH, iconTMPH, iconWH, iconWH);
+    m_iconRightRect = QRect(this->width() - iconSpaceW - iconWH, iconTMPH, iconWH, iconWH);
 
     // 获取消息所需的
     QSize msgSize = getRealStringSize(str);
@@ -94,55 +88,27 @@ QSize ChatMsgWnd::fontRect(QString str)
     // 三角形所在Rect
     // x：头像距离窗口左侧边框距离（iconSpaceW) + 头像宽度（30）+
     // 三角到头像的距离 y：行的高度/2 w: 6 h: 5
-    m_triangleLeftRect =
-        QRect(iconSpaceW + iconWH + iconRectW, m_lineHeight / 2, triangleW, 5);
-    m_triangleRightRect =
-        QRect(this->width() - iconRectW - iconWH - iconSpaceW - triangleW,
-              m_lineHeight / 2,
-              triangleW,
-              5);
+    m_triangleLeftRect = QRect(iconSpaceW + iconWH + iconRectW, m_lineHeight / 2, triangleW, 5);
+    m_triangleRightRect = QRect(this->width() - iconRectW - iconWH - iconSpaceW - triangleW, m_lineHeight / 2, triangleW, 5);
 
     // LogDebug << "m_textWidth + m_spaceWidth :" << (m_textWidth +
     // m_spaceWidth);
     if (msgSize.width() < m_textWidth)
     {
-        m_outerFrameLeftRect.setRect(m_triangleLeftRect.x() +
-                                         m_triangleLeftRect.width(),
-                                     m_lineHeight / 4 * 3,
-                                     msgSize.width() + 2 * textSpaceRect,
-                                     height - m_lineHeight);
+        m_outerFrameLeftRect.setRect(m_triangleLeftRect.x() + m_triangleLeftRect.width(), m_lineHeight / 4 * 3, msgSize.width() + 2 * textSpaceRect, height - m_lineHeight);
 
-        m_outerFrameRightRect.setRect(this->width() - msgSize.width() -
-                                          2 * textSpaceRect - iconWH -
-                                          iconSpaceW - iconRectW - triangleW,
-                                      m_lineHeight / 4 * 3,
-                                      msgSize.width() + 2 * textSpaceRect,
-                                      height - m_lineHeight);
+        m_outerFrameRightRect.setRect(this->width() - msgSize.width() - 2 * textSpaceRect - iconWH - iconSpaceW - iconRectW - triangleW, m_lineHeight / 4 * 3, msgSize.width() + 2 * textSpaceRect, height - m_lineHeight);
     }
     else
     {
         LogDebug << "msgSize.Width() >= m_textWidth + m_spaceWidth";
-        m_outerFrameLeftRect.setRect(m_triangleLeftRect.x() +
-                                         m_triangleLeftRect.width(),
-                                     m_lineHeight / 4 * 3,
-                                     m_outerFrameWidth,
-                                     height - m_lineHeight);
-        m_outerFrameRightRect.setRect(m_triangleRightRect.x() -
-                                          m_outerFrameWidth,
-                                      m_lineHeight / 4 * 3,
-                                      m_outerFrameWidth,
-                                      height - m_lineHeight);
+        m_outerFrameLeftRect.setRect(m_triangleLeftRect.x() + m_triangleLeftRect.width(), m_lineHeight / 4 * 3, m_outerFrameWidth, height - m_lineHeight);
+        m_outerFrameRightRect.setRect(m_triangleRightRect.x() - m_outerFrameWidth, m_lineHeight / 4 * 3, m_outerFrameWidth, height - m_lineHeight);
     }
 
-    m_textLeftRect.setRect(m_outerFrameLeftRect.x() + textSpaceRect,
-                           m_outerFrameLeftRect.y() + iconTMPH,
-                           m_outerFrameLeftRect.width() - 2 * textSpaceRect,
-                           m_outerFrameLeftRect.height() - 2 * iconTMPH + 2);
+    m_textLeftRect.setRect(m_outerFrameLeftRect.x() + textSpaceRect, m_outerFrameLeftRect.y() + iconTMPH, m_outerFrameLeftRect.width() - 2 * textSpaceRect, m_outerFrameLeftRect.height() - 2 * iconTMPH + 2);
 
-    m_textRigtRect.setRect(m_outerFrameRightRect.x() + textSpaceRect,
-                           m_outerFrameRightRect.y() + iconTMPH,
-                           m_outerFrameRightRect.width() - 2 * textSpaceRect,
-                           m_outerFrameRightRect.height() - 2 * iconTMPH + 2);
+    m_textRigtRect.setRect(m_outerFrameRightRect.x() + textSpaceRect, m_outerFrameRightRect.y() + iconTMPH, m_outerFrameRightRect.width() - 2 * textSpaceRect, m_outerFrameRightRect.height() - 2 * iconTMPH + 2);
     // 是否展示昵称
     if (m_bShowName)
     {
@@ -151,50 +117,20 @@ QSize ChatMsgWnd::fontRect(QString str)
         // m_iconRightRect.setRect(m_iconRightRect.x(), m_iconRightRect.y() +
         // m_lineHeight, m_iconRightRect.width(), m_iconRightRect.height());
 
-        m_triangleLeftRect.setRect(m_triangleLeftRect.x(),
-                                   m_triangleLeftRect.y() + m_lineHeight / 2,
-                                   m_triangleLeftRect.width(),
-                                   m_triangleLeftRect.height());
-        m_triangleRightRect.setRect(m_triangleRightRect.x(),
-                                    m_triangleRightRect.y() + m_lineHeight / 2,
-                                    m_triangleRightRect.width(),
-                                    m_triangleRightRect.height());
+        m_triangleLeftRect.setRect(m_triangleLeftRect.x(), m_triangleLeftRect.y() + m_lineHeight / 2, m_triangleLeftRect.width(), m_triangleLeftRect.height());
+        m_triangleRightRect.setRect(m_triangleRightRect.x(), m_triangleRightRect.y() + m_lineHeight / 2, m_triangleRightRect.width(), m_triangleRightRect.height());
 
-        m_textLeftRect.setRect(m_textLeftRect.x(),
-                               m_textLeftRect.y() + m_lineHeight / 2,
-                               m_textLeftRect.width(),
-                               m_textLeftRect.height());
-        m_textRigtRect.setRect(m_textRigtRect.x(),
-                               m_textRigtRect.y() + m_lineHeight / 2,
-                               m_textRigtRect.width(),
-                               m_textRigtRect.height());
+        m_textLeftRect.setRect(m_textLeftRect.x(), m_textLeftRect.y() + m_lineHeight / 2, m_textLeftRect.width(), m_textLeftRect.height());
+        m_textRigtRect.setRect(m_textRigtRect.x(), m_textRigtRect.y() + m_lineHeight / 2, m_textRigtRect.width(), m_textRigtRect.height());
 
-        m_outerFrameLeftRect.setRect(m_outerFrameLeftRect.x(),
-                                     m_outerFrameLeftRect.y() +
-                                         m_lineHeight / 2,
-                                     m_outerFrameLeftRect.width(),
-                                     m_outerFrameLeftRect.height());
-        m_outerFrameRightRect.setRect(m_outerFrameRightRect.x(),
-                                      m_outerFrameRightRect.y() +
-                                          m_lineHeight / 2,
-                                      m_outerFrameRightRect.width(),
-                                      m_outerFrameRightRect.height());
+        m_outerFrameLeftRect.setRect(m_outerFrameLeftRect.x(), m_outerFrameLeftRect.y() + m_lineHeight / 2, m_outerFrameLeftRect.width(), m_outerFrameLeftRect.height());
+        m_outerFrameRightRect.setRect(m_outerFrameRightRect.x(), m_outerFrameRightRect.y() + m_lineHeight / 2, m_outerFrameRightRect.width(), m_outerFrameRightRect.height());
 
         // 计算用户名长度
         QFontMetricsF fm(this->font());
         int nAllTextLen = fm.width(m_userName);
-        m_leftUserNameRect.setRect(m_outerFrameLeftRect.x(),
-                                   m_outerFrameLeftRect.y() -
-                                       m_lineHeight * 0.9,
-                                   nAllTextLen,
-                                   m_lineHeight);
-        m_rightUserNameRect.setRect(m_outerFrameRightRect.x() +
-                                        m_outerFrameRightRect.width() -
-                                        nAllTextLen,
-                                    m_outerFrameRightRect.y() -
-                                        m_lineHeight * 0.9,
-                                    nAllTextLen,
-                                    m_lineHeight);
+        m_leftUserNameRect.setRect(m_outerFrameLeftRect.x(), m_outerFrameLeftRect.y() - m_lineHeight * 0.9, nAllTextLen, m_lineHeight);
+        m_rightUserNameRect.setRect(m_outerFrameRightRect.x() + m_outerFrameRightRect.width() - nAllTextLen, m_outerFrameRightRect.y() - m_lineHeight * 0.9, nAllTextLen, m_lineHeight);
 
         height += m_lineHeight;
     }
@@ -230,7 +166,7 @@ QSize ChatMsgWnd::getRealStringSize(QString str)
         }
         else
         {
-            //如果一行可以放下
+            // 如果一行可以放下
             nLineNum += 1;
         }
     }
@@ -248,7 +184,7 @@ QSize ChatMsgWnd::getRealStringSize(QString str)
             if (nMaxWidth > m_textWidth)
             {
                 nMaxWidth = m_textWidth;
-                //获取每行的最大存放字符数量，计算含有几行
+                // 获取每行的最大存放字符数量，计算含有几行
                 int num = nAllTextLen / m_textWidth;
                 nLineNum = num;
                 if (nAllTextLen % m_textWidth != 0)
@@ -267,10 +203,7 @@ QSize ChatMsgWnd::getRealStringSize(QString str)
     return QSize(nMaxWidth /* + m_spaceWidth*/, (nLineNum + 2) * m_lineHeight);
 }
 
-void ChatMsgWnd::setText(QString text,
-                          QString time,
-                          QSize allSize,
-                          ChatMsgTypeEnum chatMsgType)
+void ChatMsgWnd::setText(QString text, QString time, QSize allSize, ChatMsgTypeEnum chatMsgType)
 {
     m_msg = text;
     m_chatMsgType = chatMsgType;
@@ -285,15 +218,13 @@ void ChatMsgWnd::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
 
-    if (ChatMsgTypeEnum::ChatMsg_OtherMsgText == m_chatMsgType ||
-        ChatMsg_OwnerMsgText == m_chatMsgType)
+    if (ChatMsgTypeEnum::ChatMsg_OtherMsgText == m_chatMsgType || ChatMsg_OwnerMsgText == m_chatMsgType)
     {
         fontRect(m_msg);
     }
 
     QPainter painter(this);
-    painter.setRenderHints(QPainter::Antialiasing |
-                           QPainter::SmoothPixmapTransform);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     painter.setPen(Qt::NoPen);
     painter.setBrush(QBrush(Qt::gray));
 
@@ -310,12 +241,7 @@ void ChatMsgWnd::paintEvent(QPaintEvent* event)
         painter.drawRoundedRect(m_outerFrameLeftRect, 4, 4);
 
         // 绘制三角形
-        QPointF points[3] = {
-            QPointF(m_triangleLeftRect.x(), 25 + 10),
-            QPointF(m_triangleLeftRect.x() + m_triangleLeftRect.width(),
-                    20 + 10),
-            QPointF(m_triangleLeftRect.x() + m_triangleLeftRect.width(),
-                    30 + 10)};
+        QPointF points[3] = {QPointF(m_triangleLeftRect.x(), 25 + 10), QPointF(m_triangleLeftRect.x() + m_triangleLeftRect.width(), 20 + 10), QPointF(m_triangleLeftRect.x() + m_triangleLeftRect.width(), 30 + 10)};
         painter.drawPolygon(points, 3);
 
         // 绘制文字
@@ -343,20 +269,16 @@ void ChatMsgWnd::paintEvent(QPaintEvent* event)
         m_rightPixmap = MainWnd::getMainWnd()->m_toolWnd->m_headImg;
         m_rightPixmap = m_rightPixmap.scaled(30, 30);
 
-        //绘制玩家头像
+        // 绘制玩家头像
         painter.drawPixmap(m_iconRightRect, m_rightPixmap);
 
-        //绘制外部边框
+        // 绘制外部边框
         QColor color = QColor(158, 234, 106);
         painter.setBrush(color);
         painter.drawRoundedRect(m_outerFrameRightRect, 4, 4);
 
         // 绘制三角形
-        QPointF points[3] = {QPointF(m_triangleRightRect.x() +
-                                         m_triangleRightRect.width(),
-                                     25 + 10),
-                             QPointF(m_triangleRightRect.x(), 20 + 10),
-                             QPointF(m_triangleRightRect.x(), 30 + 10)};
+        QPointF points[3] = {QPointF(m_triangleRightRect.x() + m_triangleRightRect.width(), 25 + 10), QPointF(m_triangleRightRect.x(), 20 + 10), QPointF(m_triangleRightRect.x(), 30 + 10)};
         painter.drawPolygon(points, 3);
 
         // 绘制文字

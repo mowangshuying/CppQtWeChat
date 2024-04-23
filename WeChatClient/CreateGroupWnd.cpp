@@ -128,38 +128,25 @@ void CreateGroupWnd::mouseReleaseEvent(QMouseEvent* event)
     m_bPress = false;
 }
 
-void CreateGroupWnd::addListWnd1Item(const char* headUrl,
-                                      int64_t friendid,
-                                      const char* nickname,
-                                      const char* rolename)
+void CreateGroupWnd::addListWnd1Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename)
 {
-    CreateGroupListItemWithSelBtnWnd* pListwnd1Item =
-        new CreateGroupListItemWithSelBtnWnd(
-            m_listWnd1, headUrl, friendid, nickname, rolename);
+    CreateGroupListItemWithSelBtnWnd* pListwnd1Item = new CreateGroupListItemWithSelBtnWnd(m_listWnd1, headUrl, friendid, nickname, rolename);
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd1);
     pListItem->setSizeHint(QSize(275, 35));
     m_listWnd1->setItemWidget(pListItem, pListwnd1Item);
 
-    connect(pListwnd1Item,
-            SIGNAL(signalSelRBtnClick(QMap<QString, QString>)),
-            this,
-            SLOT(slotSelRBtnClick(QMap<QString, QString>)));
+    connect(pListwnd1Item, SIGNAL(signalSelRBtnClick(QMap<QString, QString>)), this, SLOT(slotSelRBtnClick(QMap<QString, QString>)));
 }
 
-void CreateGroupWnd::addListWnd2Item(const char* headUrl,
-                                      int64_t friendid,
-                                      const char* nickname,
-                                      const char* rolename)
+void CreateGroupWnd::addListWnd2Item(const char* headUrl, int64_t friendid, const char* nickname, const char* rolename)
 {
-    CreateGroupListItemWnd* pListwnd2Item = new CreateGroupListItemWnd(
-        m_listWnd2, headUrl, friendid, nickname, rolename);
+    CreateGroupListItemWnd* pListwnd2Item = new CreateGroupListItemWnd(m_listWnd2, headUrl, friendid, nickname, rolename);
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWnd2);
     pListItem->setSizeHint(QSize(275, 35));
     m_listWnd2->setItemWidget(pListItem, pListwnd2Item);
 }
 
-bool CreateGroupWnd::hasThisWndByRolename(QString rolename,
-                                           QListWidget* listWnd)
+bool CreateGroupWnd::hasThisWndByRolename(QString rolename, QListWidget* listWnd)
 {
     bool bHas = false;
     if (listWnd == nullptr)
@@ -172,9 +159,7 @@ bool CreateGroupWnd::hasThisWndByRolename(QString rolename,
         QListWidgetItem* item = listWnd->item(i);
         if (listWnd == m_listWnd1)
         {
-            CreateGroupListItemWithSelBtnWnd* wnd =
-                dynamic_cast<CreateGroupListItemWithSelBtnWnd*>(
-                    listWnd->itemWidget(item));
+            CreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<CreateGroupListItemWithSelBtnWnd*>(listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 bHas = true;
@@ -184,9 +169,7 @@ bool CreateGroupWnd::hasThisWndByRolename(QString rolename,
 
         if (listWnd == m_listWnd2)
         {
-            CreateGroupListItemWnd* wnd =
-                dynamic_cast<CreateGroupListItemWnd*>(
-                    listWnd->itemWidget(item));
+            CreateGroupListItemWnd* wnd = dynamic_cast<CreateGroupListItemWnd*>(listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 bHas = true;
@@ -197,17 +180,14 @@ bool CreateGroupWnd::hasThisWndByRolename(QString rolename,
     return bHas;
 }
 
-void CreateGroupWnd::delThisWndByRolename(QString rolename,
-                                           QListWidget* listWnd)
+void CreateGroupWnd::delThisWndByRolename(QString rolename, QListWidget* listWnd)
 {
     for (int i = 0; i < listWnd->count(); i++)
     {
         QListWidgetItem* item = listWnd->item(i);
         if (listWnd == m_listWnd1)
         {
-            CreateGroupListItemWithSelBtnWnd* wnd =
-                dynamic_cast<CreateGroupListItemWithSelBtnWnd*>(
-                    listWnd->itemWidget(item));
+            CreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<CreateGroupListItemWithSelBtnWnd*>(listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 listWnd->takeItem(i);
@@ -217,9 +197,7 @@ void CreateGroupWnd::delThisWndByRolename(QString rolename,
 
         if (listWnd == m_listWnd2)
         {
-            CreateGroupListItemWnd* wnd =
-                dynamic_cast<CreateGroupListItemWnd*>(
-                    listWnd->itemWidget(item));
+            CreateGroupListItemWnd* wnd = dynamic_cast<CreateGroupListItemWnd*>(listWnd->itemWidget(item));
             if (wnd->m_roleName->text() == rolename)
             {
                 // listWnd->removeItemWidget(item);
@@ -232,21 +210,18 @@ void CreateGroupWnd::delThisWndByRolename(QString rolename,
 
 void CreateGroupWnd::updateData()
 {
-    //向右侧界面中添加相应数据
+    // 向右侧界面中添加相应数据
     auto itMap = DataManager::getMgr()->m_FriendId2NameMap.begin();
     auto itMapEnd = DataManager::getMgr()->m_FriendId2NameMap.end();
     for (; itMap != itMapEnd; itMap++)
     {
         if (hasThisWndByRolename(itMap->second, m_listWnd1) == false)
         {
-            addListWnd1Item("./img/head2.png",
-                            itMap->first,
-                            QString::number(itMap->first).toStdString().c_str(),
-                            itMap->second.toStdString().c_str());
+            addListWnd1Item("./img/head2.png", itMap->first, QString::number(itMap->first).toStdString().c_str(), itMap->second.toStdString().c_str());
         }
     }
 
-    //右侧界面清除选中的状态
+    // 右侧界面清除选中的状态
     {
         int count = m_listWnd1->count();
         for (int index = 0; index < count; index++)
@@ -257,20 +232,18 @@ void CreateGroupWnd::updateData()
                 continue;
             }
 
-            CreateGroupListItemWithSelBtnWnd* wnd =
-                dynamic_cast<CreateGroupListItemWithSelBtnWnd*>(
-                    m_listWnd1->itemWidget(item));
+            CreateGroupListItemWithSelBtnWnd* wnd = dynamic_cast<CreateGroupListItemWithSelBtnWnd*>(m_listWnd1->itemWidget(item));
             if (wnd == nullptr)
             {
                 continue;
             }
 
-            //清除选中的状态
+            // 清除选中的状态
             wnd->m_selRBtn->setChecked(false);
         }
     }
 
-    //移除左侧界面中的内容
+    // 移除左侧界面中的内容
     {
         QListWidgetItem* item;
         int count = m_listWnd2->count();
@@ -305,10 +278,7 @@ void CreateGroupWnd::slotSelRBtnClick(QMap<QString, QString> map)
     {
         if (hasThisWndByRolename(map["rolename"], m_listWnd2) == false)
         {
-            addListWnd2Item(map["headimg"].toLocal8Bit().data(),
-                            map["friendid"].toInt(),
-                            map["nickname"].toLocal8Bit().data(),
-                            map["rolename"].toLocal8Bit().data());
+            addListWnd2Item(map["headimg"].toLocal8Bit().data(), map["friendid"].toInt(), map["nickname"].toLocal8Bit().data(), map["rolename"].toLocal8Bit().data());
         }
     }
     else
@@ -316,17 +286,17 @@ void CreateGroupWnd::slotSelRBtnClick(QMap<QString, QString> map)
         delThisWndByRolename(map["rolename"], m_listWnd2);
     }
 
-    //获取m_listwnd2中含有的项目数量，修改lable中的内容
+    // 获取m_listwnd2中含有的项目数量，修改lable中的内容
     QString str = QString("已选联系人:%1").arg(m_listWnd2->count());
     m_hasSelLabel->setText(str);
 }
 
 void CreateGroupWnd::slotComfirmBtnClick()
 {
-    //先直接隐藏创建群聊的对话框
+    // 先直接隐藏创建群聊的对话框
     hide();
 
-    //获取当前玩家id，获取群的名称
+    // 获取当前玩家id，获取群的名称
     int ownerid = DataManager::getMgr()->m_userid;
     QString groupname = m_groupNameEdit->text();
     // LogDebug << "ownerid:" << ownerid << "groupname:" << groupname;
@@ -336,7 +306,7 @@ void CreateGroupWnd::slotComfirmBtnClick()
         QMessageBox::information(nullptr, "info", "请输入正确的群组名称");
         return;
     }
-    //获取群的成员信息
+    // 获取群的成员信息
     std::vector<int64_t> groupfriendIdVct;
     for (int i = 0; i < m_listWnd2->count(); i++)
     {
@@ -346,8 +316,7 @@ void CreateGroupWnd::slotComfirmBtnClick()
             continue;
         }
 
-        CreateGroupListItemWnd* wnd = dynamic_cast<CreateGroupListItemWnd*>(
-            m_listWnd2->itemWidget(item));
+        CreateGroupListItemWnd* wnd = dynamic_cast<CreateGroupListItemWnd*>(m_listWnd2->itemWidget(item));
         if (wnd == NULL)
         {
             continue;
@@ -355,7 +324,7 @@ void CreateGroupWnd::slotComfirmBtnClick()
         LogDebug << "groupfrindIdVct add " << wnd->m_friendid;
         groupfriendIdVct.push_back(wnd->m_friendid);
     }
-    //填充数据
+    // 填充数据
     neb::CJsonObject json;
     json.Add("createid", ownerid);
     json.Add("groupname", groupname.toStdString());
@@ -364,21 +333,17 @@ void CreateGroupWnd::slotComfirmBtnClick()
     {
         json["groupfriends"].Add(groupfriendIdVct[i]);
     }
-    //向远端服务器发送请求
-    WSClientMgr::getMgr()->request(
-        "cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
-            LogDebug << "msg:" << msg.ToString().c_str();
-            //现在服务端仅仅返回 createid，groupname,groupid,groupfriends
-            int groupid = -1;
-            if (!msg["data"].Get("groupid", groupid))
-            {
-                LogDebug << "msg[\"data\"] can not find groupid!";
-                return;
-            }
-            //接收到创建群组成功的时候，向列表中嵌入一条数据
-            MainWnd::getMainWnd()->m_commGroupsListWnd->addGroupItem(
-                "./img/groupHead.png",
-                groupname.toStdString().c_str(),
-                groupid);
-        });
+    // 向远端服务器发送请求
+    WSClientMgr::getMgr()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
+        LogDebug << "msg:" << msg.ToString().c_str();
+        // 现在服务端仅仅返回 createid，groupname,groupid,groupfriends
+        int groupid = -1;
+        if (!msg["data"].Get("groupid", groupid))
+        {
+            LogDebug << "msg[\"data\"] can not find groupid!";
+            return;
+        }
+        // 接收到创建群组成功的时候，向列表中嵌入一条数据
+        MainWnd::getMainWnd()->m_commGroupsListWnd->addGroupItem("./img/groupHead.png", groupname.toStdString().c_str(), groupid);
+    });
 }

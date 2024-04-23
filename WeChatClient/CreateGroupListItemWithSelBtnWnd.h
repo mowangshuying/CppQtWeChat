@@ -13,11 +13,7 @@ class CreateGroupListItemWithSelBtnWnd : public QWidget
     Q_OBJECT
   public:
     CreateGroupListItemWithSelBtnWnd(QWidget* p = nullptr);
-    CreateGroupListItemWithSelBtnWnd(QWidget* p,
-                                      const char* headimg,
-                                      int64_t friendid,
-                                      const char* nickname,
-                                      const char* rolename);
+    CreateGroupListItemWithSelBtnWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
   signals:
     void signalSelRBtnClick(QMap<QString, QString> map);
   public slots:

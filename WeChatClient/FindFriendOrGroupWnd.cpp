@@ -10,8 +10,7 @@
 #include <QListWidgetItem>
 #include <QScrollBar>
 
-FindFriendOrGroupWnd::FindFriendOrGroupWnd(QWidget* p /*= nullptr*/)
-    : QWidget(p)
+FindFriendOrGroupWnd::FindFriendOrGroupWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     LogFunc;
     setMinimumSize(600, 400);
@@ -90,10 +89,7 @@ FindFriendOrGroupWnd::FindFriendOrGroupWnd(QWidget* p /*= nullptr*/)
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotMinWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
-    connect(m_searchBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotOnSearchBtnClicked()));
+    connect(m_searchBtn, SIGNAL(clicked()), this, SLOT(slotOnSearchBtnClicked()));
 }
 
 void FindFriendOrGroupWnd::mouseMoveEvent(QMouseEvent* event)
@@ -116,13 +112,10 @@ void FindFriendOrGroupWnd::mouseReleaseEvent(QMouseEvent* event)
     m_bPress = false;
 }
 
-void FindFriendOrGroupWnd::addFriendItem(const char* headUrl,
-                                          const char* name,
-                                          int64_t userid)
+void FindFriendOrGroupWnd::addFriendItem(const char* headUrl, const char* name, int64_t userid)
 {
-    //添加好友
-    FindFriendItemWnd* pMsgItem =
-        new FindFriendItemWnd(m_listWidget, headUrl, name);
+    // 添加好友
+    FindFriendItemWnd* pMsgItem = new FindFriendItemWnd(m_listWidget, headUrl, name);
     pMsgItem->m_friendid = userid;
 
     QListWidgetItem* pListItem = new QListWidgetItem(m_listWidget);
@@ -143,55 +136,54 @@ void FindFriendOrGroupWnd::slotMinWnd()
 
 void FindFriendOrGroupWnd::slotOnSearchBtnClicked()
 {
-    //点击了查找按钮向远端服务器发送查找请求
+    // 点击了查找按钮向远端服务器发送查找请求
     if (m_findPersonChx->isChecked())
     {
-        //如果选择查找好友；
+        // 如果选择查找好友；
         std::string findstr = m_searchEdit->text().toStdString();
         neb::CJsonObject json;
         json.Add("findstr", findstr);
 
-        //清空listwidget内容
+        // 清空listwidget内容
         while (m_listWidget->count() > 0)
         {
             QListWidgetItem* pitem = m_listWidget->takeItem(0);
             delete pitem;
         }
 
-        WSClientMgr::getMgr()->request(
-            "cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
-                int state;
-                if (!msg.Get("state", state))
+        WSClientMgr::getMgr()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
+            int state;
+            if (!msg.Get("state", state))
+            {
+                return;
+            }
+
+            ////解析注册消息数组；
+            auto data = msg["data"];
+            if (!data.IsArray())
+            {
+                return;
+            }
+
+            for (int i = 0; i < data.GetArraySize(); i++)
+            {
+                neb::CJsonObject jsonelem;
+                data.Get(i, jsonelem);
+
+                int64_t userid;
+                if (!jsonelem.Get("userid", userid))
                 {
                     return;
                 }
 
-                ////解析注册消息数组；
-                auto data = msg["data"];
-                if (!data.IsArray())
+                std::string username;
+                if (!jsonelem.Get("username", username))
                 {
                     return;
                 }
 
-                for (int i = 0; i < data.GetArraySize(); i++)
-                {
-                    neb::CJsonObject jsonelem;
-                    data.Get(i, jsonelem);
-
-                    int64_t userid;
-                    if (!jsonelem.Get("userid", userid))
-                    {
-                        return;
-                    }
-
-                    std::string username;
-                    if (!jsonelem.Get("username", username))
-                    {
-                        return;
-                    }
-
-                    addFriendItem("./img/head2.png", username.c_str(), userid);
-                }
-            });
+                addFriendItem("./img/head2.png", username.c_str(), userid);
+            }
+        });
     }
 }

@@ -17,12 +17,7 @@ class CommMsgItemWnd : public QWidget
     Q_OBJECT
   public:
     CommMsgItemWnd(QWidget* p);
-    CommMsgItemWnd(QWidget* p,
-                    const char* name,
-                    const char* msg,
-                    int64_t sesid,
-                    int64_t userid,
-                    bool isGroppMsg);
+    CommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroppMsg);
     ~CommMsgItemWnd();
 
     void requestHeadImg(int id, bool isGroupMsg);

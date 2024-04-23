@@ -24,10 +24,10 @@
 
 class SessionWnd : public QWidget
 {
-    //添加消息映射支持
+    // 添加消息映射支持
     Q_OBJECT
   public:
-    //会话窗口
+    // 会话窗口
     SessionWnd(QWidget* p = nullptr);
     ~SessionWnd();
   public slots:
@@ -61,34 +61,34 @@ class SessionWnd : public QWidget
     // QHBoxLayout* m_hLayout;
     // more按钮按下时候会显示这个窗口
     GroupInfoWnd* m_groupInfoWnd;
-    //窗口布局管理
+    // 窗口布局管理
     QVBoxLayout* m_vLayout;
-    //会话的上放窗口
+    // 会话的上放窗口
     QSessionTopWnd* m_sesTopWnd;
-    //窗口列表信息
+    // 窗口列表信息
 
     QListWidget* m_MsgWndList;
 
-    //消息会话中ToolBar
+    // 消息会话中ToolBar
     SessionToolBar* m_sesToolBar;
-    //需要发送的文字
+    // 需要发送的文字
     SelfTextEdit* m_sendTextEdit;
-    //用于发送文字的按钮
+    // 用于发送文字的按钮
     QPushButton* m_sendTextBtn;
-    //用于控制
+    // 用于控制
     QHBoxLayout* m_hLayout1;
 
-    //会话id
+    // 会话id
     qint64 m_sesId;
-    //会话名字
+    // 会话名字
     QString m_name;
-    //向何人发送
+    // 向何人发送
     int64_t m_recvId;
 
     // 上次显示时间日期的时间
     QDateTime m_lastMsgDateTime;
 
-    //是否是群会话
+    // 是否是群会话
     bool m_isGroupSes = false;
     bool m_isClicked = false;
 };

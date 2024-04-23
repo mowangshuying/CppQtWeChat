@@ -22,18 +22,12 @@ class DealNewFriendsApplyWnd : public QWidget
     void resizeEvent(QResizeEvent* event) override;
 
   public:
-    void addListItem(const char* headurl,
-                     const char* name,
-                     const char* msg,
-                     int state,
-                     int id,
-                     bool isApplyer,
-                     int userid);
+    void addListItem(const char* headurl, const char* name, const char* msg, int state, int id, bool isApplyer, int userid);
 
-    //设置申请列表信息，向远端服务器请求申请列表并添加
+    // 设置申请列表信息，向远端服务器请求申请列表并添加
     void setFriendApplyList();
 
-    //遍历item,判断是否已经向列表中嵌入这个id
+    // 遍历item,判断是否已经向列表中嵌入这个id
     bool hasThisFriendApplyById(int id);
   public slots:
 

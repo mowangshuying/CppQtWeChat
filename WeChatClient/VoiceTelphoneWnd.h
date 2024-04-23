@@ -23,7 +23,7 @@ class VoiceTelphoneWnd : public QWidget
         VTS_call,        // 打电话
         VTS_waitAccept,  // 等待接听
         VTS_accept,      // 接听电话
-        VTS_phoning,     //通话中
+        VTS_phoning,     // 通话中
         VTS_close,       // 挂断电话
     };
 
@@ -48,7 +48,7 @@ class VoiceTelphoneWnd : public QWidget
 
     void requestSendClosePhoneToServer();
 
-    //接收到别人发送的消息
+    // 接收到别人发送的消息
     void cs_msg_sendvoicemsg(neb::CJsonObject& json);
 
     // 设置 recvId 和 sesId;
@@ -86,7 +86,7 @@ class VoiceTelphoneWnd : public QWidget
     QIODevice* m_inputDevice;
 
     QAudioOutput* m_output;
-    QIODevice* m_outputDevice;  //开始播放
+    QIODevice* m_outputDevice;  // 开始播放
     QVector<QByteArray> m_ByteArrayVct;
 
     QSound* m_bells;

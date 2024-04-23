@@ -13,11 +13,7 @@ class CreateGroupListItemWnd : public QWidget
     Q_OBJECT
   public:
     CreateGroupListItemWnd(QWidget* p = nullptr);
-    CreateGroupListItemWnd(QWidget* p,
-                            const char* headimg,
-                            int64_t friendid,
-                            const char* nickname,
-                            const char* rolename);
+    CreateGroupListItemWnd(QWidget* p, const char* headimg, int64_t friendid, const char* nickname, const char* rolename);
 
   public:
     QHBoxLayout* m_hLayout;

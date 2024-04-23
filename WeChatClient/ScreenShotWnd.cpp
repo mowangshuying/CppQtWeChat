@@ -38,7 +38,7 @@ ScreenShotWnd::ScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_begPos = QPoint(-1, -1);
     m_endPos = QPoint(-1, -1);
     m_leftBtnPress = false;
-    //开启鼠标实时追踪，实时的显示鼠标的位置
+    // 开启鼠标实时追踪，实时的显示鼠标的位置
     setMouseTracking(true);
 
     m_screenShotRect = QRect(0, 0, size.width(), size.height());
@@ -51,18 +51,9 @@ ScreenShotWnd::ScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_toolBarWnd = new ScreenShotToolBarWnd(this);
     m_toolBarWnd->hide();
-    connect(m_toolBarWnd->m_copyBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotCopyScreenShot()));
-    connect(m_toolBarWnd->m_saveBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotSaveScreenShot()));
-    connect(m_toolBarWnd->m_closeBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotExitSccreenShot()));
+    connect(m_toolBarWnd->m_copyBtn, SIGNAL(clicked()), this, SLOT(slotCopyScreenShot()));
+    connect(m_toolBarWnd->m_saveBtn, SIGNAL(clicked()), this, SLOT(slotSaveScreenShot()));
+    connect(m_toolBarWnd->m_closeBtn, SIGNAL(clicked()), this, SLOT(slotExitSccreenShot()));
 }
 
 ScreenShotWnd::~ScreenShotWnd()
@@ -76,19 +67,15 @@ ScreenShotWnd::~ScreenShotWnd()
 
 void ScreenShotWnd::slotCopyScreenShot()
 {
-    QGuiApplication::clipboard()->setPixmap(
-        m_fullScreenPixmap.copy(m_screenShotRect));
+    QGuiApplication::clipboard()->setPixmap(m_fullScreenPixmap.copy(m_screenShotRect));
     this->close();
     m_toolBarWnd->close();
 }
 
 void ScreenShotWnd::slotSaveScreenShot()
 {
-    QString defaultFileName =
-        QString("截图%1.png")
-            .arg(QDateTime::currentDateTime().toString("yyyyhhmmsszzz"));
-    QString fileName = QFileDialog::getSaveFileName(
-        this, "截图另存为", defaultFileName, "Image (*.jpg *.png *.bmp)");
+    QString defaultFileName = QString("截图%1.png").arg(QDateTime::currentDateTime().toString("yyyyhhmmsszzz"));
+    QString fileName = QFileDialog::getSaveFileName(this, "截图另存为", defaultFileName, "Image (*.jpg *.png *.bmp)");
     if (fileName.length() > 0)
     {
         m_fullScreenPixmap.copy(m_screenShotRect).save(fileName, "png");
@@ -156,8 +143,7 @@ void ScreenShotWnd::mouseReleaseEvent(QMouseEvent* event)
         m_globalEndPos = event->globalPos();
 
         LogDebug << "end pos x = " << m_endPos.x() << ",y = " << m_endPos.y();
-        LogDebug << "global end pos x = " << m_globalEndPos.x()
-                 << ",y = " << m_globalEndPos.y();
+        LogDebug << "global end pos x = " << m_globalEndPos.x() << ",y = " << m_globalEndPos.y();
 
         QPoint xPoint;
         xPoint.setX(qMin(m_begPos.x(), m_endPos.x()));
@@ -167,8 +153,7 @@ void ScreenShotWnd::mouseReleaseEvent(QMouseEvent* event)
 
         m_screenShotRect.setRect(xPoint.x(), xPoint.y(), nW, nH);
         LogDebug << "mouse release event:"
-                 << "x = " << xPoint.x() << ",y = " << xPoint.y()
-                 << ",w = " << nW << ",h = " << nH;
+                 << "x = " << xPoint.x() << ",y = " << xPoint.y() << ",w = " << nW << ",h = " << nH;
         update();
 
         if (m_screenShotRect.height() > 20 && m_screenShotRect.width() > 20)
@@ -196,23 +181,18 @@ void ScreenShotWnd::paintEvent(QPaintEvent* event)
     }
 
     m_isPainting = true;
-    QPainter painter(this);  //将当前窗体对象设置为画布
+    QPainter painter(this);  // 将当前窗体对象设置为画布
     QPen pen;
-    pen.setColor(qRgba(26, 173, 25, 1.0));  //设置笔色
-    pen.setWidth(2);                        //画笔线条宽度
-    painter.setPen(pen);                    //设置画笔
+    pen.setColor(qRgba(26, 173, 25, 1.0));  // 设置笔色
+    pen.setWidth(2);                        // 画笔线条宽度
+    painter.setPen(pen);                    // 设置画笔
 
-    LogDebug << "screen rect: x = " << m_screenShotRect.x()
-             << ", y = " << m_screenShotRect.y()
-             << ", w = " << m_screenShotRect.width()
-             << ",h = " << m_screenShotRect.height();
-    //防止第一次就重绘 并且宽高大于0时才进行截图操作
+    LogDebug << "screen rect: x = " << m_screenShotRect.x() << ", y = " << m_screenShotRect.y() << ", w = " << m_screenShotRect.width() << ",h = " << m_screenShotRect.height();
+    // 防止第一次就重绘 并且宽高大于0时才进行截图操作
     if (m_screenShotRect.width() > 0 && m_screenShotRect.height() > 0)
     {
         LogDebug << "paint it!";
-        painter.drawPixmap(m_screenShotRect,
-                           m_fullScreenPixmap,
-                           m_screenShotRect);
+        painter.drawPixmap(m_screenShotRect, m_fullScreenPixmap, m_screenShotRect);
         painter.drawRect(m_screenShotRect);
     }
     m_isPainting = false;
@@ -232,13 +212,13 @@ void ScreenShotWnd::keyPressEvent(QKeyEvent* e)
     else if (e->key() == Qt::Key_C && e->modifiers() == Qt::ControlModifier)
     {
         slotCopyScreenShot();
-    }  ///截图另存为(Ctrl+S)
+    }  /// 截图另存为(Ctrl+S)
     else if (e->key() == Qt::Key_S && e->modifiers() == Qt::ControlModifier)
     {
         slotSaveScreenShot();
     }
     else
     {
-        e->ignore();  //忽略
+        e->ignore();  // 忽略
     }
 }

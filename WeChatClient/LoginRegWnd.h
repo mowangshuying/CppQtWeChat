@@ -11,7 +11,7 @@
 #include <QCheckBox>
 #include "MainWnd.h"
 
-//登录和注册窗口
+// 登录和注册窗口
 class LoginRegWnd : public QWidget
 {
     Q_OBJECT
@@ -62,7 +62,7 @@ class LoginRegWnd : public QWidget
 
     MainWnd* m_mainWnd = nullptr;
 
-    //用于控制窗口的移动
+    // 用于控制窗口的移动
     bool m_bPress = false;
     QPoint m_poPress;
 

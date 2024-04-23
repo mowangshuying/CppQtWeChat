@@ -25,10 +25,10 @@
  */
 class MainWnd : public QWidget
 {
-    //添加消息映射支持
+    // 添加消息映射支持
     Q_OBJECT
   private:
-    //会话窗口
+    // 会话窗口
     MainWnd(QWidget* p = nullptr);
 
   public:
@@ -50,15 +50,15 @@ class MainWnd : public QWidget
   public:
     static MainWnd* getMainWnd();
 
-    //接收到别人发送的消息
+    // 接收到别人发送的消息
     void cs_msg_sendmsg(neb::CJsonObject& json);
-    //接收到群组中发送的消息
+    // 接收到群组中发送的消息
     void cs_msg_sendgroupmsg(neb::CJsonObject& msg);
-    //接收到更新会话的消息
+    // 接收到更新会话的消息
     void cs_msg_update_sessionlist(neb::CJsonObject& msg);
-    //接收到更新群聊列表消息
+    // 接收到更新群聊列表消息
     void cs_msg_update_grouplist(neb::CJsonObject& msg);
-    //接收到更新联系人的消息
+    // 接收到更新联系人的消息
     void cs_msg_update_friendlist(neb::CJsonObject& msg);
 
     void requestHeadImg();
@@ -67,7 +67,7 @@ class MainWnd : public QWidget
 
     bool hasSessionWndBySessionId(int sesid);
 
-    //请求群组消息
+    // 请求群组消息
     void requestGroupList();
 
     //
@@ -140,9 +140,9 @@ class MainWnd : public QWidget
 
     static MainWnd* m_mainWnd;
 
-    //用户名
+    // 用户名
     QString m_username;
-    //用户id
+    // 用户id
     int64_t m_userid;
     QNetworkAccessManager* m_networkMgr;
 

@@ -11,7 +11,7 @@ EmoijWnd::EmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     LogFunc;
     setObjectName("QEmoijWnd");
     setFixedSize(335, 225);
-    //设置无边框属性
+    // 设置无边框属性
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
@@ -26,8 +26,8 @@ EmoijWnd::EmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // m_centerWnd->setItem(1, 0, new QTableWidgetItem("Feb"));
     // m_centerWnd->setItem(2, 0, new QTableWidgetItem("Mar"));
 
-    m_centerWnd->verticalHeader()->setVisible(false);    //隐藏列表头
-    m_centerWnd->horizontalHeader()->setVisible(false);  //隐藏行表头
+    m_centerWnd->verticalHeader()->setVisible(false);    // 隐藏列表头
+    m_centerWnd->horizontalHeader()->setVisible(false);  // 隐藏行表头
 
     // 设置无焦点
     m_centerWnd->setFocusPolicy(Qt::NoFocus);
@@ -49,10 +49,9 @@ EmoijWnd::EmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setLayout(m_vLayout);
     setContentsMargins(5, 5, 5, 15);
     setAttribute(Qt::WA_StyledBackground);
-    ///读取文件
+    /// 读取文件
     QFile emoijFile("./emoij/emoij.txt");
-    if (emoijFile.exists() &&
-        emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QString str = emoijFile.readAll();
         m_emoijStrList = str.split('|', QString::SkipEmptyParts);
@@ -60,18 +59,13 @@ EmoijWnd::EmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
         {
             int col = i / 10;
             int row = i % 10;
-            m_centerWnd->setItem(col,
-                                 row,
-                                 new QTableWidgetItem(m_emoijStrList[i]));
+            m_centerWnd->setItem(col, row, new QTableWidgetItem(m_emoijStrList[i]));
         }
-        //关闭文件
+        // 关闭文件
         emoijFile.close();
     }
 
-    connect(m_centerWnd,
-            SIGNAL(cellClicked(int, int)),
-            this,
-            SLOT(slotCellClicked(int, int)));
+    connect(m_centerWnd, SIGNAL(cellClicked(int, int)), this, SLOT(slotCellClicked(int, int)));
 }
 
 bool EmoijWnd::event(QEvent* event)
@@ -94,9 +88,7 @@ void EmoijWnd::paintEvent(QPaintEvent* paintEvent)
     painter.setBrush(QColor(128, 128, 128));
 
     QPainterPath drawPath;
-    drawPath.addRoundedRect(QRect(5, 5, width() - 10, height() - 10 - 15),
-                            5,
-                            5);
+    drawPath.addRoundedRect(QRect(5, 5, width() - 10, height() - 10 - 15), 5, 5);
 
     QPolygon triPolygon;
     triPolygon << QPoint(width() / 2, height());
@@ -110,7 +102,7 @@ void EmoijWnd::paintEvent(QPaintEvent* paintEvent)
 void EmoijWnd::slotCellClicked(int x, int y)
 {
     LogDebug << "slotCellClicked:" << x << "," << y;
-    //点击完成后隐藏窗口
+    // 点击完成后隐藏窗口
     if (x * 10 + y >= 0 && x * 10 + y < m_emoijStrList.size())
     {
         LogDebug << m_emoijStrList[x * 10 + y] << endl;

@@ -147,9 +147,9 @@ CommContactInfoWnd::~CommContactInfoWnd()
 void CommContactInfoWnd::slotContactInfoChange(QMap<QString, QString> map)
 {
     LogDebug << "contactInfoChange map = " << map;
-    //根据map中name字段修改昵称字段
+    // 根据map中name字段修改昵称字段
     m_nickNameLabel->setText(map["name"]);
-    //加载QDataManager中玩家头像数据
+    // 加载QDataManager中玩家头像数据
     int friendid = atoi(map["friendid"].toStdString().c_str());
     QPixmap pixmap = DataManager::getMgr()->m_UserId2HeadImgMap[friendid];
     pixmap = pixmap.scaled(60, 60);
@@ -159,33 +159,33 @@ void CommContactInfoWnd::slotContactInfoChange(QMap<QString, QString> map)
 
 void CommContactInfoWnd::slotSendMsgBtnClick()
 {
-    //点击发送按钮，创建一个会话，并切换过去
+    // 点击发送按钮，创建一个会话，并切换过去
     QMap<QString, QString> map;
     map["name"] = m_nickNameLabel->text();
     emit signalSendMsgBtnClick(map);
 }
 
-//显示空白背景图片
+// 显示空白背景图片
 void CommContactInfoWnd::showBgPng()
 {
     m_nickNameLabel->hide();
     m_markNameLabel->hide();
-    m_rolenameLabel->hide();  //角色名
+    m_rolenameLabel->hide();  // 角色名
     m_channelLabel->hide();
     m_markNameFillLabel->hide();
     m_rolenameFillLabel->hide();
     m_channelFillLabel->hide();
     m_headimgLabel->hide();
-    //发送消息窗口
+    // 发送消息窗口
     m_sendMsgBtn->hide();
 }
 
-//隐藏空白背景图片
+// 隐藏空白背景图片
 void CommContactInfoWnd::hideBgPng()
 {
     m_nickNameLabel->show();
     m_markNameLabel->show();
-    m_rolenameLabel->show();  //角色名
+    m_rolenameLabel->show();  // 角色名
     m_channelLabel->show();
     m_markNameFillLabel->show();
     m_rolenameFillLabel->show();

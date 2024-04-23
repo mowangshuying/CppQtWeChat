@@ -73,10 +73,7 @@ PictureToolWnd::PictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     connect(m_uploadBtn, SIGNAL(clicked()), this, SLOT(slotUploadBtnClicked()));
     connect(m_cancelBtn, SIGNAL(clicked()), this, SLOT(slotCancelBtnClicked()));
-    connect(m_determineBtn,
-            SIGNAL(clicked()),
-            this,
-            SLOT(slotDetermineBtnClicked()));
+    connect(m_determineBtn, SIGNAL(clicked()), this, SLOT(slotDetermineBtnClicked()));
 
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(SlotMinWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
@@ -105,8 +102,7 @@ void PictureToolWnd::mouseReleaseEvent(QMouseEvent* event)
 
 void PictureToolWnd::slotUploadBtnClicked()
 {
-    QString filepath =
-        QFileDialog::getOpenFileName(nullptr, "选择图片", ".", "*.png");
+    QString filepath = QFileDialog::getOpenFileName(nullptr, "选择图片", ".", "*.png");
     if (filepath.trimmed().isEmpty())
     {
         LogErr << "file path is Empty!";
@@ -134,12 +130,9 @@ void PictureToolWnd::slotDetermineBtnClicked()
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
     request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
-    QHttpMultiPart* multiPart =
-        new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
+    QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
     QHttpPart part;
-    part.setHeader(QNetworkRequest::ContentDispositionHeader,
-                   QString("form-data;name=\"headimg\";filename=\"u%1.png\"")
-                       .arg(MainWnd::getMainWnd()->m_userid));
+    part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"u%1.png\"").arg(MainWnd::getMainWnd()->m_userid));
     part.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
     QFile* file = new QFile(m_filePath);
     file->open(QFile::ReadOnly);
@@ -167,18 +160,14 @@ void PictureToolWnd::slotDetermineBtnClicked()
         neb::CJsonObject json2;
         json2.Add("headimg", headimgstr);
         json2.Add("userid", MainWnd::getMainWnd()->m_userid);
-        //告诉远端服务器该玩家的头像数据
-        WSClientMgr::getMgr()->request(
-            "cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
-                LogDebug << msg.ToString().c_str() << endl;
-                QPixmap headImg = MainWnd::getMainWnd()
-                                      ->m_toolWnd->m_pictureToolWnd->m_headImg;
-                MainWnd::getMainWnd()->m_toolWnd->m_headImg = headImg;
-                MainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(
-                    headImg);
-                DataManager::getMgr()->setUserHeadImg(
-                    MainWnd::getMainWnd()->m_userid, headImg);
-            });
+        // 告诉远端服务器该玩家的头像数据
+        WSClientMgr::getMgr()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
+            LogDebug << msg.ToString().c_str() << endl;
+            QPixmap headImg = MainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
+            MainWnd::getMainWnd()->m_toolWnd->m_headImg = headImg;
+            MainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(headImg);
+            DataManager::getMgr()->setUserHeadImg(MainWnd::getMainWnd()->m_userid, headImg);
+        });
     });
 }
 

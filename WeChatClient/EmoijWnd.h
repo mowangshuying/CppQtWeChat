@@ -19,7 +19,7 @@ class EmoijWnd : public QWidget
   signals:
     void signalEmoijClicked(QString m_emoijString);
   public slots:
-    //判断哪个单元格子被点击
+    // 判断哪个单元格子被点击
     void slotCellClicked(int x, int y);
 
   public:

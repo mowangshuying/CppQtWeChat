@@ -1,10 +1,7 @@
 #include "DataManager.h"
 #include "ChatFileOuterWnd.h"
 
-ChatFileOuterWnd::ChatFileOuterWnd(QWidget* p /*= nullptr*/,
-                                     int64_t sendid /* = -1*/,
-                                     int64_t recvid /* = -1*/)
-    : QWidget(p)
+ChatFileOuterWnd::ChatFileOuterWnd(QWidget* p /*= nullptr*/, int64_t sendid /* = -1*/, int64_t recvid /* = -1*/) : QWidget(p)
 {
     LogFunc;
     setObjectName("QChatFileOuterWnd");
@@ -23,7 +20,7 @@ ChatFileOuterWnd::ChatFileOuterWnd(QWidget* p /*= nullptr*/,
     {
         m_hLayout->setSpacing(0);
         m_hLayout->addSpacing(10);
-        //设置玩家的头像
+        // 设置玩家的头像
         m_hLayout->addLayout(m_vLayout);
         m_hLayout->addSpacing(5);
         m_hLayout->addWidget(m_innerWnd);
@@ -124,10 +121,7 @@ void ChatFileOuterWnd::setServerFileName(QString serverFileName)
     m_innerWnd->m_serveFilePath = serverFileName;
 }
 
-void ChatFileOuterWnd::setFileUploadData(QString fileName,
-                                          QString fileSize,
-                                          QString fileDir,
-                                          QString filePath)
+void ChatFileOuterWnd::setFileUploadData(QString fileName, QString fileSize, QString fileDir, QString filePath)
 {
     setFileName(fileName);
     setFileSize(fileSize);
@@ -136,10 +130,7 @@ void ChatFileOuterWnd::setFileUploadData(QString fileName,
     setSendFileShow();
 }
 
-void ChatFileOuterWnd::setFileDownLoadData(QString fileName,
-                                            QString fileSize,
-                                            QString fileState,
-                                            QString serverFileName)
+void ChatFileOuterWnd::setFileDownLoadData(QString fileName, QString fileSize, QString fileState, QString serverFileName)
 {
     setFileName(fileName);
     setFileSize(fileSize);
