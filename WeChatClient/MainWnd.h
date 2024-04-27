@@ -17,7 +17,7 @@
 #include "./json/CJsonObject.hpp"
 #include <QSystemTrayIcon>
 #include <QMenu>
-#include "VoiceTelphoneWnd.h"
+//#include "VoiceTelphoneWnd.h"
 #include "SettingWnd.h"
 
 /*
@@ -154,6 +154,6 @@ class MainWnd : public QWidget
     QAction* m_systemTrayIconExitAction;
     QAction* m_systemTrayIconShowMainWndAction;
 
-    VoiceTelphoneWnd* m_voiceTelphoneWnd;
+   // VoiceTelphoneWnd* m_voiceTelphoneWnd;
     SettingWnd* m_settingWnd;
 };

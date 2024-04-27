@@ -69,8 +69,9 @@ VoiceTelphoneWnd::VoiceTelphoneWnd(QWidget* p) : QWidget(p)
     m_outputDevice = m_output->start();
     m_inputDevice = m_input->start();
 
-    m_bells = new QSound("./music/callPhone.wav");
-    m_bells->setLoops(10);
+    m_bells = new QSoundEffect(this);
+    m_bells->setSource(QUrl::fromLocalFile("./music/callPhone.wav"));
+    m_bells->setLoopCount(10);
 
     // 注册信号和槽
     regSignalSlot();

@@ -128,7 +128,7 @@ QSize ChatMsgWnd::fontRect(QString str)
 
         // 计算用户名长度
         QFontMetricsF fm(this->font());
-        int nAllTextLen = fm.width(m_userName);
+        int nAllTextLen = fm.horizontalAdvance(m_userName);
         m_leftUserNameRect.setRect(m_outerFrameLeftRect.x(), m_outerFrameLeftRect.y() - m_lineHeight * 0.9, nAllTextLen, m_lineHeight);
         m_rightUserNameRect.setRect(m_outerFrameRightRect.x() + m_outerFrameRightRect.width() - nAllTextLen, m_outerFrameRightRect.y() - m_lineHeight * 0.9, nAllTextLen, m_lineHeight);
 
@@ -141,14 +141,14 @@ QSize ChatMsgWnd::fontRect(QString str)
 QSize ChatMsgWnd::getRealStringSize(QString str)
 {
     QFontMetricsF fm(this->font());
-    int fontw = fm.width(" ");
+    int fontw = fm.horizontalAdvance(" ");
     m_lineHeight = 20;
     int nCount = str.count("\n");
     int nLineNum = 0;
     int nMaxWidth = 0;
 
     // 获取消息总宽度
-    int nAllTextLen = fm.width(str) + 1;
+    int nAllTextLen = fm.horizontalAdvance(str) + 1;
     // 如果消息中没有换行符：
     if (nCount == 0)
     {
@@ -175,7 +175,7 @@ QSize ChatMsgWnd::getRealStringSize(QString str)
         for (int i = 0; i <= nCount; i++)
         {
             QString tempSplitStr = str.split("\n").at(i);
-            int nAllTextLen = fm.width(tempSplitStr) + 1;
+            int nAllTextLen = fm.horizontalAdvance(tempSplitStr) + 1;
             if (nAllTextLen > nMaxWidth)
             {
                 nMaxWidth = nAllTextLen;

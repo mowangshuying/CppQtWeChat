@@ -7,7 +7,6 @@
 #include <QTextStream>
 #include <QMessageLogContext>
 #include <qlogging.h>
-#include <QtMsgHandler>
 
 // 日志格式统一规范
 // [时间] [等级] [文件名] [函数名] [行数] [内容]

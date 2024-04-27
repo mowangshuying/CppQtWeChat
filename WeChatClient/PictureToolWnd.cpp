@@ -148,7 +148,7 @@ void PictureToolWnd::slotDetermineBtnClicked()
         reply->deleteLater();
 
         QString str = QString(all);
-        LogDebug << str << endl;
+        LogDebug << str;
 
         neb::CJsonObject json1(str.toStdString());
         std::string headimgstr = "";
@@ -162,7 +162,7 @@ void PictureToolWnd::slotDetermineBtnClicked()
         json2.Add("userid", MainWnd::getMainWnd()->m_userid);
         // 告诉远端服务器该玩家的头像数据
         WSClientMgr::getMgr()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
-            LogDebug << msg.ToString().c_str() << endl;
+            LogDebug << msg.ToString().c_str();
             QPixmap headImg = MainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
             MainWnd::getMainWnd()->m_toolWnd->m_headImg = headImg;
             MainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(headImg);

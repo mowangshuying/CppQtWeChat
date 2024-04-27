@@ -1,11 +1,10 @@
 #include "SessionToolBar.h"
 #include <QAppliCation>
 #include <QPixMap>
-#include <QDesktopWidget>
 #include "ScreenShotWnd.h"
 #include <QDebug>
 #include <QScreen>
-#include "VoiceTelphoneWnd.h"
+//#include "VoiceTelphoneWnd.h"
 
 SessionToolBar::SessionToolBar(QWidget* p /*= nullptr*/) : QWidget(p)
 {
@@ -69,27 +68,27 @@ void SessionToolBar::slotEmojiBtnClick()
 // 参考资料：https://www.cnblogs.com/syh6324/p/9502307.html
 void SessionToolBar::slotScreenshotBtnClick()
 {
-    LogDebug << "desktop winId:" << QApplication::desktop()->winId();
-    LogDebug << "desktop sceen count:" << QApplication::desktop()->screenCount();
-    LogDebug << "desktop width:" << QApplication::desktop()->width() << " height:" << QApplication::desktop()->height();
+   // LogDebug << "desktop winId:" << QApplication::desktop()->winId();
+  //  LogDebug << "desktop sceen count:" << QApplication::desktop()->screenCount();
+  //  LogDebug << "desktop width:" << QApplication::desktop()->width() << " height:" << QApplication::desktop()->height();
 
     // 获取当前鼠标位置
-    QPoint mousePoint = QCursor().pos();
-    LogDebug << __FUNCTION__ << "mouse point x:" << mousePoint.x() << " y:" << mousePoint.y();
-    int nSceenCount = QApplication::desktop()->screenCount();
-    int nSceenWidth = QApplication::desktop()->width();
-    int nEverySceenWidth = nSceenWidth / nSceenCount;
-    int nCurScreenIndex = -1;
-    for (int i = 0; i < nSceenCount; i++)
+   // QPoint mousePoint = QCursor().pos();
+  //  LogDebug << __FUNCTION__ << "mouse point x:" << mousePoint.x() << " y:" << mousePoint.y();
+   /// int nSceenCount = QApplication::desktop()->screenCount();
+  //  int nSceenWidth = QApplication::desktop()->width();
+  //  int nEverySceenWidth = nSceenWidth / nSceenCount;
+   // int nCurScreenIndex = -1;
+   /*/ for (int i = 0; i < nSceenCount; i++)
     {
         if (mousePoint.x() >= nEverySceenWidth * i && mousePoint.x() <= nEverySceenWidth * (i + 1))
         {
             nCurScreenIndex = i;
             break;
         }
-    }
+    }*/
 
-    LogDebug << __FUNCTION__ << " nCurScreenIndex:" << nCurScreenIndex;
+  //  LogDebug << __FUNCTION__ << " nCurScreenIndex:" << nCurScreenIndex;
 
     // 如果原来含有截图窗口，释放原来的截图窗口内存，重新分配内存
     if (m_screenShotWnd != nullptr)

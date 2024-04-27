@@ -55,7 +55,7 @@
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
-    <QtInstall>5.12.0_msvc2017_64</QtInstall>
+    <QtInstall>6.5.1_msvc2019_64</QtInstall>
     <QtModules>core;network;gui;multimedia;widgets;websockets;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -217,7 +217,6 @@
     <ClCompile Include="SelfSwitchButton.cpp" />
     <ClCompile Include="ToolWnd.cpp" />
     <ClCompile Include="UserInfoWnd.cpp" />
-    <ClCompile Include="VoiceTelphoneWnd.cpp" />
     <ClCompile Include="WSClientMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -273,7 +272,6 @@
     <ClInclude Include="SelfTextEdit.h" />
     <QtMoc Include="SettingWnd.h" />
     <QtMoc Include="StyleSheetMgr.h" />
-    <QtMoc Include="VoiceTelphoneWnd.h" />
     <QtMoc Include="ScreenShotToolBarWnd.h" />
     <QtMoc Include="SelectMoreWnd.h" />
     <QtMoc Include="EditLabel.h" />

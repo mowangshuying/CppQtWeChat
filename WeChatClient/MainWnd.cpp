@@ -134,8 +134,8 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setMinimumSize(880, 660);
     setMouseTracking(true);
 
-    m_voiceTelphoneWnd = new VoiceTelphoneWnd();
-    m_voiceTelphoneWnd->hide();
+  //  m_voiceTelphoneWnd = new VoiceTelphoneWnd();
+  //  m_voiceTelphoneWnd->hide();
 
     m_settingWnd = new SettingWnd();
     m_settingWnd->hide();
@@ -223,7 +223,7 @@ void MainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
         ses->dealMsgTime();
 
         // 向会话中嵌入一条数据；
-        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+        QString time = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
         ChatMsgWnd* msgWnd = new ChatMsgWnd(ses->m_MsgWndList, sendid, MainWnd::getMainWnd()->m_username, recvid);
         QListWidgetItem* msgWndItem = new QListWidgetItem(ses->m_MsgWndList);
         msgWnd->setFixedWidth(ses->width());
@@ -347,7 +347,7 @@ void MainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
         if (msgtype == 0)
         {
             // 向会话中嵌入一条数据；
-            QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+            QString time = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
             ChatMsgWnd* msgWnd = new ChatMsgWnd(ses->m_MsgWndList, sendid, sendUserName.c_str(), recvid);
             QListWidgetItem* msgItem = new QListWidgetItem(ses->m_MsgWndList);
             msgWnd->setFixedWidth(640);

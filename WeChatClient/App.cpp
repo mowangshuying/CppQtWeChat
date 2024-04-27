@@ -1,6 +1,5 @@
 #include <QApplication>
 #include <QMessageBox>
-#include <QTextCodec>
 
 #include "LoginRegWnd.h"
 #include "WSClientMgr.h"

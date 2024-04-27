@@ -10,7 +10,7 @@
 #include <QAudioOutput>
 #include <QIODevice>
 #include "json/CJsonObject.hpp"
-#include <QSound>
+#include <QSoundEffect>
 #include <QAudioFormat>
 
 class VoiceTelphoneWnd : public QWidget
@@ -89,7 +89,7 @@ class VoiceTelphoneWnd : public QWidget
     QIODevice* m_outputDevice;  // 开始播放
     QVector<QByteArray> m_ByteArrayVct;
 
-    QSound* m_bells;
+    QSoundEffect* m_bells;
 
     int64_t m_recvId = -1;
     int64_t m_sesId = -1;

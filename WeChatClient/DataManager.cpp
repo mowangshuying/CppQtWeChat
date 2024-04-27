@@ -10,7 +10,7 @@ DataManager::DataManager()
     if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QString str = emoijFile.readAll();
-        m_emoijStrList = str.split('|', QString::SkipEmptyParts);
+        m_emoijStrList = str.split('|', Qt::SkipEmptyParts);
         emoijFile.close();
     }
 }

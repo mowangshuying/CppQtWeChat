@@ -1,5 +1,5 @@
 #include "SelfSwitchButton.h"
-
+#include <QPainterPath>
 #include <QPainter>
 
 SelfSwitchButton::SelfSwitchButton(QWidget *parent) : QWidget(parent)

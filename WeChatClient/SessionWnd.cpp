@@ -224,16 +224,16 @@ void SessionWnd::slotMoreBtnClick()
 
 void SessionWnd::slotVoiceTelPhoneBtnClick()
 {
-    MainWnd* mainWnd = MainWnd::getMainWnd();
-    VoiceTelphoneWnd* telphoneWnd = mainWnd->m_voiceTelphoneWnd;
-    telphoneWnd->setRecvIdAndSesId(m_recvId, m_sesId);
-    if (telphoneWnd->windowState() == Qt::WindowMinimized)
-    {
-        telphoneWnd->showNormal();
-    }
-    telphoneWnd->show();
-    telphoneWnd->activateWindow();
-    telphoneWnd->callPhone();
+    //MainWnd* mainWnd = MainWnd::getMainWnd();
+    ////VoiceTelphoneWnd* telphoneWnd = mainWnd->m_voiceTelphoneWnd;
+    //telphoneWnd->setRecvIdAndSesId(m_recvId, m_sesId);
+    //if (telphoneWnd->windowState() == Qt::WindowMinimized)
+    //{
+    //    telphoneWnd->showNormal();
+    //}
+    //telphoneWnd->show();
+    //telphoneWnd->activateWindow();
+    //telphoneWnd->callPhone();
 }
 
 void SessionWnd::slotUpdateGroupName(QString groupName)
@@ -395,7 +395,7 @@ void SessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
     WSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
         dealMsgTime();
         // 向远端发送消息
-        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+        QString time = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
         ChatMsgWnd* msgWnd = new ChatMsgWnd(m_MsgWndList, MainWnd::getMainWnd()->m_userid, MainWnd::getMainWnd()->m_username, m_recvId);
         QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
         msgWnd->setFixedWidth(this->width());
@@ -418,7 +418,7 @@ void SessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
 
         LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
         // 向远端发送消息
-        QString time = QString::number(QDateTime::currentDateTime().toTime_t());
+        QString time = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
         ChatMsgWnd* msgWnd = new ChatMsgWnd(m_MsgWndList, MainWnd::getMainWnd()->m_userid, MainWnd::getMainWnd()->m_username, m_recvId);
         QListWidgetItem* msgItem = new QListWidgetItem(m_MsgWndList);
         msgWnd->setFixedWidth(this->width());

@@ -5,6 +5,7 @@
 #include <QHeaderView>
 #include <QFile>
 #include <QDebug>
+#include <QPainterPath>
 
 EmoijWnd::EmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
@@ -54,7 +55,7 @@ EmoijWnd::EmoijWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     if (emoijFile.exists() && emoijFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QString str = emoijFile.readAll();
-        m_emoijStrList = str.split('|', QString::SkipEmptyParts);
+        m_emoijStrList = str.split('|', Qt::SkipEmptyParts);
         for (int i = 0; i < m_emoijStrList.length(); i++)
         {
             int col = i / 10;
@@ -105,7 +106,7 @@ void EmoijWnd::slotCellClicked(int x, int y)
     // 点击完成后隐藏窗口
     if (x * 10 + y >= 0 && x * 10 + y < m_emoijStrList.size())
     {
-        LogDebug << m_emoijStrList[x * 10 + y] << endl;
+        LogDebug << m_emoijStrList[x * 10 + y] << "\n";
         emit signalEmoijClicked(m_emoijStrList[x * 10 + y]);
     }
     hide();

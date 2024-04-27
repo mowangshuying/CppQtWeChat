@@ -152,9 +152,6 @@
     <ClCompile Include="ScreenShotToolBarWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VoiceTelphoneWnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -284,9 +281,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ScreenShotToolBarWnd.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="VoiceTelphoneWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="StyleSheetMgr.h">
