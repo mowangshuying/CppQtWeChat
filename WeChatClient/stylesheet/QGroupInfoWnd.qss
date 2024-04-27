@@ -129,5 +129,6 @@ QScrollArea {
     background-color: rgb(243, 243, 243);
     border-radius: 4px;
     border: 1px solid transparent;
-    border-left: 1px solid rgba(130, 135, 144);
+    border-left: 1px solid rgb(130, 135, 144);
+    border-top: 1px solid rgb(130, 135, 144);
 }
