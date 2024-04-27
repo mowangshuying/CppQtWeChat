@@ -1,37 +1,35 @@
 #QFindFriendOrGroupWnd {
-    background-color: rgb(238,244,249);
+    background-color: rgb(238, 244, 249);
     border-radius: 4px;
 }
 
 #QFindFriendOrGroupWnd:!active {
-    background-color: rgb(243,243,243); 
+    background-color: rgb(243, 243, 243);
 }
 
 #QFindFriendOrGroupWnd:active {
-    background-color: rgb(238,244,249);
+    background-color: rgb(238, 244, 249);
 }
-
 
 QPushButton {
     color: black;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.073);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.183);
-    border-radius: 5px;
-    font: 14px 'Segoe UI', 'Microsoft YaHei';
-    padding: 5px 12px 6px 12px;
-    outline: none;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 4px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    background-color: rgb(251, 251, 251);
+    font-size: 15px;
 }
 
 QPushButton:hover {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.073);
+    border: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(204, 204, 204);
+    background-color: rgb(246, 246, 246);
 }
 
-QPushButton:disabled {
-    color: rgba(0, 0, 0, 0.36);
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+QPushButton:pressed {
+    border: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(229, 229, 229);
+    background-color: rgb(245, 245, 245);
 }
 
 QCheckBox {
@@ -139,8 +137,8 @@ QLineEdit:disabled {
 QListView {
     alternate-background-color: blue;
     /*设置背景颜色*/
-   /* background: rgba(255, 255, 255, 0.7); */
-   background: rgb(238,244,249);
+    /* background: rgba(255, 255, 255, 0.7); */
+    background: rgb(238, 244, 249);
     selection-color: white;
     border: none;
     border-radius: 5px;
@@ -149,7 +147,6 @@ QListView {
     font: 13px 'Segoe UI', 'Microsoft YaHei';
     selection-background-color: transparent;
 }
-
 
 QListView::item {
     padding: 4px;
@@ -167,11 +164,11 @@ QListView::item:alternate {
 
 QListView::item:selected {
     background: rgba(255, 255, 255, 1);
-   /* border: 1px solid rgb(149,236,105); */
+    /* border: 1px solid rgb(149,236,105); */
 }
 
 QListView::item:selected:!active {
-   /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ABAFE5, stop: 1 #8588B2);*/
+    /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ABAFE5, stop: 1 #8588B2);*/
 }
 
 QListView::item:selected:active {
@@ -182,4 +179,3 @@ QListView::item:hover {
     /* background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FAFBFE, stop: 1 #DCDEF1);*/
     /* background: rgba(255, 255, 255, 0.3); */
 }
-

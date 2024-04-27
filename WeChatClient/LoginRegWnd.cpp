@@ -12,17 +12,15 @@
 
 #include "./json/CJsonObject.hpp"
 #include "StyleSheetMgr.h"
+#include <QStyleOption>
+#include <QPainter>
 
 LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     LogFunc;
     m_centerWnd = new QWidget(this);
-    m_centerWnd->setObjectName("QLoginAndRegWnd");
-    QStyleSheetObject object;
-    object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
-    object.m_widget = m_centerWnd;
-    StyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
-
+    m_centerWnd->setObjectName("centerWnd");
+    // 设置固定大小
     setFixedSize(430, 330);
     m_centerWnd->setFixedSize(430, 330);
     setContentsMargins(10, 10, 10, 10);
@@ -30,9 +28,6 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout = new QVBoxLayout(m_centerWnd);
     m_vLayout->setSpacing(0);
     m_centerWnd->setLayout(m_vLayout);
-
-    setWindowFlags(Qt::FramelessWindowHint);
-    setAttribute(Qt::WA_TranslucentBackground);
 
     m_topWnd = new QWidget(m_centerWnd);
     m_topWnd->setContentsMargins(0, 0, 0, 0);
@@ -49,17 +44,21 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_closeBtn = new QPushButton(m_centerWnd);
     m_settingBtn = new QPushButton(m_centerWnd);
 
-    m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20, 20));
     m_settingBtn->setIconSize(QSize(20, 20));
+    m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20, 20));
     m_settingBtn->setFixedSize(20, 20);
 
+     m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png").scaled(20, 20));
-    m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setFixedSize(20, 20);
 
-    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png").scaled(20, 20));
     m_closeBtn->setIconSize(QSize(20, 20));
+    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png").scaled(20, 20));
     m_closeBtn->setFixedSize(20, 20);
+
+    m_settingBtn->setObjectName("settingBtn");
+    m_closeBtn->setObjectName("closeBtn");
+    m_minBtn->setObjectName("minBtn");
 
     m_hTopLayout->addWidget(m_titleLabel);
     m_hTopLayout->addWidget(m_settingBtn);
@@ -95,14 +94,14 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_regOrLoginBtn->setText("登录");
 
     m_hBottomLayout2 = new QHBoxLayout(m_centerWnd);
-    m_regOrLoginChx = new QCheckBox(m_centerWnd);
-    m_remmerPwdChx = new QCheckBox(m_centerWnd);
+    m_regLoginCB = new QCheckBox(m_centerWnd);
+    m_remmerPwdCB = new QCheckBox(m_centerWnd);
 
-    m_regOrLoginChx->setText("注册");
-    m_remmerPwdChx->setText("找回密码");
+    m_regLoginCB->setText("注册");
+    m_remmerPwdCB->setText("记住密码");
 
-    m_hBottomLayout2->addWidget(m_regOrLoginChx);
-    m_hBottomLayout2->addWidget(m_remmerPwdChx);
+    m_hBottomLayout2->addWidget(m_regLoginCB);
+    m_hBottomLayout2->addWidget(m_remmerPwdCB);
 
     m_vBottomLayout->addWidget(m_accuntEdit);
     m_vBottomLayout->addWidget(m_pwdEdit);
@@ -116,15 +115,37 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vLayout->addWidget(m_bottomWnd);
 
     regSignalSlot();
+    setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    // 注册样式表
+    QStyleSheetObject object;
+    object.m_qssFileName = "./stylesheet/LoginRegWnd.qss";
+    object.m_widget = m_centerWnd;
+    StyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
+}
+
+ LoginRegWnd::~LoginRegWnd()
+{
+    if (m_mainWnd != nullptr)
+        delete m_mainWnd;
 }
 
 void LoginRegWnd::regSignalSlot()
 {
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotMinWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
-    connect(m_regOrLoginChx, SIGNAL(clicked(bool)), this, SLOT(slotRegOrLoginSel(bool)));
-    connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(slotRegOrLoginBtn()));
-    connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(slotRegOrLoginBtn()));
+    connect(m_regLoginCB, SIGNAL(clicked(bool)), this, SLOT(slotRegLoginSel(bool)));
+    connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(slotRegLoginBtnClicked()));
+    connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(slotRegLoginBtnClicked()));
+}
+
+void LoginRegWnd::paintEvent(QPaintEvent* event)
+{
+    QStyleOption opt;
+    opt.initFrom(this);
+    QPainter painter(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &painter, this);
 }
 
 void LoginRegWnd::mouseMoveEvent(QMouseEvent* event)
@@ -157,7 +178,7 @@ void LoginRegWnd::slotMinWnd()
     showMinimized();
 }
 
-void LoginRegWnd::slotRegOrLoginSel(bool isSel /*= false*/)
+void LoginRegWnd::slotRegLoginSel(bool isSel /*= false*/)
 {
     if (isSel)
     {
@@ -171,11 +192,11 @@ void LoginRegWnd::slotRegOrLoginSel(bool isSel /*= false*/)
     }
 }
 
-void LoginRegWnd::slotRegOrLoginBtn()
+void LoginRegWnd::slotRegLoginBtnClicked()
 {
+    // 提供注册功能，点击注册按钮向远端服务发送消息
     if (m_bReg)
     {
-        // 提供注册功能，点击注册按钮向远端服务发送消息
         neb::CJsonObject json;
 
         std::string username = m_accuntEdit->text().toStdString().c_str();  // 用户名
@@ -191,43 +212,46 @@ void LoginRegWnd::slotRegOrLoginBtn()
 
         WSClientMgr::getMgr()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
             int state = 0;
+
             if (!msg.Get("state", state))
+                return;
+
+            std::string infoStr = "注册失败:" + msg["data"].ToString();
+            if (state != 0)
+            {
+                QMessageBox::information(nullptr, "info", infoStr.c_str());
+                return;
+            }
+
+            int userId = -1;
+            if (!msg["data"].Get("userId", userId))
             {
                 return;
             }
 
-            std::string infoStr = "注册失败:" + msg["data"].ToString();
-            if (state == 0)
-            {
-                infoStr = "注册成功";
-
-                int userId = -1;
-                if (!msg["data"].Get("userId", userId))
-                {
-                    return;
-                }
-
-                QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
-                QNetworkRequest request;
-                request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
-                QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
-                QHttpPart part;
-                part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));
-                part.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
-                QFile* file = new QFile("./img/default.png");
-                file->open(QFile::ReadOnly);
-                part.setBodyDevice(file);
-                file->setParent(multiPart);
-                multiPart->append(part);
-                QNetworkReply* reply = pManager->post(request, multiPart);
-            }
+            // 上传默认的头像.
+            QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
+            QNetworkRequest request;
+            request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
+            QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
+            QHttpPart part;
+            part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));
+            part.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
+            QFile* file = new QFile("./img/default.png");
+            file->open(QFile::ReadOnly);
+            part.setBodyDevice(file);
+            file->setParent(multiPart);
+            multiPart->append(part);
+            QNetworkReply* reply = pManager->post(request, multiPart);
 
             // 注册成功后，弹出窗口
+            infoStr = "注册成功";
             QMessageBox::information(nullptr, "info", infoStr.c_str());
         });
         return;
     }
 
+    // 不是注册就是登录
     if (!m_bReg)
     {
         std::string username = m_accuntEdit->text().toStdString().c_str();

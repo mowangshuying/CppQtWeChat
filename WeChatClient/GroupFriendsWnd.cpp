@@ -10,6 +10,7 @@ GroupFriendsWnd::GroupFriendsWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setLayout(m_vLayout);
 
     m_listWnd = new QListWidget();
+    m_listWnd->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_vLayout->addWidget(m_listWnd);
 
     setContentsMargins(0, 0, 0, 0);

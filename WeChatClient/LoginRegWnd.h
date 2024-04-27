@@ -17,14 +17,12 @@ class LoginRegWnd : public QWidget
     Q_OBJECT
   public:
     LoginRegWnd(QWidget* p = nullptr);
-    ~LoginRegWnd()
-    {
-        if (m_mainWnd != nullptr)
-            delete m_mainWnd;
-    }
+    ~LoginRegWnd();
 
     void regSignalSlot();
 
+    // to enable qss
+    void paintEvent(QPaintEvent* event);
   public slots:
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
@@ -32,8 +30,8 @@ class LoginRegWnd : public QWidget
 
     void slotCloseWnd();
     void slotMinWnd();
-    void slotRegOrLoginSel(bool isSel = false);
-    void slotRegOrLoginBtn();
+    void slotRegLoginSel(bool isSel = false);
+    void slotRegLoginBtnClicked();
 
   public:
     QWidget* m_centerWnd;
@@ -57,8 +55,8 @@ class LoginRegWnd : public QWidget
     QPushButton* m_regOrLoginBtn;
 
     QHBoxLayout* m_hBottomLayout2;
-    QCheckBox* m_regOrLoginChx;
-    QCheckBox* m_remmerPwdChx;
+    QCheckBox* m_regLoginCB;
+    QCheckBox* m_remmerPwdCB;
 
     MainWnd* m_mainWnd = nullptr;
 

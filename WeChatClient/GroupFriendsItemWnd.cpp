@@ -7,18 +7,17 @@
 
 GroupFriendsItemWnd::GroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    LogFunc;
     setObjectName("QGroupFriendsItemWnd");
-    m_hLayout = new QHBoxLayout();
+    m_hLayout = new QHBoxLayout;
     setLayout(m_hLayout);
-    m_hLayout->setContentsMargins(0, 0, 0, 0);
-    setContentsMargins(5, 5, 5, 5);
+    m_hLayout->setContentsMargins(5, 5, 5, 5);
+ //   setContentsMargins(5, 5, 5, 5);
 
-    m_headImg = new QLabel();
+    m_headImg = new QLabel;
     m_headImg->setFixedSize(30, 30);
-    m_hLayout->addWidget(m_headImg);
+    m_hLayout->addWidget(m_headImg, Qt::AlignHCenter);
 
-    m_name = new QLabel();
+    m_name = new QLabel;
     m_name->setText("群友昵称");
     m_hLayout->addWidget(m_name);
     m_friendId = -1;
@@ -40,14 +39,13 @@ void GroupFriendsItemWnd::requestHeadImg()
 
 void GroupFriendsItemWnd::slotReplyFinished(QNetworkReply* reply)
 {
-    if (reply->error() == QNetworkReply::NoError)
-    {
-        QPixmap pixmap;
-        pixmap.loadFromData(reply->readAll());
-        pixmap = pixmap.scaled(30, 30);
-        m_headImg->setPixmap(pixmap);
-        DataManager::getMgr()->m_UserId2HeadImgMap[m_friendId] = pixmap;
+    if (reply->error() != QNetworkReply::NoError)
+        return;
 
-        reply->deleteLater();
-    }
+    QPixmap pixmap;
+    pixmap.loadFromData(reply->readAll());
+    pixmap = pixmap.scaled(30, 30);
+    m_headImg->setPixmap(pixmap);
+    DataManager::getMgr()->m_UserId2HeadImgMap[m_friendId] = pixmap;
+    reply->deleteLater();
 }
