@@ -1,0 +1,95 @@
+#centerWnd {
+    background-color: rgb(249, 249, 249);
+    border-radius: 4px;
+}
+
+QPushButton {
+    color: black;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 4px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    background-color: rgb(251, 251, 251);
+    font-size: 15px;
+}
+
+QPushButton:hover {
+    border: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(204, 204, 204);
+    background-color: rgb(246, 246, 246);
+}
+
+QPushButton:pressed {
+    border: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(229, 229, 229);
+    background-color: rgb(245, 245, 245);
+}
+
+#settingBtn,
+#closeBtn,
+#minBtn {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+
+/*lineedit qss*/
+
+QLineEdit {
+    border-radius: 4px;
+    border: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(134, 134, 134);
+    background-color: rgb(251, 251, 251);
+}
+
+QLineEdit:hover {
+    background-color: rgb(246, 246, 246);
+}
+
+QLineEdit:focus {
+    border-bottom: 2px solid rgb(0, 90, 158);
+}
+
+
+/*checkbox qss*/
+
+QCheckBox {
+    min-height: 30px;
+    max-height: 30px;
+}
+
+QCheckBox::indicator {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 1px solid rgb(133, 133, 133);
+    background-color: rgb(237, 237, 237);
+    margin-right: 5px;
+}
+
+QCheckBox::indicator:hover {
+    background-color: rgb(229, 229, 229);
+}
+
+QCheckBox::indicator:pressed {
+    background-color: rgb(220, 220, 220);
+}
+
+QCheckBox::indicator:checked {
+    background-color: rgb(0, 90, 158);
+    border: 1px solid rgb(0, 90, 158);
+    color: rgb(255, 255, 255);
+    image: url("./img/CheckBox-White.png");
+}
+
+QCheckBox::indicator:checked:pressed {
+    image: url("./img/CheckBoxPressed-White.png");
+}
+
+QCheckBox:disabled {
+    color: rgb(0, 0, 0);
+}
+
+QCheckBox::indicator:disabled {
+    border: 1px solid rgb(187, 187, 187);
+    background-color: rgb(0, 0, 0);
+}

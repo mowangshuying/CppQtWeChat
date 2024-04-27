@@ -1,4 +1,4 @@
-#include "SelectAddGroupOrAddFriendWnd.h"
+#include "SelectGroupFriendWnd.h"
 #include "FindFriendOrGroupWnd.h"
 #include "SelfSplit.h"
 #include <QDebug>
@@ -6,10 +6,16 @@
 
 #include "StyleSheetMgr.h"
 
-SelectAddGroupOrAddFriendWnd::SelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget(p)
+SelectGroupFriendWnd::SelectGroupFriendWnd(QWidget* p) : QWidget(p)
 {
     LogFunc;
-    m_centerWnd = new QWidget(this);
+    m_vMainLayout = new QVBoxLayout;
+    setLayout(m_vMainLayout);
+    m_vMainLayout->setContentsMargins(5, 5, 5, 5);
+
+
+    m_centerWnd = new QWidget;
+    m_vMainLayout->addWidget(m_centerWnd);
 
     m_centerWnd->setObjectName("QSelectAddGroupOrAddFriendWnd");
     QStyleSheetObject object;
@@ -20,25 +26,19 @@ SelectAddGroupOrAddFriendWnd::SelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget
     setAttribute(Qt::WA_TranslucentBackground);
     setWindowFlags(Qt::FramelessWindowHint);
 
-    setFixedSize(120, 100);
+    //setFixedSize(120, 100);
 
-    m_vLayout = new QVBoxLayout(m_centerWnd);
-    m_vLayout->setContentsMargins(10, 10, 10, 10);
-    m_vLayout->setSpacing(0);
+    m_vCenterLayout = new QVBoxLayout;
+    m_vCenterLayout->setContentsMargins(5, 5, 5, 5);
+    m_vCenterLayout->setSpacing(0);
 
     m_addContactsOrGroupBtn = new QPushButton("添加好友或群");
     m_createGroupBtn = new QPushButton("创建群聊");
 
-    m_vLayout->addWidget(m_addContactsOrGroupBtn);
-    ///* {
-    //     QSimpleSplit* sp = new QSimpleSplit();
-    //     m_vLayout->addWidget(sp);
-    // }*/
-    m_vLayout->addWidget(m_createGroupBtn);
+    m_vCenterLayout->addWidget(m_addContactsOrGroupBtn);
+    m_vCenterLayout->addWidget(m_createGroupBtn);
 
-    //  setFixedHeight(m_createGroupBtn->height() +
-    //  m_addContactsOrGroupBtn->height());
-    m_centerWnd->setLayout(m_vLayout);
+    m_centerWnd->setLayout(m_vCenterLayout);
 
     m_findFriendOrGroupWnd = new FindFriendOrGroupWnd();
     m_findFriendOrGroupWnd->hide();
@@ -50,7 +50,7 @@ SelectAddGroupOrAddFriendWnd::SelectAddGroupOrAddFriendWnd(QWidget* p) : QWidget
     connect(m_createGroupBtn, SIGNAL(clicked()), this, SLOT(slotCreateGroup()));
 }
 
-void SelectAddGroupOrAddFriendWnd::slotAddContactsOrGroupBtnClick()
+void SelectGroupFriendWnd::slotAddContactsOrGroupBtnClick()
 {
     if (m_findFriendOrGroupWnd != nullptr)
     {
@@ -59,7 +59,7 @@ void SelectAddGroupOrAddFriendWnd::slotAddContactsOrGroupBtnClick()
     }
 }
 
-void SelectAddGroupOrAddFriendWnd::slotCreateGroup()
+void SelectGroupFriendWnd::slotCreateGroup()
 {
     if (m_crateGroupWnd != nullptr)
     {
@@ -68,7 +68,7 @@ void SelectAddGroupOrAddFriendWnd::slotCreateGroup()
     }
 }
 
-bool SelectAddGroupOrAddFriendWnd::event(QEvent* event)
+bool SelectGroupFriendWnd::event(QEvent* event)
 {
     if (event->type() == QEvent::ActivationChange)
     {

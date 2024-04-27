@@ -203,7 +203,7 @@
     <ClCompile Include="MainWnd.cpp" />
     <ClCompile Include="ApplyFriendNextWnd.cpp" />
     <ClCompile Include="ScreenShotWnd.cpp" />
-    <ClCompile Include="SelectAddGroupOrAddFriendWnd.cpp" />
+    <ClCompile Include="SelectGroupFriendWnd.cpp" />
     <ClCompile Include="SelectMoreWnd.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="SelfTextEdit.cpp" />
@@ -236,7 +236,7 @@
     <QtMoc Include="CreateGroupListItemWithSelBtnWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SelectAddGroupOrAddFriendWnd.h" />
+    <QtMoc Include="SelectGroupFriendWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ApplyFriendWaitInfoWnd.h" />

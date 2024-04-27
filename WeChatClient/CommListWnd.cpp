@@ -2,7 +2,7 @@
 #include <QScrollBar>
 #include "MainWnd.h"
 
-#include "SelectAddGroupOrAddFriendWnd.h"
+#include "SelectGroupFriendWnd.h"
 #include "SelfSplit.h"
 #include "CommListWnd.h"
 #include "CommMsgItemWnd.h"
@@ -58,7 +58,7 @@ CommListWnd::CommListWnd(QWidget* p /*= nullptr*/, QCommListWndEnum wndType /*QC
     m_listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_vLayout->addWidget(m_listWidget);
 
-    m_selectWnd = new SelectAddGroupOrAddFriendWnd(nullptr);
+    m_selectWnd = new SelectGroupFriendWnd(nullptr);
     m_selectWnd->hide();
 
     m_searchEdit->installEventFilter(this);
@@ -148,17 +148,13 @@ void CommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
 
 void CommListWnd::slotOnStartGroupBtnClicked()
 {
-    // LogDebug << "onStartGroupBtnClicked()";
     QRect rect = m_startGroupBtn->geometry();
-    LogDebug << "rect" << rect << endl;
-    LogDebug << " the pos of startGroupBtn: " << m_startGroupBtn->pos();
     QPoint gPoint = m_startGroupBtn->mapToGlobal(QPoint(0, 0));
 
-    /*选择的窗口只能允许出现一个*/
-    QRect swRect = m_selectWnd->geometry();
-    swRect.setX(gPoint.x() - m_selectWnd->width() + m_startGroupBtn->width());
-    swRect.setY(gPoint.y() + m_startGroupBtn->height() + 5);
-    m_selectWnd->setGeometry(swRect);
+    LogDebug << "GPoint:"<< gPoint;
+
+    gPoint.setY(m_startGroupBtn->height() + gPoint.y());
+    m_selectWnd->move(gPoint);
     m_selectWnd->show();
 }
 

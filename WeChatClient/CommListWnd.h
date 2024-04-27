@@ -11,7 +11,7 @@
 #include <QMap>
 #include <QString>
 
-#include "SelectAddGroupOrAddFriendWnd.h"
+#include "SelectGroupFriendWnd.h"
 
 class CommListWnd : public QWidget
 {
@@ -62,7 +62,7 @@ class CommListWnd : public QWidget
     // 开始的那个按钮
     QPushButton* m_startGroupBtn;
 
-    SelectAddGroupOrAddFriendWnd* m_selectWnd;
+    SelectGroupFriendWnd* m_selectWnd;
 
     QListWidget* m_listWidget;
 
