@@ -4,6 +4,11 @@
     border-bottom-right-radius: 4px;
 }
 
+#contentWnd {
+    background-color: rgb(243, 243, 243);
+    /* border: 1px solid rgb(130, 135, 144); */
+}
+
 QLabel {
     font: 14px 'Segoe UI', 'Microsoft YaHei';
     color: black;

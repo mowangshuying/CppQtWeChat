@@ -30,8 +30,8 @@ class CommMsgItemWnd : public QWidget
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout;
     QLabel* m_headurl;
-    QLabel* m_name;
-    QLabel* m_msg;
+    QLabel* m_usernameLabel;
+    QLabel* m_msgLabel;
     int64_t m_userid;
     int64_t m_sesId;
     bool m_isGroupMsg;

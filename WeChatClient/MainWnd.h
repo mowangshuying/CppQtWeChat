@@ -2,6 +2,8 @@
 
 #include "def.h"
 
+#include <FramelessHelper/Widgets/FramelessWidget>
+
 #include <map>
 #include <QWidget>
 #include <QHBoxLayout>
@@ -23,7 +25,7 @@
 /*
  * 主窗口窗口只能有一个，将主窗口设置为单例对象
  */
-class MainWnd : public QWidget
+class MainWnd :   public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
 {
     // 添加消息映射支持
     Q_OBJECT
@@ -33,19 +35,6 @@ class MainWnd : public QWidget
 
   public:
     ~MainWnd();
-
-    enum BorderArea
-    {
-        BorderAreaNone = 0,
-        BorderAreaTop,
-        BorderAreaBottom,
-        BorderAreaLeft,
-        BorderAreaRight,
-        BorderAreaTopLeft,
-        BorderAreaTopRight,
-        BorderAreaBottomLeft,
-        BorderAreaBottomRight,
-    };
 
   public:
     static MainWnd* getMainWnd();
@@ -70,11 +59,6 @@ class MainWnd : public QWidget
     // 请求群组消息
     void requestGroupList();
 
-    //
-    void UpdateBorderArea(QPoint pos);
-    void UpdateCursor();
-    void UpdateWindowByBorderArea();
-
     void setUserIdAndName(int64_t userId, QString username)
     {
         m_username = username;
@@ -97,7 +81,7 @@ class MainWnd : public QWidget
 
     void mouseMoveEvent(QMouseEvent* event);
 
-    void adjustWndSizeByMouseMove(QMouseEvent* event);
+  //  void adjustWndSizeByMouseMove(QMouseEvent* event);
 
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
@@ -146,7 +130,7 @@ class MainWnd : public QWidget
     int64_t m_userid;
     QNetworkAccessManager* m_networkMgr;
 
-    BorderArea m_borderArea;
+  //  BorderArea m_borderArea;
 
     // 系统托盘功能
     QSystemTrayIcon* m_systemTrayIcon;

@@ -53,6 +53,7 @@ CommContactInfoWnd::CommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     // m_vLayout->addLayout(m_vLayout1);
 
     m_contentWnd = new QWidget(this);
+    m_contentWnd->setObjectName("contentWnd");
     m_contentWnd->setFixedSize(500, 500);
     m_contentWnd->setLayout(m_vLayout1);
     m_vLayout->addWidget(m_contentWnd, 0, Qt::AlignCenter);

@@ -21,7 +21,7 @@
 
 MainWnd* MainWnd::m_mainWnd = nullptr;
 
-MainWnd::MainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
+MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
 {
     LogFunc;
     m_centerWnd = new QWidget(this);
@@ -79,14 +79,9 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     }
     m_hLayout->setSpacing(0);
     m_hLayout->addLayout(m_sRightLayout, 1);
-    // m_hLayout->addWidget(m_groupInfoWnd);
     m_hLayout->addStretch();
 
     setLayout(m_hLayout);
-    setWindowFlags(Qt::FramelessWindowHint);
-    setAttribute(Qt::WA_TranslucentBackground);
-
-    //
     connect(m_toolWnd, SIGNAL(signalToolWndPageChanged(int)), this, SLOT(slotToolWndPageChanged(int)));
     connect(m_commMsgListWnd, SIGNAL(signalCommListChanged(int)), this, SLOT(slotSesIdToIndex(int)));
     connect(m_commContactsListWnd, SIGNAL(signalContactInfoChange(QMap<QString, QString>)), m_commContactInfo, SLOT(slotContactInfoChange(QMap<QString, QString>)));
@@ -128,14 +123,8 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &MainWnd::showNormalWnd);
     connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &MainWnd::slotOnSystemTrayIconClick);
 
-    // if (objectName().isEmpty())
-    //    setObjectName("QMainWnd");
-    //// setStyleSheet("QWidget#QMainWnd{ background: transparent;}");
     setMinimumSize(880, 660);
     setMouseTracking(true);
-
-  //  m_voiceTelphoneWnd = new VoiceTelphoneWnd();
-  //  m_voiceTelphoneWnd->hide();
 
     m_settingWnd = new SettingWnd();
     m_settingWnd->hide();
@@ -160,8 +149,6 @@ MainWnd::~MainWnd()
 
 void MainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 {
-    // QMessageBox::information(nullptr, "info", msg.ToString().c_str());
-    // 首先获取对应的会话id；
     int sesid = -1;
     if (!msg["data"].Get("sesid", sesid))
     {
@@ -267,12 +254,24 @@ void MainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
             return;
         }
 
+        neb::CJsonObject fsJson;
+        if (!fsJson.Parse(filename_server))
+        {
+            return;
+        }
+
+        std::string fsStr;
+        if (!fsJson.Get("headimg", fsStr))
+        {
+            return;
+        }
+
         ////接收端是一个文件
         ChatFileOuterWnd* fileWnd = new ChatFileOuterWnd(nullptr, sendid, recvid);
         fileWnd->m_innerWnd->m_fileName->setText(filename_client.c_str());
         fileWnd->m_innerWnd->m_fileSize->setText(filesize.c_str());
         fileWnd->m_innerWnd->m_sendState->setText("等待下载");
-        fileWnd->m_innerWnd->m_serveFilePath = filename_server.c_str();
+        fileWnd->m_innerWnd->m_serveFilePath = fsStr.c_str();
         fileWnd->m_innerWnd->recvFileShow();
         fileWnd->setFixedWidth(ses->m_MsgWndList->width());
         QListWidgetItem* fileItem = new QListWidgetItem(ses->m_MsgWndList);
@@ -389,9 +388,21 @@ void MainWnd::cs_msg_sendgroupmsg(neb::CJsonObject& msg)
                 return;
             }
 
+            neb::CJsonObject fsJson;
+            if (!fsJson.Parse(filename_server))
+            {
+                return;
+            }
+
+            std::string fsStr;
+            if (!json.Get("img", fsStr))
+            {
+                return;
+            }
+
             ////接收端是一个文件
             ChatFileOuterWnd* fileWnd = new ChatFileOuterWnd(nullptr, sendid, recvid);
-            fileWnd->setFileDownLoadData(filename_client.c_str(), filesize.c_str(), "等待下载", filename_server.c_str());
+            fileWnd->setFileDownLoadData(filename_client.c_str(), filesize.c_str(), "等待下载", fsStr.c_str());
             fileWnd->setFixedWidth(ses->m_MsgWndList->width());
             QListWidgetItem* fileItem = new QListWidgetItem(ses->m_MsgWndList);
             QSize fileWndSize(fileWnd->width(), 100 + 20);
@@ -620,125 +631,6 @@ void MainWnd::requestGroupList()
     });
 }
 
-// 参考资料：https://blog.csdn.net/tormi21c/article/details/124237553?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168042672816800215064844%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168042672816800215064844&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-3-124237553-null-null.142^v80^pc_new_rank,201^v4^add_ask,239^v2^insert_chatgpt&utm_term=qt%20%E9%BC%A0%E6%A0%87%E6%8B%96%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%94%BE%E5%A4%A7%E7%BC%A9%E5%B0%8F&spm=1018.2226.3001.4187
-void MainWnd::UpdateBorderArea(QPoint pos)
-{
-    m_borderArea = BorderArea::BorderAreaNone;
-    int offset = 5;
-
-    int x = pos.x();
-    int y = pos.y();
-    int w = this->width();
-    int h = this->height();
-
-    if (x >= -offset && x < offset && y >= -offset && y < offset)
-    {
-        m_borderArea = BorderArea::BorderAreaTopLeft;
-        return;
-    }
-
-    if (x > w - offset && x <= w + offset && y >= -offset && y < offset)
-    {
-        m_borderArea = BorderArea::BorderAreaTopRight;
-        return;
-    }
-
-    if (x >= -offset && x < offset && y > h - offset && y <= h + offset)
-    {
-        m_borderArea = BorderArea::BorderAreaBottomLeft;
-        return;
-    }
-
-    if (x > w - offset && x <= w + offset && y > h - offset && y <= h + offset)
-    {
-        m_borderArea = BorderArea::BorderAreaBottomRight;
-        return;
-    }
-
-    if (y <= offset && x > offset && x < w - offset)
-    {
-        m_borderArea = BorderArea::BorderAreaTop;
-        return;
-    }
-
-    if (x <= offset && y > offset && y < h - offset)
-    {
-        m_borderArea = BorderArea::BorderAreaLeft;
-        return;
-    }
-
-    if (x >= w - offset && y > offset && y < h - offset)
-    {
-        m_borderArea = BorderArea::BorderAreaRight;
-        return;
-    }
-
-    if (y >= h - offset && x > offset && x < w - offset)
-    {
-        m_borderArea = BorderArea::BorderAreaBottom;
-        return;
-    }
-}
-
-void MainWnd::UpdateCursor()
-{
-    switch (m_borderArea)
-    {
-        case BorderArea::BorderAreaNone:
-            setCursor(Qt::ArrowCursor);
-            break;
-        case BorderArea::BorderAreaTop:
-        case BorderArea::BorderAreaBottom:
-            setCursor(Qt::SizeVerCursor);
-            break;
-
-        case BorderArea::BorderAreaLeft:
-        case BorderArea::BorderAreaRight:
-            setCursor(Qt::SizeHorCursor);
-            break;
-
-        case BorderArea::BorderAreaTopLeft:
-        case BorderArea::BorderAreaBottomRight:
-            setCursor(Qt::SizeFDiagCursor);
-            break;
-
-        case BorderArea::BorderAreaTopRight:
-        case BorderArea::BorderAreaBottomLeft:
-            setCursor(Qt::SizeBDiagCursor);
-            break;
-        default:
-            break;
-    }
-}
-
-void MainWnd::UpdateWindowByBorderArea()
-{
-    switch (m_borderArea)
-    {
-        case MainWnd::BorderAreaNone:
-            break;
-        case MainWnd::BorderAreaTop:
-
-            break;
-        case MainWnd::BorderAreaBottom:
-            break;
-        case MainWnd::BorderAreaLeft:
-            break;
-        case MainWnd::BorderAreaRight:
-            break;
-        case MainWnd::BorderAreaTopLeft:
-            break;
-        case MainWnd::BorderAreaTopRight:
-            break;
-        case MainWnd::BorderAreaBottomLeft:
-            break;
-        case MainWnd::BorderAreaBottomRight:
-            break;
-        default:
-            break;
-    }
-}
-
 void MainWnd::closeWnd()
 {
     m_systemTrayIcon->hide();
@@ -773,105 +665,9 @@ void MainWnd::showNormalWnd()
 void MainWnd::mouseMoveEvent(QMouseEvent* event)
 {
     if (!m_bLeftBtnPress)
-    {
-        UpdateBorderArea(event->pos());
-        UpdateCursor();
         return;
-    }
 
-    if (windowState() == Qt::WindowMaximized)
-    {
-        return;
-    }
-
-    // 鼠标移动的调试信息
-    //   LogDebug << "[mouseMoveEvent and event->pos]: x:" << event->pos().x()
-    //   << "y:" << event->pos().y(); LogDebug << "[mouseMoveEvent and
-    //   m_poPress]: x:" << m_leftBtnPressPoint.x() << "y:" <<
-    //   m_leftBtnPressPoint.y(); LogDebug << "[mouseMoveEvent and pos()]: x:"
-    //   << pos().x() << "y:" << pos().y(); LogDebug << "[mouseMoveEvent
-    //   distance]:x:" << (event->pos() - m_leftBtnPressPoint).x();
-
-    if (m_borderArea == BorderArea::BorderAreaNone)
-    {
-        move(event->pos() - m_leftBtnPressPoint + pos());
-    }
-    else
-    {
-        adjustWndSizeByMouseMove(event);
-    }
-}
-
-void MainWnd::adjustWndSizeByMouseMove(QMouseEvent* event)
-{
-    if (m_borderArea == BorderArea::BorderAreaRight)
-    {
-        LogDebug << "mini size: w:" << minimumSize().width() << "h:" << minimumSize().height();
-        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
-        int wndW = width() + distancePoint.x();
-        if (wndW < 950)
-        {
-            return;
-        }
-        setFixedWidth(wndW);
-        m_leftBtnPressPoint = event->pos();
-        return;
-    }
-    else if (m_borderArea == BorderArea::BorderAreaLeft)
-    {
-        QRect wndRect = rect();
-        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
-
-        int gWndX = pos().x() + wndRect.x() + distancePoint.x();
-        int gWndY = pos().y();
-        int wndW = width() - distancePoint.x();
-        int wndH = height();
-
-        LogDebug << "[BorderArea::BorderAreaLeft]:"
-                 << "rect.x() = " << wndRect.x() << "distance.x() = " << distancePoint.x() << "width = " << width() << "height = " << height();
-
-        // 小于最小宽度不允许继续缩放
-        if (wndW < 950)
-        {
-            return;
-        }
-
-        setGeometry(gWndX, gWndY, wndW, wndH);
-        setFixedWidth(wndW);
-        m_leftBtnPressPoint = event->pos();
-        m_leftBtnPressPoint.setX(m_leftBtnPressPoint.x() - distancePoint.x());
-        return;
-    }
-    else if (m_borderArea == BorderArea::BorderAreaTop)
-    {
-        QRect wndRect = rect();
-        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
-
-        int gWndX = pos().x();
-        int gWndY = pos().y() + wndRect.y() + distancePoint.y();
-        int wndW = width();
-        int wndH = height() - distancePoint.y();
-        if (wndH < 600)
-        {
-            return;
-        }
-        setGeometry(gWndX, gWndY, wndW, wndH);
-        setFixedHeight(wndH);
-        m_leftBtnPressPoint = event->pos();
-        m_leftBtnPressPoint.setY(m_leftBtnPressPoint.y() - distancePoint.y());
-    }
-    else if (m_borderArea == BorderArea::BorderAreaBottom)
-    {
-        QPoint distancePoint = event->pos() - m_leftBtnPressPoint;
-        int wndH = height() + distancePoint.y();
-        if (wndH < 600)
-        {
-            return;
-        }
-        setFixedHeight(wndH);
-        m_leftBtnPressPoint = event->pos();
-        return;
-    }
+    move(event->pos() - m_leftBtnPressPoint + pos());
 }
 
 void MainWnd::mousePressEvent(QMouseEvent* event)
@@ -884,9 +680,6 @@ void MainWnd::mousePressEvent(QMouseEvent* event)
     // 鼠标左键按下
     m_bLeftBtnPress = true;
     m_leftBtnPressPoint = event->pos();
-    UpdateBorderArea(event->pos());
-    UpdateCursor();
-    LogDebug << "left button: x:" << m_leftBtnPressPoint.x() << "y:" << m_leftBtnPressPoint.y();
 }
 
 void MainWnd::mouseReleaseEvent(QMouseEvent* event)
@@ -935,7 +728,7 @@ void MainWnd::slotSendMsgBtnClick(QMap<QString, QString> infoMap)
     {
         QListWidgetItem* pitem = m_commMsgListWnd->m_listWidget->item(i);
         CommMsgItemWnd* pWnd = dynamic_cast<CommMsgItemWnd*>(m_commMsgListWnd->m_listWidget->itemWidget(pitem));
-        QString namestr = pWnd->m_name->text();
+        QString namestr = pWnd->m_usernameLabel->text();
         if (namestr == infoMap["name"])
         {
             m_commMsgListWnd->m_listWidget->setCurrentItem(pitem);
@@ -1059,57 +852,17 @@ void MainWnd::slotSearchText(QString searchText)
             pWnd = nullptr;
         }
     }
+
     m_commSearchListWnd->m_listWidget->clear();
-
-    //// 嵌入群组与搜索本地群组
-    //{
-    //    QWidget* tmpLabel = new QLabel("群组");
-    //    QListWidgetItem* pListItem = new
-    //    QCustomListWidgetItem(m_commSearchListWnd->m_listWidget);
-    //    tmpLabel->setFixedWidth(m_commSearchListWnd->m_listWidget->width() -
-    //    5);
-    //    pListItem->setSizeHint(QSize(m_commSearchListWnd->m_listWidget->width()
-    //    - 5, 25)); m_commSearchListWnd->m_listWidget->setItemWidget(pListItem,
-    //    tmpLabel);
-
-    //    int count = m_commGroupsListWnd->m_listWidget->count();
-    //    for (int i = 0; i < count; i++)
-    //    {
-    //        QListWidgetItem* pitem =
-    //        m_commGroupsListWnd->m_listWidget->item(i); QCommGroupItemWnd*
-    //        pWnd =
-    //        dynamic_cast<QCommGroupItemWnd*>(m_commGroupsListWnd->m_listWidget->itemWidget(pitem));
-    //        if (pWnd->m_groupName->text().contains(searchText))
-    //        {
-    //            // 创建item并添加到
-    //            m_commSearchListWnd->addGroupItem("",
-    //            pWnd->m_groupName->text().toStdString().c_str(),
-    //            pWnd->m_groupId);
-    //        }
-    //    }
-    //}
-
-    //{
-    // 嵌入联系人标签与搜索联系人
-    //  QWidget* tmpLabel = new QLabel("消息");
-    // QListWidgetItem* pListItem = new
-    // QCustomListWidgetItem(m_commSearchListWnd->m_listWidget);
-    // tmpLabel->setFixedWidth(m_commSearchListWnd->m_listWidget->width() - 5);
-    // pListItem->setSizeHint(QSize(m_commSearchListWnd->m_listWidget->width() -
-    // 5, 25)); m_commSearchListWnd->m_listWidget->setItemWidget(pListItem,
-    // tmpLabel);
-
-    // 遍历 找到包含搜索的字段，添加到列表中
     count = m_commMsgListWnd->m_listWidget->count();
     for (int i = 0; i < count; i++)
     {
         QListWidgetItem* pitem = m_commMsgListWnd->m_listWidget->item(i);
         CommMsgItemWnd* pWnd = dynamic_cast<CommMsgItemWnd*>(m_commMsgListWnd->m_listWidget->itemWidget(pitem));
-        if (pWnd->m_name->text().contains(searchText))
+        if (pWnd->m_usernameLabel->text().contains(searchText))
         {
             // 创建item并添加到
-            m_commSearchListWnd->addMsgItem(pWnd->m_name->text().toStdString().c_str(), pWnd->m_msg->text().toStdString().c_str(), pWnd->m_sesId, pWnd->m_userid, pWnd->m_isGroupMsg);
+            m_commSearchListWnd->addMsgItem(pWnd->m_usernameLabel->text().toStdString().c_str(), pWnd->m_msgLabel->text().toStdString().c_str(), pWnd->m_sesId, pWnd->m_userid, pWnd->m_isGroupMsg);
         }
     }
-    //}
 }

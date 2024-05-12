@@ -296,7 +296,7 @@ void SessionWnd::dropEvent(QDropEvent* event)
 
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
-    request.setUrl(QUrl("HTTP_FILE_SERVER_ADDR"));
+    request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
     QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
     QHttpPart part;
     part.setHeader(QNetworkRequest::ContentDispositionHeader, httpHeader);

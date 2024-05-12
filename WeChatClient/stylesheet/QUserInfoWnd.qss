@@ -1,12 +1,18 @@
 #QUserInfoWnd {
-    background-color: rgb(238, 244, 249);
+    background-color: rgb(243, 243, 243);
     border-radius: 4px;
+    border: 1px solid rgb(130, 135, 144);
 }
 
 QLabel {
-    font: 14px 'Segoe UI', 'Microsoft YaHei';
+    font: 12px 'Segoe UI', 'Microsoft YaHei';
     color: black;
     border: none;
+}
+
+#usernameLabel,
+#userIdLabel {
+    color: rgb(158, 158, 158);
 }
 
 QPushButton {

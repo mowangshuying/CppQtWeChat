@@ -297,7 +297,7 @@ void CommListWnd::setMsgItemNameBySesId(int64_t sesId, QString msgItemName)
         CommMsgItemWnd* pWnd = dynamic_cast<CommMsgItemWnd*>(m_listWidget->itemWidget(pitem));
         if (pWnd->m_sesId == sesId)
         {
-            pWnd->m_name->setText(msgItemName);
+            pWnd->m_usernameLabel->setText(msgItemName);
             break;
         }
     }

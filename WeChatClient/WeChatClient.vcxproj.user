@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerEnvironment>PATH=$(QtDllPath);%PATH%;$(SolutionDir)3rdparty\framelesshelper\bin\debug</LocalDebuggerEnvironment>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <QtLastBackgroundBuild>2024-04-27T03:29:51.2888626Z</QtLastBackgroundBuild>
+    <QtLastBackgroundBuild>2024-05-12T07:23:29.6701120Z</QtLastBackgroundBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="QtSettings">
-    <QtLastBackgroundBuild>2024-04-27T03:29:51.3566812Z</QtLastBackgroundBuild>
+    <QtLastBackgroundBuild>2024-05-12T07:23:30.2266830Z</QtLastBackgroundBuild>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <QtLastBackgroundBuild>2024-04-27T03:29:51.1372682Z</QtLastBackgroundBuild>
+    <QtLastBackgroundBuild>2024-05-12T07:23:29.2289862Z</QtLastBackgroundBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
-    <QtLastBackgroundBuild>2024-04-27T03:48:27.1944583Z</QtLastBackgroundBuild>
+    <QtLastBackgroundBuild>2024-05-12T07:23:29.5249929Z</QtLastBackgroundBuild>
   </PropertyGroup>
 </Project>

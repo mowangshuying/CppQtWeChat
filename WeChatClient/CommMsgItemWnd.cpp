@@ -7,38 +7,38 @@ CommMsgItemWnd::CommMsgItemWnd(QWidget* p) : QWidget(p)
     setObjectName("QCommMsgItemWnd");
 }
 
-CommMsgItemWnd::CommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool isGroupMsg)
+CommMsgItemWnd::CommMsgItemWnd(QWidget* p, const char* name, const char* msg, int64_t sesid, int64_t userid, bool bGroupMsg)
 {
     setObjectName("QCommMsgItemWnd");
 
     m_sesId = sesid;
     m_userid = userid;
-    m_isGroupMsg = isGroupMsg;
+    m_isGroupMsg = bGroupMsg;
 
     m_vLayout = new QVBoxLayout();
     m_hLayout = new QHBoxLayout();
-    m_name = new QLabel();
-    m_msg = new QLabel();
+    m_usernameLabel = new QLabel();
+    m_msgLabel = new QLabel();
 
     QFont font("", 10, 60);
-    m_name->setFont(font);
+    m_usernameLabel->setFont(font);
 
-    m_name->setText(name);
-    m_msg->setText(msg);
+    m_usernameLabel->setText(name);
+    m_msgLabel->setText(msg);
 
     m_vLayout->addSpacing(10);
-    m_vLayout->addWidget(m_name);
-    m_vLayout->addWidget(m_msg);
+    m_vLayout->addWidget(m_usernameLabel);
+    m_vLayout->addWidget(m_msgLabel);
     m_vLayout->addSpacing(10);
 
     m_headurl = new QLabel();
     m_headurl->setFixedSize(40, 40);
 
+    // 设置默认头像
     m_url = "./img/default.png";
-    if (isGroupMsg)
-    {
+    if (bGroupMsg)
         m_url = "./img/groupHead.png";
-    }
+
     m_headurl->setPixmap(QPixmap(m_url));
 
     m_hLayout->addSpacing(10);
@@ -52,10 +52,7 @@ CommMsgItemWnd::CommMsgItemWnd(QWidget* p, const char* name, const char* msg, in
     setLayout(m_hLayout);
     setFixedHeight(65);
 
-    // ./img/groupHead.png
-    // ./img/head1.png
-
-    requestHeadImg(userid, isGroupMsg);
+    requestHeadImg(userid, bGroupMsg);
 }
 
 void CommMsgItemWnd::requestHeadImg(int id, bool isGroupMsg)

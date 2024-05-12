@@ -102,7 +102,7 @@ void ChatFileInnerWnd::slotDownloadFileBtnClick()
     {
         // 下载远程文件并显示进度条
         m_pNetManager = new QNetworkAccessManager(this);
-        QString downLoadFileUrl = m_serveFilePath;
+        QString downLoadFileUrl = QString("http://49.232.169.205:80/UploadDemo%1").arg(m_serveFilePath);
         QNetworkReply* reply = m_pNetManager->get(QNetworkRequest(QUrl(downLoadFileUrl)));
         connect(reply, &QNetworkReply::downloadProgress, this, [this, reply](qint64 x, qint64 y) {
             // 显示下载进度

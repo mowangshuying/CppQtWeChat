@@ -105,19 +105,23 @@ void ToolWnd::slotOnClickContactsBtn()
 
 void ToolWnd::slotOnClickHeadUrlLabel()
 {
-    if (m_userInfoWnd->isHidden())
-    {
-        QRect rect = m_headUrlLabel->geometry();
-        QPoint gPoint = m_headUrlLabel->mapToGlobal(QPoint(0, 0));
-        QRect swRect = m_userInfoWnd->geometry();
-        swRect.setX(gPoint.x() + m_headUrlLabel->width() / 2);
-        swRect.setY(gPoint.y() + m_headUrlLabel->height() / 2);
-        m_userInfoWnd->m_headLabel->setPixmap(DataManager::getMgr()->m_UserId2HeadImgMap[DataManager::getMgr()->m_userid]);
-        m_userInfoWnd->m_usernameLabel->setText(DataManager::getMgr()->m_username);
-        m_userInfoWnd->m_userIdLabel->setText("用户id:" + QString::number(DataManager::getMgr()->m_userid));
-        m_userInfoWnd->setGeometry(swRect);
-        m_userInfoWnd->show();
-    }
+    // 点击就先隐藏
+    m_userInfoWnd->hide();
+
+    // 更新数据并显示；
+    QRect rect = m_headUrlLabel->geometry();
+    QPoint gPoint = m_headUrlLabel->mapToGlobal(QPoint(0, 0));
+    QRect swRect = m_userInfoWnd->geometry();
+    swRect.setX(gPoint.x() + m_headUrlLabel->width() / 2);
+    swRect.setY(gPoint.y() + m_headUrlLabel->height() / 2);
+
+    QPixmap pixmap = DataManager::getMgr()->m_UserId2HeadImgMap[DataManager::getMgr()->m_userid];
+    pixmap = pixmap.scaled(60, 60, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    m_userInfoWnd->m_headLabel->setPixmap(pixmap);
+    m_userInfoWnd->m_usernameLabel->setText(DataManager::getMgr()->m_username);
+    m_userInfoWnd->m_userIdLabel->setText("用户id:" + QString::number(DataManager::getMgr()->m_userid));
+    m_userInfoWnd->setGeometry(swRect);
+    m_userInfoWnd->show();
 }
 
 void ToolWnd::slotOnClickChangeHeadImgBtn()

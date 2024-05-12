@@ -10,7 +10,14 @@
 UserInfoWnd::UserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
     LogFunc;
-    m_centerWnd = new QWidget(this);
+    m_vMainLayout = new QVBoxLayout;
+    setLayout(m_vMainLayout);
+
+     m_vMainLayout->setContentsMargins(0, 0, 0, 0);
+
+    m_centerWnd = new QWidget;
+    m_vMainLayout->addWidget(m_centerWnd);
+
     m_centerWnd->setObjectName("QUserInfoWnd");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
@@ -21,23 +28,25 @@ UserInfoWnd::UserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    setFixedSize(300, 240);
+    setFixedSize(280, 190);
 
-    m_vLayout = new QVBoxLayout();
-    m_centerWnd->setLayout(m_vLayout);
+    m_vCenterLayout = new QVBoxLayout;
+    m_centerWnd->setLayout(m_vCenterLayout);
 
-    m_vLayout->addSpacing(25);
+    m_vCenterLayout->addSpacing(25);
 
-    //
-    m_hLayout1 = new QHBoxLayout();
-    m_vLayout1 = new QVBoxLayout();
-    m_vLayout2 = new QVBoxLayout();
+
+    m_hTopLayout = new QHBoxLayout;
+    m_vInfoLayout = new QVBoxLayout;
 
     QFont ft;
     ft.setPointSize(15);
 
-    m_usernameLabel = new QLabel();
-    m_userIdLabel = new QLabel();
+    m_usernameLabel = new QLabel;
+    m_userIdLabel = new QLabel;
+
+    m_usernameLabel->setObjectName("usernameLabel");
+    m_userIdLabel->setObjectName("userIdLabel");
 
     m_usernameLabel->setFont(ft);
     ft.setPointSize(12);
@@ -46,34 +55,35 @@ UserInfoWnd::UserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_usernameLabel->setText("xxxxxx");
     m_userIdLabel->setText("用户id:xxxxxx");
 
-    m_vLayout1->addWidget(m_usernameLabel);
-    m_vLayout1->addWidget(m_userIdLabel);
+    m_vInfoLayout->addWidget(m_usernameLabel);
+    m_vInfoLayout->addWidget(m_userIdLabel);
+    m_vInfoLayout->addStretch();
 
-    //
-    m_hLayout1->addLayout(m_vLayout1);
-
-    m_headLabel = new QLabel(this);
-    m_headLabel->setFixedSize(40, 40);
-
+    // 头像标签
+    m_headLabel = new QLabel;
+    m_headLabel->setFixedSize(60, 60);
     m_headLabel->setPixmap(QPixmap("./img/head2.png"));
 
-    m_changeHeadImgBtn = new QPushButton();
+    // 修改头像按钮
+    m_changeHeadImgBtn = new QPushButton;
     m_changeHeadImgBtn->setText("修改头像");
-    // m_changeHeadImgBtn->setFixedWidth(50);
-    // m_changeHeadImgBtn->setFixedHeight(20);
+    m_changeHeadImgBtn->setFixedSize(120, 40);
 
-    m_vLayout2->addWidget(m_headLabel);
-    m_vLayout2->addWidget(m_changeHeadImgBtn);
+    m_hTopLayout->addWidget(m_headLabel);
+    m_hTopLayout->addLayout(m_vInfoLayout);
+    m_vCenterLayout->addLayout(m_hTopLayout);
 
-    m_hLayout1->addLayout(m_vLayout2);
-    m_vLayout->addLayout(m_hLayout1);
+    // 添加sp;
+    m_vCenterLayout->addSpacing(10);
+    m_vCenterLayout->addWidget(new SelfSplit(nullptr, SelfSplit::Direction_H));
 
-    ///* {
-    //     QSimpleSplit* sp = new QSimpleSplit();
-    //     m_vLayout->addWidget(sp);
-    // }*/
+    m_hBtnLayout = new QHBoxLayout;
+    m_hBtnLayout->addWidget(m_changeHeadImgBtn, Qt::AlignCenter);
 
-    m_vLayout->addStretch();
+    m_vCenterLayout->addSpacing(15);
+
+    m_vCenterLayout->addLayout(m_hBtnLayout);
+    m_vCenterLayout->addStretch();
 }
 
 bool UserInfoWnd::event(QEvent* event)

@@ -40,7 +40,7 @@ QTextEdit {
 
 QListView {
     /*设置背景颜色*/
-    background: rgba(243, 243, 243);
+    background: rgb(243, 243, 243);
     border: none;
     font: 13px 'Segoe UI', 'Microsoft YaHei';
 }
