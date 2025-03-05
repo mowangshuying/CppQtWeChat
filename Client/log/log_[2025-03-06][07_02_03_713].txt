@@ -1,0 +1,18 @@
+[ 2025-03-06 07:02:03.767 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::WSClientMgr . 24 ] threadId: 0x49c8
+[ 2025-03-06 07:02:03.767 ] [ debug ] [ DataManager.cpp . DataManager::DataManager . 8 ] called.
+[ 2025-03-06 07:02:03.768 ] [ debug ] [ LoginRegWnd.cpp . LoginRegWnd::LoginRegWnd . 20 ] called.
+QLayout: Attempting to add QLayout "" to QWidget "centerWnd", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centerWnd", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centerWnd", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centerWnd", which already has a layout
+QLayout: Attempting to add QLayout "" to QWidget "centerWnd", which already has a layout
+[ 2025-03-06 07:02:03.799 ] [ debug ] [ StyleSheetMgr.cpp . StyleSheetMgr::reg . 23 ] reg: "./stylesheet/LoginRegWnd.qss"
+[ 2025-03-06 07:02:04.767 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:05.764 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:06.763 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:07.765 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:08.769 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:09.768 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:10.768 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:11.766 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server
+[ 2025-03-06 07:02:12.769 ] [ debug ] [ WSClientMgr.cpp . WSClientMgr::slotTimer . 208 ] Retry to connect server

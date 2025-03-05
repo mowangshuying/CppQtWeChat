@@ -136,7 +136,7 @@ void WSClientMgr::slotConnected()
     neb::CJsonObject json;
     json.Add("type", "Client");
     json.Add("cckey", "ccmm00@123456");
-    request("cs_reg_client", json, [this](neb::CJsonObject& msg) {
+    request("regClient", json, [this](neb::CJsonObject& msg) {
         LogDebug << "reg client suc";
         m_bConn = true;
     });
