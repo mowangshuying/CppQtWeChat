@@ -18,12 +18,12 @@ ScreenShotWnd::ScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-  //  QDesktopWidget* destTopWnd = QApplication::desktop();
-  //  int curMonitor = destTopWnd->screenNumber(QCursor().pos());
-  //  LogDebug << "curMonitor:" << curMonitor;
+    //  QDesktopWidget* destTopWnd = QApplication::desktop();
+    //  int curMonitor = destTopWnd->screenNumber(QCursor().pos());
+    //  LogDebug << "curMonitor:" << curMonitor;
 
- //   QList<QScreen*> screens = QApplication::screens();
-  //  LogDebug << "screens size:" << screens.size();
+    //   QList<QScreen*> screens = QApplication::screens();
+    //  LogDebug << "screens size:" << screens.size();
     m_screen = QApplication::screenAt(QCursor::pos());
     QRect screenRect = m_screen->geometry();
     LogDebug << "screenRect:" << screenRect;

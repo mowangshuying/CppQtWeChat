@@ -48,7 +48,7 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20, 20));
     m_settingBtn->setFixedSize(20, 20);
 
-     m_minBtn->setIconSize(QSize(20, 20));
+    m_minBtn->setIconSize(QSize(20, 20));
     m_minBtn->setIcon(QPixmap("./img/minBtn_.png").scaled(20, 20));
     m_minBtn->setFixedSize(20, 20);
 
@@ -125,7 +125,7 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     StyleSheetMgr::getMgr()->reg(object.m_qssFileName, object);
 }
 
- LoginRegWnd::~LoginRegWnd()
+LoginRegWnd::~LoginRegWnd()
 {
     if (m_mainWnd != nullptr)
         delete m_mainWnd;

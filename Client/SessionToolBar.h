@@ -4,7 +4,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include "EmoijWnd.h"
-//#include "VoiceTelphoneWnd.h"
+// #include "VoiceTelphoneWnd.h"
 #include "ScreenShotWnd.h"
 
 class SessionToolBar : public QWidget
@@ -24,5 +24,5 @@ class SessionToolBar : public QWidget
     QPushButton* m_sendFileBtn;
     QPushButton* m_voiceTelphoneBtn;
     ScreenShotWnd* m_screenShotWnd = nullptr;
-    //VoiceTelphoneWnd* m_phoneWnd;
+    // VoiceTelphoneWnd* m_phoneWnd;
 };

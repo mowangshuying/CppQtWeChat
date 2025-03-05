@@ -151,7 +151,7 @@ void CommListWnd::slotOnStartGroupBtnClicked()
     QRect rect = m_startGroupBtn->geometry();
     QPoint gPoint = m_startGroupBtn->mapToGlobal(QPoint(0, 0));
 
-    LogDebug << "GPoint:"<< gPoint;
+    LogDebug << "GPoint:" << gPoint;
 
     gPoint.setY(m_startGroupBtn->height() + gPoint.y());
     m_selectWnd->move(gPoint);

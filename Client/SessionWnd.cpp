@@ -224,16 +224,16 @@ void SessionWnd::slotMoreBtnClick()
 
 void SessionWnd::slotVoiceTelPhoneBtnClick()
 {
-    //MainWnd* mainWnd = MainWnd::getMainWnd();
+    // MainWnd* mainWnd = MainWnd::getMainWnd();
     ////VoiceTelphoneWnd* telphoneWnd = mainWnd->m_voiceTelphoneWnd;
-    //telphoneWnd->setRecvIdAndSesId(m_recvId, m_sesId);
-    //if (telphoneWnd->windowState() == Qt::WindowMinimized)
+    // telphoneWnd->setRecvIdAndSesId(m_recvId, m_sesId);
+    // if (telphoneWnd->windowState() == Qt::WindowMinimized)
     //{
-    //    telphoneWnd->showNormal();
-    //}
-    //telphoneWnd->show();
-    //telphoneWnd->activateWindow();
-    //telphoneWnd->callPhone();
+    //     telphoneWnd->showNormal();
+    // }
+    // telphoneWnd->show();
+    // telphoneWnd->activateWindow();
+    // telphoneWnd->callPhone();
 }
 
 void SessionWnd::slotUpdateGroupName(QString groupName)

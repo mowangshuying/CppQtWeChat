@@ -13,7 +13,6 @@ SelectGroupFriendWnd::SelectGroupFriendWnd(QWidget* p) : QWidget(p)
     setLayout(m_vMainLayout);
     m_vMainLayout->setContentsMargins(5, 5, 5, 5);
 
-
     m_centerWnd = new QWidget;
     m_vMainLayout->addWidget(m_centerWnd);
 
@@ -26,7 +25,7 @@ SelectGroupFriendWnd::SelectGroupFriendWnd(QWidget* p) : QWidget(p)
     setAttribute(Qt::WA_TranslucentBackground);
     setWindowFlags(Qt::FramelessWindowHint);
 
-    //setFixedSize(120, 100);
+    // setFixedSize(120, 100);
 
     m_vCenterLayout = new QVBoxLayout;
     m_vCenterLayout->setContentsMargins(5, 5, 5, 5);

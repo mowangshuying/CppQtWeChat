@@ -19,13 +19,13 @@
 #include "./json/CJsonObject.hpp"
 #include <QSystemTrayIcon>
 #include <QMenu>
-//#include "VoiceTelphoneWnd.h"
+// #include "VoiceTelphoneWnd.h"
 #include "SettingWnd.h"
 
 /*
  * 主窗口窗口只能有一个，将主窗口设置为单例对象
  */
-class MainWnd :   public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
+class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
 {
     // 添加消息映射支持
     Q_OBJECT
@@ -81,7 +81,7 @@ class MainWnd :   public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
 
     void mouseMoveEvent(QMouseEvent* event);
 
-  //  void adjustWndSizeByMouseMove(QMouseEvent* event);
+    //  void adjustWndSizeByMouseMove(QMouseEvent* event);
 
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
@@ -130,7 +130,7 @@ class MainWnd :   public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
     int64_t m_userid;
     QNetworkAccessManager* m_networkMgr;
 
-  //  BorderArea m_borderArea;
+    //  BorderArea m_borderArea;
 
     // 系统托盘功能
     QSystemTrayIcon* m_systemTrayIcon;
@@ -138,6 +138,6 @@ class MainWnd :   public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
     QAction* m_systemTrayIconExitAction;
     QAction* m_systemTrayIconShowMainWndAction;
 
-   // VoiceTelphoneWnd* m_voiceTelphoneWnd;
+    // VoiceTelphoneWnd* m_voiceTelphoneWnd;
     SettingWnd* m_settingWnd;
 };

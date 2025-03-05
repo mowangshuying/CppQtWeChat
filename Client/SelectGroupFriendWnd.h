@@ -22,7 +22,7 @@ class SelectGroupFriendWnd : public QWidget
     void slotAddContactsOrGroupBtnClick();
     void slotCreateGroup();
 
- protected:
+  protected:
     QVBoxLayout* m_vMainLayout;
     QWidget* m_centerWnd;
     QVBoxLayout* m_vCenterLayout;

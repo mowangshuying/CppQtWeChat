@@ -13,7 +13,7 @@ UserInfoWnd::UserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_vMainLayout = new QVBoxLayout;
     setLayout(m_vMainLayout);
 
-     m_vMainLayout->setContentsMargins(0, 0, 0, 0);
+    m_vMainLayout->setContentsMargins(0, 0, 0, 0);
 
     m_centerWnd = new QWidget;
     m_vMainLayout->addWidget(m_centerWnd);
@@ -34,7 +34,6 @@ UserInfoWnd::UserInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_centerWnd->setLayout(m_vCenterLayout);
 
     m_vCenterLayout->addSpacing(25);
-
 
     m_hTopLayout = new QHBoxLayout;
     m_vInfoLayout = new QVBoxLayout;

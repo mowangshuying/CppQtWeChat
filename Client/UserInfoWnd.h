@@ -16,11 +16,12 @@ class UserInfoWnd : public QWidget
     UserInfoWnd(QWidget* p = nullptr);
 
     bool event(QEvent* event);
+
   public:
     QVBoxLayout* m_vMainLayout;
     QWidget* m_centerWnd;
     QVBoxLayout* m_vCenterLayout;
-    
+
     QHBoxLayout* m_hTopLayout;
     QVBoxLayout* m_vInfoLayout;
     QHBoxLayout* m_hBtnLayout;
@@ -28,7 +29,7 @@ class UserInfoWnd : public QWidget
     QLabel* m_usernameLabel;
     QLabel* m_userIdLabel;
 
-  //  QVBoxLayout* m_vLayout2;
+    //  QVBoxLayout* m_vLayout2;
     QLabel* m_headLabel;
     QPushButton* m_changeHeadImgBtn;
     QLabel* m_otherLabel;

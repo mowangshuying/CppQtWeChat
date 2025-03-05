@@ -11,7 +11,7 @@ GroupFriendsItemWnd::GroupFriendsItemWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hLayout = new QHBoxLayout;
     setLayout(m_hLayout);
     m_hLayout->setContentsMargins(5, 5, 5, 5);
- //   setContentsMargins(5, 5, 5, 5);
+    //   setContentsMargins(5, 5, 5, 5);
 
     m_headImg = new QLabel;
     m_headImg->setFixedSize(30, 30);
