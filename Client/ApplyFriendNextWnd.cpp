@@ -6,7 +6,7 @@
 #include <QMouseEvent>
 #include <QMessageBox>
 
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include "MainWnd.h"
 #include "StyleSheetMgr.h"
 
@@ -117,13 +117,13 @@ void ApplyFriendNextWnd::slotPushBtnClick()
         auto pApplyWnd1 = dynamic_cast<ApplyFriendInputInfoWnd*>(m_wnd1);
         json.Add("applymsg", pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
 
-        WSClientMgr::getMgr()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
+        NetClientUtils::getUtils()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
             int state = 0;
             if (!msg.Get("state", state))
             {
                 return;
             }
-            LogDebug << "recv apply add user";
+            LogD << "recv apply add user";
         });
 
         return;

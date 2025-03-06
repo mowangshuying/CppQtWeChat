@@ -3,7 +3,7 @@
 #include "DealNewFriendsApplyWnd.h"
 #include "DealNewFriendsApplyItemWnd.h"
 #include "SelfSplit.h"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include "MainWnd.h"
 #include "./json/CJsonObject.hpp"
 #include "StyleSheetMgr.h"
@@ -98,8 +98,8 @@ void DealNewFriendsApplyWnd::setFriendApplyList()
     //
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->m_userid);
-    WSClientMgr::getMgr()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
-        LogDebug << msg.ToString().c_str();
+    NetClientUtils::getUtils()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
+        LogD << msg.ToString().c_str();
         for (int i = 0; i < msg["data"].GetArraySize(); i++)
         {
             neb::CJsonObject tempJsonObj;

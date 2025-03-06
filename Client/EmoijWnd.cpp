@@ -102,11 +102,11 @@ void EmoijWnd::paintEvent(QPaintEvent* paintEvent)
 
 void EmoijWnd::slotCellClicked(int x, int y)
 {
-    LogDebug << "slotCellClicked:" << x << "," << y;
+    LogD << "slotCellClicked:" << x << "," << y;
     // 点击完成后隐藏窗口
     if (x * 10 + y >= 0 && x * 10 + y < m_emoijStrList.size())
     {
-        LogDebug << m_emoijStrList[x * 10 + y] << "\n";
+        LogD << m_emoijStrList[x * 10 + y] << "\n";
         emit signalEmoijClicked(m_emoijStrList[x * 10 + y]);
     }
     hide();

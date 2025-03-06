@@ -1,7 +1,7 @@
 #include "MainWnd.h"
 #include "SelfSplit.h"
 #include "json/CJsonObject.hpp"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include <QApplication>
 #include "CommMsgItemWnd.h"
 #include "CommContactItemWnd.h"
@@ -94,11 +94,11 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
 
     connect(m_commSearchListWnd, SIGNAL(signalCommListChanged(int)), this, SLOT(slotSesIdToIndex(int)));
 
-    WSClientMgr::getMgr()->regMsgCall("cs_msg_sendmsg", std::bind(&MainWnd::cs_msg_sendmsg, this, std::placeholders::_1));
-    WSClientMgr::getMgr()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&MainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
-    WSClientMgr::getMgr()->regMsgCall("cs_msg_update_sessionlist", std::bind(&MainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
-    WSClientMgr::getMgr()->regMsgCall("cs_msg_update_grouplist", std::bind(&MainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
-    WSClientMgr::getMgr()->regMsgCall("cs_msg_update_friendlist", std::bind(&MainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
+    NetClientUtils::getUtils()->regMsgCall("cs_msg_sendmsg", std::bind(&MainWnd::cs_msg_sendmsg, this, std::placeholders::_1));
+    NetClientUtils::getUtils()->regMsgCall("cs_msg_sendgroupmsg", std::bind(&MainWnd::cs_msg_sendgroupmsg, this, std::placeholders::_1));
+    NetClientUtils::getUtils()->regMsgCall("cs_msg_update_sessionlist", std::bind(&MainWnd::cs_msg_update_sessionlist, this, std::placeholders::_1));
+    NetClientUtils::getUtils()->regMsgCall("cs_msg_update_grouplist", std::bind(&MainWnd::cs_msg_update_grouplist, this, std::placeholders::_1));
+    NetClientUtils::getUtils()->regMsgCall("cs_msg_update_friendlist", std::bind(&MainWnd::cs_msg_update_friendlist, this, std::placeholders::_1));
 
     m_networkMgr = new QNetworkAccessManager(this);
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
@@ -200,7 +200,7 @@ void MainWnd::cs_msg_sendmsg(neb::CJsonObject& msg)
 
     if (ses == nullptr)
     {
-        LogDebug << "can not find ses sesId:" << sesid;
+        LogD << "can not find ses sesId:" << sesid;
         return;
     }
 
@@ -440,7 +440,7 @@ void MainWnd::requestFriendList()
     //
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->m_userid);
-    WSClientMgr::getMgr()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::getUtils()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg) {
         if (!msg["data"].IsArray())
         {
             return;
@@ -476,10 +476,10 @@ void MainWnd::requestSessionList()
     // 向远端请求会话列表
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->getMainWnd()->m_userid);
-    WSClientMgr::getMgr()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::getUtils()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg) {
         // QMessageBox::information(nullptr, "info",
         // msg.ToString().c_str());
-        LogDebug << "msg:" << msg.ToString().c_str();
+        LogD << "msg:" << msg.ToString().c_str();
         // 向会话列表中添加一些数据
         if (!msg["data"].IsArray())
         {
@@ -594,8 +594,8 @@ void MainWnd::requestGroupList()
 {
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->getMainWnd()->m_userid);
-    WSClientMgr::getMgr()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
-        LogDebug << "requestGroupList:" << msg.ToString().c_str();
+    NetClientUtils::getUtils()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
+        LogD << "requestGroupList:" << msg.ToString().c_str();
         // 先判断传入是否是msg["data"]是否是array
         if (!msg["data"].IsArray())
         {
@@ -795,19 +795,19 @@ void MainWnd::slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason
     {
         case QSystemTrayIcon::Unknown:
         {
-            LogDebug << "unknown message";
+            LogD << "unknown message";
         }
         break;
 
         case QSystemTrayIcon::Context:
         {
             // 右键菜单
-            LogDebug << "context";
+            LogD << "context";
         }
         break;
         case QSystemTrayIcon::DoubleClick:
         {
-            LogDebug << "double click";
+            LogD << "double click";
         }
         break;
         case QSystemTrayIcon::Trigger:
@@ -817,12 +817,12 @@ void MainWnd::slotOnSystemTrayIconClick(QSystemTrayIcon::ActivationReason reason
             {
                 showNormal();
             }
-            LogDebug << "trigger";
+            LogD << "trigger";
         }
         break;
         case QSystemTrayIcon::MiddleClick:
         {
-            LogDebug << "midlle click";
+            LogD << "midlle click";
         }
         break;
         default:
@@ -838,7 +838,7 @@ void MainWnd::slotOnSettingBtnClick()
 
 void MainWnd::slotSearchText(QString searchText)
 {
-    LogDebug << " searchText = " << searchText;
+    LogD << " searchText = " << searchText;
     m_sMiddleLayout->setCurrentIndex(3);
     // 清空列表项
     int count = m_commSearchListWnd->m_listWidget->count();

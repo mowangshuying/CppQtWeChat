@@ -1,7 +1,7 @@
 #include "SelfSplit.h"
 #include "FindFriendItemWnd.h"
 #include "FindFriendOrGroupWnd.h"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include "./json/CJsonObject.hpp"
 #include "StyleSheetMgr.h"
 
@@ -151,7 +151,7 @@ void FindFriendOrGroupWnd::slotOnSearchBtnClicked()
             delete pitem;
         }
 
-        WSClientMgr::getMgr()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
+        NetClientUtils::getUtils()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
             int state;
             if (!msg.Get("state", state))
             {

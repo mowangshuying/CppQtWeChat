@@ -3,20 +3,6 @@
 QFile* Log::gFileLog = nullptr;
 QtMessageHandler Log::gDefaultHandler = nullptr;
 
-QString Log::getTimeStr()
-{
-    QDateTime dateTime = QDateTime::currentDateTime();
-    QString timeStr = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
-    return timeStr;
-}
-
-QString Log::getFileName(const char* file)
-{
-    QString fileStr = file;
-    QString fileNameStr = fileStr.right(fileStr.size() - fileStr.lastIndexOf("\\") - 1);
-    return fileNameStr;
-}
-
 void Log::init()
 {
     QDateTime dateTime = QDateTime::currentDateTime();
@@ -42,6 +28,20 @@ void Log::deinit()
         delete gFileLog;
         gFileLog = nullptr;
     }
+}
+
+QString Log::getTimeStr()
+{
+    QDateTime dateTime = QDateTime::currentDateTime();
+    QString timeStr = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
+    return timeStr;
+}
+
+QString Log::getFileName(const char* file)
+{
+    QString fileStr = file;
+    QString fileNameStr = fileStr.right(fileStr.size() - fileStr.lastIndexOf("\\") - 1);
+    return fileNameStr;
 }
 
 void Log::messageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg)

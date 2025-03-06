@@ -8,7 +8,7 @@
 #include "CreateGroupListItemWithSelBtnWnd.h"
 #include "CreateGroupListItemWnd.h"
 #include "DataManager.h"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include "MainWnd.h"
 #include "StyleSheetMgr.h"
 
@@ -321,7 +321,7 @@ void CreateGroupWnd::slotComfirmBtnClick()
         {
             continue;
         }
-        LogDebug << "groupfrindIdVct add " << wnd->m_friendid;
+        LogD << "groupfrindIdVct add " << wnd->m_friendid;
         groupfriendIdVct.push_back(wnd->m_friendid);
     }
     // 填充数据
@@ -334,13 +334,13 @@ void CreateGroupWnd::slotComfirmBtnClick()
         json["groupfriends"].Add(groupfriendIdVct[i]);
     }
     // 向远端服务器发送请求
-    WSClientMgr::getMgr()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
-        LogDebug << "msg:" << msg.ToString().c_str();
+    NetClientUtils::getUtils()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
+        LogD << "msg:" << msg.ToString().c_str();
         // 现在服务端仅仅返回 createid，groupname,groupid,groupfriends
         int groupid = -1;
         if (!msg["data"].Get("groupid", groupid))
         {
-            LogDebug << "msg[\"data\"] can not find groupid!";
+            LogD << "msg[\"data\"] can not find groupid!";
             return;
         }
         // 接收到创建群组成功的时候，向列表中嵌入一条数据

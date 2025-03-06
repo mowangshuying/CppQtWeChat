@@ -20,7 +20,7 @@ StyleSheetMgr::~StyleSheetMgr()
 
 void StyleSheetMgr::reg(QString wndObjectName, QStyleSheetObject object)
 {
-    LogDebug << "reg:" << wndObjectName;
+    LogD << "reg:" << wndObjectName;
     auto itf = m_map.find(wndObjectName);
     if (itf != m_map.end())
     {
@@ -38,7 +38,7 @@ void StyleSheetMgr::reg(QString wndObjectName, QStyleSheetObject object)
         m_map[wndObjectName] = watcher;
 
         connect(fileWatcher, &QFileSystemWatcher::fileChanged, [wndObjectName, this](const QString& path) {
-            LogDebug << "file changed path:" << path;
+            LogD << "file changed path:" << path;
             QFile qss(path);
             if (qss.open(QIODevice::ReadOnly))
             {

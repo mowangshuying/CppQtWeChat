@@ -41,7 +41,7 @@ CommContactItemWnd::CommContactItemWnd(QWidget* p, const char* headUrl, const ch
 
     setFixedHeight(65);
 
-    LogDebug << "w:" << this->width() << "h:" << this->height();
+    LogD << "w:" << this->width() << "h:" << this->height();
 }
 
 CommContactItemWnd::~CommContactItemWnd()

@@ -7,7 +7,7 @@
 
 CommContactInfoWnd::CommContactInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
-    LogDebug;
+    LogD;
     setObjectName("QCommContactInfo");
     QStyleSheetObject object;
     object.m_qssFileName = "./stylesheet/" + objectName() + ".qss";
@@ -147,7 +147,7 @@ CommContactInfoWnd::~CommContactInfoWnd()
 
 void CommContactInfoWnd::slotContactInfoChange(QMap<QString, QString> map)
 {
-    LogDebug << "contactInfoChange map = " << map;
+    LogD << "contactInfoChange map = " << map;
     // 根据map中name字段修改昵称字段
     m_nickNameLabel->setText(map["name"]);
     // 加载QDataManager中玩家头像数据

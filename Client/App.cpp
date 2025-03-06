@@ -2,7 +2,7 @@
 #include <QMessageBox>
 
 #include "LoginRegWnd.h"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include "DealNewFriendsApplyWnd.h"
 #include <QDir>
 #include "StyleSheetMgr.h"
@@ -16,10 +16,10 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon("./img/wechat.ico"));
 
-    LogDebug << "start";
+    LogD << "start";
     Log::init();
     StyleSheetMgr::initMgr();
-    WSClientMgr::initMgr();
+    NetClientUtils::init();
     DataManager::initMgr();
 
     // 加载本地的样式表
@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 
     // 最后退出日志
     DataManager::exitMgr();
-    WSClientMgr::exitMgr();
+    NetClientUtils::deinit();
     StyleSheetMgr::exitMgr();
     Log::deinit();
 }

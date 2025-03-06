@@ -26,11 +26,11 @@ ScreenShotWnd::ScreenShotWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     //  LogDebug << "screens size:" << screens.size();
     m_screen = QApplication::screenAt(QCursor::pos());
     QRect screenRect = m_screen->geometry();
-    LogDebug << "screenRect:" << screenRect;
+    LogD << "screenRect:" << screenRect;
 
     m_fullScreenPixmap = m_screen->grabWindow(0);
     QSize size = m_fullScreenPixmap.size();
-    LogDebug << "screen pixmap size:" << m_fullScreenPixmap.size();
+    LogD << "screen pixmap size:" << m_fullScreenPixmap.size();
 
     m_begPos = QPoint(-1, -1);
     m_endPos = QPoint(-1, -1);
@@ -139,8 +139,8 @@ void ScreenShotWnd::mouseReleaseEvent(QMouseEvent* event)
         m_endPos = event->pos();
         m_globalEndPos = event->globalPos();
 
-        LogDebug << "end pos x = " << m_endPos.x() << ",y = " << m_endPos.y();
-        LogDebug << "global end pos x = " << m_globalEndPos.x() << ",y = " << m_globalEndPos.y();
+        LogD << "end pos x = " << m_endPos.x() << ",y = " << m_endPos.y();
+        LogD << "global end pos x = " << m_globalEndPos.x() << ",y = " << m_globalEndPos.y();
 
         QPoint xPoint;
         xPoint.setX(qMin(m_begPos.x(), m_endPos.x()));
@@ -149,7 +149,7 @@ void ScreenShotWnd::mouseReleaseEvent(QMouseEvent* event)
         int nH = qAbs(m_endPos.y() - m_begPos.y());
 
         m_screenShotRect.setRect(xPoint.x(), xPoint.y(), nW, nH);
-        LogDebug << "mouse release event:"
+        LogD << "mouse release event:"
                  << "x = " << xPoint.x() << ",y = " << xPoint.y() << ",w = " << nW << ",h = " << nH;
         update();
 
@@ -165,7 +165,7 @@ void ScreenShotWnd::mouseReleaseEvent(QMouseEvent* event)
             tmpRect.setWidth(m_toolBarWnd->width());
             m_toolBarWnd->setGeometry(tmpRect);
             m_toolBarWnd->show();
-            LogDebug << "pating suc!";
+            LogD << "pating suc!";
         }
     }
 }
@@ -184,11 +184,11 @@ void ScreenShotWnd::paintEvent(QPaintEvent* event)
     pen.setWidth(2);                        // 画笔线条宽度
     painter.setPen(pen);                    // 设置画笔
 
-    LogDebug << "screen rect: x = " << m_screenShotRect.x() << ", y = " << m_screenShotRect.y() << ", w = " << m_screenShotRect.width() << ",h = " << m_screenShotRect.height();
+    LogD << "screen rect: x = " << m_screenShotRect.x() << ", y = " << m_screenShotRect.y() << ", w = " << m_screenShotRect.width() << ",h = " << m_screenShotRect.height();
     // 防止第一次就重绘 并且宽高大于0时才进行截图操作
     if (m_screenShotRect.width() > 0 && m_screenShotRect.height() > 0)
     {
-        LogDebug << "paint it!";
+        LogD << "paint it!";
         painter.drawPixmap(m_screenShotRect, m_fullScreenPixmap, m_screenShotRect);
         painter.drawRect(m_screenShotRect);
     }

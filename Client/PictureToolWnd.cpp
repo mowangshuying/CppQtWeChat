@@ -13,7 +13,7 @@
 #include "MainWnd.h"
 #include "SelfSplit.h"
 #include "StyleSheetMgr.h"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 
 PictureToolWnd::PictureToolWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 {
@@ -105,7 +105,7 @@ void PictureToolWnd::slotUploadBtnClicked()
     QString filepath = QFileDialog::getOpenFileName(nullptr, "选择图片", ".", "*.png");
     if (filepath.trimmed().isEmpty())
     {
-        LogErr << "file path is Empty!";
+        LogE << "file path is Empty!";
         return;
     }
 
@@ -148,7 +148,7 @@ void PictureToolWnd::slotDetermineBtnClicked()
         reply->deleteLater();
 
         QString str = QString(all);
-        LogDebug << str;
+        LogD << str;
 
         neb::CJsonObject json1(str.toStdString());
         std::string headimgstr = "";
@@ -161,8 +161,8 @@ void PictureToolWnd::slotDetermineBtnClicked()
         json2.Add("headimg", headimgstr);
         json2.Add("userid", MainWnd::getMainWnd()->m_userid);
         // 告诉远端服务器该玩家的头像数据
-        WSClientMgr::getMgr()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
-            LogDebug << msg.ToString().c_str();
+        NetClientUtils::getUtils()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
+            LogD << msg.ToString().c_str();
             QPixmap headImg = MainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
             MainWnd::getMainWnd()->m_toolWnd->m_headImg = headImg;
             MainWnd::getMainWnd()->m_toolWnd->m_headUrlLabel->setPixmap(headImg);

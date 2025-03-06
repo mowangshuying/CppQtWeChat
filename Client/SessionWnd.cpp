@@ -11,7 +11,7 @@
 #include "QSessionTopWnd.h"
 #include "SelfSplit.h"
 #include "MainWnd.h"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include "json/CJsonObject.hpp"
 #include "QMessageBox.h"
 #include "ChatFileInnerWnd.h"
@@ -129,7 +129,7 @@ void SessionWnd::slotSendTextBtnClick()
     // 如果不含任何内容不允许发送
     if (msgText == "")
     {
-        LogErr << "msgText is empty!";
+        LogE << "msgText is empty!";
         return;
     }
 
@@ -161,7 +161,7 @@ void SessionWnd::slotEmoijClicked(QString str)
 {
     QString tempStr = m_sendTextEdit->toPlainText() + str;
     m_sendTextEdit->setText(tempStr);
-    LogDebug << tempStr;
+    LogD << tempStr;
 }
 
 void SessionWnd::slotMoreBtnClick()
@@ -178,8 +178,8 @@ void SessionWnd::slotMoreBtnClick()
     // 向远端服务器发送请求
     neb::CJsonObject json;
     json.Add("groupId", m_recvId);
-    WSClientMgr::getMgr()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
-        LogDebug << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
+    NetClientUtils::getUtils()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
+        LogD << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
 
         // 向群好友列表中嵌入数据
         neb::CJsonObject datajson;
@@ -247,23 +247,23 @@ void SessionWnd::slotUpdateGroupName(QString groupName)
 
 void SessionWnd::dragEnterEvent(QDragEnterEvent* event)
 {
-    LogDebug << "dragEnterEvent";
+    LogD << "dragEnterEvent";
     event->acceptProposedAction();
 }
 
 void SessionWnd::dropEvent(QDropEvent* event)
 {
-    LogDebug << "dropEvent";
+    LogD << "dropEvent";
     // 拖拽成功获取文件信息
     const QMimeData* qm = event->mimeData();
     QString strFileName = qm->urls()[0].toLocalFile();
-    LogDebug << "strFileName:" << strFileName;
+    LogD << "strFileName:" << strFileName;
 
     // 判断是否是支持的文件
     QFileInfo fileInfo = QFileInfo(strFileName);
     if (fileInfo.isDir())
     {
-        LogErr << "is dir";
+        LogE << "is dir";
         return;
     }
 
@@ -340,7 +340,7 @@ void SessionWnd::dropEvent(QDropEvent* event)
         delete file;
         file = nullptr;
 
-        WSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogDebug << "after upload file recv msg from server!"; });
+        NetClientUtils::getUtils()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogD << "after upload file recv msg from server!"; });
     });
 }
 
@@ -392,7 +392,7 @@ void SessionWnd::resizeEvent(QResizeEvent* event)
 void SessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 {
     // QString userName = QMainWnd::getMainWnd()->m_username;
-    WSClientMgr::getMgr()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
+    NetClientUtils::getUtils()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
         dealMsgTime();
         // 向远端发送消息
         QString time = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
@@ -413,10 +413,10 @@ void SessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 
 void SessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
 {
-    WSClientMgr::getMgr()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
+    NetClientUtils::getUtils()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
         dealMsgTime();
 
-        LogDebug << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
+        LogD << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();
         // 向远端发送消息
         QString time = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
         ChatMsgWnd* msgWnd = new ChatMsgWnd(m_MsgWndList, MainWnd::getMainWnd()->m_userid, MainWnd::getMainWnd()->m_username, m_recvId);
@@ -440,7 +440,7 @@ void SessionWnd::dealMsgTime()
     {
         QDateTime nowDateTime = QDateTime::currentDateTime();
         int64_t distanceS = m_lastMsgDateTime.secsTo(nowDateTime);
-        LogDebug << "distanceS:" << distanceS;
+        LogD << "distanceS:" << distanceS;
 
         m_lastMsgDateTime = QDateTime::currentDateTime();
         if (distanceS >= 60 * 5)

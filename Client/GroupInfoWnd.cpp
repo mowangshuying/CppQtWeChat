@@ -5,7 +5,7 @@
 #include <QScrollArea>
 
 #include "StyleSheetMgr.h"
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include "MainWnd.h"
 
 GroupInfoWnd::GroupInfoWnd(QWidget* p /*= nullptr*/) : QWidget(p)
@@ -225,14 +225,14 @@ void GroupInfoWnd::addGroupFriendItem(int64_t ownerId, QString nickName)
 
 void GroupInfoWnd::slotSetGroupName()
 {
-    LogDebug << "called";
+    LogD << "called";
     neb::CJsonObject json;
     json.Add("ownerId", MainWnd::getMainWnd()->m_userid);
     json.Add("groupId", m_groupId);
     QString groupName = m_groupName2->getText();
     json.Add("groupName", groupName.toStdString());
-    WSClientMgr::getMgr()->request("cs_msg_set_group_name", json, [this, groupName](neb::CJsonObject& msg) {
-        LogDebug << msg.ToString().c_str();
+    NetClientUtils::getUtils()->request("cs_msg_set_group_name", json, [this, groupName](neb::CJsonObject& msg) {
+        LogD << msg.ToString().c_str();
         // 更新会话窗口中的标题
         emit signalUpdateGroupName(groupName);
     });

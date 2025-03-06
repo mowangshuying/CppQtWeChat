@@ -78,11 +78,11 @@ QSize ChatMsgWnd::fontRect(QString str)
 
     // 获取消息所需的
     QSize msgSize = getRealStringSize(str);
-    LogDebug << "get Real string size = " << msgSize;
+    LogD << "get Real string size = " << msgSize;
 
     // 消息框的高度，消息框的高度最小和头像等高
     int height = msgSize.height() > minH ? msgSize.height() : minH;
-    LogDebug << "msg height = " << height;
+    LogD << "msg height = " << height;
 
     // 计算三角形
     // 三角形所在Rect
@@ -101,7 +101,7 @@ QSize ChatMsgWnd::fontRect(QString str)
     }
     else
     {
-        LogDebug << "msgSize.Width() >= m_textWidth + m_spaceWidth";
+        LogD << "msgSize.Width() >= m_textWidth + m_spaceWidth";
         m_outerFrameLeftRect.setRect(m_triangleLeftRect.x() + m_triangleLeftRect.width(), m_lineHeight / 4 * 3, m_outerFrameWidth, height - m_lineHeight);
         m_outerFrameRightRect.setRect(m_triangleRightRect.x() - m_outerFrameWidth, m_lineHeight / 4 * 3, m_outerFrameWidth, height - m_lineHeight);
     }

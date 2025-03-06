@@ -3,7 +3,7 @@
 #include <QMouseEvent>
 
 #include <QDebug>
-#include "WSClientMgr.h"
+#include "NetClientUtils.h"
 #include <QMessageBox>
 #include <QBuffer>
 #include <QHttpMultiPart>
@@ -210,7 +210,7 @@ void LoginRegWnd::slotRegLoginBtnClicked()
         json.Add("nickname", nickname);
         json.Add("sex", sex);
 
-        WSClientMgr::getMgr()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
+        NetClientUtils::getUtils()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
             int state = 0;
 
             if (!msg.Get("state", state))
@@ -260,7 +260,7 @@ void LoginRegWnd::slotRegLoginBtnClicked()
         json.Add("username", username);
         json.Add("password", password);
 
-        WSClientMgr::getMgr()->request("cs_msg_login", json, [this](neb::CJsonObject& msg) {
+        NetClientUtils::getUtils()->request("cs_msg_login", json, [this](neb::CJsonObject& msg) {
             int state = 0;
             if (!msg.Get("state", state))
                 return;
@@ -277,7 +277,7 @@ void LoginRegWnd::slotRegLoginBtnClicked()
             if (!msg["data"].Get("username", username))
                 return;
 
-            LogDebug << msg.ToString().c_str();
+            LogD << msg.ToString().c_str();
             m_mainWnd = MainWnd::getMainWnd();
             if (m_mainWnd == nullptr)
                 return;

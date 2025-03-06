@@ -62,7 +62,7 @@ bool EditLabel::eventFilter(QObject* obj, QEvent* e)
         if (e->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(e);
-            LogDebug << "key:" << keyEvent->key();
+            LogD << "key:" << keyEvent->key();
             if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
             {
                 m_label->setText(m_lineEdit->text());

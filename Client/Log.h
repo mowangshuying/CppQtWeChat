@@ -26,48 +26,46 @@ class Log
     {
     }
 
-    static QString getTimeStr();
-
-    static QString getFileName(const char* file);
-
     static void init();
     static void deinit();
+    static QString getTimeStr();
+    static QString getFileName(const char* file);
     static void messageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg);
-
-  public:
+  
+public:
     static QFile* gFileLog;
     static QtMessageHandler gDefaultHandler;
 };
 
-#define LogFunc LogDebug << "called.";
+#define LogFunc LogD << "called.";
 
 #define getLogTimeStr Log::getTimeStr().toStdString().c_str()
 #define getLogFileStr Log::getFileName(__FILE__).toStdString().c_str()
 
-#define LogDebug                            \
-    qDebug() << "[" << getLogTimeStr << "]" \
+#define LogD                            \
+    qDebug().nospace() << "[" << getLogTimeStr << "]" \
              << "["                         \
              << "debug"                     \
              << "]"                         \
-             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "]"
+             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "] "
 
-#define LogInfo                             \
-    qDebug() << "[" << getLogTimeStr << "]" \
+#define LogI                             \
+    qDebug().nospace() << "[" << getLogTimeStr << "]" \
              << "["                         \
              << "info"                      \
              << "]"                         \
-             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "]"
+             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "] "
 
-#define LogWarn                             \
-    qDebug() << "[" << getLogTimeStr << "]" \
+#define LogW                             \
+    qDebug().nospace() << "[" << getLogTimeStr << "]" \
              << "["                         \
              << "warn"                      \
              << "]"                         \
-             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "]"
+             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "] "
 
-#define LogErr                              \
-    qDebug() << "[" << getLogTimeStr << "]" \
+#define LogE                              \
+    qDebug().nospace() << "[" << getLogTimeStr << "]" \
              << "["                         \
              << "err"                       \
              << "]"                         \
-             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "]"
+             << "[" << getLogFileStr << "." << __FUNCTION__ << "." << __LINE__ << "] "

@@ -80,7 +80,7 @@ void CommListWnd::slotOnCurrentItemClicked(QListWidgetItem* item)
     // 自定义列表
     // 包含如下列表信息：联系人列表、消息列表、群聊列表
     CustomListWidgetItem* pCustItem = dynamic_cast<CustomListWidgetItem*>(item);
-    LogDebug << "sesid:" << pCustItem->sesId();
+    LogD << "sesid:" << pCustItem->sesId();
 
     // 当前点击的是联系人列表中的某一项目
     if (m_WndType == QCommListWndEnum::ContactItemWndType)
@@ -151,7 +151,7 @@ void CommListWnd::slotOnStartGroupBtnClicked()
     QRect rect = m_startGroupBtn->geometry();
     QPoint gPoint = m_startGroupBtn->mapToGlobal(QPoint(0, 0));
 
-    LogDebug << "GPoint:" << gPoint;
+    LogD << "GPoint:" << gPoint;
 
     gPoint.setY(m_startGroupBtn->height() + gPoint.y());
     m_selectWnd->move(gPoint);
@@ -165,7 +165,7 @@ bool CommListWnd::eventFilter(QObject* target, QEvent* event)
         QKeyEvent* tmpKeyEvent = (QKeyEvent*)event;
         if (tmpKeyEvent->key() == Qt::Key_Return)
         {
-            LogDebug << "Press Enter Key searchText = " << m_searchEdit->text();
+            LogD << "Press Enter Key searchText = " << m_searchEdit->text();
             emit signalSearchText(m_searchEdit->text());
             return true;
         }
@@ -178,11 +178,11 @@ void CommListWnd::addMsgItem(const char* name, const char* msg, qint64 sesid, in
 {
     if (hasMsgItemBySesId(sesid))
     {
-        LogDebug << "has same ses sesid = " << sesid;
+        LogD << "has same ses sesid = " << sesid;
         return;
     }
 
-    LogDebug << "msg:" << msg;
+    LogD << "msg:" << msg;
     CommMsgItemWnd* pMsgItem = new CommMsgItemWnd(m_listWidget, name, msg, sesid, userid, isGroupMsg);
     QListWidgetItem* pListItem = new CustomListWidgetItem(m_listWidget);
     pMsgItem->setFixedWidth(this->width() - 5);
@@ -194,7 +194,7 @@ void CommListWnd::addContactsItem(const char* headUrl, const char* name, bool is
 {
     if (hasContactsItemByFriendId(friendid))
     {
-        LogDebug << "has same friend friendId = " << friendid;
+        LogD << "has same friend friendId = " << friendid;
         return;
     }
     CommContactItemWnd* pMsgItem = new CommContactItemWnd(m_listWidget, headUrl, name, isNewFriend, friendid);
@@ -208,7 +208,7 @@ void CommListWnd::addGroupItem(const char* headUrl, const char* name, int groupi
 {
     if (hasGroupItemByGroupId(groupid))
     {
-        LogDebug << "has same group groupid = " << groupid;
+        LogD << "has same group groupid = " << groupid;
         return;
     }
 
@@ -282,7 +282,7 @@ void CommListWnd::setGroupItemNameByGroupId(int64_t grouId, QString groupName)
         {
             QString rawGroupName = pWnd->m_groupName->text();
             pWnd->m_groupName->setText(groupName);
-            LogDebug << "update groupName:" << rawGroupName << " -> " << pWnd->m_groupName->text();
+            LogD << "update groupName:" << rawGroupName << " -> " << pWnd->m_groupName->text();
             break;
         }
     }

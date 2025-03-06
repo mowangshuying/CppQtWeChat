@@ -222,10 +222,10 @@
     <ClCompile Include="SelfSwitchButton.cpp" />
     <ClCompile Include="ToolWnd.cpp" />
     <ClCompile Include="UserInfoWnd.cpp" />
-    <ClCompile Include="WSClientMgr.cpp" />
+    <ClCompile Include="NetClientUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="WSClientMgr.h" />
+    <QtMoc Include="NetClientUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginRegWnd.h" />
@@ -305,7 +305,7 @@
     <QtMoc Include="SessionWnd.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="WeChatClient.rc" />
+    <ResourceCompile Include="Client.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="img\wechat.ico" />
