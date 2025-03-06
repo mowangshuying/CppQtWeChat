@@ -1,6 +1,5 @@
 #pragma once
 
-// 
 #include "def.h"
 #include "json/CJsonObject.hpp"
 #include <QWebSocket>

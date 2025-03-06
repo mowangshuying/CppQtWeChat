@@ -28,10 +28,10 @@ class LoginRegWnd : public QWidget
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
-    void slotCloseWnd();
-    void slotMinWnd();
-    void slotRegLoginSel(bool isSel = false);
-    void slotRegLoginBtnClicked();
+    void onCloseWnd();
+    void onMinWnd();
+    void onRegLoginSel(bool isSel = false);
+    void onRegLoginBtnClicked();
 
   public:
     QWidget* m_centerWnd;

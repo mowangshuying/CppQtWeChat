@@ -135,9 +135,9 @@ void LoginRegWnd::regSignalSlot()
 {
     connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotMinWnd()));
     connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
-    connect(m_regLoginCB, SIGNAL(clicked(bool)), this, SLOT(slotRegLoginSel(bool)));
-    connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(slotRegLoginBtnClicked()));
-    connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(slotRegLoginBtnClicked()));
+    connect(m_regLoginCB, SIGNAL(clicked(bool)), this, SLOT(onRegLoginSel(bool)));
+    connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(onRegLoginBtnClicked()));
+    connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(onRegLoginBtnClicked()));
 }
 
 void LoginRegWnd::paintEvent(QPaintEvent* event)
@@ -168,17 +168,17 @@ void LoginRegWnd::mouseReleaseEvent(QMouseEvent* event)
     m_bPress = false;
 }
 
-void LoginRegWnd::slotCloseWnd()
+void LoginRegWnd::onCloseWnd()
 {
     close();
 }
 
-void LoginRegWnd::slotMinWnd()
+void LoginRegWnd::onMinWnd()
 {
     showMinimized();
 }
 
-void LoginRegWnd::slotRegLoginSel(bool isSel /*= false*/)
+void LoginRegWnd::onRegLoginSel(bool isSel /*= false*/)
 {
     if (isSel)
     {
@@ -192,16 +192,17 @@ void LoginRegWnd::slotRegLoginSel(bool isSel /*= false*/)
     }
 }
 
-void LoginRegWnd::slotRegLoginBtnClicked()
+void LoginRegWnd::onRegLoginBtnClicked()
 {
-    // 提供注册功能，点击注册按钮向远端服务发送消息
+    
     if (m_bReg)
     {
+        // 用户注册-----------------------------------------------------------------
         neb::CJsonObject json;
 
-        std::string username = m_accuntEdit->text().toStdString().c_str();  // 用户名
-        std::string password = m_pwdEdit->text().toStdString().c_str();     // 密码
-        std::string nickname = m_accuntEdit->text().toStdString().c_str();  // 角色名
+        std::string username = m_accuntEdit->text().toStdString().c_str();
+        std::string password = m_pwdEdit->text().toStdString().c_str();
+        std::string nickname = m_accuntEdit->text().toStdString().c_str();
 
         // 性别标识
         int sex = 0;
@@ -210,43 +211,21 @@ void LoginRegWnd::slotRegLoginBtnClicked()
         json.Add("nickname", nickname);
         json.Add("sex", sex);
 
-        NetClientUtils::getUtils()->request("cs_msg_register", json, [this](neb::CJsonObject& msg) {
-            int state = 0;
-
-            if (!msg.Get("state", state))
-                return;
-
-            std::string infoStr = "注册失败:" + msg["data"].ToString();
-            if (state != 0)
-            {
-                QMessageBox::information(nullptr, "info", infoStr.c_str());
-                return;
-            }
-
-            int userId = -1;
+        NetClientUtils::getUtils()->request("regUser", json, [this](neb::CJsonObject& msg) {
+            int64 userId = 0;
             if (!msg["data"].Get("userId", userId))
             {
                 return;
             }
 
-            // 上传默认的头像.
-            QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
-            QNetworkRequest request;
-            request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
-            QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
-            QHttpPart part;
-            part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"%1.png\"").arg(userId));
-            part.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
-            QFile* file = new QFile("./img/default.png");
-            file->open(QFile::ReadOnly);
-            part.setBodyDevice(file);
-            file->setParent(multiPart);
-            multiPart->append(part);
-            QNetworkReply* reply = pManager->post(request, multiPart);
-
-            // 注册成功后，弹出窗口
-            infoStr = "注册成功";
-            QMessageBox::information(nullptr, "info", infoStr.c_str());
+            if (userId > 0)
+            {
+                QMessageBox::information(nullptr, "info", "reg Suc");
+            }
+            else
+            {
+                QMessageBox::information(nullptr, "info", "reg Err");
+            }
         });
         return;
     }
@@ -260,18 +239,18 @@ void LoginRegWnd::slotRegLoginBtnClicked()
         json.Add("username", username);
         json.Add("password", password);
 
-        NetClientUtils::getUtils()->request("cs_msg_login", json, [this](neb::CJsonObject& msg) {
-            int state = 0;
-            if (!msg.Get("state", state))
-                return;
+        NetClientUtils::getUtils()->request("login", json, [this](neb::CJsonObject& msg) {
+            //int state = 0;
+            //if (!msg.Get("state", state))
+            //    return;
 
             int64 userid = 0;
             if (!msg["data"].Get("userId", userid))
                 return;
 
-            std::string token;
-            if (!msg["data"].Get("token", token))
-                return;
+            //std::string token;
+            //if (!msg["data"].Get("token", token))
+            //    return;
 
             std::string username;
             if (!msg["data"].Get("username", username))
