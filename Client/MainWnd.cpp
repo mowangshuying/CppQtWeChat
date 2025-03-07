@@ -24,15 +24,18 @@ MainWnd* MainWnd::m_mainWnd = nullptr;
 MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
 {
     LogFunc;
-    m_centerWnd = new QWidget(this);
-    m_centerWnd->setObjectName("QMainWnd");
-    QString qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
-    StyleSheetMgr::getMgr()->reg(m_centerWnd->objectName(), qssFileName, m_centerWnd);
+    m_centerWnd = this;
+    //m_centerWnd->setObjectName("QMainWnd");
+    //QString qssFileName = "./stylesheet/" + m_centerWnd->objectName() + ".qss";
+    //StyleSheetMgr::getMgr()->reg(m_centerWnd->objectName(), qssFileName, m_centerWnd);
 
     m_hLayout = new QHBoxLayout(m_centerWnd);
     m_centerWnd->setLayout(m_hLayout);
 
+    // 左侧工具栏部分 ----------------------------
     m_toolWnd = new ToolWnd(m_centerWnd);
+
+    // 中间部分 ----------------------------------
     m_commMsgListWnd = new CommListWnd(m_centerWnd, CommListWnd::MsgItemWndTpye);
     m_commContactsListWnd = new CommListWnd(m_centerWnd, CommListWnd::ContactItemWndType);
     m_commGroupsListWnd = new CommListWnd(m_centerWnd, CommListWnd::GroupItemWndType);
@@ -40,8 +43,6 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
 
     m_hLayout->setContentsMargins(0, 0, 0, 0);
     m_hLayout->setSpacing(0);
-
-    // 左边Layout
     m_sMiddleLayout = new QStackedLayout(m_centerWnd);
     m_sMiddleLayout->addWidget(m_commMsgListWnd);
     m_sMiddleLayout->addWidget(m_commContactsListWnd);
@@ -51,6 +52,7 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
 
     m_hLayout->setSpacing(0);
 
+    // 右边部分 ------------------------------------
     m_sRightLayout = new QStackedLayout(m_centerWnd);
     m_sRightLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -77,6 +79,7 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
         SelfSplit* sp = new SelfSplit(m_centerWnd, SelfSplit::Direction_V);
         m_hLayout->addWidget(sp);
     }
+
     m_hLayout->setSpacing(0);
     m_hLayout->addLayout(m_sRightLayout, 1);
     m_hLayout->addStretch();
@@ -103,7 +106,19 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
     m_networkMgr = new QNetworkAccessManager(this);
     connect(m_networkMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotReplyFinished(QNetworkReply*)));
 
-    // 系统托盘功能
+    makeSystemTray();
+
+    setMinimumSize(1000, 800);
+    setMouseTracking(true);
+
+    m_settingWnd = new SettingWnd();
+    m_settingWnd->hide();
+    connect(m_toolWnd->m_selectMoreWnd->m_settingBtn, SIGNAL(clicked()), this, SLOT(slotOnSettingBtnClick()));
+}
+
+void MainWnd::makeSystemTray()
+{
+    // 系统托盘功能 -----------------------------------------
     m_systemTrayIcon = new QSystemTrayIcon(this);
     m_systemTrayIcon->setIcon(QIcon("./img/wechat.ico"));
     m_systemTrayIcon->setToolTip("QT版微信v2.0.0");
@@ -122,13 +137,6 @@ MainWnd::MainWnd(QWidget* p /*= nullptr*/) : FramelessWidget(p)
     connect(m_systemTrayIconExitAction, &QAction::triggered, this, &MainWnd::closeWnd);
     connect(m_systemTrayIconShowMainWndAction, &QAction::triggered, this, &MainWnd::showNormalWnd);
     connect(m_systemTrayIcon, &QSystemTrayIcon::activated, this, &MainWnd::slotOnSystemTrayIconClick);
-
-    setMinimumSize(880, 660);
-    setMouseTracking(true);
-
-    m_settingWnd = new SettingWnd();
-    m_settingWnd->hide();
-    connect(m_toolWnd->m_selectMoreWnd->m_settingBtn, SIGNAL(clicked()), this, SLOT(slotOnSettingBtnClick()));
 }
 
 MainWnd* MainWnd::getMainWnd()

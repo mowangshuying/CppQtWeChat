@@ -15,9 +15,8 @@
 #include <QNetworkReply>
 #include "SelectMoreWnd.h"
 
-/*
- * 最右边工具栏窗口
- */
+// 最右边工具栏窗口
+// 消息，用户，群组，设置
 class ToolWnd : public QWidget
 {
     // 添加消息映射支持

@@ -240,23 +240,15 @@ void LoginRegWnd::onRegLoginBtnClicked()
         json.Add("password", password);
 
         NetClientUtils::getUtils()->request("login", json, [this](neb::CJsonObject& msg) {
-            //int state = 0;
-            //if (!msg.Get("state", state))
-            //    return;
-
             int64 userid = 0;
             if (!msg["data"].Get("userId", userid))
                 return;
-
-            //std::string token;
-            //if (!msg["data"].Get("token", token))
-            //    return;
 
             std::string username;
             if (!msg["data"].Get("username", username))
                 return;
 
-            LogD << msg.ToString().c_str();
+            // LogD << msg.ToString().c_str();
             m_mainWnd = MainWnd::getMainWnd();
             if (m_mainWnd == nullptr)
                 return;

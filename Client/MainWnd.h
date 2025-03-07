@@ -33,6 +33,8 @@ class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
     // 会话窗口
     MainWnd(QWidget* p = nullptr);
 
+    void makeSystemTray();
+
   public:
     ~MainWnd();
 
