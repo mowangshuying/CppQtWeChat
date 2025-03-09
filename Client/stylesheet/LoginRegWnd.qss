@@ -24,13 +24,21 @@ QPushButton:pressed {
     background-color: rgb(245, 245, 245);
 }
 
-#settingBtn,
 #closeBtn,
 #minBtn {
     background-color: transparent;
     border: 1px solid transparent;
 }
 
+#closeBtn:hover {
+	background-color: rgb(229, 0, 0);
+	border: 1px solid transparent;
+}
+
+#minBtn:hover {
+	background-color: rgb(229, 229, 229);
+	border: 1px solid transparent;
+}
 
 /*lineedit qss*/
 

@@ -27,6 +27,7 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
 
     m_vLayout = new QVBoxLayout(m_centerWnd);
     m_vLayout->setSpacing(0);
+    m_vLayout->setContentsMargins(0, 0, 0, 0);
     m_centerWnd->setLayout(m_vLayout);
 
     m_topWnd = new QWidget(m_centerWnd);
@@ -42,26 +43,20 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_titleLabel = new QLabel(m_centerWnd);
     m_minBtn = new QPushButton(m_centerWnd);
     m_closeBtn = new QPushButton(m_centerWnd);
-    m_settingBtn = new QPushButton(m_centerWnd);
 
-    m_settingBtn->setIconSize(QSize(20, 20));
-    m_settingBtn->setIcon(QPixmap("./img/settingBtn_.png").scaled(20, 20));
-    m_settingBtn->setFixedSize(20, 20);
+    m_minBtn->setIconSize(QSize(25, 25));
+    m_minBtn->setIcon(QPixmap("./img/ChromeMinimize.png"));
+    m_minBtn->setFixedSize(25, 25);
 
-    m_minBtn->setIconSize(QSize(20, 20));
-    m_minBtn->setIcon(QPixmap("./img/minBtn_.png").scaled(20, 20));
-    m_minBtn->setFixedSize(20, 20);
+    m_closeBtn->setIconSize(QSize(25, 25));
+    m_closeBtn->setIcon(QPixmap("./img/ChromeClose.png"));
+    m_closeBtn->setFixedSize(25, 25);
 
-    m_closeBtn->setIconSize(QSize(20, 20));
-    m_closeBtn->setIcon(QPixmap("./img/closeBtn_.png").scaled(20, 20));
-    m_closeBtn->setFixedSize(20, 20);
-
-    m_settingBtn->setObjectName("settingBtn");
     m_closeBtn->setObjectName("closeBtn");
     m_minBtn->setObjectName("minBtn");
 
     m_hTopLayout->addWidget(m_titleLabel);
-    m_hTopLayout->addWidget(m_settingBtn);
+    //m_hTopLayout->addWidget(m_settingBtn);
     m_hTopLayout->addWidget(m_minBtn);
     m_hTopLayout->addWidget(m_closeBtn);
 
@@ -85,8 +80,8 @@ LoginRegWnd::LoginRegWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_accuntEdit->setPlaceholderText("请输入账号");
     m_pwdEdit->setPlaceholderText("请输入密码");
 
-    m_accuntEdit->setText("myfirstAccount");
-    m_pwdEdit->setText("mypassword");
+    m_accuntEdit->setText("");
+    m_pwdEdit->setText("");
 
     m_regOrLoginBtn = new QPushButton();
     m_regOrLoginBtn->setFixedSize(240, 40);
@@ -133,8 +128,8 @@ LoginRegWnd::~LoginRegWnd()
 
 void LoginRegWnd::regSignalSlot()
 {
-    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(slotMinWnd()));
-    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(slotCloseWnd()));
+    connect(m_minBtn, SIGNAL(clicked()), this, SLOT(onMinWnd()));
+    connect(m_closeBtn, SIGNAL(clicked()), this, SLOT(onCloseWnd()));
     connect(m_regLoginCB, SIGNAL(clicked(bool)), this, SLOT(onRegLoginSel(bool)));
     connect(m_regOrLoginBtn, SIGNAL(clicked()), this, SLOT(onRegLoginBtnClicked()));
     connect(m_pwdEdit, SIGNAL(returnPressed()), this, SLOT(onRegLoginBtnClicked()));
@@ -248,7 +243,7 @@ void LoginRegWnd::onRegLoginBtnClicked()
             if (!msg["data"].Get("username", username))
                 return;
 
-            // LogD << msg.ToString().c_str();
+            // 登录成功打开主窗口并所有用户数据；
             m_mainWnd = MainWnd::getMainWnd();
             if (m_mainWnd == nullptr)
                 return;
