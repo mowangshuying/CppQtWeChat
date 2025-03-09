@@ -3,28 +3,25 @@
 #include "def.h"
 
 #include <FramelessHelper/Widgets/FramelessWidget>
-
-#include <map>
-#include <QWidget>
 #include <QHBoxLayout>
-#include <QStackedLayout>
-#include <QNetworkReply>
-
-#include "ToolWnd.h"
-#include "CommListWnd.h"
-#include "SessionWnd.h"
-#include "CommContactInfoWnd.h"
-#include "GroupInfoWnd.h"
-#include "DealNewFriendsApplyWnd.h"
-#include "./json/CJsonObject.hpp"
-#include <QSystemTrayIcon>
 #include <QMenu>
-// #include "VoiceTelphoneWnd.h"
-#include "SettingWnd.h"
+#include <QNetworkReply>
+#include <QStackedLayout>
+#include <QSystemTrayIcon>
+#include <QWidget>
+#include <map>
 
-/*
- * 主窗口窗口只能有一个，将主窗口设置为单例对象
- */
+#include "./json/CJsonObject.hpp"
+#include "CommContactInfoWnd.h"
+#include "CommListWnd.h"
+#include "DealNewFriendsApplyWnd.h"
+#include "GroupInfoWnd.h"
+#include "SessionWnd.h"
+#include "SettingWnd.h"
+#include "ToolWnd.h"
+// #include "VoiceTelphoneWnd.h"
+
+// 主窗口为单例对象；
 class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
 {
     // 添加消息映射支持
@@ -33,10 +30,11 @@ class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
     // 会话窗口
     MainWnd(QWidget* p = nullptr);
 
-    void makeSystemTray();
-
   public:
     ~MainWnd();
+    
+    // 构建系统图标;
+    void makeSystemTray();
 
   public:
     static MainWnd* getMainWnd();
@@ -69,10 +67,14 @@ class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
 
     void request()
     {
+        // 获取头像；
         requestHeadImg();
+        // 获取好友列表；
         requestFriendList();
-        requestSessionList();
+        // 获取群组列表；
         requestGroupList();
+        // 获取会话列表；
+        requestSessionList();
     }
 
   public slots:
@@ -82,9 +84,6 @@ class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
     void showNormalWnd();
 
     void mouseMoveEvent(QMouseEvent* event);
-
-    //  void adjustWndSizeByMouseMove(QMouseEvent* event);
-
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
@@ -101,20 +100,31 @@ class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
     QWidget* m_centerWnd;
 
     QHBoxLayout* m_hLayout;
+    
+    
+    // 左边部分：工具栏---------------------
     ToolWnd* m_toolWnd;
 
+    // 中间部分：----------------------------
+    // 布局；
+    QStackedLayout* m_sMiddleLayout;
+    // 消息窗口
     CommListWnd* m_commMsgListWnd;
+    // 联系人窗口
     CommListWnd* m_commContactsListWnd;
+    // 群聊窗口
     CommListWnd* m_commGroupsListWnd;
+    // 查找窗口
     CommListWnd* m_commSearchListWnd;
 
-    CommContactInfoWnd* m_commContactInfo;
-
-    DealNewFriendsApplyWnd* m_dealNewFriendsApplyWnd;
-
-    SessionWnd* m_sessionWnd;
-    QStackedLayout* m_sMiddleLayout;
+    // 右侧部分 ----------------------------
     QStackedLayout* m_sRightLayout;
+    // 联系人页面
+    CommContactInfoWnd* m_commContactInfo;
+    // 处理添加好友窗口；
+    DealNewFriendsApplyWnd* m_dealNewFriendsApplyWnd;
+    // 会话窗口
+    SessionWnd* m_sessionWnd;
 
     int m_lastSesId = -1;
     int m_lastContactId = -1;
@@ -124,22 +134,25 @@ class MainWnd : public FRAMELESSHELPER_PREPEND_NAMESPACE(FramelessWidget)
     bool m_bLeftBtnPress = false;
     QPoint m_leftBtnPressPoint;
 
-    static MainWnd* m_mainWnd;
-
-    // 用户名
+    // 用户名和用户id;
     QString m_username;
-    // 用户id
     int64_t m_userid;
+    
     QNetworkAccessManager* m_networkMgr;
 
-    //  BorderArea m_borderArea;
-
-    // 系统托盘功能
+    // 系统托盘功能 ----------------------------
     QSystemTrayIcon* m_systemTrayIcon;
     QMenu* m_systemTrayIconMenu;
     QAction* m_systemTrayIconExitAction;
     QAction* m_systemTrayIconShowMainWndAction;
 
+    // 语音通话功能;
     // VoiceTelphoneWnd* m_voiceTelphoneWnd;
+
+    // 设置窗口 -------------------------------
     SettingWnd* m_settingWnd;
+
+
+    // 主窗口静态变量 -------------------------
+    static MainWnd* m_mainWnd;
 };

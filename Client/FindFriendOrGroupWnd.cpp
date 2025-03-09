@@ -151,7 +151,7 @@ void FindFriendOrGroupWnd::slotOnSearchBtnClicked()
             delete pitem;
         }
 
-        NetClientUtils::getUtils()->request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
+        NetClientUtils::request("cs_msg_find_user", json, [this](neb::CJsonObject& msg) {
             int state;
             if (!msg.Get("state", state))
             {

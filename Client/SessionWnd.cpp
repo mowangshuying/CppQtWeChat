@@ -178,7 +178,7 @@ void SessionWnd::slotMoreBtnClick()
     // 向远端服务器发送请求
     neb::CJsonObject json;
     json.Add("groupId", m_recvId);
-    NetClientUtils::getUtils()->request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_get_group_info", json, [this](neb::CJsonObject& msg) {
         LogD << "cs_msg_get_group_info msg:" << msg.ToString().c_str();
 
         // 向群好友列表中嵌入数据
@@ -296,7 +296,7 @@ void SessionWnd::dropEvent(QDropEvent* event)
 
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
-    request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
+    request.setUrl(QUrl(HttpFileServerAddr));
     QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
     QHttpPart part;
     part.setHeader(QNetworkRequest::ContentDispositionHeader, httpHeader);
@@ -340,7 +340,7 @@ void SessionWnd::dropEvent(QDropEvent* event)
         delete file;
         file = nullptr;
 
-        NetClientUtils::getUtils()->request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogD << "after upload file recv msg from server!"; });
+        NetClientUtils::request("cs_msg_sendmsg", json, [this](neb::CJsonObject& msg) { LogD << "after upload file recv msg from server!"; });
     });
 }
 
@@ -392,7 +392,7 @@ void SessionWnd::resizeEvent(QResizeEvent* event)
 void SessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 {
     // QString userName = QMainWnd::getMainWnd()->m_username;
-    NetClientUtils::getUtils()->request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_sendmsg", json, [this, msgText](neb::CJsonObject& msg) {
         dealMsgTime();
         // 向远端发送消息
         QString time = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
@@ -413,7 +413,7 @@ void SessionWnd::sendMsgToUser(neb::CJsonObject json, QString msgText)
 
 void SessionWnd::sendMsgToGroup(neb::CJsonObject json, QString msgText)
 {
-    NetClientUtils::getUtils()->request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_sendgroupmsg", json, [this, msgText](neb::CJsonObject& msg) {
         dealMsgTime();
 
         LogD << "cs_msg_sendgroupmsg:" << msg.ToString().c_str();

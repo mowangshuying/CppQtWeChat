@@ -16,7 +16,8 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon("./img/wechat.ico"));
 
-    LogD << "start";
+    LogD << "App Start:"; 
+    LogD << SplitStr;
     Log::init();
     StyleSheetMgr::initMgr();
     NetClientUtils::init();

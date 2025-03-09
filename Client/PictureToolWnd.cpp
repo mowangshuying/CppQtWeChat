@@ -129,7 +129,7 @@ void PictureToolWnd::slotDetermineBtnClicked()
 
     QNetworkAccessManager* pManager = new QNetworkAccessManager(this);
     QNetworkRequest request;
-    request.setUrl(QUrl(HTTP_FILE_SERVER_ADDR));
+    request.setUrl(QUrl(HttpFileServerAddr));
     QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType, this);
     QHttpPart part;
     part.setHeader(QNetworkRequest::ContentDispositionHeader, QString("form-data;name=\"headimg\";filename=\"u%1.png\"").arg(MainWnd::getMainWnd()->m_userid));
@@ -161,7 +161,7 @@ void PictureToolWnd::slotDetermineBtnClicked()
         json2.Add("headimg", headimgstr);
         json2.Add("userid", MainWnd::getMainWnd()->m_userid);
         // 告诉远端服务器该玩家的头像数据
-        NetClientUtils::getUtils()->request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
+        NetClientUtils::request("cs_msg_updateheadimg", json2, [this](neb::CJsonObject& msg) {
             LogD << msg.ToString().c_str();
             QPixmap headImg = MainWnd::getMainWnd()->m_toolWnd->m_pictureToolWnd->m_headImg;
             MainWnd::getMainWnd()->m_toolWnd->m_headImg = headImg;

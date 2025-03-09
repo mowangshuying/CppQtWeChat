@@ -334,7 +334,7 @@ void CreateGroupWnd::slotComfirmBtnClick()
         json["groupfriends"].Add(groupfriendIdVct[i]);
     }
     // 向远端服务器发送请求
-    NetClientUtils::getUtils()->request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_create_group", json, [this, groupname](neb::CJsonObject& msg) {
         LogD << "msg:" << msg.ToString().c_str();
         // 现在服务端仅仅返回 createid，groupname,groupid,groupfriends
         int groupid = -1;

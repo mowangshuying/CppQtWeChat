@@ -211,7 +211,7 @@ void LoginRegWnd::onRegLoginBtnClicked()
         json.Add("nickname", nickname);
         json.Add("sex", sex);
 
-        NetClientUtils::getUtils()->request("regUser", json, [this](neb::CJsonObject& msg) {
+        NetClientUtils::request("regUser", json, [this](neb::CJsonObject& msg) {
             int64 userId = 0;
             if (!msg["data"].Get("userId", userId))
             {
@@ -239,7 +239,7 @@ void LoginRegWnd::onRegLoginBtnClicked()
         json.Add("username", username);
         json.Add("password", password);
 
-        NetClientUtils::getUtils()->request("login", json, [this](neb::CJsonObject& msg) {
+        NetClientUtils::request("login", json, [this](neb::CJsonObject& msg) {
             int64 userid = 0;
             if (!msg["data"].Get("userId", userid))
                 return;

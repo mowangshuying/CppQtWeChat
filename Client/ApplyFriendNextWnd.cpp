@@ -117,7 +117,7 @@ void ApplyFriendNextWnd::slotPushBtnClick()
         auto pApplyWnd1 = dynamic_cast<ApplyFriendInputInfoWnd*>(m_wnd1);
         json.Add("applymsg", pApplyWnd1->m_inputMsgEdit->toPlainText().toStdString().c_str());
 
-        NetClientUtils::getUtils()->request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
+        NetClientUtils::request("cs_msg_apply_add_user", json, [](neb::CJsonObject& msg) {
             int state = 0;
             if (!msg.Get("state", state))
             {

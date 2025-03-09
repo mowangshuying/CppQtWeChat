@@ -52,7 +52,7 @@ SettingWnd::SettingWnd(QWidget* p /*= nullptr*/) : QWidget(p)
     m_hVerLayout = new QHBoxLayout(m_centerWnd);
     m_keyVerLabel = new QLabel("版本信息:");
     m_valueVerLabel = new QLabel();
-    m_valueVerLabel->setText(WECHAT_VERSION);
+    m_valueVerLabel->setText(WeChatVersion);
     m_hVerLayout->addSpacing(25);
     m_hVerLayout->addWidget(m_keyVerLabel);
     m_hVerLayout->addSpacing(60);

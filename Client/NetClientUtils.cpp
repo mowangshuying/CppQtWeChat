@@ -22,9 +22,7 @@ NetClientUtils::NetClientUtils()
     connect(m_webSock, &QWebSocket::textMessageReceived, this, &NetClientUtils::onRecvMsg);
 
     // 连接远端服务器
-    // m_webSock->open(QUrl(CHAT_SERVER_ADDR));
-    m_webSock->open(QUrl("ws://127.0.0.1:5000"));
-    //LogD << "threadId:" << QThread::currentThread()->currentThreadId();
+    m_webSock->open(QUrl(ChatServerAddr));
 }
 
 NetClientUtils::~NetClientUtils()
@@ -85,14 +83,14 @@ std::string NetClientUtils::getRandString()
 
 bool NetClientUtils::send(const QString& message)
 {
-    auto nLen =  m_webSock->sendTextMessage(message);
+    auto nLen =  getWebSock()->sendTextMessage(message);
     return nLen > 0;
 }
 
 void NetClientUtils::regMsgCall(QString cmd, NetEventCall call)
 {
     NetEventCaller caller(call, "", cmd.toStdString());
-    m_netEventCallers.push_back(caller);
+    getUtils()->m_netEventCallers.push_back(caller);
 }
 
 bool NetClientUtils::transfer(neb::CJsonObject& msg)
@@ -125,7 +123,7 @@ bool NetClientUtils::request(const std::string& cmd, neb::CJsonObject& data, Net
    if (ret)
    {
        NetEventCaller caller(call, randString, cmd);
-       m_netEventCallers.push_back(caller);
+       getUtils()->m_netEventCallers.push_back(caller);
    }
    return ret;
 }
@@ -192,7 +190,7 @@ void NetClientUtils::onTimer()
     //m_time++;
     if (!m_bConn)
     {
-        m_webSock->open(QUrl(CHAT_SERVER_ADDR));
+        m_webSock->open(QUrl(ChatServerAddr));
         LogD << "Retry to connect server";
     }
 }

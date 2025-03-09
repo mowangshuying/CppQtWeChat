@@ -448,7 +448,7 @@ void MainWnd::requestFriendList()
     //
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->m_userid);
-    NetClientUtils::getUtils()->request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_get_friendslist", json, [this](neb::CJsonObject& msg) {
         if (!msg["data"].IsArray())
         {
             return;
@@ -484,7 +484,7 @@ void MainWnd::requestSessionList()
     // 向远端请求会话列表
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->getMainWnd()->m_userid);
-    NetClientUtils::getUtils()->request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_get_sessionlist", json, [this](neb::CJsonObject& msg) {
         // QMessageBox::information(nullptr, "info",
         // msg.ToString().c_str());
         LogD << "msg:" << msg.ToString().c_str();
@@ -602,7 +602,7 @@ void MainWnd::requestGroupList()
 {
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->getMainWnd()->m_userid);
-    NetClientUtils::getUtils()->request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_get_groupList", json, [this](neb::CJsonObject& msg) {
         LogD << "requestGroupList:" << msg.ToString().c_str();
         // 先判断传入是否是msg["data"]是否是array
         if (!msg["data"].IsArray())

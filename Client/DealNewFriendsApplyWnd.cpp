@@ -98,7 +98,7 @@ void DealNewFriendsApplyWnd::setFriendApplyList()
     //
     neb::CJsonObject json;
     json.Add("ownerid", MainWnd::getMainWnd()->m_userid);
-    NetClientUtils::getUtils()->request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_get_applyadduserlist", json, [this](neb::CJsonObject& msg) {
         LogD << msg.ToString().c_str();
         for (int i = 0; i < msg["data"].GetArraySize(); i++)
         {

@@ -231,7 +231,7 @@ void GroupInfoWnd::slotSetGroupName()
     json.Add("groupId", m_groupId);
     QString groupName = m_groupName2->getText();
     json.Add("groupName", groupName.toStdString());
-    NetClientUtils::getUtils()->request("cs_msg_set_group_name", json, [this, groupName](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_set_group_name", json, [this, groupName](neb::CJsonObject& msg) {
         LogD << msg.ToString().c_str();
         // 更新会话窗口中的标题
         emit signalUpdateGroupName(groupName);

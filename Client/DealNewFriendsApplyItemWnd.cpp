@@ -105,7 +105,7 @@ void DealNewFriendsApplyItemWnd::slotOnAgreeBtnClick()
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 1);
-    NetClientUtils::getUtils()->request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
         m_AgreeBtn->setText("已同意");
         m_AgreeBtn->setEnabled(false);
         m_refuseBtn->hide();
@@ -118,7 +118,7 @@ void DealNewFriendsApplyItemWnd::slotOnRefuseBtnClick()
     neb::CJsonObject json;
     json.Add("applyid", m_id);
     json.Add("applystate", 2);
-    NetClientUtils::getUtils()->request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
+    NetClientUtils::request("cs_msg_do_apply_add_user", json, [this](neb::CJsonObject& msg) {
         m_AgreeBtn->setText("已拒绝");
         m_AgreeBtn->setEnabled(false);
         m_refuseBtn->hide();
